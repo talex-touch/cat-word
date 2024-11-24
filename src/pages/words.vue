@@ -1,4 +1,5 @@
 <script name="Words" setup lang="ts">
+import { ElMessage } from 'element-plus'
 import WordCard from '~/components/WordCard.vue'
 import type { IWord } from '~/composables/words'
 import { words } from '~/composables/words/CET-6'
@@ -74,6 +75,38 @@ async function next() {
   nextDom.style.visibility = ''
 }
 
+const {
+  isSupported,
+  isListening,
+  isFinal,
+  error,
+  result,
+  start,
+  stop,
+} = useSpeechRecognition()
+
+async function speechRecognition() {
+  if (!isSupported.value)
+    return next()
+
+  start()
+
+  await sleep(3000)
+
+  stop()
+
+  if (result.value === data.current.mainWord.word) {
+    ElMessage.success('阅读非常完美！')
+  }
+  else {
+    ElMessage.info(`还需提升${result.value}`)
+  }
+
+  await sleep(300)
+
+  next()
+}
+
 async function handleChoose(word: IWord) {
   const wrong = word !== data.current.mainWord
 
@@ -83,11 +116,11 @@ async function handleChoose(word: IWord) {
     whenever(() => data.content === false, async () => {
       await sleep(600)
 
-      next()
+      speechRecognition()
     })
   }
   else {
-    next()
+    speechRecognition()
   }
 }
 
@@ -95,7 +128,7 @@ next()
 </script>
 
 <template>
-  <div class="WordsPage">
+  <div :class="{ listenning: isListening }" class="WordsPage">
     <h1 class="title">
       单词打卡
     </h1>
@@ -160,10 +193,43 @@ next()
         </el-button>
       </div>
     </div>
+
+    <teleport to="body">
+      <div v-if="isListening" class="Word-Recognition">
+        <div i-carbon:voice-activate />
+        <p>念出这个单词</p>
+      </div>
+    </teleport>
   </div>
 </template>
 
 <style lang="scss">
+.Word-Recognition {
+  p {
+    font-size: 16px;
+  }
+  z-index: 10;
+  position: absolute;
+  display: flex;
+
+  top: 50%;
+  left: 50%;
+
+  width: 128px;
+  height: 128px;
+
+  gap: 0.5rem;
+  font-size: 32px;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  background-color: var(--el-mask-color-extra-light);
+
+  border-radius: 16px;
+  backdrop-filter: blur(18px) saturate(180%);
+  transform: translate(-50%, -50%);
+}
+
 .WordContent-Bottom {
   position: fixed;
   padding: 1rem;
@@ -286,6 +352,14 @@ next()
 }
 
 .WordsPage {
+  &.listenning {
+    filter: blur(2px);
+  }
+
+  h1.title {
+    font-size: 24px;
+    font-weight: 600;
+  }
   position: relative;
   padding: 1rem;
 
