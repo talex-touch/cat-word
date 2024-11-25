@@ -95,7 +95,7 @@ async function speechRecognition() {
 
   stop()
 
-  if (result.value === data.current.mainWord.word) {
+  if (result.value.toLocaleLowerCase() === data.current.mainWord.word.toLocaleLowerCase()) {
     ElMessage.success('阅读非常完美！')
   }
   else {
@@ -108,6 +108,9 @@ async function speechRecognition() {
 }
 
 async function handleChoose(word: IWord) {
+  if (isListening.value)
+    return
+
   const wrong = word !== data.current.mainWord
 
   if (wrong) {
@@ -165,7 +168,7 @@ next()
       </div>
 
       <div class="WordContent-Extra">
-        <div v-if="data.current.mainWord.synonyms" class="block">
+        <div v-if="data.current.mainWord.synonyms?.length" class="block">
           <p class="title">
             同义词
           </p>
@@ -175,7 +178,7 @@ next()
             </span>
           </p>
         </div>
-        <div v-if="data.current.mainWord.antonyms" class="block">
+        <div v-if="data.current.mainWord.antonyms?.length" class="block">
           <p class="title">
             反义词
           </p>
@@ -186,6 +189,8 @@ next()
           </p>
         </div>
       </div>
+
+      <br>
 
       <div class="WordContent-Bottom" @click="data.content = false">
         <el-button size="large" w-full type="primary">
@@ -231,10 +236,11 @@ next()
 }
 
 .WordContent-Bottom {
-  position: fixed;
+  position: sticky;
   padding: 1rem;
   display: flex;
 
+  top: 100%;
   bottom: 0;
 
   width: 100%;
@@ -302,7 +308,7 @@ next()
     }
 
     p.desc {
-      margin-top: 1rem;
+      margin-top: 0.5rem;
       font-size: 20px;
     }
   }
