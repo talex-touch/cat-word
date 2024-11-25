@@ -136,9 +136,11 @@ async function speechRecognition() {
 
   if (result.value.toLocaleLowerCase() === data.current.mainWord.word.toLocaleLowerCase()) {
     ElMessage.success('阅读非常完美！')
+    useVibrate('light')
   }
   else {
     ElMessage.info(`还需提升${result.value}`)
+    useVibrate('heavy')
   }
 
   await sleep(300)
@@ -156,6 +158,7 @@ async function handleChoose(word: IWord) {
 
   if (wrong) {
     data.content = true
+    useVibrate('heavy')
 
     whenever(() => data.content === false, async () => {
       await sleep(300)
@@ -164,6 +167,8 @@ async function handleChoose(word: IWord) {
     })
   }
   else {
+    useVibrate('bit')
+
     speechRecognition()
   }
 }
