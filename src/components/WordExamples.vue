@@ -40,12 +40,14 @@ function formateSentence(sentence: string) {
       &.active {
         background-color: var(--el-color-primary-light-7);
       }
+      display: flex;
       padding: 0.5rem;
 
-      width: 24px;
-      height: 24px;
-      line-height: 10px;
-      text-align: center;
+      width: 1.5rem;
+      height: 1.5rem;
+
+      align-items: center;
+      justify-content: center;
 
       border-radius: 4px;
       background-color: var(--el-fill-color);
