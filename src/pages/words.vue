@@ -16,14 +16,14 @@ const data = reactive<any>({
   next: null,
 })
 
-function playAudioSound(success: boolean = false) {
+async function playAudioSound(success: boolean = false) {
   const el = success ? successAudio.value : errorAudio.value
 
   if (!el)
     return
 
   el.currentTime = 0
-  el.play()
+  await el.play()
 }
 
 // 随机抽取1个单词以及3个额外单词的选项
@@ -152,7 +152,7 @@ async function handleChoose(word: IWord) {
 
   const wrong = word !== data.current.mainWord
 
-  playAudioSound(!wrong)
+  await playAudioSound(!wrong)
 
   if (wrong) {
     data.content = true
