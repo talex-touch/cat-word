@@ -7,11 +7,24 @@ import { words } from '~/composables/words/CET-6'
 const mainCard = ref<InstanceType<typeof WordCard>>()
 const moveCard = ref<InstanceType<typeof WordCard>>()
 
+const successAudio = ref<HTMLAudioElement>()
+const errorAudio = ref<HTMLAudioElement>()
+
 const data = reactive<any>({
   content: false,
   current: null,
   next: null,
 })
+
+function playAudioSound(success: boolean = false) {
+  const el = success ? successAudio.value : errorAudio.value
+
+  if (!el)
+    return
+
+  el.currentTime = 0
+  el.play()
+}
 
 // 随机抽取1个单词以及3个额外单词的选项
 function randomWords() {
@@ -33,11 +46,35 @@ function randomWords() {
   return { mainWord, options }
 }
 
+const spokenText = ref('')
+const {
+  isSupported: spokenSupoorted,
+  isPlaying,
+  status,
+  voiceInfo,
+  utterance,
+  stop: spokenStop,
+  speak,
+} = useSpeechSynthesis(spokenText)
+
+async function spokenWord(word: IWord) {
+  if (!spokenSupoorted.value)
+    return
+
+  if (isPlaying.value)
+    spokenStop()
+
+  spokenText.value = word.word
+
+  speak()
+}
+
 async function next() {
   const moving = data.current !== null
 
   if (!moving) {
     data.current = randomWords()
+    spokenWord(data.current.mainWord)
 
     return
   }
@@ -73,6 +110,8 @@ async function next() {
 
   currentDom.style.transform = 'translateX(0) scale(1)'
   nextDom.style.visibility = ''
+
+  spokenWord(data.current.mainWord)
 }
 
 const {
@@ -113,11 +152,13 @@ async function handleChoose(word: IWord) {
 
   const wrong = word !== data.current.mainWord
 
+  playAudioSound(!wrong)
+
   if (wrong) {
     data.content = true
 
     whenever(() => data.content === false, async () => {
-      await sleep(600)
+      await sleep(300)
 
       speechRecognition()
     })
@@ -146,6 +187,9 @@ next()
         :data="data.next"
       />
     </div>
+
+    <audio ref="successAudio" src="/sound/success.wav" />
+    <audio ref="errorAudio" src="/sound/error.wav" />
 
     <div v-if="data.current" :class="{ visible: data.content }" class="WordContent transition-cubic">
       <h1 p-4 class="title">
