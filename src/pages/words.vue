@@ -106,12 +106,12 @@ async function next() {
   currentDom.style.transition = ''
   currentDom.style.transform = 'translateX(0) scale(0.85)'
 
+  spokenWord(data.current.mainWord)
+
   await sleep(200)
 
   currentDom.style.transform = 'translateX(0) scale(1)'
   nextDom.style.visibility = ''
-
-  spokenWord(data.current.mainWord)
 }
 
 const {
@@ -284,7 +284,7 @@ next()
   padding: 1rem;
   display: flex;
 
-  top: 100%;
+  top: calc(100% - 72px);
   bottom: 0;
 
   width: 100%;
