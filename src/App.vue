@@ -54,7 +54,7 @@
 
 :root {
   --theme-color: #f7c62c;
-  --theme-color-light: #ebc23cff;
+  --theme-color-light: #d3ac2aff;
   --bg-color: var(--el-bg-color);
   --bg-color-dark: var(--el-bg-color-dark);
 }

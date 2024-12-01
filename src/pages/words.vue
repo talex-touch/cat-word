@@ -178,7 +178,10 @@ next()
 
 <template>
   <div :class="{ listenning: isListening }" class="WordsPage">
-    <h1 class="title">
+    <h1 flex items-center gap-2 class="title">
+      <ExitButton>
+        <div i-carbon:arrow-left />
+      </ExitButton>
       单词打卡
     </h1>
 
@@ -407,6 +410,21 @@ next()
 }
 
 .WordsPage {
+  &::before {
+    z-index: -1;
+    content: '';
+    position: absolute;
+
+    top: -1rem;
+    left: -10vmin;
+
+    width: 120vmin;
+    height: 50vmin;
+
+    border-radius: 0 0 100px 100px;
+    background-color: var(--theme-color);
+  }
+
   &.listenning {
     filter: blur(2px);
   }
