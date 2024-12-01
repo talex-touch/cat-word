@@ -80,7 +80,6 @@
 
       border-radius: 50%;
       background-color: var(--theme-color);
-      border: 1px solid var(--el-border-color);
     }
     .header-content {
       display: flex;
@@ -102,16 +101,11 @@
     align-items: center;
     flex-direction: column;
   }
+  z-index: 1;
+  position: relative;
 
   width: 100%;
   height: 100%;
-}
-
-.about-me,
-.skills,
-.projects,
-.contact {
-  margin-bottom: 50px;
 }
 
 .footer {

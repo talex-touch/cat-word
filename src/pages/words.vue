@@ -178,7 +178,7 @@ next()
 
 <template>
   <div :class="{ listenning: isListening }" class="WordsPage">
-    <h1 flex items-center gap-2 class="title">
+    <h1 flex items-center gap-2 text-black class="title">
       <ExitButton>
         <div i-carbon:arrow-left />
       </ExitButton>
@@ -433,6 +433,7 @@ next()
     font-size: 24px;
     font-weight: 600;
   }
+  z-index: 1;
   position: relative;
   padding: 1rem;
 
