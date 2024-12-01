@@ -1,4 +1,4 @@
-<script setup>
+<script lang="ts" setup>
 const navs = reactive([
   {
     name: '学习',
@@ -13,21 +13,49 @@ const navs = reactive([
   {
     name: '我的',
     icon: 'i-carbon-user',
-    path: '/user',
+    path: '/personal',
   },
 ])
 
 const route = useRoute()
+const router = useRouter()
 
 const activeNav = computed(() => navs.find(item => item.path === route?.path))
+
+const indicator = ref<HTMLElement>()
+
+async function fixIndicator() {
+  if (!indicator.value)
+    return
+
+  const ind = navs.findIndex(item => item.path === route?.path)
+  const el = document.querySelector(`#footer-nav-item-${ind + 1}`) as HTMLElement
+
+  if (!el)
+    return
+
+  const x = el.offsetLeft
+
+  Object.assign(indicator.value.style, {
+    transform: `translateX(${x}px)`,
+  })
+}
+
+watchEffect(() => {
+  const _ignore = indicator.value
+
+  console.log('1')
+
+  fixIndicator()
+})
 </script>
 
 <template>
-  <nav v-if="activeNav" class="Application-Footer" mt-6 inline-flex gap-2 text-xl>
+  <nav v-if="activeNav" class="Application-Footer fake-background" mt-6 inline-flex gap-2 text-xl>
     <ul w-full flex justify-between>
       <li
-        v-for="nav in navs" :key="nav.path" flex flex-col items-center :class="{ active: activeNav?.path === nav.path }"
-        @click="$router.push(nav.path)"
+        v-for="(nav, ind) in navs" :id="`footer-nav-item-${ind + 1}`" :key="nav.path" flex flex-col items-center
+        :class="{ active: activeNav?.path === nav.path }" @click="router.push(nav.path)"
       >
         <div class="nav-icon">
           <div :class="nav.icon" />
@@ -38,24 +66,29 @@ const activeNav = computed(() => navs.find(item => item.path === route?.path))
       </li>
     </ul>
   </nav>
+  <div ref="indicator" class="Application-Footer-Indicator transition-cubic" />
 </template>
 
 <style lang="scss">
 .Application-Footer ul li {
   &.active {
-    color: var(--theme-color);
+    opacity: 1;
+    color: var(--el-text-color-regular);
   }
   .nav-icon {
-    font-size: 24px;
+    font-size: 20px;
   }
   padding: 0 1rem;
 
-  font-size: 16px;
+  opacity: 0.75;
+  font-size: 12px;
   font-weight: 600;
   justify-content: space-between;
+  color: var(--el-text-color-secondary);
 }
 
 .Application-Footer {
+  z-index: 1;
   position: absolute;
   padding: 1rem;
 
@@ -65,6 +98,23 @@ const activeNav = computed(() => navs.find(item => item.path === route?.path))
   height: 80px;
 
   flex: 1 0 80px;
+  border-radius: 16px 16px 0 0;
   border-top: 1px solid var(--el-border-color);
+
+  backdrop-filter: blur(18px) saturate(180%);
+}
+
+.Application-Footer-Indicator {
+  position: absolute;
+
+  left: 0;
+  bottom: 0;
+
+  width: 64px;
+  height: 64px;
+
+  opacity: 0.75;
+  filter: blur(32px);
+  background-color: var(--theme-color);
 }
 </style>

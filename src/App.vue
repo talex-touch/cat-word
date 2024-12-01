@@ -36,6 +36,22 @@
   height: 100%;
 }
 
+.fake-background::after {
+  z-index: -1;
+  content: '';
+  position: absolute;
+
+  top: 0;
+  left: 0;
+
+  width: 100%;
+  height: 100%;
+
+  opacity: var(--fake-opacity, 0.25);
+  border-radius: inherit;
+  background-color: var(--fake-color, var(--el-bg-color-page));
+}
+
 :root {
   --theme-color: #dfe214;
   --theme-color-light: #ebee2e;

@@ -17,3 +17,11 @@ export interface IWord {
   type: string[]
   story: string
 }
+
+export interface IGlobalData {
+
+}
+
+const obj: IGlobalData = {}
+
+export const globalData = useLocalStorage('globalData', JSON.parse(JSON.stringify(obj)))

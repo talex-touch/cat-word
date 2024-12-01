@@ -1,43 +1,43 @@
 <script setup lang="ts">
 const icons = [{
   name: '综合提升',
-  icon: 'i-carbon',
+  icon: 'i-carbon:arrow-up',
   color: ['#02D9B2', '#01BDB4'],
 }, {
   name: '发音',
-  icon: 'i-carbon',
+  icon: 'i-carbon:activity',
   color: ['#B392F2', '#8A69F6'],
 }, {
   name: '综合提升',
-  icon: 'i-carbon',
+  icon: 'i-carbon-headphones',
   color: ['#20DF9F', '#13D77F'],
 }, {
   name: '综合提升',
-  icon: 'i-carbon',
+  icon: 'i-carbon-music',
   color: ['#FFA9E8', '#FD82D0'],
 }, {
   name: '综合提升',
-  icon: 'i-carbon',
+  icon: 'i-carbon-media-library-filled',
   color: ['#FEAA06', '#FF7C01'],
 }, {
   name: '综合提升',
-  icon: 'i-carbon',
+  icon: 'i-carbon-media-library-filled',
   color: ['#FE4794', '#FF4B50'],
 }, {
   name: '综合提升',
-  icon: 'i-carbon',
+  icon: 'i-carbon-enumeration-usage',
   color: ['#0DB2B3', '#0B7B8A'],
 }, {
   name: '综合提升',
-  icon: 'i-carbon',
+  icon: 'i-carbon-tropical-storm-tracks',
   color: ['#FE0000', '#F30102'],
 }, {
   name: '综合提升',
-  icon: 'i-carbon',
+  icon: 'i-carbon-face-cool',
   color: ['#0FDEFE', '#00B4FE'],
 }, {
   name: '综合提升',
-  icon: 'i-carbon',
+  icon: 'i-carbon-request-quote',
   color: ['#FBDC03', '#FEB601'],
 }]
 </script>
@@ -61,10 +61,15 @@ const icons = [{
     </div>
 
     <div my-2 class="ExplorePage-Banner">
-      <el-carousel height="150px">
-        <el-carousel-item v-for="item in 4" :key="item">
-          <h3 class="small justify-center" text="2xl">
+      <el-carousel height="120px">
+        <el-carousel-item>
+          <h3 class="ExplorePage-BannerItem small justify-center" text="2xl">
             你离地道发音还有多远？
+          </h3>
+        </el-carousel-item>
+        <el-carousel-item v-for="item in 1" :key="item">
+          <h3 class="ExplorePage-BannerItem small justify-center" text="2xl">
+            猫咪单词 | 立即体验
           </h3>
         </el-carousel-item>
       </el-carousel>
@@ -78,6 +83,21 @@ const icons = [{
 </template>
 
 <style lang="scss">
+.ExplorePage-BannerItem {
+  position: relative;
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
+  height: 100%;
+
+  color: #fff;
+  border-radius: 25px;
+  background-image: linear-gradient(to right, rgb(248, 99, 99), rgb(74, 74, 231));
+}
+
 .ExplorePage-Course {
   h1 {
     margin-bottom: 1rem;
@@ -96,9 +116,17 @@ const icons = [{
     align-items: center;
     flex-direction: column;
     &-Bg {
+      display: flex;
+
+      align-items: center;
+      justify-content: center;
+
       width: 48px;
       height: 48px;
 
+      color: #fff;
+      font-size: 20px;
+      font-weight: 600;
       border-radius: 50%;
       background-image: linear-gradient(to bottom, var(--c1), var(--c2));
     }
