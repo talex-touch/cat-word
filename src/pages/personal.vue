@@ -5,6 +5,12 @@
 <template>
   <div class="PersonalPage">
     <header class="header">
+      <div class="header-top">
+        <p>
+          个人主页
+        </p>
+      </div>
+
       <div class="header-img">
         <img src="http://q1.qlogo.cn/g?b=qq&nk=3397743231&s=100">
       </div>
@@ -15,36 +21,26 @@
         <p>爱学习的猫咪</p>
       </div>
     </header>
-    <main class="main">
-      <section class="about-me">
-        <h2>关于我</h2>
-        <p>{{ aboutMe }}</p>
-      </section>
-      <section class="skills">
-        <h2>技能</h2>
-        <ul>
-          <li v-for="skill in skills" :key="skill">
-            {{ skill }}
-          </li>
-        </ul>
-      </section>
-      <section class="projects">
-        <h2>项目</h2>
-        <ul>
-          <li v-for="project in projects" :key="project.name">
-            <h3>{{ project.name }}</h3>
-            <p>{{ project.description }}</p>
-          </li>
-        </ul>
-      </section>
-      <section class="contact">
-        <h2>联系我</h2>
-        <p>邮箱：{{ email }}</p>
-        <p>电话：{{ phone }}</p>
-      </section>
+    <main px-4 class="main">
+      <SignCalendar />
+
+      <LineArrow>
+        <template #icon>
+          <div i-carbon:calendar />
+        </template>
+        我的日历
+      </LineArrow>
+      <LineArrow>
+        <template #icon>
+          <div i-carbon:user-feedback />
+        </template>
+        帮助与反馈
+      </LineArrow>
     </main>
     <footer class="footer">
-      <p>版权所有 &copy; QuotaWish</p>
+      <p text-sm op-50>
+        版权所有 &copy; QuotaWish
+      </p>
     </footer>
   </div>
 </template>
@@ -52,32 +48,45 @@
 <style lang="scss">
 .PersonalPage {
   .header {
+    .header-top {
+      position: absolute;
+
+      top: 1rem;
+      left: 1rem;
+
+      font-size: 1.25rem;
+      font-weight: 600;
+    }
+
     &::before {
       content: '';
       position: absolute;
       top: 0;
       left: 0;
       width: 100%;
-      height: 100%;
+      height: 30%;
 
       background-color: var(--theme-color);
       z-index: -1;
     }
 
     .header-img {
-      width: 72px;
-      height: 72px;
+      img {
+        border-radius: 50%;
+      }
+      padding: 8px;
+      width: 108px;
+      height: 108px;
 
-      overflow: hidden;
       border-radius: 50%;
-
+      background-color: var(--theme-color);
       border: 1px solid var(--el-border-color);
     }
     .header-content {
       display: flex;
 
+      align-items: center;
       flex-direction: column;
-      align-items: flex-start;
       justify-content: space-between;
 
       p.name {
@@ -91,19 +100,11 @@
 
     gap: 1rem;
     align-items: center;
+    flex-direction: column;
   }
 
   width: 100%;
   height: 100%;
-}
-
-.header {
-  text-align: center;
-  padding: 50px 0;
-}
-
-.main {
-  padding: 50px 0;
 }
 
 .about-me,

@@ -38,14 +38,14 @@ async function fixIndicator() {
 
   Object.assign(indicator.value.style, {
     opacity: '0.5',
-    transform: `${indicator.value.style.transform} scale(0.25)`,
+    transform: `${indicator.value.style.transform} scale(0.5)`,
   })
 
   await sleep(20)
 
   Object.assign(indicator.value.style, {
     opacity: '',
-    transform: `translateX(${x}px) scale(0.25)`,
+    transform: `translateX(${x}px) scale(0.5)`,
   })
 
   await sleep(200)
@@ -125,8 +125,8 @@ watchEffect(() => {
   left: 0;
   bottom: 0;
 
-  width: 64px;
-  height: 64px;
+  width: 108px;
+  height: 108px;
 
   opacity: 0.75;
   filter: blur(32px);

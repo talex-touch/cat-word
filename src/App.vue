@@ -53,7 +53,7 @@
 }
 
 :root {
-  --theme-color: #dfe214;
+  --theme-color: #dfee14;
   --theme-color-light: #ebee2e;
   --bg-color: var(--el-bg-color);
   --bg-color-dark: var(--el-bg-color-dark);
