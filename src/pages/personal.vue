@@ -12,7 +12,7 @@
       </div>
 
       <div class="header-img">
-        <img src="http://q1.qlogo.cn/g?b=qq&nk=3397743231&s=100">
+        <img src="/avatar.jpg">
       </div>
       <div class="header-content">
         <p class="name">
