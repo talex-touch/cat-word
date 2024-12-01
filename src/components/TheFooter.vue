@@ -45,21 +45,19 @@ async function fixIndicator() {
 
   Object.assign(indicator.value.style, {
     opacity: '',
-    transform: `translateX(${x}px) scale(0.5)`,
+    transform: `translateX(${x - 32}px) scale(0.5)`,
   })
 
   await sleep(200)
 
   Object.assign(indicator.value.style, {
     opacity: '',
-    transform: `translateX(${x}px) scale(1)`,
+    transform: `translateX(${x - 32}px) scale(1)`,
   })
 }
 
 watchEffect(() => {
   const _ignore = indicator.value
-
-  console.log('1')
 
   fixIndicator()
 })
@@ -81,7 +79,7 @@ watchEffect(() => {
       </li>
     </ul>
   </nav>
-  <div ref="indicator" class="Application-Footer-Indicator transition-cubic" />
+  <div v-if="activeNav" ref="indicator" class="Application-Footer-Indicator transition-cubic" />
 </template>
 
 <style lang="scss">

@@ -25,7 +25,7 @@ const router = useRouter()
       </div>
     </div>
 
-    <div mx-auto my--8 class="IndexPage-Card w-80%" @click="router.push('/words')">
+    <div mx-auto my--8 class="IndexPage-Card w-80%" @click="router.push('/prewords')">
       <ul flex justify-between>
         <li flex flex-col items-center border-r-1 px-2>
           <p flex items-center text-3 op-75>

@@ -53,9 +53,18 @@
 }
 
 :root {
-  --theme-color: #dfee14;
-  --theme-color-light: #ebee2e;
+  --theme-color: #f7c62c;
+  --theme-color-light: #ebc23cff;
   --bg-color: var(--el-bg-color);
   --bg-color-dark: var(--el-bg-color-dark);
+}
+
+@font-face {
+  font-family: 'MikyCoffee';
+  src: url('/font/MikyCoffee.otf') format('opentype');
+}
+
+.coffee-font {
+  font-family: 'MikyCoffee', sans-serif;
 }
 </style>
