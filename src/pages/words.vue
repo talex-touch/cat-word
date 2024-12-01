@@ -10,10 +10,16 @@ const moveCard = ref<InstanceType<typeof WordCard>>()
 const successAudio = ref<HTMLAudioElement>()
 const errorAudio = ref<HTMLAudioElement>()
 
+const router = useRouter()
+
 const data = reactive<any>({
   content: false,
   current: null,
   next: null,
+  word: {
+    current: 0,
+    total: 10,
+  },
 })
 
 async function playAudioSound(success: boolean = false) {
@@ -74,6 +80,7 @@ async function next() {
 
   if (!moving) {
     data.current = randomWords()
+    data.word.current += 1
     spokenWord(data.current.mainWord)
 
     return
@@ -84,6 +91,7 @@ async function next() {
 
   data.next = data.current
   data.current = randomWords()
+  data.word.current += 1
 
   currentDom.style.transition = 'none'
   currentDom.style.transform = 'translateX(120%) scale(0.85)'
@@ -160,11 +168,11 @@ async function handleChoose(word: IWord) {
     data.content = true
     useVibrate('heavy')
 
-    whenever(() => data.content === false, async () => {
-      await sleep(300)
+    // whenever(() => data.content === false, async () => {
+    //   await sleep(300)
 
-      speechRecognition()
-    })
+    //   speechRecognition()
+    // })
   }
   else {
     useVibrate('bit')
@@ -174,15 +182,25 @@ async function handleChoose(word: IWord) {
 }
 
 next()
+
+whenever(() =>
+  data.word.current
+  > data.word.total, () => {
+  router.push('/')
+})
 </script>
 
 <template>
   <div :class="{ listenning: isListening }" class="WordsPage">
     <h1 flex items-center gap-2 text-black class="title">
-      <ExitButton>
+      <ExitButton @click="router.push('/')">
         <div i-carbon:arrow-left />
       </ExitButton>
       单词打卡
+    </h1>
+
+    <h1 flex items-center gap-2 text-black class="mention">
+      剩余 {{ data.word.total - data.word.current }} 个
     </h1>
 
     <div class="WordCard-Container">
@@ -432,6 +450,13 @@ next()
   h1.title {
     font-size: 24px;
     font-weight: 600;
+  }
+
+  .mention {
+    position: absolute;
+
+    top: 1.5rem;
+    right: 2rem;
   }
   z-index: 1;
   position: relative;
