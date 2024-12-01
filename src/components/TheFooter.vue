@@ -37,7 +37,22 @@ async function fixIndicator() {
   const x = el.offsetLeft
 
   Object.assign(indicator.value.style, {
-    transform: `translateX(${x}px)`,
+    opacity: '0.5',
+    transform: `${indicator.value.style.transform} scale(0.25)`,
+  })
+
+  await sleep(20)
+
+  Object.assign(indicator.value.style, {
+    opacity: '',
+    transform: `translateX(${x}px) scale(0.25)`,
+  })
+
+  await sleep(200)
+
+  Object.assign(indicator.value.style, {
+    opacity: '',
+    transform: `translateX(${x}px) scale(1)`,
   })
 }
 

@@ -44,7 +44,7 @@
       </section>
     </main>
     <footer class="footer">
-      <p>版权所有 &copy; {{ year }}</p>
+      <p>版权所有 &copy; QuotaWish</p>
     </footer>
   </div>
 </template>
@@ -52,6 +52,18 @@
 <style lang="scss">
 .PersonalPage {
   .header {
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+
+      background-color: var(--theme-color);
+      z-index: -1;
+    }
+
     .header-img {
       width: 72px;
       height: 72px;
@@ -73,13 +85,13 @@
         font-weight: 600;
       }
     }
-    padding: 0 1rem;
+    position: relative;
+    padding: 2rem 1rem;
     display: flex;
 
     gap: 1rem;
     align-items: center;
   }
-  padding: 1rem 0;
 
   width: 100%;
   height: 100%;
