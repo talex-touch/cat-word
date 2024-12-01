@@ -11,14 +11,20 @@
       <slot />
     </div>
 
-    <div class="end">
+    <div flex items-center class="end">
+      <slot name="end" />
+
       <div i-carbon:chevron-right />
     </div>
   </section>
 </template>
 
-<style lang="scss">
+<style lang="scss" scoped>
 section {
+  &:active {
+    background-color: var(--el-fill-color-light);
+  }
+
   .head-icon {
     display: flex;
 
@@ -33,8 +39,13 @@ section {
   }
 
   .end {
-    width: 32px;
     height: 100%;
+    min-width: 32px;
+
+    width: max-content;
+
+    font-size: 14px;
+    color: var(--el-text-color-secondary);
   }
   margin: 0.75rem 0;
   padding: 0.5rem 0.5rem;

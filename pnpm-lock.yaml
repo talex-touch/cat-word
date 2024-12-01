@@ -20,6 +20,9 @@ importers:
       sass:
         specifier: ^1.81.0
         version: 1.81.0
+      vant:
+        specifier: ^4.9.9
+        version: 4.9.9(vue@3.5.3(typescript@5.5.4))
       vue:
         specifier: ^3.5.3
         version: 3.5.3(typescript@5.5.4)
@@ -998,6 +1001,14 @@ packages:
     peerDependencies:
       vite: ^2.9.0 || ^3.0.0-0 || ^4.0.0 || ^5.0.0-0
 
+  '@vant/popperjs@1.3.0':
+    resolution: {integrity: sha512-hB+czUG+aHtjhaEmCJDuXOep0YTZjdlRR+4MSmIFnkCQIxJaXLQdSsR90XWvAI2yvKUI7TCGqR8pQg2RtvkMHw==}
+
+  '@vant/use@1.6.0':
+    resolution: {integrity: sha512-PHHxeAASgiOpSmMjceweIrv2AxDZIkWXyaczksMoWvKV2YAYEhoizRuk/xFnKF+emUIi46TsQ+rvlm/t2BBCfA==}
+    peerDependencies:
+      vue: ^3.0.0
+
   '@vitejs/plugin-vue@5.1.3':
     resolution: {integrity: sha512-3xbWsKEKXYlmX82aOHufFQVnkbMC/v8fLpWwh6hWOUrK5fbbtBh9Q/WWse27BFgSy2/e2c0fz5Scgya9h2GLhw==}
     engines: {node: ^18.0.0 || >=20.0.0}
@@ -1245,6 +1256,9 @@ packages:
     resolution: {integrity: sha512-28volmaZVG2PGO3V3+gBPKoSHvLlE8FGfG/GKXKkjjfxLuj/50B/0OQGakM/g6ehQeqCrZYM4eHC4Ks48eig1Q==}
     peerDependencies:
       vue: 3.5.3
+
+  '@vue/shared@3.5.13':
+    resolution: {integrity: sha512-/hnE/qP5ZoGpol0a5mDi45bOd7t3tjYJBjsgCsivow7D48cJeV5l05RD82lPqi7gRiphZM37rnhW1l6ZoCNNnQ==}
 
   '@vue/shared@3.5.3':
     resolution: {integrity: sha512-Jp2v8nylKBT+PlOUjun2Wp/f++TfJVFjshLzNtJDdmFJabJa7noGMncqXRM1vXGX+Yo2V7WykQFNxusSim8SCA==}
@@ -3205,6 +3219,11 @@ packages:
     resolution: {integrity: sha512-OljLrQ9SQdOUqTaQxqL5dEfZWrXExyyWsozYlAWFawPVNuD83igl7uJD2RTkNMbniIYgt8l81eCJGIdQF7avLQ==}
     engines: {node: ^14.17.0 || ^16.13.0 || >=18.0.0}
 
+  vant@4.9.9:
+    resolution: {integrity: sha512-sEw3ljwCza5dazpJqh04b38vCjNr2Id8vb7LOkYQQR/94iERDIm5jcQinhmwlRnwoGCa+JkNwm0jrCafzZJiwA==}
+    peerDependencies:
+      vue: ^3.0.0
+
   vite-node@2.0.5:
     resolution: {integrity: sha512-LdsW4pxj0Ot69FAoXZ1yTnA9bjGohr2yNBU7QKRxpz8ITSkhuDl6h3zS/tvgz4qrNjeRnvrWeXQ8ZF7Um4W00Q==}
     engines: {node: ^18.0.0 || >=20.0.0}
@@ -4373,6 +4392,12 @@ snapshots:
       - rollup
       - supports-color
 
+  '@vant/popperjs@1.3.0': {}
+
+  '@vant/use@1.6.0(vue@3.5.3(typescript@5.5.4))':
+    dependencies:
+      vue: 3.5.3(typescript@5.5.4)
+
   '@vitejs/plugin-vue@5.1.3(vite@5.4.3(@types/node@22.5.4)(sass@1.81.0))(vue@3.5.3(typescript@5.5.4))':
     dependencies:
       vite: 5.4.3(@types/node@22.5.4)(sass@1.81.0)
@@ -4788,6 +4813,8 @@ snapshots:
       '@vue/compiler-ssr': 3.5.3
       '@vue/shared': 3.5.3
       vue: 3.5.3(typescript@5.5.4)
+
+  '@vue/shared@3.5.13': {}
 
   '@vue/shared@3.5.3': {}
 
@@ -6932,6 +6959,13 @@ snapshots:
       spdx-expression-parse: 3.0.1
 
   validate-npm-package-name@5.0.1: {}
+
+  vant@4.9.9(vue@3.5.3(typescript@5.5.4)):
+    dependencies:
+      '@vant/popperjs': 1.3.0
+      '@vant/use': 1.6.0(vue@3.5.3(typescript@5.5.4))
+      '@vue/shared': 3.5.13
+      vue: 3.5.3(typescript@5.5.4)
 
   vite-node@2.0.5(@types/node@22.5.4)(sass@1.81.0):
     dependencies:

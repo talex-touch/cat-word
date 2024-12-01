@@ -1,7 +1,36 @@
 <script setup lang="ts">
+import DictSelector from '~/components/words/DictSelector.vue'
+import ModeSelector from '~/components/words/ModeSelector.vue'
+import PlanSelector from '~/components/words/PlanSelector.vue'
+import { targetDict, targetMode } from '~/composables/words'
+
 const router = useRouter()
 
-const dialogVisible = ref(false)
+const dialogOptions = reactive<any>({
+  visible: false,
+  component: null,
+})
+
+function selectDict() {
+  Object.assign(dialogOptions, {
+    visible: true,
+    component: DictSelector,
+  })
+}
+
+function selectPlan() {
+  Object.assign(dialogOptions, {
+    visible: true,
+    component: PlanSelector,
+  })
+}
+
+function selectMode() {
+  Object.assign(dialogOptions, {
+    visible: true,
+    component: ModeSelector,
+  })
+}
 </script>
 
 <template>
@@ -20,40 +49,47 @@ const dialogVisible = ref(false)
       </p>
 
       <div mt-8 class="PreWordsPage-Section">
-        <LineArrow>
+        <LineArrow @click="selectDict">
           <template #icon>
             <div i-carbon:book />
+          </template>
+          <template #end>
+            {{ targetDict.name }}
           </template>
           选择词书
         </LineArrow>
 
-        <LineArrow>
+        <LineArrow @click="selectPlan">
           <template #icon>
             <div i-carbon:plan />
+          </template>
+          <template #end>
+            10个/组
           </template>
           制定计划
         </LineArrow>
 
-        <LineArrow>
+        <LineArrow @click="selectMode">
           <template #icon>
             <div i-carbon:apps />
+          </template>
+          <template #end>
+            {{ targetMode.name }}
           </template>
           实操模式
         </LineArrow>
       </div>
     </div>
-
     <div class="PreWordsPage-Supper">
       <el-button size="large" w-full type="primary" @click="router.push('/words')">
         开始打卡
       </el-button>
     </div>
 
-    <TouchDialog v-model="dialogVisible">
-      <template #Title>
-        Hi
+    <TouchDialog v-model="dialogOptions.visible">
+      <template #Main>
+        <component :is="dialogOptions.component" v-if="dialogOptions.component" />
       </template>
-      emm
     </TouchDialog>
   </div>
 </template>

@@ -11,6 +11,8 @@ import 'uno.css'
 import 'element-plus/dist/index.css'
 import 'element-plus/theme-chalk/dark/css-vars.css'
 
+// import 'vant/lib/index.css'
+
 const app = createApp(App)
 const router = createRouter({
   routes,

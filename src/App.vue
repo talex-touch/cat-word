@@ -28,6 +28,7 @@ onMounted(() => {
 
   width: 100%;
   height: 100%;
+  max-height: 100vh;
 
   color: var(--el-text-color-primary);
   flex-direction: column;
@@ -84,5 +85,15 @@ onMounted(() => {
   *.only-pc-display {
     display: none !important;
   }
+}
+
+html,
+body {
+  position: absolute;
+
+  width: 100%;
+  height: 100%;
+
+  overflow: hidden;
 }
 </style>
