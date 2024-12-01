@@ -1,5 +1,7 @@
 <script setup lang="ts">
 const router = useRouter()
+
+const dialogVisible = ref(false)
 </script>
 
 <template>
@@ -13,12 +15,31 @@ const router = useRouter()
         <span class="prewords-headword-item item-5">S</span>
       </div>
 
-      <p class="head-title">
+      <p text-black class="head-title">
         准备打卡
       </p>
 
-      <div class="PreWordsPage-Section">
-        1
+      <div mt-8 class="PreWordsPage-Section">
+        <LineArrow>
+          <template #icon>
+            <div i-carbon:book />
+          </template>
+          选择词书
+        </LineArrow>
+
+        <LineArrow>
+          <template #icon>
+            <div i-carbon:plan />
+          </template>
+          制定计划
+        </LineArrow>
+
+        <LineArrow>
+          <template #icon>
+            <div i-carbon:apps />
+          </template>
+          实操模式
+        </LineArrow>
       </div>
     </div>
 
@@ -27,10 +48,21 @@ const router = useRouter()
         开始打卡
       </el-button>
     </div>
+
+    <TouchDialog v-model="dialogVisible">
+      <template #Title>
+        Hi
+      </template>
+      emm
+    </TouchDialog>
   </div>
 </template>
 
 <style lang="scss">
+.PreWordsPage-Section {
+  padding: 0 7.5%;
+}
+
 .PreWordsPage-Supper {
   position: absolute;
 
@@ -111,9 +143,12 @@ const router = useRouter()
     border-radius: 0 0 1000px 1000px;
     background-color: var(--theme-color);
   }
-  position: relative;
+  z-index: 1;
+  position: absolute;
 
   width: 100%;
   height: 100%;
+
+  overflow: hidden;
 }
 </style>

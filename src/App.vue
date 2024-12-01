@@ -1,3 +1,9 @@
+<script setup lang="ts">
+onMounted(() => {
+  document.body.classList.add('mobile')
+})
+</script>
+
 <template>
   <div class="Application">
     <div class="Application-Main">
@@ -66,5 +72,17 @@
 
 .coffee-font {
   font-family: 'MikyCoffee', sans-serif;
+}
+
+@media (min-width: 768px) {
+  *.only-pe-display {
+    display: none !important;
+  }
+}
+
+@media (max-width: 768px) {
+  *.only-pc-display {
+    display: none !important;
+  }
 }
 </style>

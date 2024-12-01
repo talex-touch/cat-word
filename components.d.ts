@@ -7,14 +7,17 @@ export {}
 /* prettier-ignore */
 declare module 'vue' {
   export interface GlobalComponents {
+    CircleLoader: typeof import('./src/components/icon/CircleLoader.vue')['default']
     ExitButton: typeof import('./src/components/ExitButton.vue')['default']
     LineArrow: typeof import('./src/components/LineArrow.vue')['default']
+    Logo: typeof import('./src/components/chore/Logo.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     SignCalendar: typeof import('./src/components/SignCalendar.vue')['default']
     TheCounter: typeof import('./src/components/TheCounter.vue')['default']
     TheFooter: typeof import('./src/components/TheFooter.vue')['default']
     TheInput: typeof import('./src/components/TheInput.vue')['default']
+    TouchDialog: typeof import('./src/components/dialog/TouchDialog.vue')['default']
     WordCard: typeof import('./src/components/WordCard.vue')['default']
     WordExamples: typeof import('./src/components/WordExamples.vue')['default']
   }

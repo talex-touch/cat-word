@@ -29,7 +29,7 @@ section {
     justify-content: center;
 
     border-radius: 50%;
-    background-color: var(--el-mask-color);
+    background-color: var(--el-bg-color);
   }
 
   .end {
