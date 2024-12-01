@@ -8,35 +8,35 @@ const icons = [{
   icon: 'i-carbon:activity',
   color: ['#B392F2', '#8A69F6'],
 }, {
-  name: '综合提升',
+  name: '口语',
   icon: 'i-carbon-headphones',
   color: ['#20DF9F', '#13D77F'],
 }, {
-  name: '综合提升',
+  name: '听力',
   icon: 'i-carbon-music',
   color: ['#FFA9E8', '#FD82D0'],
 }, {
-  name: '综合提升',
+  name: '配音',
   icon: 'i-carbon-media-library-filled',
   color: ['#FEAA06', '#FF7C01'],
 }, {
-  name: '综合提升',
-  icon: 'i-carbon-media-library-filled',
+  name: '短视频',
+  icon: 'i-carbon-video',
   color: ['#FE4794', '#FF4B50'],
 }, {
-  name: '综合提升',
+  name: '四六级',
   icon: 'i-carbon-enumeration-usage',
   color: ['#0DB2B3', '#0B7B8A'],
 }, {
-  name: '综合提升',
+  name: '红色旋风',
   icon: 'i-carbon-tropical-storm-tracks',
   color: ['#FE0000', '#F30102'],
 }, {
-  name: '综合提升',
+  name: '休闲娱乐',
   icon: 'i-carbon-face-cool',
   color: ['#0FDEFE', '#00B4FE'],
 }, {
-  name: '综合提升',
+  name: '词汇测试',
   icon: 'i-carbon-request-quote',
   color: ['#FBDC03', '#FEB601'],
 }]
@@ -77,7 +77,7 @@ const icons = [{
 
     <div class="ExplorePage-Course">
       <h1>更多课程</h1>
-      1
+      暂无
     </div>
   </div>
 </template>

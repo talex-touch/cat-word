@@ -28,8 +28,6 @@ async function fixIndicator() {
   if (!indicator.value)
     return
 
-  await sleep(20)
-
   const ind = navs.findIndex(item => item.path === route?.path)
   const el = document.querySelector(`#footer-nav-item-${ind + 1}`) as HTMLElement
 
