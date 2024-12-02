@@ -335,6 +335,8 @@ function removeImage(index) {
   padding: 1rem;
 
   flex: 1;
+
+  overflow-y: scroll;
 }
 
 .Editor-Aside {
