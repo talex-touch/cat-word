@@ -1675,7 +1675,6 @@ export const words = [
     content: 'v.拥抱。它可以用来形容在亲密的环境中，用手臂围绕两个或以上人体之间的互动。除此之外，hug还可以作为名词使用，指的是拥抱的动作。',
     img: [
       'https://www.helloimg.com/i/2024/11/24/6742bf9f962b1.jpg',
-      '',
     ],
     translation: '拥抱',
     examples: [

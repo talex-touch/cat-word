@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import type { IDict } from '~/composables/words'
 import { dictionaries, globalData } from '~/composables/words'
 
 const active = computed({
@@ -23,6 +24,20 @@ async function fixActive() {
 }
 
 watch(active, () => nextTick(() => fixActive()), { immediate: true })
+
+function generateStyles(dict: IDict) {
+  const obj: Record<string, string> = {
+    '--color': dict.style.color,
+    '--color-light': dict.style.colorLight,
+  }
+
+  const style = Object.keys(obj).reduce((acc, cur) => {
+    acc += `${cur}: ${obj[cur]};`
+    return acc
+  }, '')
+
+  return style
+}
 </script>
 
 <template>
@@ -30,8 +45,8 @@ watch(active, () => nextTick(() => fixActive()), { immediate: true })
     <el-scrollbar>
       <div class="DictSelector-Wrapper">
         <div
-          v-for="(dict, ind) in dictionaries"
-          :id="`selector-item-${ind}`" :key="dict.id" :class="{ active: dict.id === active }"
+          v-for="(dict, ind) in dictionaries" :id="`selector-item-${ind}`"
+          :key="dict.id" :style="generateStyles(dict)" :class="{ active: dict.id === active }"
           class="DictSelector-Item" @click="active = dict.id"
         >
           <p class="title">
@@ -60,7 +75,7 @@ watch(active, () => nextTick(() => fixActive()), { immediate: true })
     width: 32px;
     height: 32px;
 
-    left: 0.5rem;
+    right: 0.5rem;
     bottom: 0.5rem;
 
     align-items: center;
@@ -73,15 +88,30 @@ watch(active, () => nextTick(() => fixActive()), { immediate: true })
     transform: scale(0);
   }
 
+  &::before {
+    content: '';
+    position: absolute;
+
+    bottom: 0px;
+    right: -2px;
+
+    width: 98%;
+    height: 3px;
+
+    border-radius: 16px 0 16px 16px;
+    background-color: var(--el-fill-color);
+  }
+
   &.active {
     .checkmark {
       transform: scale(1);
     }
-    transform: scale(1.025);
+
+    border: 2px solid var(--color-light);
   }
 
   .title {
-    font-size: 20px;
+    font-size: 18px;
     font-weight: 600;
 
     color: #000;
@@ -89,14 +119,14 @@ watch(active, () => nextTick(() => fixActive()), { immediate: true })
   position: relative;
   padding: 1rem;
 
-  width: 100px;
-  height: 130px;
+  width: 120px;
+  height: 150px;
 
-  flex: 1 0 100px;
-  border-radius: 12px;
-  background-image: linear-gradient(to right, var(--theme-color), var(--theme-color-light)),
+  flex: 1 0 120px;
+  border-radius: 6px 2px 4px 8px;
+  background-image: linear-gradient(to right, var(--color), var(--color-light)),
     linear-gradient(120deg, #a6c0fe 0%, #f68084 100%);
-  border: 2px solid var(--theme-color-light);
+  border: 2px solid #0000;
 }
 
 .DictSelector-Wrapper {

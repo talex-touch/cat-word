@@ -62,6 +62,7 @@ onMounted(() => {
 :root {
   --theme-color: #f7c62c;
   --theme-color-light: #d3ac2aff;
+  --theme-color-dark: #bb920aff;
   --bg-color: var(--el-bg-color);
   --bg-color-dark: var(--el-bg-color-dark);
 }

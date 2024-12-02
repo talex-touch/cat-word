@@ -2,7 +2,7 @@
 import { ElMessage } from 'element-plus'
 import WordCard from '~/components/WordCard.vue'
 import type { IWord } from '~/composables/words'
-import { words } from '~/composables/words/CET-6'
+import { targetDict } from '~/composables/words'
 
 const mainCard = ref<InstanceType<typeof WordCard>>()
 const moveCard = ref<InstanceType<typeof WordCard>>()
@@ -12,16 +12,32 @@ const errorAudio = ref<HTMLAudioElement>()
 
 const router = useRouter()
 
-const data = reactive<any>({
+interface IWordGroup {
+  mainWord: IWord
+  options: IWord[]
+}
+
+const data = reactive<{
+  content: boolean
+  current: IWordGroup | null
+  next: IWordGroup | null
+  word: {
+    current: number
+    total: number
+    left: number
+  }
+}>({
   content: false,
   current: null,
   next: null,
   word: {
     current: 0,
     total: 10,
+    left: 0,
   },
 })
 
+const storage = computed(() => useLocalStorage<any>(targetDict.value.id, []))
 async function playAudioSound(success: boolean = false) {
   const el = success ? successAudio.value : errorAudio.value
 
@@ -34,12 +50,19 @@ async function playAudioSound(success: boolean = false) {
 
 // 随机抽取1个单词以及3个额外单词的选项
 function randomWords() {
+  const totalWords = [...targetDict.value.words]
+  const words = [...totalWords].filter((word: IWord) => !storage.value.value.includes(word.word))
+
+  data.word.total = Math.min(data.word.total, words.length)
+
   // 随机抽取
   const mainWordIndex = Math.floor(Math.random() * words.length)
   const mainWord = words[mainWordIndex]
 
+  console.log({ words, storage: storage.value.value, mainWord })
+
   // 剩余单词数组
-  const remainingWords = words.filter((_, index) => index !== mainWordIndex)
+  const remainingWords = totalWords.filter(word => word.word !== mainWord.word)
 
   // 从剩余单词中随机选择3个单词
   const options: any[] = []
@@ -56,9 +79,9 @@ const spokenText = ref('')
 const {
   isSupported: spokenSupoorted,
   isPlaying,
-  status,
-  voiceInfo,
-  utterance,
+  // status,
+  // voiceInfo,
+  // utterance,
   stop: spokenStop,
   speak,
 } = useSpeechSynthesis(spokenText)
@@ -125,8 +148,8 @@ async function next() {
 const {
   isSupported,
   isListening,
-  isFinal,
-  error,
+  // isFinal,
+  // error,
   result,
   start,
   stop,
@@ -142,7 +165,7 @@ async function speechRecognition() {
 
   stop()
 
-  if (result.value.toLocaleLowerCase() === data.current.mainWord.word.toLocaleLowerCase()) {
+  if (result.value.toLocaleLowerCase() === data.current!.mainWord.word.toLocaleLowerCase()) {
     ElMessage.success('阅读非常完美！')
     useVibrate('light')
   }
@@ -160,7 +183,7 @@ async function handleChoose(word: IWord) {
   if (isListening.value)
     return
 
-  const wrong = word !== data.current.mainWord
+  const wrong = word !== data.current!.mainWord
 
   await playAudioSound(!wrong)
 
@@ -175,6 +198,8 @@ async function handleChoose(word: IWord) {
     // })
   }
   else {
+    storage.value.value.push(data.current!.mainWord.word)
+
     useVibrate('bit')
 
     speechRecognition()
@@ -192,25 +217,27 @@ whenever(() =>
 
 <template>
   <div :class="{ listenning: isListening }" class="WordsPage">
-    <h1 flex items-center gap-2 text-black class="title">
-      <ExitButton @click="router.push('/')">
-        <div i-carbon:arrow-left />
-      </ExitButton>
-      单词打卡
-    </h1>
+    <div flex items-center justify-between gap-2 text-black class="WordsPage-Header">
+      <div flex items-center gap-2 font-bold class="WordsPage-Header-Left">
+        <ExitButton @click="router.push('/')">
+          <div i-carbon:arrow-left />
+        </ExitButton>
+        {{ targetDict.name }}
+      </div>
 
-    <h1 flex items-center gap-2 text-black class="mention">
-      剩余 {{ data.word.total - data.word.current }} 个
-    </h1>
+      <h1 flex items-center gap-2 text-sm op-75>
+        剩余 {{ data.word.total - data.word.current }} 个
+      </h1>
+    </div>
 
     <div class="WordCard-Container">
       <WordCard
-        ref="mainCard" :right="data.current.mainWord" class="WordCard WordCard-Main transition-cubic"
-        :data="data.current" @choose="handleChoose"
+        ref="mainCard" :right="data.current!.mainWord" class="WordCard WordCard-Main transition-cubic"
+        :data="data.current!" @choose="handleChoose"
       />
       <WordCard
-        ref="moveCard" :right="data.current.mainWord" class="WordCard WordCard-Next transition-cubic"
-        :data="data.next"
+        ref="moveCard" :right="data.current!.mainWord" class="WordCard WordCard-Next transition-cubic"
+        :data="data.next!"
       />
     </div>
 
@@ -452,12 +479,6 @@ whenever(() =>
     font-weight: 600;
   }
 
-  .mention {
-    position: absolute;
-
-    top: 1.5rem;
-    right: 2rem;
-  }
   z-index: 1;
   position: relative;
   padding: 1rem;
