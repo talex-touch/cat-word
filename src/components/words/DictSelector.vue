@@ -53,6 +53,10 @@ function generateStyles(dict: IDict) {
             {{ dict.name }}
           </p>
 
+          <div class="icon">
+            <div v-html="dict.style.icon" />
+          </div>
+
           <div class="checkmark">
             <div i-carbon-checkmark />
           </div>
@@ -68,6 +72,24 @@ function generateStyles(dict: IDict) {
 
 <style lang="scss">
 .DictSelector-Item {
+  .icon {
+    & > div svg {
+      width: 32px;
+      height: 32px;
+
+      opacity: 0.125;
+      transform: translate(8px, 20px) scale(2);
+    }
+    z-index: 1;
+    position: relative;
+
+    width: 24px;
+    height: 24px;
+
+    mix-blend-mode: difference;
+    color: var(--el-text-color-secondary);
+  }
+
   .checkmark {
     position: absolute;
     display: flex;
