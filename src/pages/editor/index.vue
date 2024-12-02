@@ -58,6 +58,7 @@ const data = ref('')
 function reset() {
   ruleForm.data = ''
   ruleForm.word = ''
+  ruleForm.img = []
 
   data.value = ''
 }
@@ -82,12 +83,19 @@ function handleAdd() {
   // 如果列表已有则修改
   const index = list.value.findIndex((item: any) => item.word === ruleForm.word)
 
+  const _obj = JSON.parse(ruleForm.data)
+
+  const obj = mergeData(JSON.stringify({
+    ..._obj,
+    word: ruleForm.word,
+  }), data.value)
+
   if (index !== -1) {
-    list.value[index] = mergeData(ruleForm.data, data.value)
+    list.value[index] = obj
     return
   }
 
-  list.value.push(mergeData(ruleForm.data, data.value))
+  list.value.push(JSON.parse(JSON.stringify(obj)))
 }
 
 function mergeData(word: any, data: any) {
@@ -95,10 +103,11 @@ function mergeData(word: any, data: any) {
     return ''
 
   const obj = JSON.parse(word)
-  const dataObj = JSON.parse(data)
+  const dataObj = JSON.parse(data || '{}')
 
   return {
     ...obj,
+    img: ruleForm.img,
     backgroundStory: dataObj.content,
   }
 }
@@ -193,6 +202,32 @@ function clearWords() {
       })
     })
 }
+
+function handleAddImg() {
+  ElMessageBox.prompt('请输入图片地址', 'INPUT', {
+    confirmButtonText: 'OK',
+    cancelButtonText: '取消',
+
+  })
+    .then(({ value }) => {
+      ruleForm.img.push(value)
+
+      ElMessage({
+        type: 'success',
+        message: `添加成功`,
+      })
+    })
+    .catch(() => {
+      ElMessage({
+        type: 'info',
+        message: 'Input canceled',
+      })
+    })
+}
+
+function removeImage(index) {
+  ruleForm.img.splice(index, 1)
+}
 </script>
 
 <template>
@@ -241,6 +276,19 @@ function clearWords() {
         <el-form-item v-if="false" label="合并数据" prop="data">
           <el-text>合并数据如下</el-text>
           <p>{{ data }}</p>
+        </el-form-item>
+        <el-form-item label="添加图片" prop="data">
+          <ul>
+            <li v-for="(img, index) in ruleForm.img" :key="img" flex items-center>
+              <p>{{ img }}</p>
+              <div cursor-pointer hover:color-red @click="removeImage(index)">
+                <div i-carbon:close />
+              </div>
+            </li>
+            <el-button type="primary" @click="handleAddImg">
+              添加图片
+            </el-button>
+          </ul>
         </el-form-item>
         <el-form-item label="最终数据" prop="data">
           <p>{{ mergeData(ruleForm.data, data) }}</p>
