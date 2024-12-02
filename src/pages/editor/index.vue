@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ElMessage } from 'element-plus'
+import { ElMessage, ElMessageBox } from 'element-plus'
 import type { IWord } from '~/composables/words'
 import GptWords from '~/composables/words/gptwords.json?raw'
 
@@ -167,6 +167,32 @@ onChange(() => {
 
   reader.readAsText(file)
 })
+
+function clearWords() {
+  ElMessageBox.confirm(
+    '将会清除所有单词，确认继续吗？',
+    '确认删除',
+    {
+      confirmButtonText: '确认删除所有单词',
+      cancelButtonText: '取消',
+      type: 'warning',
+    },
+  )
+    .then(() => {
+      ElMessage({
+        type: 'success',
+        message: 'Delete completed',
+      })
+
+      list.value = []
+    })
+    .catch(() => {
+      ElMessage({
+        type: 'info',
+        message: 'Delete canceled',
+      })
+    })
+}
 </script>
 
 <template>
@@ -189,7 +215,7 @@ onChange(() => {
         <el-text>共计 {{ list.length }} 个单词.</el-text>
 
         <div flex items-center justify-center>
-          <el-button type="danger" @click="list = []">
+          <el-button type="danger" @click="clearWords">
             清空
           </el-button>
           <el-button type="info" @click="importWords">
