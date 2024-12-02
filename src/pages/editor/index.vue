@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { ElMessage } from 'element-plus'
 import type { IWord } from '~/composables/words'
 import GptWords from '~/composables/words/gptwords.json?raw'
 
@@ -33,6 +34,11 @@ const ruleForm = reactive<IWord & { data: string }>({
     sound: '',
   },
   derived: [],
+  phrases: [],
+  prefix: '',
+  suffix: '',
+  transform: [],
+  remember: '',
 })
 
 watch(active, () => {
@@ -130,13 +136,47 @@ function exportWords() {
 
   saveJSONToFile(text, 'dictionary.json')
 }
+
+const { files, open, onCancel, onChange } = useFileDialog()
+
+async function importWords() {
+  open()
+}
+
+onChange(() => {
+  const file = files.value?.item?.(0)
+
+  if (!file)
+    return
+
+  // 如果不是文本文件
+  if (file.type !== 'application/json') {
+    ElMessage.error('请选择 JSON 文件')
+    return
+  }
+
+  const reader = new FileReader()
+
+  reader.onload = function (event) {
+    const content = event.target?.result
+
+    if (content) {
+      list.value = JSON.parse(content as string)
+    }
+  }
+
+  reader.readAsText(file)
+})
 </script>
 
 <template>
   <div class="Editor">
     <div class="Editor-Aside">
       <ul class="word-list" style="overflow: auto">
-        <li v-for="(item, i) in list" :key="i" :class="{ active: active === item.word }" class="word-list-item" @click="active = item.word">
+        <li
+          v-for="(item, i) in list" :key="i" :class="{ active: active === item.word }" class="word-list-item"
+          @click="active = item.word"
+        >
           {{ item.word }}
 
           <div class="word-remove" @click="removeWord(i)">
@@ -145,11 +185,20 @@ function exportWords() {
         </li>
       </ul>
 
-      <div class="Editor-Aside-Bottom">
+      <div gap-4 class="Editor-Aside-Bottom">
         <el-text>共计 {{ list.length }} 个单词.</el-text>
-        <el-button @click="exportWords">
-          导出
-        </el-button>
+
+        <div flex items-center justify-center>
+          <el-button type="danger" @click="list = []">
+            清空
+          </el-button>
+          <el-button type="info" @click="importWords">
+            导入
+          </el-button>
+          <el-button type="primary" @click="exportWords">
+            导出
+          </el-button>
+        </div>
       </div>
     </div>
     <div class="Editor-Main">
@@ -203,6 +252,7 @@ function exportWords() {
   top: 100%;
   bottom: 0;
 
+  flex-direction: column;
   justify-content: space-between;
   border-top: 1px solid var(--el-border-color);
 }
