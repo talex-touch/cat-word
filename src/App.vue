@@ -67,13 +67,20 @@ onMounted(() => {
   --bg-color-dark: var(--el-bg-color-dark);
 }
 
-@font-face {
-  font-family: 'MikyCoffee';
-  src: url('/font/MikyCoffee.otf') format('opentype');
+.coffee-font {
+  font-family: 'Milky Coffee';
+  font-weight: normal;
+  font-style: normal;
 }
 
-.coffee-font {
-  font-family: 'MikyCoffee', sans-serif;
+@font-face {
+  font-family: 'Milky Coffee';
+  src:
+    url('/font/MilkyCoffee.woff2') format('woff2'),
+    url('font/MilkyCoffee.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
 }
 
 @media (min-width: 768px) {

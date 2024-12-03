@@ -117,31 +117,31 @@ async function next() {
   data.word.current += 1
 
   currentDom.style.transition = 'none'
-  currentDom.style.transform = 'translateX(120%) scale(0.85)'
+  currentDom.style.transform = 'translateX(120%)'
 
   nextDom.style.transition = 'none'
   nextDom.style.transform = 'translateX(0)'
 
-  await sleep(100)
+  await sleep(10)
 
   nextDom.style.visibility = 'visible'
   nextDom.style.transition = ''
-  nextDom.style.transform = 'translateX(0%) scale(0.85)'
+  nextDom.style.transform = 'translateX(0%)'
 
-  await sleep(200)
+  await sleep(20)
 
-  nextDom.style.transform = 'translateX(-120%) scale(0.85)'
+  nextDom.style.transform = 'translateX(-120%)'
 
   await sleep(200)
 
   currentDom.style.transition = ''
-  currentDom.style.transform = 'translateX(0) scale(0.85)'
+  currentDom.style.transform = 'translateX(0)'
 
   spokenWord(data.current.mainWord)
 
   await sleep(200)
 
-  currentDom.style.transform = 'translateX(0) scale(1)'
+  currentDom.style.transform = 'translateX(0)'
   nextDom.style.visibility = ''
 }
 
@@ -161,7 +161,7 @@ async function speechRecognition() {
 
   start()
 
-  await sleep(3000)
+  await sleep(2500)
 
   stop()
 

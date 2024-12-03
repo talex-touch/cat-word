@@ -1,3 +1,4 @@
+import { InstallCodeMirror } from 'codemirror-editor-vue3'
 import ElementPlus from 'element-plus'
 import { createApp } from 'vue'
 import { createRouter, createWebHistory } from 'vue-router'
@@ -20,4 +21,5 @@ const router = createRouter({
 })
 app.use(ElementPlus)
 app.use(router)
+app.use(InstallCodeMirror)
 app.mount('#app')

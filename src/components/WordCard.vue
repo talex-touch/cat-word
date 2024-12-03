@@ -43,13 +43,19 @@ async function handleChooseWord(word: IWord) {
   <div class="WordCard">
     <div v-if="data" class="WordsCard">
       <div class="WordsCard-Image">
-        <el-image :src="data.mainWord.img[0]" />
-        <el-image :src="data.mainWord.img[0]" />
+        <!-- indicator-position="outside" -->
+        <el-carousel>
+          <el-carousel-item v-for="item in data.mainWord.img" :key="item">
+            <el-image :src="item" />
+            <el-image :src="item" />
+          </el-carousel-item>
+        </el-carousel>
       </div>
 
       <p class="word">
-        <span class="word-inner">{{ data.mainWord.word }}</span>
-        <span class="word-type">{{ formateType(data.mainWord.type, 1) }}.</span>
+        <span class="word-inner">{{ data.mainWord.word }}<span class="word-type">{{ formateType(data.mainWord.type, 1)
+        }}.</span></span>
+        <span class="phonetic">{{ data.mainWord.phonetic }}</span>
       </p>
     </div>
 
@@ -117,6 +123,16 @@ async function handleChooseWord(word: IWord) {
 .WordsCard {
   .word {
     .word-type {
+      margin: 0 0.25rem;
+      padding: 0.25rem 0.5rem;
+
+      font-size: 16px;
+      border-radius: 8px;
+      color: var(--el-text-color-secondary);
+      background-color: var(--el-fill-color);
+    }
+
+    .phonetic {
       color: var(--el-text-color-secondary);
 
       font-size: 18px;
@@ -141,7 +157,7 @@ async function handleChooseWord(word: IWord) {
     width: 100%;
     height: 100%;
 
-    border-radius: 12px;
+    // border-radius: 12px;
     &:first-child {
       z-index: 0;
 
@@ -151,10 +167,23 @@ async function handleChooseWord(word: IWord) {
 
   .WordsCard-Image {
     position: relative;
+    padding: 0.5rem;
 
     width: 100%;
     height: 300px;
     max-height: 40vh;
+
+    overflow: hidden;
+    border-radius: 16px;
+
+    .el-carousel {
+      position: relative;
+
+      height: 100%;
+
+      overflow: hidden;
+      border-radius: 16px;
+    }
   }
 
   position: relative;
