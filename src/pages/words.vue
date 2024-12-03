@@ -214,6 +214,8 @@ whenever(() =>
   > data.word.total, () => {
   router.push('/')
 })
+
+onMounted(() => storage.value.value = [])
 </script>
 
 <template>
