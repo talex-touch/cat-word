@@ -31,7 +31,7 @@
   }
   position: relative;
   margin: 0.5rem 0;
-  padding: 1rem;
+  padding: 0.75rem;
 
   width: 100%;
 

@@ -32,6 +32,12 @@ async function spokenWord(word: IWord) {
 
   speak()
 }
+
+const analyze = ref(false)
+
+function openAnalyse() {
+  analyze.value = true
+}
 </script>
 
 <template>
@@ -55,6 +61,14 @@ async function spokenWord(word: IWord) {
     </div>
 
     <div class="WordDetailContent-Main">
+      <WordSection>
+        <template #Tag>
+          定义解析
+        </template>
+        <p>{{ word.definition[0] }}</p>
+        <p>{{ word.definition[1] }}</p>
+      </WordSection>
+
       <WordSection>
         <template #Tag>
           诠释助记
@@ -108,11 +122,6 @@ async function spokenWord(word: IWord) {
 
     <WordExamples v-if="word.examples?.length" style="margin: 0 1rem" :word="word" />
 
-    <div v-if="word.definition" class="WordContent-Definition">
-      <p>{{ word.definition[0] }}</p>
-      <p>{{ word.definition[1] }}</p>
-    </div>
-
     <div class="WordContent-Extra">
       <div v-if="word.synonyms?.length" class="block">
         <p class="title">
@@ -158,15 +167,32 @@ async function spokenWord(word: IWord) {
 
     <br>
 
-    <div class="WordContent-Bottom" @click="emits('close')">
-      <el-button size="large" w-full type="primary">
+    <div class="WordContent-Bottom">
+      <el-button plain size="large" type="info" @click="openAnalyse">
+        析
+      </el-button>
+      <el-button plain size="large" w-full type="primary" @click="emits('close')">
         下一题
       </el-button>
     </div>
+
+    <TouchDialog v-model="analyze">
+      <div class="WordDetailContent-DialogContent">
+        <el-scrollbar>
+          <MoContentRender :model-value="word.backgroundStory" />
+        </el-scrollbar>
+      </div>
+    </TouchDialog>
   </div>
 </template>
 
 <style lang="scss">
+.WordDetailContent-DialogContent {
+  padding: 1rem;
+
+  height: 85vh;
+}
+
 .WordDetaiContent-Header {
   .phonetic {
     margin: 0 0.25rem;

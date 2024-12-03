@@ -14,6 +14,7 @@ declare module 'vue' {
     LineArrow: typeof import('./src/components/LineArrow.vue')['default']
     Logo: typeof import('./src/components/chore/Logo.vue')['default']
     MoCodeMirror: typeof import('./src/components/editor/MoCodeMirror.vue')['default']
+    MoContentRender: typeof import('./src/components/editor/MoContentRender.vue')['default']
     ModeSelector: typeof import('./src/components/words/ModeSelector.vue')['default']
     PlanSelector: typeof import('./src/components/words/PlanSelector.vue')['default']
     PlayIcon: typeof import('./src/components/icon/PlayIcon.vue')['default']
