@@ -1,5 +1,6 @@
 <script name="Words" setup lang="ts">
 import { ElMessage } from 'element-plus'
+import PlayIcon from '~/components/icon/PlayIcon.vue'
 import WordCard from '~/components/WordCard.vue'
 import type { IWord } from '~/composables/words'
 import { targetDict } from '~/composables/words'
@@ -245,60 +246,7 @@ whenever(() =>
     <audio ref="errorAudio" src="/sound/error.wav" />
 
     <div v-if="data.current" :class="{ visible: data.content }" class="WordContent transition-cubic">
-      <h1 p-4 class="title">
-        <p class="word">
-          {{ data.current.mainWord.word }}
-          <span class="phonetic">
-            {{ data.current.mainWord.phonetic }}
-          </span>
-        <!-- <i i-carbon:album /> -->
-        </p>
-        <p class="desc">
-          {{ data.current.mainWord.translation }} <span mx-2 op-50>{{ formateType(data.current.mainWord.type) }}.</span>
-        </p>
-      </h1>
-
-      <!-- <div v-if="data.current.mainWord.backgroundStory" class="WordContent-Story">
-        {{ data.current.mainWord.backgroundStory }}
-      </div> -->
-
-      <WordExamples v-if="data.current.mainWord.examples?.length" style="margin: 0 1rem" :word="data.current.mainWord" />
-
-      <div v-if="data.current.mainWord.definition" class="WordContent-Definition">
-        <p>{{ data.current.mainWord.definition[0] }}</p>
-        <p>{{ data.current.mainWord.definition[1] }}</p>
-      </div>
-
-      <div class="WordContent-Extra">
-        <div v-if="data.current.mainWord.synonyms?.length" class="block">
-          <p class="title">
-            同义词
-          </p>
-          <p class="content">
-            <span v-for="word in data.current.mainWord.synonyms" :key="word.word">
-              {{ word?.word }}
-            </span>
-          </p>
-        </div>
-        <div v-if="data.current.mainWord.antonyms?.length" class="block">
-          <p class="title">
-            反义词
-          </p>
-          <p class="content">
-            <span v-for="word in data.current.mainWord.antonyms" :key="word.word">
-              {{ word?.word }}
-            </span>
-          </p>
-        </div>
-      </div>
-
-      <br>
-
-      <div class="WordContent-Bottom" @click="data.content = false">
-        <el-button size="large" w-full type="primary">
-          下一题
-        </el-button>
-      </div>
+      <WordDetailContent :word="data.current.mainWord" @close="data.content = false" />
     </div>
 
     <teleport to="body">
@@ -337,93 +285,11 @@ whenever(() =>
   transform: translate(-50%, -50%);
 }
 
-.WordContent-Bottom {
-  position: sticky;
-  padding: 1rem;
-  display: flex;
-
-  top: calc(100% - 72px);
-  bottom: 0;
-
-  width: 100%;
-  height: 72px;
-
-  align-items: center;
-  justify-content: center;
-
-  background-color: var(--el-bg-color);
-}
-
-.WordContent-Definition {
-  padding: 1rem;
-  margin: 1rem 1rem;
-
-  border-radius: 16px;
-  color: var(--el-text-color-secondary);
-  background-color: var(--el-bg-color-page);
-}
-
-.WordContent-Story {
-  margin: 1rem 1rem 2rem;
-
-  font-size: 18px;
-}
-
-.WordContent-Extra {
-  .block {
-    p.content {
-      display: flex;
-
-      width: 100%;
-      gap: 0.25rem;
-
-      flex-wrap: wrap;
-    }
-
-    p.title {
-      width: max-content;
-      padding: 0.25rem;
-
-      border-radius: 8px;
-      background-color: var(--el-fill-color);
-    }
-
-    margin: 0.5rem 0;
-    padding: 1rem;
-
-    border-radius: 16px;
-    color: var(--el-text-color-secondary);
-    background-color: var(--el-bg-color-page);
-  }
-  margin: 0.5rem 1rem;
-}
-
 .WordContent {
   &.visible {
     transform: translateY(0);
   }
-
-  .phonetic {
-    margin: 0 0.25rem;
-    padding: 0.25rem 0.5rem;
-
-    font-size: 16px;
-    border-radius: 8px;
-    color: var(--el-text-color-secondary);
-    background-color: var(--el-fill-color);
-  }
-
-  .title {
-    p.word {
-      font-size: 32px;
-      font-weight: 600;
-    }
-
-    p.desc {
-      margin-top: 0.5rem;
-      font-size: 20px;
-    }
-  }
+  z-index: 10;
   position: absolute;
   // padding: 1rem;
 

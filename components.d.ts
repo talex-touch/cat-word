@@ -16,6 +16,7 @@ declare module 'vue' {
     MoCodeMirror: typeof import('./src/components/editor/MoCodeMirror.vue')['default']
     ModeSelector: typeof import('./src/components/words/ModeSelector.vue')['default']
     PlanSelector: typeof import('./src/components/words/PlanSelector.vue')['default']
+    PlayIcon: typeof import('./src/components/icon/PlayIcon.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     SignCalendar: typeof import('./src/components/SignCalendar.vue')['default']
@@ -24,6 +25,9 @@ declare module 'vue' {
     TheInput: typeof import('./src/components/TheInput.vue')['default']
     TouchDialog: typeof import('./src/components/dialog/TouchDialog.vue')['default']
     WordCard: typeof import('./src/components/WordCard.vue')['default']
+    WordDetailContent: typeof import('./src/components/words/WordDetailContent.vue')['default']
     WordExamples: typeof import('./src/components/WordExamples.vue')['default']
+    WordSection: typeof import('./src/components/words/WordSection.vue')['default']
+    WordSelector: typeof import('./src/components/words/WordSelector.vue')['default']
   }
 }

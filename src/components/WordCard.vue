@@ -1,5 +1,6 @@
 <script name="Words" setup lang="ts">
 import type { IWord } from '~/composables/words'
+import PlayIcon from './icon/PlayIcon.vue'
 
 const props = defineProps<{
   data: {
@@ -37,6 +38,29 @@ async function handleChooseWord(word: IWord) {
 
   display.value = false
 }
+
+const spokenText = ref('')
+const {
+  isSupported: spokenSupoorted,
+  isPlaying,
+  // status,
+  // voiceInfo,
+  // utterance,
+  stop: spokenStop,
+  speak,
+} = useSpeechSynthesis(spokenText)
+
+async function spokenWord(word: IWord) {
+  if (!spokenSupoorted.value)
+    return
+
+  if (isPlaying.value)
+    spokenStop()
+
+  spokenText.value = word.word
+
+  speak()
+}
 </script>
 
 <template>
@@ -55,7 +79,7 @@ async function handleChooseWord(word: IWord) {
       <p class="word">
         <span class="word-inner">{{ data.mainWord.word }}<span class="word-type">{{ formateType(data.mainWord.type, 1)
         }}.</span></span>
-        <span class="phonetic">{{ data.mainWord.phonetic }}</span>
+        <span class="phonetic" flex items-center gap-2>{{ data.mainWord.phonetic }} <PlayIcon @click="spokenWord(data.mainWord)" /></span>
       </p>
     </div>
 
