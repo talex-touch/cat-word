@@ -65,6 +65,9 @@ onMounted(() => {
   --theme-color-dark: #bb920aff;
   --bg-color: var(--el-bg-color);
   --bg-color-dark: var(--el-bg-color-dark);
+
+  --van-nav-bar-background: var(--bg-color) !important;
+  --van-nav-bar-title-text-color: var(--el-text-color-secondary) !important;
 }
 
 .coffee-font {

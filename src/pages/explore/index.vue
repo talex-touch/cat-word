@@ -2,6 +2,7 @@
 const icons = [{
   name: '综合提升',
   icon: 'i-carbon:arrow-up',
+  path: '/explore/comprehensive',
   color: ['#02D9B2', '#01BDB4'],
 }, {
   name: '发音',
@@ -40,6 +41,13 @@ const icons = [{
   icon: 'i-carbon-request-quote',
   color: ['#FBDC03', '#FEB601'],
 }]
+
+const router = useRouter()
+
+function directPage(icon: any) {
+  if (icon.path)
+    router.push(icon.path)
+}
 </script>
 
 <template>
@@ -50,8 +58,9 @@ const icons = [{
 
     <div class="ExplorePage-Icon">
       <div
-        v-for="icon in icons" :key="icon.name" class="ExplorePage-IconItem"
-        :style="`--c1: ${icon.color[0]}; --c2: ${icon.color[1]}`"
+        v-for="icon in icons"
+        :key="icon.name" class="ExplorePage-IconItem" :style="`--c1: ${icon.color[0]}; --c2: ${icon.color[1]}`"
+        @click="directPage(icon)"
       >
         <div class="ExplorePage-IconItem-Bg">
           <div :class="icon.icon" />
