@@ -248,20 +248,25 @@ whenever(() =>
       <h1 p-4 class="title">
         <p class="word">
           {{ data.current.mainWord.word }}
+          <span class="phonetic">
+            {{ data.current.mainWord.phonetic }}
+          </span>
+        <!-- <i i-carbon:album /> -->
         </p>
         <p class="desc">
-          {{ data.current.mainWord.translation }} <span mx-2 op-50>{{ formateType(data.current.mainWord.type) }}</span>
+          {{ data.current.mainWord.translation }} <span mx-2 op-50>{{ formateType(data.current.mainWord.type) }}.</span>
         </p>
       </h1>
 
-      <div v-if="data.current.mainWord.story" class="WordContent-Story">
-        {{ data.current.mainWord.story }}
-      </div>
+      <!-- <div v-if="data.current.mainWord.backgroundStory" class="WordContent-Story">
+        {{ data.current.mainWord.backgroundStory }}
+      </div> -->
 
-      <WordExamples style="margin: 0 1rem" :word="data.current.mainWord" />
+      <WordExamples v-if="data.current.mainWord.examples?.length" style="margin: 0 1rem" :word="data.current.mainWord" />
 
       <div v-if="data.current.mainWord.definition" class="WordContent-Definition">
-        {{ data.current.mainWord.definition }}
+        <p>{{ data.current.mainWord.definition[0] }}</p>
+        <p>{{ data.current.mainWord.definition[1] }}</p>
       </div>
 
       <div class="WordContent-Extra">
@@ -270,8 +275,8 @@ whenever(() =>
             同义词
           </p>
           <p class="content">
-            <span v-for="word in data.current.mainWord.synonyms" :key="word">
-              {{ word?.word || word }}
+            <span v-for="word in data.current.mainWord.synonyms" :key="word.word">
+              {{ word?.word }}
             </span>
           </p>
         </div>
@@ -280,8 +285,8 @@ whenever(() =>
             反义词
           </p>
           <p class="content">
-            <span v-for="word in data.current.mainWord.antonyms" :key="word">
-              {{ word?.word || word }}
+            <span v-for="word in data.current.mainWord.antonyms" :key="word.word">
+              {{ word?.word }}
             </span>
           </p>
         </div>
@@ -396,6 +401,16 @@ whenever(() =>
 .WordContent {
   &.visible {
     transform: translateY(0);
+  }
+
+  .phonetic {
+    margin: 0 0.25rem;
+    padding: 0.25rem 0.5rem;
+
+    font-size: 16px;
+    border-radius: 8px;
+    color: var(--el-text-color-secondary);
+    background-color: var(--el-fill-color);
   }
 
   .title {

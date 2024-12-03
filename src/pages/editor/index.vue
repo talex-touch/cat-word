@@ -262,6 +262,35 @@ function handleSelect(item: IWord) {
     active.value = item.word
   }
 }
+
+const cozeWebSDK = new CozeWebSDK.WebChatClient({
+  config: {
+    // 智能体 ID
+    botId: '7443772163654139958',
+  },
+  ui: {
+    footer: {
+      expressionText: 'Powered by {{QuotaWish}}. AI-generated content for reference only.',
+      linkvars: {
+        QuotaWish: {
+          text: 'QuotaWish',
+          link: 'https://quotawish.com',
+        },
+      },
+    },
+    chatBot: {
+      title: 'QuotaWish WordGenerator'
+    }
+  },
+  // auth: {
+  //   // 鉴权方式，默认type 为unauth，表示不鉴权；建议设置为 token，表示通过PAT或OAuth鉴权
+  //   type: 'token',
+  //   // type 为 token 时，需要设置PAT或OAuth访问密钥
+  //   token: 'pat_zxzSAzxawer234zASNElEglZxcmWJ5ouCcq12gsAAsqJGALlq7hcOqMcPFV3wEVDiqjrg****',
+  //   // 访问密钥过期时，使用的新密钥，可以按需设置。
+  //   onRefreshToken: () => 'pat_zxzSAzxawer234zASNElEglZxcmWJ5ouCcq12gsAAsqJGALlq7hcOqMcPFV3wEVDiqjrg****',
+  // },
+})
 </script>
 
 <template>

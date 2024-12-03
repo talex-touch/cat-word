@@ -10,7 +10,8 @@ export interface IWord {
   examples: {
     sentence: string
     translation: string
-    addon: any
+    addon: string
+    highlight: string
   }[]
   synonyms: {
     word: string
@@ -27,6 +28,7 @@ export interface IWord {
   definition: any
   type: string[]
   story: string
+  backgroundStory: string
   phonetic: {
     aloud: string // 英音
     sound: string // 美音
