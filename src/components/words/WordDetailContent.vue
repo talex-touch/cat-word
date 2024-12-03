@@ -4,11 +4,14 @@ import { words } from '~/composables/words/CET-4'
 
 const props = defineProps<{
   word: IWord
+  button: string
 }>()
 
 const emits = defineEmits<{
   (e: 'close'): void
 }>()
+
+const buttonTitle = computed(() => props.button || '下一题')
 
 const spokenText = ref('')
 const {
@@ -172,7 +175,7 @@ function openAnalyse() {
         析
       </el-button>
       <el-button plain size="large" w-full type="primary" @click="emits('close')">
-        下一题
+        {{ buttonTitle }}
       </el-button>
     </div>
 

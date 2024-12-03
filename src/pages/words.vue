@@ -1,6 +1,5 @@
 <script name="Words" setup lang="ts">
 import { ElMessage } from 'element-plus'
-import PlayIcon from '~/components/icon/PlayIcon.vue'
 import WordCard from '~/components/WordCard.vue'
 import type { IWord } from '~/composables/words'
 import { targetDict } from '~/composables/words'
@@ -216,6 +215,10 @@ whenever(() =>
 })
 
 onMounted(() => storage.value.value = [])
+
+function goDictionary() {
+  router.push(`/dictionary?dict=${targetDict.value.id}`)
+}
 </script>
 
 <template>
@@ -225,7 +228,9 @@ onMounted(() => storage.value.value = [])
         <ExitButton @click="router.push('/')">
           <div i-carbon:arrow-left />
         </ExitButton>
-        {{ targetDict.name }}
+        <p underline @click="goDictionary">
+          {{ targetDict.name }}
+        </p>
       </div>
 
       <h1 flex items-center gap-2 text-sm op-75>
