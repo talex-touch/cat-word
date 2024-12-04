@@ -79,7 +79,9 @@ async function spokenWord(word: IWord) {
       <p class="word">
         <span class="word-inner">{{ data.mainWord.word }}<span class="word-type">{{ formateType(data.mainWord.type, 1)
         }}.</span></span>
-        <span class="phonetic" flex items-center gap-2>{{ data.mainWord.phonetic }} <PlayIcon @click="spokenWord(data.mainWord)" /></span>
+        <span class="phonetic" flex items-center gap-2>{{ data.mainWord.phonetic }}
+          <PlayIcon v-if="false" @click="spokenWord(data.mainWord)" />
+        </span>
       </p>
     </div>
 
@@ -94,16 +96,49 @@ async function spokenWord(word: IWord) {
     </ul>
 
     <div class="WordCard-Footer">
-      <div class="WordCard-Footer-Button">
-        <div i-carbon-arrow-left>
-          跳过
-        </div>
+      <div flex items-center gap-1 class="WordCard-Footer-Button">
+        <div i-carbon-arrow-left />
+        上一个
+      </div>
+
+      <div flex items-center gap-1 class="WordCard-Footer-Button">
+        <PlayIcon @click="spokenWord(data.mainWord)" />
+      </div>
+
+      <div flex items-center gap-1 class="WordCard-Footer-Button">
+        <div i-carbon-star />
+        收藏
       </div>
     </div>
   </div>
 </template>
 
 <style lang="scss">
+.WordCard-Footer {
+  &-Button {
+    &:active {
+      color: var(--el-text-color-regular);
+      background-color: var(--el-fill-color-darker);
+    }
+    padding: 0.25rem 0.5rem;
+
+    font-size: 14px;
+    border-radius: 12px;
+    color: var(--el-text-color-secondary);
+    background-color: var(--el-fill-color-lighter);
+  }
+  position: sticky;
+  padding: 0 0.5rem;
+  margin: 1rem 0;
+  display: flex;
+
+  top: calc(100% - 84px);
+
+  bottom: 1rem;
+
+  justify-content: space-between;
+}
+
 .WordsOptions {
   .WordOption {
     &:active {
