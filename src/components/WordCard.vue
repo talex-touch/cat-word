@@ -205,7 +205,6 @@ async function spokenWord(word: IWord) {
       font-size: 18px;
       font-weight: normal;
     }
-
     display: flex;
 
     font-size: 22px;

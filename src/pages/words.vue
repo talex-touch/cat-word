@@ -223,6 +223,11 @@ function goDictionary() {
 
 <template>
   <div :class="{ listenning: isListening }" class="WordsPage">
+    <div class="WordsPage-Decoration">
+      <div class="WordsPage-Decoration-EarLeft" />
+      <div class="WordsPage-Decoration-EarRight" />
+    </div>
+
     <div flex items-center justify-between gap-2 text-black class="WordsPage-Header">
       <div flex items-center gap-2 font-bold class="WordsPage-Header-Left">
         <ExitButton @click="router.push('/')">
@@ -342,6 +347,48 @@ function goDictionary() {
   position: absolute;
 }
 
+.WordsPage-Decoration {
+  .WordsPage-Decoration-EarLeft {
+    position: absolute;
+
+    top: 15%;
+    left: 0%;
+
+    width: 50vw;
+    height: 40vw;
+
+    border-radius: 45%;
+    background-color: var(--theme-color);
+    // box-shadow: 0 0 0.5rem 2rem var(--theme-color);
+  }
+  .WordsPage-Decoration-EarRight {
+    position: absolute;
+
+    top: 15%;
+    right: 0%;
+
+    width: 50vw;
+    height: 40vw;
+
+    border-radius: 45%;
+    background-color: var(--theme-color);
+    // box-shadow: 0 0 0.5rem 2rem var(--theme-color);
+  }
+  display: none;
+  z-index: -1;
+  position: absolute;
+
+  top: 50vmin;
+  left: 0;
+
+  width: 100%;
+  height: 50vw;
+
+  filter: drop-shadow(0 0 4px var(--theme-color));
+  // ;
+  // box-shadow: 0 0 2rem 8rem var(--theme-color);
+}
+
 .WordsPage {
   &::before {
     z-index: -1;
@@ -352,10 +399,13 @@ function goDictionary() {
     left: -10vmin;
 
     width: 120vmin;
-    height: 50vmin;
+    height: 60vmin;
 
-    border-radius: 0 0 100px 100px;
+    // opacity: 0.75;
+    // filter: drop-shadow(0 0 16px var(--theme-color));
+    border-radius: 0 0 200px 200px;
     background-color: var(--theme-color);
+    // box-shadow: 0 0 0rem 8rem var(--theme-color);
   }
 
   &.listenning {

@@ -45,6 +45,8 @@ function openAnalyse() {
 
 <template>
   <div class="WordDetailContent">
+    <div class="WordDetailContent-Background" />
+
     <div class="WordDetaiContent-Header">
       <p flex items-end gap-2 class="word">
         {{ word.word }}
@@ -170,7 +172,7 @@ function openAnalyse() {
 
     <br>
 
-    <div class="WordContent-Bottom">
+    <div class="WordContent-Bottom fake-background">
       <el-button plain size="large" type="info" @click="openAnalyse">
         析
       </el-button>
@@ -248,7 +250,10 @@ function openAnalyse() {
   align-items: center;
   justify-content: center;
 
-  background-color: var(--el-bg-color);
+  // --fake-color: var(--theme-color);
+  backdrop-filter: blur(18px) saturate(180%);
+  // background-color: var(--el-bg-color);
+  border-top: 1px solid var(--el-border-color);
 }
 
 .WordContent-Definition {
@@ -301,5 +306,30 @@ function openAnalyse() {
 
   width: 100%;
   min-height: 100%;
+}
+
+.WordDetailContent-Background {
+  .dark & {
+    opacity: 0.25;
+  }
+  z-index: -1;
+  position: absolute;
+
+  top: 0;
+  left: 0;
+
+  width: 100%;
+  height: 100%;
+
+  opacity: 0.75;
+  filter: blur(12px) saturate(180%);
+
+  background-color: var(--el-bg-color-page);
+  background-image: radial-gradient(var(--theme-color-light) 10%, transparent 10%),
+    radial-gradient(var(--theme-color) 10%, transparent 10%);
+  background-size: 100px 100px;
+  background-position:
+    0 0,
+    50px 50px;
 }
 </style>

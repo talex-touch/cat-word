@@ -46,6 +46,7 @@ const currentWord = ref<any>()
   top: 0;
   left: 0;
 
+  overflow-y: scroll;
   transform: translateX(120%);
   background-color: var(--el-bg-color);
 }
