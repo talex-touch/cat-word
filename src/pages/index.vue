@@ -1,4 +1,6 @@
 <script setup lang="ts" generic="T extends any, O extends any">
+import DisplayIndexCourse from '~/components/display/IndexCourse.vue'
+
 defineOptions({
   name: 'IndexPage',
 })
@@ -57,6 +59,7 @@ const router = useRouter()
       </ul>
     </div>
 
+    <DisplayIndexCourse />
     <el-empty description="None" />
   </div>
 </template>

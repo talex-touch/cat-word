@@ -11,6 +11,7 @@ declare module 'vue' {
     CodeMirror: typeof import('./src/components/editor/CodeMirror.vue')['default']
     DictSelector: typeof import('./src/components/words/DictSelector.vue')['default']
     ExitButton: typeof import('./src/components/ExitButton.vue')['default']
+    IndexCourse: typeof import('./src/components/display/IndexCourse.vue')['default']
     LineArrow: typeof import('./src/components/LineArrow.vue')['default']
     Logo: typeof import('./src/components/chore/Logo.vue')['default']
     MoCodeMirror: typeof import('./src/components/editor/MoCodeMirror.vue')['default']
