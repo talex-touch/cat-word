@@ -405,7 +405,10 @@ function goDictionary() {
     // filter: drop-shadow(0 0 16px var(--theme-color));
     border-radius: 0 0 200px 200px;
     background-color: var(--theme-color);
-    // box-shadow: 0 0 0rem 8rem var(--theme-color);
+    box-shadow:
+      0 0 0rem 5rem #eea850e0,
+      0 0 0.5rem 8rem #ed935780,
+      0 0 1rem 10rem #eb726350;
   }
 
   &.listenning {
