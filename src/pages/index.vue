@@ -11,52 +11,30 @@ const router = useRouter()
 <template>
   <div class="IndexPage">
     <div class="IndexPage-Header">
-      <p text-2xl font-bold>
-        学习
-      </p>
-
-      <div my-4 w-full flex items-center gap-4 class="IndexPage-HeaderAi">
+      <div class="coffee-font" text-1.75xl flex items-center gap-1 font-bold>
         <img w-8 src="/ai-logo.png">
-        <div flex flex-1 items-center justify-between gap-2 class="IndexPage-HeaderAi-Bubble">
-          5分钟精确诊断你的英语水平...
+        Tata
+      </div>
 
-          <div class="logo-icon">
-            <div i-carbon-arrow-right />
-          </div>
-        </div>
+      <div flex items-center gap-2 class="IndexPage-Header-Info">
+        <RoundInfo type="danger">
+          <div i-carbon-favorite-filled />
+          5
+        </RoundInfo>
+
+        <RoundInfo type="warning">
+          <div i-carbon-star-filled />
+          400
+        </RoundInfo>
       </div>
     </div>
 
-    <div mx-auto my--8 class="IndexPage-Card w-80%" @click="router.push('/prewords')">
-      <ul flex justify-between>
-        <li flex flex-col items-center border-r-1 px-2>
-          <p flex items-center text-3 op-75>
-            今日任务 <i i-carbon-caret-right block />
-          </p>
+    <div mx-auto class="IndexPage-Card w-95%" @click="router.push('/prewords')">
+      <p class="title coffee-font">
+        Plan
+      </p>
 
-          <p mt-4 class="title">
-            <span font-bold> 0/3</span> 个
-          </p>
-        </li>
-        <li flex flex-col items-center border-r-1 px-2>
-          <p flex items-center text-3 op-75>
-            今日学习 <i i-carbon-caret-right block />
-          </p>
-
-          <p mt-4 class="title">
-            <span font-bold> 0/10</span> 分钟
-          </p>
-        </li>
-        <li flex flex-col items-center px-2>
-          <p flex items-center text-3 op-75>
-            今日任务 <i i-carbon-caret-right block />
-          </p>
-
-          <p mt-4 class="title">
-            <span font-bold>0</span> 天签到
-          </p>
-        </li>
-      </ul>
+      <WordSignInfo />
     </div>
 
     <DisplayIndexCourse />
@@ -64,50 +42,43 @@ const router = useRouter()
   </div>
 </template>
 
-<style>
+<style lang="scss">
 .IndexPage-Card {
-  padding: 1rem;
+  p.title {
+    margin: 0 0 1rem;
 
-  border-radius: 12px;
-  box-shadow: var(--el-box-shadow);
-  background-color: var(--bg-color);
-}
-
-.IndexPage-HeaderAi-Bubble {
-  .logo-icon {
-    display: flex;
-
-    width: 24px;
-    height: 24px;
-
-    align-items: center;
-    justify-content: center;
-
+    color: var(--el-text-color-placeholder);
+    font-size: 24px;
     font-weight: 600;
-    border-radius: 50%;
-    background-color: #fff;
   }
-  padding: 0.5rem 1rem;
-
-  color: #000;
-  border-radius: 0 12px 12px 12px;
-  background-color: var(--theme-color-light);
 }
 
 .IndexPage-Header {
+  .IndexPage-Header-Info {
+    font-size: 14px;
+  }
+
   & > p {
     color: #000;
   }
+  z-index: 1;
+  position: sticky;
+  display: flex;
   padding: 1rem;
 
-  height: 40%;
-  max-height: 160px;
-  background-color: var(--theme-color);
+  top: 0;
+
+  justify-content: space-between;
+
+  background-color: var(--el-bg-color);
 }
 
 .IndexPage {
+  position: relative;
+
   height: 100%;
 
+  overflow-y: scroll;
   background-color: var(--el-bg-color);
 }
 </style>

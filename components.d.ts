@@ -9,6 +9,7 @@ declare module 'vue' {
   export interface GlobalComponents {
     CircleLoader: typeof import('./src/components/icon/CircleLoader.vue')['default']
     CodeMirror: typeof import('./src/components/editor/CodeMirror.vue')['default']
+    DictionaryDisplay: typeof import('./src/components/display/DictionaryDisplay.vue')['default']
     DictSelector: typeof import('./src/components/words/DictSelector.vue')['default']
     ExitButton: typeof import('./src/components/ExitButton.vue')['default']
     IndexCourse: typeof import('./src/components/display/IndexCourse.vue')['default']
@@ -19,6 +20,7 @@ declare module 'vue' {
     ModeSelector: typeof import('./src/components/words/ModeSelector.vue')['default']
     PlanSelector: typeof import('./src/components/words/PlanSelector.vue')['default']
     PlayIcon: typeof import('./src/components/icon/PlayIcon.vue')['default']
+    RoundInfo: typeof import('./src/components/display/RoundInfo.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     SignCalendar: typeof import('./src/components/SignCalendar.vue')['default']
@@ -31,5 +33,6 @@ declare module 'vue' {
     WordExamples: typeof import('./src/components/WordExamples.vue')['default']
     WordSection: typeof import('./src/components/words/WordSection.vue')['default']
     WordSelector: typeof import('./src/components/words/WordSelector.vue')['default']
+    WordSignInfo: typeof import('./src/components/words/WordSignInfo.vue')['default']
   }
 }
