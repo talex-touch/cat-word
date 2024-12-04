@@ -4,7 +4,7 @@ import { words } from '~/composables/words/CET-4'
 
 const props = defineProps<{
   word: IWord
-  button: string
+  button?: string
 }>()
 
 const emits = defineEmits<{

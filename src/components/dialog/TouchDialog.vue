@@ -172,7 +172,7 @@ function listen(el: HTMLElement, options: Options) {
 
 const _options: Options = {
   thresholdDistance: window.innerHeight * 0.8, // 设置阈值距离为100px
-  elasticity: 0.15,
+  elasticity: 0.1,
   elasticityClose: 20,
 }
 

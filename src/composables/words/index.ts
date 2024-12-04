@@ -110,8 +110,8 @@ export const dictionaries = reactive<IDict[]>([
     name: '高考高频词汇',
     type: 'English',
     style: {
-      color: '#E8992C',
-      colorLight: '#A8670BFF',
+      color: '#F39511FF',
+      colorLight: '#CD7904FF',
       icon: '<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"><path fill="currentColor" d="M30 15h-2.05A12.01 12.01 0 0 0 17 4.05V2h-2v2.05A12.01 12.01 0 0 0 4.05 15H2v2h2.05A12.01 12.01 0 0 0 15 27.95V30h2v-2.05A12.01 12.01 0 0 0 27.95 17H30ZM17 25.95V22h-2v3.95A10.02 10.02 0 0 1 6.05 17H10v-2H6.05A10.02 10.02 0 0 1 15 6.05V10h2V6.05A10.02 10.02 0 0 1 25.95 15H22v2h3.95A10.02 10.02 0 0 1 17 25.95"/></svg>',
     },
     words: JSON.parse(IELTS),
@@ -121,8 +121,8 @@ export const dictionaries = reactive<IDict[]>([
     name: '四级过考词汇',
     type: 'English',
     style: {
-      color: '#629E83',
-      colorLight: '#3D5E4B',
+      color: '#2FD188FF',
+      colorLight: '#0BA54BFF',
       icon: '<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"><path fill="currentColor" d="M18 10v8zm1-1h-2v8h-3V9h-2v10h5v4h2v-4h1v-2h-1z"/></svg>',
     },
     words: JSON.parse(IELTS),
@@ -132,8 +132,8 @@ export const dictionaries = reactive<IDict[]>([
     name: '六级过考词汇',
     type: 'English',
     style: {
-      color: '#F28372',
-      colorLight: '#C04A3A',
+      color: '#F07A67FF',
+      colorLight: '#BC4232FF',
       icon: '<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"><path fill="currentColor" d="M18 14h-4v-3h5V9h-5a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h4a2 2 0 0 0 2-2v-5a2 2 0 0 0-2-2m-4 7v-5h4v5Z"/></svg>',
     },
     words: JSON.parse(IELTS),
@@ -154,8 +154,8 @@ export const dictionaries = reactive<IDict[]>([
     name: '雅思过考词汇',
     type: 'English',
     style: {
-      color: '#C7A90F',
-      colorLight: '#A48A0A',
+      color: '#EFD125FF',
+      colorLight: '#D1B31BFF',
       icon: '<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"><path fill="currentColor" d="M24.832 16.969c-.272-.647-.581-1.38-.883-2.285c-.79-2.369 1.734-4.953 1.758-4.977l-1.414-1.414c-.14.14-3.423 3.478-2.242 7.023c.326.978.652 1.75.938 2.43A9.4 9.4 0 0 1 24 22a6.24 6.24 0 0 1-4.19 5.293a8.52 8.52 0 0 0-2.103-8l-1.044-1.044l-.582 1.357c-1.836 4.284-4.021 6.154-5.306 6.934A5.84 5.84 0 0 1 8 22a9.6 9.6 0 0 1 .929-3.629A11.3 11.3 0 0 0 10 14v-1.778c.874.36 2 1.303 2 3.778v2.604l1.743-1.935c3.112-3.454 2.463-7.567 1.206-10.308A4.486 4.486 0 0 1 18 11h2c0-5.537-4.579-7-7-7h-2l1.2 1.599c.137.185 2.862 3.927 1.353 7.688A4.94 4.94 0 0 0 9 10H8v4a9.6 9.6 0 0 1-.929 3.629A11.3 11.3 0 0 0 6 22c0 3.848 3.823 8 10 8s10-4.152 10-8a11.4 11.4 0 0 0-1.168-5.031M12.835 27.526a16.5 16.5 0 0 0 4.367-5.598a6.1 6.1 0 0 1 .257 5.971A11 11 0 0 1 16 28a10.3 10.3 0 0 1-3.165-.474"/></svg>',
     },
     words: JSON.parse(IELTS),

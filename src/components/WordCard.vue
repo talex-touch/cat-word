@@ -92,6 +92,14 @@ async function spokenWord(word: IWord) {
         <p>{{ word.translation }}</p>
       </li>
     </ul>
+
+    <div class="WordCard-Footer">
+      <div class="WordCard-Footer-Button">
+        <div i-carbon-arrow-left>
+          跳过
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
