@@ -1,4 +1,5 @@
 import cet4 from './cet4'
+import cet6 from './cet6'
 import high from './high'
 import ielts from './ielts'
 import postGraduate from './post-graduate'
@@ -101,23 +102,22 @@ const obj: IGlobalData = {
 export const dictionaries = reactive<IDict[]>([
   high,
   cet4,
+  cet6,
   postGraduate,
   ielts,
-  // {
-  //   id: 'CET-6',
-  //   name: '六级过考词汇',
-  //   type: 'English',
-  //   style: {
-  //     color: '#F07A67FF',
-  //     colorLight: '#BC4232FF',
-  //     icon: '<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"><path fill="currentColor" d="M18 14h-4v-3h5V9h-5a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h4a2 2 0 0 0 2-2v-5a2 2 0 0 0-2-2m-4 7v-5h4v5Z"/></svg>',
-  //   },
-  //   words: JSON.parse(IELTS),
-  // },
 ])
 
+export interface CalendarData {
+  year: number
+  month: number
+
+  day: string
+
+  data: any[]
+}
+
 export const globalData = useLocalStorage<IGlobalData>('globalData', JSON.parse(JSON.stringify(obj)))
-export const calendarData = useLocalStorage<any>('calendarData', {})
+export const calendarData = useLocalStorage<CalendarData[]>('calendarData', [])
 
 export const targetDict = computed(() => dictionaries.find(item => item.id === globalData.value.dict) || dictionaries[0])
 export const targetMode = computed(() => modes.find(item => item.mode === globalData.value.mode) || modes[0])
