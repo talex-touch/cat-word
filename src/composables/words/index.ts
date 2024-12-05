@@ -117,6 +117,7 @@ export const dictionaries = reactive<IDict[]>([
 ])
 
 export const globalData = useLocalStorage<IGlobalData>('globalData', JSON.parse(JSON.stringify(obj)))
+export const calendarData = useLocalStorage<any>('calendarData', {})
 
 export const targetDict = computed(() => dictionaries.find(item => item.id === globalData.value.dict) || dictionaries[0])
 export const targetMode = computed(() => modes.find(item => item.mode === globalData.value.mode) || modes[0])

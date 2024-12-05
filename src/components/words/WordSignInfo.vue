@@ -65,7 +65,7 @@ const progress = computed(() => learnedAmo.value / totalAmo.value)
         </div>
       </div>
 
-      <el-button w-full size="large" type="primary" @click="router.push('/prewards')">
+      <el-button w-full size="large" type="primary" @click="router.push('/prewords')">
         开始背单词吧！
       </el-button>
     </div>
@@ -111,8 +111,10 @@ const progress = computed(() => learnedAmo.value / totalAmo.value)
         transparent 77%,
         transparent
       );
+    pointer-events: none;
     background-size: 55px 55px;
   }
+  z-index: 1;
   position: relative;
   padding: 0.5rem 1rem;
 
