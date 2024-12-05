@@ -31,13 +31,16 @@ export interface IStorage {
 
 export interface IWordData {
   word: string
+  learnedTime: number
 }
 
 export class WordData {
   word: string
+  learnedTime: number
 
   constructor(word: string) {
     this.word = word
+    this.learnedTime = Date.now()
   }
 }
 
