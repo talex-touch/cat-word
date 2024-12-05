@@ -24,8 +24,8 @@ export interface IStorage {
 
   /** 随机获取一个未学习单词和相关的3个选项 */
   randomUnlearnedWordsWithOptiohns: () => {
-    mainWord: string
-    options: string[]
+    mainWord: IWord
+    options: IWord[]
   }
 }
 
@@ -52,23 +52,24 @@ export class DictStorage implements IStorage {
   }
 
   randomUnlearnedWordsWithOptiohns() {
-    // const totalWords = this.getAllWords()
+    const totalWords = [...this.getAllWords()]
     const unlearnedWords = [...this.getUnlearnedWords()]
 
-    const _options: any[] = []
-    while (_options.length < 4) {
-      const randomIndex = Math.floor(Math.random() * unlearnedWords.length)
-      const selectWord = unlearnedWords[randomIndex]
+    const randomIndex = Math.floor(Math.random() * unlearnedWords.length)
+    const mainWord = unlearnedWords[randomIndex]
 
-      if (_options.includes(selectWord))
+    const options: IWord[] = []
+    while (options.length < 3) {
+      const randomIndex = Math.floor(Math.random() * totalWords.length)
+      const selectWord = totalWords[randomIndex]
+
+      if (options.includes(selectWord) || mainWord.word === selectWord.word)
         continue
 
-      _options.push(selectWord)
+      options.push(selectWord)
 
-      unlearnedWords.splice(randomIndex, 1)
+      totalWords.splice(randomIndex, 1)
     }
-
-    const [mainWord, ...options] = _options
 
     return { mainWord, options }
   }
@@ -103,7 +104,7 @@ export class DictStorage implements IStorage {
     const totalWords = this.getAllWords()
     const learnedWords = this.getLearnedWords()
 
-    return totalWords.filter(item => !learnedWords.includes(item))
+    return totalWords.filter(item => !learnedWords.map((item: any) => item.word).includes(item.word))
   }
 
   getAllWords() {

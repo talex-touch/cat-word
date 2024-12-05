@@ -1,6 +1,7 @@
 <script setup lang="ts">
+import { NavBar } from 'vant'
+
 import { dictionaries } from '~/composables/words'
-import { words } from '~/composables/words/CET-4'
 
 const route = useRoute()
 const router = useRouter()
@@ -11,17 +12,10 @@ const currentWord = ref<any>()
 
 <template>
   <div class="DictionaryPage">
-    <div text-1.5xl flex items-center justify-between px-4 pb-2>
-      <ExitButton text-black @click="router.back()">
-        <div i-carbon:chevron-left />
-      </ExitButton>
-
-      <p>{{ dictionary?.name }} - 词典</p>
-      <p />
-    </div>
+    <NavBar :title="`${dictionary?.name} - 词典`" left-text="返回" left-arrow w-full @click-left="router.back()" />
 
     <ul>
-      <li v-for="word in dictionary?.words" :key="word.word" @click="currentWord = word">
+      <li v-for="word in dictionary?.storage.getAllWords()" :key="word.word" @click="currentWord = word">
         {{ word.word }}
       </li>
     </ul>
@@ -75,7 +69,7 @@ const currentWord = ref<any>()
   }
 
   position: relative;
-  padding: 1rem 0;
+  padding-bottom: 1rem;
 
   height: 100%;
 }

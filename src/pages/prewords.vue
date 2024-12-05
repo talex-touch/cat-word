@@ -31,6 +31,10 @@ function selectMode() {
     component: ModeSelector,
   })
 }
+
+function calculateTime(amo: number) {
+  return Math.max(Math.ceil(amo / 20), 1)
+}
 </script>
 
 <template>
@@ -81,6 +85,9 @@ function selectMode() {
       </div>
     </div>
     <div class="PreWordsPage-Supper">
+      <div my-2 flex items-center justify-center gap-2 op-75>
+        <div i-carbon-time />预计用时 {{ calculateTime(globalData.amount) }} 分钟
+      </div>
       <el-button size="large" w-full type="primary" @click="router.push('/words')">
         开始打卡
       </el-button>

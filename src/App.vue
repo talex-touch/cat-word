@@ -19,6 +19,10 @@ onMounted(() => {
   transition: 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
+button.el-button--large {
+  border-radius: 12px !important;
+}
+
 .Application {
   position: absolute;
   display: flex;
