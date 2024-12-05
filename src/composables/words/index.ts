@@ -58,6 +58,7 @@ export interface IWord {
 export interface IGlobalData {
   dict: string
   mode: Mode
+  amount: number
 }
 
 export enum Mode {
@@ -94,6 +95,7 @@ export const modes = reactive([
 const obj: IGlobalData = {
   dict: 'CET-4',
   mode: Mode.COMPREHENSIVE,
+  amount: 10,
 }
 
 export const dictionaries = reactive<IDict[]>([
@@ -114,7 +116,7 @@ export const dictionaries = reactive<IDict[]>([
   // },
 ])
 
-export const globalData = useLocalStorage('globalData', JSON.parse(JSON.stringify(obj)))
+export const globalData = useLocalStorage<IGlobalData>('globalData', JSON.parse(JSON.stringify(obj)))
 
 export const targetDict = computed(() => dictionaries.find(item => item.id === globalData.value.dict) || dictionaries[0])
 export const targetMode = computed(() => modes.find(item => item.mode === globalData.value.mode) || modes[0])

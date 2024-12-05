@@ -2,7 +2,7 @@
 import DictSelector from '~/components/words/DictSelector.vue'
 import ModeSelector from '~/components/words/ModeSelector.vue'
 import PlanSelector from '~/components/words/PlanSelector.vue'
-import { targetDict, targetMode } from '~/composables/words'
+import { globalData, targetDict, targetMode } from '~/composables/words'
 
 const router = useRouter()
 
@@ -64,7 +64,7 @@ function selectMode() {
             <div i-carbon:plan />
           </template>
           <template #end>
-            10个/组
+            {{ globalData.amount }}个/组
           </template>
           制定计划
         </LineArrow>
