@@ -9,8 +9,6 @@ const learnedAmo = computed(() => storage.value.getLearnedWords().length)
 const totalAmo = computed(() => data.value.words.length)
 
 const progress = computed(() => learnedAmo.value / totalAmo.value)
-
-console.log({ data, progress, learnedAmo, totalAmo })
 </script>
 
 <template>
