@@ -29,7 +29,7 @@ const router = useRouter()
       </div>
     </div>
 
-    <div mx-auto class="IndexPage-Card w-95%" @click="router.push('/prewords')">
+    <div mx-auto class="IndexPage-Card w-95%">
       <p class="title coffee-font">
         Plan
       </p>
