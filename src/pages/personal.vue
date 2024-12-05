@@ -72,6 +72,9 @@
 
     .header-img {
       img {
+        width: 92px;
+        height: 92px;
+
         border-radius: 50%;
       }
       padding: 8px;

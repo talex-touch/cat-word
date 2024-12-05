@@ -14,7 +14,7 @@ const progress = computed(() => learnedAmo.value / totalAmo.value)
 </script>
 
 <template>
-  <div class="WordSignInfo-Wrapper transition-cubic">
+  <div text-black class="WordSignInfo-Wrapper transition-cubic">
     <div class="WordSignInfo transition-cubic">
       <div class="WordSignInfo-Svg">
         <img :src="Cat">
@@ -46,7 +46,7 @@ const progress = computed(() => learnedAmo.value / totalAmo.value)
 
       <div mt-2 flex items-center justify-between class="WordSignInfo-DetailBlockWrapper">
         <div class="WordSignInfo-DetailBlock coffee-font">
-          <p text-sm font-bold>
+          <p text-sm font-bold op-75>
             需新学
           </p>
 
@@ -55,7 +55,7 @@ const progress = computed(() => learnedAmo.value / totalAmo.value)
           </p>
         </div>
         <div class="WordSignInfo-DetailBlock coffee-font">
-          <p text-sm font-bold>
+          <p text-sm font-bold op-75>
             需复习
           </p>
 

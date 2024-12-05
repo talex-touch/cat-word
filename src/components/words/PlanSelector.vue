@@ -128,7 +128,7 @@ function handleChange({ columnIndex, selectedValues }: any) {
   height: 40px;
 
   pointer-events: none;
-  transform: translateY(-50%) translateY(1rem) translateY(12px);
+  transform: translateY(-50%) translateY(1rem) translateY(14px);
 }
 
 .PlanPicker-Column {
@@ -161,6 +161,9 @@ function handleChange({ columnIndex, selectedValues }: any) {
 }
 
 .PlanPicker {
+  --van-picker-background: var(--bg-color);
+  --van-picker-option-text-color: var(--el-text-color-primary);
+
   .van-picker {
     width: 100%;
   }
