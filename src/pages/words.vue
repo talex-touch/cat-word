@@ -37,7 +37,6 @@ const data = reactive<{
   },
 })
 
-const storage = computed(() => useLocalStorage<any>(targetDict.value.id, []))
 async function playAudioSound(success: boolean = false) {
   const el = success ? successAudio.value : errorAudio.value
 
@@ -50,29 +49,29 @@ async function playAudioSound(success: boolean = false) {
 
 // 随机抽取1个单词以及3个额外单词的选项
 function randomWords() {
-  const totalWords = [...targetDict.value.words]
-  const words = [...totalWords].filter((word: IWord) => !storage.value.value.includes(word.word))
+  return targetDict.value.storage.randomUnlearnedWordsWithOptiohns()
+  // const storage = targetDict.value.storage
+  // const totalWords = [...storage.getAllWords()]
+  // const words = storage.getUnlearnedWords()
 
-  data.word.total = Math.min(data.word.total, words.length)
+  // data.word.total = Math.min(data.word.total, words.length)
 
-  // 随机抽取
-  const mainWordIndex = Math.floor(Math.random() * words.length)
-  const mainWord = words[mainWordIndex]
+  // // 随机抽取
+  // const mainWordIndex = Math.floor(Math.random() * words.length)
+  // const mainWord = words[mainWordIndex]
 
-  console.log({ words, storage: storage.value.value, mainWord })
+  // // 剩余单词数组
+  // const remainingWords = totalWords.filter(word => word.word !== mainWord.word)
 
-  // 剩余单词数组
-  const remainingWords = totalWords.filter(word => word.word !== mainWord.word)
+  // // 从剩余单词中随机选择3个单词
+  // const options: any[] = []
+  // for (let i = 0; i < 3; i++) {
+  //   const randomIndex = Math.floor(Math.random() * remainingWords.length)
+  //   options.push(remainingWords[randomIndex])
+  //   remainingWords.splice(randomIndex, 1) // 移除已选中的单词
+  // }
 
-  // 从剩余单词中随机选择3个单词
-  const options: any[] = []
-  for (let i = 0; i < 3; i++) {
-    const randomIndex = Math.floor(Math.random() * remainingWords.length)
-    options.push(remainingWords[randomIndex])
-    remainingWords.splice(randomIndex, 1) // 移除已选中的单词
-  }
-
-  return { mainWord, options }
+  // return { mainWord, options }
 }
 
 const spokenText = ref('')
@@ -198,7 +197,7 @@ async function handleChoose(word: IWord) {
     // })
   }
   else {
-    storage.value.value.push(data.current!.mainWord.word)
+    targetDict.value.storage.setLearned(data.current!.mainWord.word)
 
     useVibrate('bit')
 
@@ -213,8 +212,6 @@ whenever(() =>
   > data.word.total, () => {
   router.push('/')
 })
-
-onMounted(() => storage.value.value = [])
 
 function goDictionary() {
   router.push(`/dictionary?dict=${targetDict.value.id}`)
@@ -275,6 +272,7 @@ function goDictionary() {
   p {
     font-size: 16px;
   }
+
   z-index: 10;
   position: absolute;
   display: flex;
@@ -301,6 +299,7 @@ function goDictionary() {
   &.visible {
     transform: translateY(0);
   }
+
   z-index: 10;
   position: absolute;
   // padding: 1rem;
@@ -321,6 +320,7 @@ function goDictionary() {
   &.WordCard-Next {
     visibility: hidden;
   }
+
   position: absolute;
 
   top: 0;
@@ -361,6 +361,7 @@ function goDictionary() {
     background-color: var(--theme-color);
     // box-shadow: 0 0 0.5rem 2rem var(--theme-color);
   }
+
   .WordsPage-Decoration-EarRight {
     position: absolute;
 
@@ -374,6 +375,7 @@ function goDictionary() {
     background-color: var(--theme-color);
     // box-shadow: 0 0 0.5rem 2rem var(--theme-color);
   }
+
   display: none;
   z-index: -1;
   position: absolute;

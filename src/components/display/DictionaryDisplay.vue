@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import type { IDict } from '~/composables/words'
+import type { Dictionary, IDict } from '~/composables/words'
 
 const props = defineProps<{
-  dict: IDict
+  dict: Dictionary
 }>()
 
 function generateStyles(dict: IDict) {

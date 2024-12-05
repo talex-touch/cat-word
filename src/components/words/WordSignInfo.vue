@@ -2,9 +2,15 @@
 import { targetDict } from '~/composables/words'
 import Cat from '/svg/cat.svg'
 
-const props = defineProps<{
-  modelValue?: boolean
-}>()
+const data = computed<any>(() => targetDict.value)
+
+const storage = computed(() => data.value.storage)
+const learnedAmo = computed(() => storage.value.getLearnedWords().length)
+const totalAmo = computed(() => data.value.words.length)
+
+const progress = computed(() => learnedAmo.value / totalAmo.value)
+
+console.log({ data, progress, learnedAmo, totalAmo })
 </script>
 
 <template>
@@ -14,7 +20,7 @@ const props = defineProps<{
     </div>
 
     <div class="WordSignInfo-Dictionary">
-      <DictionaryDisplay :dict="targetDict" />
+      <DictionaryDisplay :dict="data" />
     </div>
 
     <div class="WordSignInfo-Content">
@@ -22,9 +28,9 @@ const props = defineProps<{
         单词练习
       </p>
       <p class="WordSignInfo-Content-Desc">
-        10/{{ targetDict.words.length }} 已学习
+        {{ learnedAmo }} /{{ totalAmo }} 已学习
       </p>
-      <div style="--p: 50%" class="WordSignInfo-Content-Progress">
+      <div :style="`--p: ${progress * 100}%`" class="WordSignInfo-Content-Progress">
         <div class="WordSignInfo-Content-Progress-Bg" />
         <div class="WordSignInfo-Content-Progress-Inner" />
       </div>
