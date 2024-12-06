@@ -39,7 +39,7 @@ onMounted(async () => {
 
       <h1><span font-bold>01</span>天</h1>
 
-      <div w-full flex items-center justify-between>
+      <div mt-8 w-full flex items-center justify-between>
         挑战 7 天不断电
         <span font-bold op-75>1/7</span>
       </div>
@@ -300,7 +300,7 @@ onMounted(async () => {
   left: 5%;
 
   width: 90%;
-  height: 200px;
+  height: 220px;
 
   border-radius: 25px;
   box-shadow: var(--el-box-shadow);

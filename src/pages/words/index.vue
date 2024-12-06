@@ -2,7 +2,7 @@
 import { ElMessage } from 'element-plus'
 import WordCard from '~/components/WordCard.vue'
 import type { IWord } from '~/composables/words'
-import { globalData, targetDict } from '~/composables/words'
+import { calendarData, globalData, targetDict } from '~/composables/words'
 
 const mainCard = ref<InstanceType<typeof WordCard>>()
 const moveCard = ref<InstanceType<typeof WordCard>>()
