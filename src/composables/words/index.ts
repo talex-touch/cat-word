@@ -124,6 +124,9 @@ export interface CalendarData {
   data: ISignData[]
 }
 
+if (localStorage.getItem('calendarData') === '{}')
+  localStorage.removeItem('calendarData')
+
 export const globalData = useLocalStorage<IGlobalData>('globalData', JSON.parse(JSON.stringify(obj)))
 export const calendarData = useLocalStorage<CalendarData[]>('calendarData', [])
 
