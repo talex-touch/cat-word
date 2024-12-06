@@ -8,6 +8,9 @@ importers:
 
   .:
     dependencies:
+      '@number-flow/vue':
+        specifier: ^0.3.2
+        version: 0.3.2(vue@3.5.3(typescript@5.5.4))
       '@tsparticles/slim':
         specifier: ^3.7.1
         version: 3.7.1
@@ -618,6 +621,11 @@ packages:
   '@npmcli/redact@2.0.1':
     resolution: {integrity: sha512-YgsR5jCQZhVmTJvjduTOIHph0L73pK8xwMVaDY0PatySqVM9AZj93jpoXYSJqfHFxFkN9dmqTw6OiqExsS3LPw==}
     engines: {node: ^16.14.0 || >=18.0.0}
+
+  '@number-flow/vue@0.3.2':
+    resolution: {integrity: sha512-sJ41RqLKA00yRQCysca0XFaYTjU5blCrgNVNsiiJylJJkOREwIg9w8bCWNy7OJfnzI9bHRyaG7NKJ5TEJzAbmQ==}
+    peerDependencies:
+      vue: ^3
 
   '@one-ini/wasm@0.1.1':
     resolution: {integrity: sha512-XuySG1E38YScSJoMlqovLru4KTUNSjgVTIjyh7qMX6aNN5HY5Ct5LhRJdxO79JtTzKfzV/bnWpz+zquYrISsvw==}
@@ -2014,6 +2022,9 @@ packages:
       jiti:
         optional: true
 
+  esm-env@1.2.1:
+    resolution: {integrity: sha512-U9JedYYjCnadUlXk7e1Kr+aENQhtUaoaV9+gZm1T8LC/YBAPJx3NSPIAurFOC0U5vrdSevnUJS2/wUVxGwPhng==}
+
   espree@10.1.0:
     resolution: {integrity: sha512-M1M6CpiE6ffoigIOWYO9UDP8TMUw9kqb21tf+08IgDYjCsOvCuDt4jQcZmoYxx+w7zlKw9/N0KXfto+I8/FrXA==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
@@ -2694,6 +2705,9 @@ packages:
 
   nth-check@2.1.1:
     resolution: {integrity: sha512-lqjrjmaOoAnWfMmBPL+XNnynZh2+swxiX3WUE0s4yEHI6m+AwrK2UZOimIRl3X/4QctVqS8AiZjFqyOGrMXb/w==}
+
+  number-flow@0.4.1:
+    resolution: {integrity: sha512-d39o1tWL7mMMBLuOfHswtQ8r0fj9eUcatb4G1Spdv0ZO/I30kg9DBdSzSPjNG6hrj1slQ6KA3TQXk1RmOq4qOA==}
 
   nwsapi@2.2.12:
     resolution: {integrity: sha512-qXDmcVlZV4XRtKFzddidpfVP4oMSGhga+xdMc25mv8kaLUHtgzCDhUxkrN8exkGdTlLNaXj7CV3GtON7zuGZ+w==}
@@ -4102,6 +4116,12 @@ snapshots:
       semver: 7.6.3
 
   '@npmcli/redact@2.0.1': {}
+
+  '@number-flow/vue@0.3.2(vue@3.5.3(typescript@5.5.4))':
+    dependencies:
+      esm-env: 1.2.1
+      number-flow: 0.4.1
+      vue: 3.5.3(typescript@5.5.4)
 
   '@one-ini/wasm@0.1.1': {}
 
@@ -5882,6 +5902,8 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
+  esm-env@1.2.1: {}
+
   espree@10.1.0:
     dependencies:
       acorn: 8.12.1
@@ -6572,6 +6594,10 @@ snapshots:
   nth-check@2.1.1:
     dependencies:
       boolbase: 1.0.0
+
+  number-flow@0.4.1:
+    dependencies:
+      esm-env: 1.2.1
 
   nwsapi@2.2.12: {}
 

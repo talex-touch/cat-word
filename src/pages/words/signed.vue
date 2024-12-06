@@ -1,27 +1,75 @@
 <script setup lang="ts">
-import tsParticles from '@tsparticles/vue3'
+import NumberFlow from '@number-flow/vue'
 import Astronaut from '/svg/astronaut.svg'
+import Mello from '/svg/mello.svg'
+
+const num = ref(0)
+const score = ref(0)
+
+const router = useRouter()
+
+onMounted(async () => {
+  await sleep(100)
+
+  num.value = 5
+
+  await sleep(100)
+
+  score.value = 5
+})
 </script>
 
 <template>
   <div class="Signed">
-    <div class="Signed-MainCard">
+    <div class="Signed-Header">
+      <h1>今日已完成!</h1>
+      <div class="Signed-Header-Time">
+        2023-08-08
+      </div>
+    </div>
+
+    <div class="Signed-MainCard fake-background">
       <div class="Signed-MainCard-Svg">
         <img :src="Astronaut">
       </div>
+      <div class="Signed-MainCard-SuccessSvg">
+        <img :src="Mello">
+      </div>
       <p>你已连续学习</p>
 
-      <h1><span>01</span>天</h1>
+      <h1><span font-bold>01</span>天</h1>
 
       <div w-full flex items-center justify-between>
         挑战 7 天不断电
-        <span>1/7</span>
+        <span font-bold op-75>1/7</span>
       </div>
 
       <div style="--p: 14.2%" class="Signed-MainCard-Progress">
         <div class="Signed-MainCard-Progress-Bar" />
         <div class="Signed-MainCard-Progress-Inner" />
       </div>
+    </div>
+
+    <div class="Signed-SubCard">
+      <div class="Signed-SubCardItem fake-background">
+        <p>过招单词</p>
+        <p class="amo">
+          <NumberFlow :continuous="true" :will-change="true" :animated="true" :value="num" />
+        </p>
+      </div>
+
+      <div class="Signed-SubCardItem fake-background">
+        <p>学分</p>
+        <p class="amo">
+          <NumberFlow :continuous="true" :will-change="true" :animated="true" :value="score" />
+        </p>
+      </div>
+    </div>
+
+    <div class="Signed-CheckIn fake-background">
+      <el-button w-full size="large" type="primary" @click="router.push('/')">
+        关闭
+      </el-button>
     </div>
 
     <div class="Signed-Particles">
@@ -103,6 +151,45 @@ import Astronaut from '/svg/astronaut.svg'
 </template>
 
 <style lang="scss">
+.Signed-Header {
+  z-index: 1;
+  position: relative;
+  padding: 1rem;
+
+  top: 5%;
+  left: 5%;
+
+  gap: 1rem;
+  width: 90%;
+
+  h1 {
+    font-size: 24px;
+  }
+
+  .Signed-Header-Time {
+    opacity: 0.75;
+    font-size: 16px;
+    font-weight: 600;
+  }
+}
+
+.Signed-CheckIn {
+  z-index: 1;
+  position: sticky;
+  padding: 1rem;
+
+  top: 100%;
+  left: 0;
+
+  width: 100%;
+
+  border-radius: 25px 25px 0 0;
+  color: var(--el-text-color-regular);
+  box-shadow: var(--el-box-shadow);
+
+  backdrop-filter: blur(18px) saturate(180%);
+}
+
 .Signed-Particles {
   z-index: 0;
   position: absolute;
@@ -136,7 +223,37 @@ import Astronaut from '/svg/astronaut.svg'
 
   overflow: hidden;
   border-radius: 8px;
-  background-color: var(--el-fill-color);
+  background-color: var(--el-fill-color-darker);
+}
+
+.Signed-SubCard {
+  &Item {
+    .amo {
+      font-weight: 600;
+      font-size: 28px;
+    }
+    position: relative;
+    padding: 1rem;
+
+    width: 50%;
+
+    border-radius: 25px;
+    color: var(--el-text-color-regular);
+    box-shadow: var(--el-box-shadow);
+    backdrop-filter: blur(18px) saturate(180%);
+  }
+  z-index: 1;
+  position: relative;
+  margin: 1rem 0;
+  display: flex;
+
+  top: 20%;
+  left: 5%;
+
+  gap: 1rem;
+  width: 90%;
+
+  justify-content: space-between;
 }
 
 .Signed-MainCard {
@@ -144,11 +261,24 @@ import Astronaut from '/svg/astronaut.svg'
     position: absolute;
 
     top: 0;
-    width: 30%;
+    width: 40%;
 
     right: 10%;
 
     transform: translateY(-100%);
+
+    img {
+      width: 100%;
+    }
+  }
+
+  &-SuccessSvg {
+    position: absolute;
+
+    top: 0;
+    width: 40%;
+
+    right: 0.5rem;
 
     img {
       width: 100%;
@@ -172,12 +302,17 @@ import Astronaut from '/svg/astronaut.svg'
   width: 90%;
   height: 200px;
 
-  border-radius: 18px;
-  color: var(--el-text-color-secondary);
-  background-color: var(--el-bg-color-page);
+  border-radius: 25px;
+  box-shadow: var(--el-box-shadow);
+  color: var(--el-text-color-regular);
+  backdrop-filter: blur(18px) saturate(180%);
 }
 
 .Signed {
+  .dark &::before {
+    opacity: 0.5;
+  }
+
   &::before {
     content: '';
     position: absolute;
@@ -189,8 +324,7 @@ import Astronaut from '/svg/astronaut.svg'
     height: 100%;
 
     transform: scale(1.25);
-    filter: blur(1px) saturate(180%);
-    opacity: 0.25;
+    filter: blur(2px) saturate(180%);
     background:
       radial-gradient(circle farthest-side at 0% 50%, #fb1 23.5%, rgba(240, 166, 17, 0) 0) 21px 30px,
       radial-gradient(circle farthest-side at 0% 50%, #b71 24%, rgba(240, 166, 17, 0) 0) 19px 30px,
@@ -223,8 +357,11 @@ import Astronaut from '/svg/astronaut.svg'
     background-size: 40px 60px;
   }
   position: relative;
-  padding: 1rem;
+  // padding: 1rem;
 
   height: 100%;
+
+  --fake-opacity: 0.85;
+  --fake-color: var(--el-fill-color-dark);
 }
 </style>
