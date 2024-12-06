@@ -116,7 +116,6 @@ async function next() {
 
   data.next = data.current
   data.current = randomWords()
-  data.word.current += 1
   data.word.history.push(data.next!.mainWord.word)
 
   currentDom.style.transition = 'none'
@@ -202,6 +201,7 @@ async function handleChoose(word: IWord) {
   }
   else {
     targetDict.value.storage.setLearned(data.current!.mainWord.word)
+    data.word.current += 1
 
     useVibrate('bit')
 
