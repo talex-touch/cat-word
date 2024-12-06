@@ -1,6 +1,7 @@
 <script setup lang="ts">
-import { globalData, targetDict } from '~/composables/words'
+import { calendarManager, globalData, targetDict } from '~/composables/words'
 import Cat from '/svg/cat.svg'
+import Checked from '/svg/complete.svg'
 
 const router = useRouter()
 
@@ -11,10 +12,11 @@ const learnedAmo = computed(() => storage.value.getLearnedWords().length)
 const totalAmo = computed(() => data.value.words.length)
 
 const progress = computed(() => learnedAmo.value / totalAmo.value)
+const todayData = computed(() => calendarManager.getTodayData())
 </script>
 
 <template>
-  <div text-black class="WordSignInfo-Wrapper transition-cubic">
+  <div :class="{ signed: todayData }" text-black class="WordSignInfo-Wrapper transition-cubic">
     <div class="WordSignInfo transition-cubic">
       <div class="WordSignInfo-Svg">
         <img :src="Cat">
@@ -41,38 +43,75 @@ const progress = computed(() => learnedAmo.value / totalAmo.value)
     <div class="WordSignInfo-Detail">
       <p w-full flex items-center justify-between>
         <span font-bold class="title">今日计划</span>
-        <span text-sm op-75>随时随地，单词好记</span>
+        <span text-sm>随时随地，单词好记</span>
       </p>
 
       <div mt-2 flex items-center justify-between class="WordSignInfo-DetailBlockWrapper">
-        <div class="WordSignInfo-DetailBlock coffee-font">
-          <p text-sm font-bold op-75>
-            需新学
-          </p>
+        <template v-if="todayData">
+          <div class="WordSignInfo-DetailBlock coffee-font">
+            <p text-sm font-bold op-75>
+              已学习
+            </p>
 
-          <p text-2xl>
-            {{ globalData.amount }} 词
-          </p>
-        </div>
-        <div class="WordSignInfo-DetailBlock coffee-font">
-          <p text-sm font-bold op-75>
-            需复习
-          </p>
+            <p text-2xl>
+              {{ todayData.data?.words.length }} 词
+            </p>
+          </div>
+        </template>
+        <template v-else>
+          <div class="WordSignInfo-DetailBlock coffee-font">
+            <p text-sm font-bold op-75>
+              需新学
+            </p>
 
-          <p text-2xl>
-            {{ globalData.amount }} 词
-          </p>
-        </div>
+            <p text-2xl>
+              {{ globalData.amount }} 词
+            </p>
+          </div>
+          <div class="WordSignInfo-DetailBlock coffee-font">
+            <p text-sm font-bold op-75>
+              需复习
+            </p>
+
+            <p text-2xl>
+              {{ globalData.amount }} 词
+            </p>
+          </div>
+        </template>
       </div>
 
-      <el-button w-full size="large" type="primary" @click="router.push('/prewords')">
-        开始背单词吧！
+      <el-button v-if="!todayData" w-full size="large" type="primary" @click="router.push('/prewords')">
+        <span v-if="todayData">打卡</span>
+        <span v-else>开始背单词吧！</span>
       </el-button>
+
+      <template v-else>
+        <el-button w="30%" size="large" type="primary" @click="router.push('/prewords')">
+          <span v-if="todayData">打卡</span>
+          <span v-else>开始背单词吧！</span>
+        </el-button>
+
+        <div class="WordSignInfo-Checked">
+          <img :src="Checked">
+        </div>
+      </template>
     </div>
   </div>
 </template>
 
 <style lang="scss">
+.WordSignInfo-Checked {
+  z-index: -1;
+  position: absolute;
+
+  bottom: 0;
+  width: 40%;
+
+  right: 5%;
+  transform: translate(0, 10%);
+  // background-image: linear-gradient(to right, var(--theme-color), var(--theme-color-dark));
+}
+
 .WordSignInfo-Detail {
   &::before {
     content: '';
@@ -217,6 +256,13 @@ const progress = computed(() => learnedAmo.value / totalAmo.value)
   align-items: flex-end;
 
   transform: scaleX(-1);
+}
+
+.signed .WordSignInfo-Svg {
+  left: unset;
+  right: -0.5rem;
+
+  transform: scale(1);
 }
 
 .WordSignInfo-Dictionary {
