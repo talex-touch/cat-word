@@ -2,7 +2,7 @@
 import { ElMessage } from 'element-plus'
 import WordCard from '~/components/WordCard.vue'
 import type { IWord } from '~/composables/words'
-import { calendarData, globalData, targetDict } from '~/composables/words'
+import { calendarData, calendarManager, globalData, targetDict } from '~/composables/words'
 
 const mainCard = ref<InstanceType<typeof WordCard>>()
 const moveCard = ref<InstanceType<typeof WordCard>>()
@@ -25,6 +25,8 @@ const data = reactive<{
     current: number
     total: number
     left: number
+    history: string[]
+    start: number
   }
 }>({
   content: false,
@@ -34,6 +36,8 @@ const data = reactive<{
     current: 0,
     total: globalData.value.amount,
     left: 0,
+    history: [],
+    start: Date.now(),
   },
 })
 
@@ -102,7 +106,6 @@ async function next() {
 
   if (!moving) {
     data.current = randomWords()
-    data.word.current += 1
     spokenWord(data.current.mainWord)
 
     return
@@ -114,6 +117,7 @@ async function next() {
   data.next = data.current
   data.current = randomWords()
   data.word.current += 1
+  data.word.history.push(data.next!.mainWord.word)
 
   currentDom.style.transition = 'none'
   currentDom.style.transform = 'translateX(120%)'
@@ -210,7 +214,9 @@ next()
 whenever(() =>
   data.word.current
   > data.word.total, () => {
-  router.push('/')
+  calendarManager.createTodayData(data.word.history, Date.now() - data.word.start, true)
+
+  router.push('/words/signed')
 })
 
 function goDictionary() {

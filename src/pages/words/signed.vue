@@ -1,21 +1,27 @@
 <script setup lang="ts">
 import NumberFlow from '@number-flow/vue'
+import { dayjs } from 'element-plus'
+import { calendarManager } from '~/composables/words'
 import Astronaut from '/svg/astronaut.svg'
 import Mello from '/svg/mello.svg'
 
 const num = ref(0)
 const score = ref(0)
+const timeText = ref('')
 
 const router = useRouter()
 
 onMounted(async () => {
+  const todayData = calendarManager.getTodayData()!
+  timeText.value = dayjs(new Date(todayData.data!.date)).format('YYYY-MM-DD')
+
   await sleep(100)
 
-  num.value = 5
+  num.value = todayData.data!.words.length
 
   await sleep(100)
 
-  score.value = 5
+  score.value = todayData.data!.words.length * 1.5
 })
 </script>
 
@@ -24,7 +30,7 @@ onMounted(async () => {
     <div class="Signed-Header">
       <h1>今日已完成!</h1>
       <div class="Signed-Header-Time">
-        2023-08-08
+        {{ timeText }}
       </div>
     </div>
 

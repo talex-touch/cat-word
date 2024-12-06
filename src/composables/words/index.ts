@@ -195,7 +195,8 @@ export class CalendarManager {
 
     return {
       signed: days?.[day] === '1',
-      data: data.data,
+      dataList: data.data,
+      data: data.data.find(item => item.day === day),
       origin: data,
     }
   }
@@ -204,3 +205,5 @@ export class CalendarManager {
     return [new Date().getFullYear(), new Date().getMonth() + 1, new Date().getDate()]
   }
 }
+
+export const calendarManager = new CalendarManager()
