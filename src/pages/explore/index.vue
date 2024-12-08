@@ -12,14 +12,17 @@ const icons = [{
 }, {
   name: '口语',
   icon: 'i-carbon-headphones',
+  path: '/explore/speech',
   color: ['#20DF9F', '#13D77F'],
 }, {
   name: '听力',
   icon: 'i-carbon-music',
+  path: '/explore/listen',
   color: ['#FFA9E8', '#FD82D0'],
 }, {
   name: '配音',
   icon: 'i-carbon-media-library-filled',
+  path: '/explore/dub',
   color: ['#FEAA06', '#FF7C01'],
 }, {
   name: '短视频',

@@ -176,6 +176,8 @@ async function speechRecognition() {
     useVibrate('heavy')
   }
 
+  result.value = ''
+
   await sleep(300)
 
   next()
@@ -201,11 +203,12 @@ async function handleChoose(word: IWord) {
   }
   else {
     targetDict.value.storage.setLearned(data.current!.mainWord.word)
-    data.word.current += 1
 
     useVibrate('bit')
 
-    speechRecognition()
+    await speechRecognition()
+
+    data.word.current += 1
   }
 }
 

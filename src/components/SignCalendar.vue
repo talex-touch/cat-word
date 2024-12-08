@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { calendarManager } from '~/composables/words'
+
 // 获取近7天的日期
 function getDates() {
   const dates = []
@@ -11,12 +13,14 @@ function getDates() {
 }
 
 const dates = getDates()
+const todayData = calendarManager.getTodayData()
+const todaySigned = computed(() => todayData?.signed)
 </script>
 
 <template>
   <div class="SignCalendar">
     <ul class="SignCalendar-Head">
-      <li v-for="date in dates" :key="date.getDate()">
+      <li v-for="date in dates" :key="date.getDate()" :class="{ checked: todaySigned && date.getDate() === new Date().getDate() }">
         {{ date.getDate() }}
       </li>
     </ul>
@@ -29,7 +33,10 @@ const dates = getDates()
           坚持打卡不断电挑战
         </p>
         <p class="inner">
-          <span class="normal">Day:</span><span color-green>0</span>/30
+          <span class="normal">Day:</span><span color-green>
+            <span v-if="todaySigned">1</span>
+            <span v-else>0</span>
+          </span>/30
         </p>
       </div>
     </div>
@@ -76,6 +83,9 @@ const dates = getDates()
 }
 
 .SignCalendar-Head {
+  li.checked {
+    color: var(--el-color-primary);
+  }
   position: relative;
   padding: 0 1rem 0.5rem 1rem;
   display: flex;
