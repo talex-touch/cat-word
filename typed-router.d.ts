@@ -25,6 +25,7 @@ declare module 'vue-router/auto-routes' {
     '/editor/merge': RouteRecordInfo<'/editor/merge', '/editor/merge', Record<never, never>, Record<never, never>>,
     '/explore/': RouteRecordInfo<'/explore/', '/explore', Record<never, never>, Record<never, never>>,
     '/explore/comprehensive': RouteRecordInfo<'/explore/comprehensive', '/explore/comprehensive', Record<never, never>, Record<never, never>>,
+    '/explore/pronounce': RouteRecordInfo<'/explore/pronounce', '/explore/pronounce', Record<never, never>, Record<never, never>>,
     '/hi/[name]': RouteRecordInfo<'/hi/[name]', '/hi/:name', { name: ParamValue<true> }, { name: ParamValue<false> }>,
     '/old': RouteRecordInfo<'/old', '/old', Record<never, never>, Record<never, never>>,
     '/personal': RouteRecordInfo<'/personal', '/personal', Record<never, never>, Record<never, never>>,

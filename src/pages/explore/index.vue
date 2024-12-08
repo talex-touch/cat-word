@@ -7,6 +7,7 @@ const icons = [{
 }, {
   name: '发音',
   icon: 'i-carbon:activity',
+  path: '/explore/pronounce',
   color: ['#B392F2', '#8A69F6'],
 }, {
   name: '口语',
