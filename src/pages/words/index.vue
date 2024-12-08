@@ -213,7 +213,7 @@ next()
 
 whenever(() =>
   data.word.current
-  >= data.word.total, () => {
+  > data.word.total, () => {
   calendarManager.createTodayData(data.word.history, Date.now() - data.word.start, true)
 
   router.push('/words/signed')

@@ -16,7 +16,7 @@ const todayData = computed(() => calendarManager.getTodayData())
 </script>
 
 <template>
-  <div :class="{ signed: todayData }" text-black class="WordSignInfo-Wrapper transition-cubic">
+  <div :class="{ signed: todayData?.signed }" text-black class="WordSignInfo-Wrapper transition-cubic">
     <div class="WordSignInfo transition-cubic">
       <div class="WordSignInfo-Svg">
         <img :src="Cat">
@@ -47,7 +47,7 @@ const todayData = computed(() => calendarManager.getTodayData())
       </p>
 
       <div mt-2 flex items-center justify-between class="WordSignInfo-DetailBlockWrapper">
-        <template v-if="todayData">
+        <template v-if="todayData?.signed">
           <div class="WordSignInfo-DetailBlock coffee-font">
             <p text-sm font-bold op-75>
               已学习
@@ -80,15 +80,13 @@ const todayData = computed(() => calendarManager.getTodayData())
         </template>
       </div>
 
-      <el-button v-if="!todayData" w-full size="large" type="primary" @click="router.push('/prewords')">
-        <span v-if="todayData">打卡</span>
-        <span v-else>开始背单词吧！</span>
+      <el-button v-if="!todayData?.signed" w-full size="large" type="primary" @click="router.push('/prewords')">
+        <span>开始背单词吧！</span>
       </el-button>
 
       <template v-else>
         <el-button w="30%" size="large" type="primary" @click="router.push('/prewords')">
-          <span v-if="todayData">打卡</span>
-          <span v-else>开始背单词吧！</span>
+          <span>打卡</span>
         </el-button>
 
         <div class="WordSignInfo-Checked">

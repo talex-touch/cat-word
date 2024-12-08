@@ -7,6 +7,7 @@ import Mello from '/svg/mello.svg'
 
 const num = ref(0)
 const score = ref(0)
+const days = ref(0)
 const timeText = ref('')
 
 const router = useRouter()
@@ -16,6 +17,10 @@ onMounted(async () => {
   timeText.value = dayjs(new Date(todayData.data!.date)).format('YYYY-MM-DD')
 
   await sleep(100)
+
+  days.value = 1
+
+  await sleep(300)
 
   num.value = todayData.data!.words.length
 
@@ -43,7 +48,11 @@ onMounted(async () => {
       </div>
       <p>你已连续学习</p>
 
-      <h1><span font-bold>01</span>天</h1>
+      <h1>
+        <span font-bold>
+          <NumberFlow :prefix="days < 10 ? '0' : ''" :continuous="true" :will-change="true" :animated="true" :value="days" />
+        </span>天
+      </h1>
 
       <div mt-8 w-full flex items-center justify-between>
         挑战 7 天不断电
@@ -253,7 +262,7 @@ onMounted(async () => {
   margin: 1rem 0;
   display: flex;
 
-  top: 20%;
+  top: 10%;
   left: 5%;
 
   gap: 1rem;
@@ -302,7 +311,7 @@ onMounted(async () => {
   position: relative;
   padding: 1rem;
 
-  top: 20%;
+  top: 10%;
   left: 5%;
 
   width: 90%;
