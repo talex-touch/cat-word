@@ -20,6 +20,30 @@ export function formateType(type: string[], len: number = -1) {
   return types.join('/')
 }
 
+export function replaceKeywords(keyword: string, text: string, as: string) {
+  return text.replaceAll(new RegExp(`${keyword}`, 'g'), as)
+}
+
+export function highlightKeywords(text: string, keyword: string) {
+  const template = (k: string) => `<span class="highlight">${k}</span>`
+
+  // 将关键词短语划分
+  const keywords = keyword.split(' ')
+  let finalText = replaceKeywords(keyword, text, `<span class="highlight">${keyword}</span>`)
+  let index = -1
+
+  keywords.forEach((item) => {
+    const ind = text.indexOf(item, index)
+
+    if (ind !== -1) {
+      index = ind
+      finalText = replaceKeywords(item, finalText, template(item))
+    }
+  })
+
+  return finalText
+}
+
 export function useVibrate(type: 'light' | 'heavy' | 'medium' | 'bit') {
   switch (type) {
     case 'light':

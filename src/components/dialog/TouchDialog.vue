@@ -284,6 +284,21 @@ onMounted(() => {
   }
 
   &.Main {
+    &::before {
+      z-index: 1;
+      content: '';
+      position: absolute;
+
+      top: 100%;
+      left: 0;
+
+      height: 100%;
+      width: 100%;
+
+      pointer-events: none;
+      background-color: var(--el-bg-color);
+    }
+
     .visible & {
       pointer-events: auto;
     }
@@ -346,7 +361,8 @@ onMounted(() => {
     max-height: 80%;
 
     opacity: 1;
-    transition: 0.35s 0.25s;
+    transition: 0.5s 0.25s;
+    transition-timing-function: cubic-bezier(0.23, 1, 0.32, 1);
     transform: translate(-50%, -50%) scale(1);
   }
 

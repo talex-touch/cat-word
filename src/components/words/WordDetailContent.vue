@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import type { IWord } from '~/composables/words'
-import { words } from '~/composables/words/CET-4'
 
 const props = defineProps<{
   word: IWord
@@ -11,7 +10,7 @@ const emits = defineEmits<{
   (e: 'close'): void
 }>()
 
-const buttonTitle = computed(() => props.button || '下一题')
+const buttonTitle = computed(() => props.button || '重新选择')
 
 const spokenText = ref('')
 const {
@@ -41,6 +40,8 @@ const analyze = ref(false)
 function openAnalyse() {
   analyze.value = true
 }
+
+console.log(props.word)
 </script>
 
 <template>
@@ -104,9 +105,7 @@ function openAnalyse() {
               {{ phrase.usage }}
             </p>
           </div>
-          <p text-sm>
-            {{ phrase.example }}
-          </p>
+          <p text-sm v-html="highlightKeywords(phrase.example, phrase.phrase)" />
           <p text-sm>
             {{ phrase.translation }}
           </p>
@@ -183,9 +182,10 @@ function openAnalyse() {
 
     <TouchDialog v-model="analyze">
       <div class="WordDetailContent-DialogContent">
-        <el-scrollbar>
-          <MoContentRender :model-value="word.backgroundStory" />
-        </el-scrollbar>
+        <MoContentRender :model-value="word.backgroundStory" />
+
+        <br>
+        <br>
       </div>
     </TouchDialog>
   </div>
@@ -302,6 +302,10 @@ function openAnalyse() {
 }
 
 .WordDetailContent {
+  .highlight {
+    color: var(--el-color-primary);
+  }
+
   position: relative;
 
   width: 100%;
@@ -312,6 +316,7 @@ function openAnalyse() {
   .dark & {
     opacity: 0.25;
   }
+
   z-index: -1;
   position: absolute;
 

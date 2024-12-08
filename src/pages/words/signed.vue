@@ -14,6 +14,13 @@ const router = useRouter()
 
 onMounted(async () => {
   const todayData = calendarManager.getTodayData()!
+
+  if (!todayData?.signed) {
+    router.push('/')
+
+    return
+  }
+
   timeText.value = dayjs(new Date(todayData.data!.date)).format('YYYY-MM-DD')
 
   await sleep(100)
