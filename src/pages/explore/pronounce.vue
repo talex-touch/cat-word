@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import NumberFlow from '@number-flow/vue'
 import { ElMessage } from 'element-plus'
 import { Card, NavBar, Sidebar, SidebarItem } from 'vant'
 import { pronounceWords } from '~/composables/pronounce'
@@ -65,6 +66,8 @@ async function handleEnd() {
 
   result.value = ''
 }
+
+useEventListener('touchend', handleEnd)
 </script>
 
 <template>
@@ -81,13 +84,17 @@ async function handleEnd() {
         </p>
       </div>
 
-      <div class="PronouncePage-Button transition-cubic" @touchstart="handleStart" @touchend="handleEnd">
+      <div class="PronouncePage-Button transition-cubic" @touchstart="handleStart">
         <span v-if="!isListening">
           开 始
         </span>
         <span v-else>
           松手停止
         </span>
+      </div>
+
+      <div font-bold class="PronouncePage-StatusBar">
+        <NumberFlow suffix="/50" :continuous="true" :will-change="true" :animated="true" :value="pronounceData.index + 1" />
       </div>
     </div>
   </div>
@@ -127,6 +134,7 @@ async function handleEnd() {
   width: 96px;
   height: 96px;
 
+  user-select: none;
   align-items: center;
   justify-content: center;
   box-shadow: 0 0 10px 0 var(--el-color-primary);
