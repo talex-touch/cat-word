@@ -1,5 +1,5 @@
 <script name="Words" setup lang="ts">
-import type { IWord } from '~/composables/words'
+import { type IWord, useWordSound } from '~/composables/words'
 import PlayIcon from './icon/PlayIcon.vue'
 
 const props = defineProps<{
@@ -39,27 +39,10 @@ async function handleChooseWord(word: IWord) {
   display.value = false
 }
 
-const spokenText = ref('')
-const {
-  isSupported: spokenSupoorted,
-  isPlaying,
-  // status,
-  // voiceInfo,
-  // utterance,
-  stop: spokenStop,
-  speak,
-} = useSpeechSynthesis(spokenText)
-
 async function spokenWord(word: IWord) {
-  if (!spokenSupoorted.value)
-    return
+  const res = await useWordSound(word.word)
 
-  if (isPlaying.value)
-    spokenStop()
-
-  spokenText.value = word.word
-
-  speak()
+  res.play()
 }
 </script>
 

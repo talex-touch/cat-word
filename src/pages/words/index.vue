@@ -2,7 +2,7 @@
 import { ElMessage } from 'element-plus'
 import WordCard from '~/components/WordCard.vue'
 import type { IWord } from '~/composables/words'
-import { calendarData, calendarManager, globalData, targetDict } from '~/composables/words'
+import { calendarData, calendarManager, globalData, targetDict, useWordSound } from '~/composables/words'
 
 const mainCard = ref<InstanceType<typeof WordCard>>()
 const moveCard = ref<InstanceType<typeof WordCard>>()
@@ -78,27 +78,10 @@ function randomWords() {
   // return { mainWord, options }
 }
 
-const spokenText = ref('')
-const {
-  isSupported: spokenSupoorted,
-  isPlaying,
-  // status,
-  // voiceInfo,
-  // utterance,
-  stop: spokenStop,
-  speak,
-} = useSpeechSynthesis(spokenText)
-
 async function spokenWord(word: IWord) {
-  if (!spokenSupoorted.value)
-    return
+  const audio = await useWordSound(word.word)
 
-  if (isPlaying.value)
-    spokenStop()
-
-  spokenText.value = word.word
-
-  speak()
+  audio.play()
 }
 
 async function next() {

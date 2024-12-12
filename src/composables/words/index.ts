@@ -6,6 +6,7 @@ import postGraduate from './post-graduate'
 import type { IDict } from './types'
 
 export * from './types'
+export * from './util'
 
 export interface IWord {
   word: string
