@@ -5,11 +5,11 @@
 <template>
   <div class="PersonalPage">
     <header class="header">
-      <div class="header-top">
+      <!-- <div class="header-top">
         <p>
           个人主页
         </p>
-      </div>
+      </div> -->
 
       <div class="header-img">
         <img src="/avatar.jpg">
@@ -21,6 +21,7 @@
         <p>爱学习的猫咪</p>
       </div>
     </header>
+
     <main px-4 class="main">
       <SignCalendar />
 
@@ -37,6 +38,7 @@
         帮助与反馈
       </LineArrow>
     </main>
+
     <footer class="footer">
       <p text-sm op-50>
         版权所有 &copy; QuotaWish
@@ -61,33 +63,55 @@
     &::before {
       content: '';
       position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 30%;
 
-      background-color: var(--theme-color);
-      z-index: -1;
+      top: -48px;
+      right: -48px;
+
+      width: 128px;
+      height: 128px;
+
+      z-index: 1;
+
+      opacity: 0.5;
+      border-radius: 50%;
+      border: 5px solid var(--el-bg-color);
+    }
+    &::after {
+      content: '';
+      position: absolute;
+
+      top: -36px;
+      right: -36px;
+
+      width: 108px;
+      height: 108px;
+
+      z-index: 1;
+
+      opacity: 0.5;
+      border-radius: 50%;
+      border: 5px solid var(--el-bg-color);
     }
 
     .header-img {
       img {
-        width: 92px;
-        height: 92px;
+        width: 64px;
+        height: 64px;
 
         border-radius: 50%;
       }
-      padding: 8px;
-      width: 108px;
-      height: 108px;
+      padding: 4px;
+      width: 72px;
+      height: 72px;
 
       border-radius: 50%;
-      background-color: var(--theme-color);
+      // background-color: var(--theme-color);
     }
+
     .header-content {
       display: flex;
 
-      align-items: center;
+      // align-items: center;
       flex-direction: column;
       justify-content: space-between;
 
@@ -97,18 +121,42 @@
       }
     }
     position: relative;
-    padding: 2rem 1rem;
+    padding: 0.5rem 1rem;
     display: flex;
 
     gap: 1rem;
+    color: #000;
     align-items: center;
-    flex-direction: column;
+    // flex-direction: column;
   }
   z-index: 1;
   position: relative;
 
   width: 100%;
   height: 100%;
+}
+
+.PersonalPage {
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    background-image: linear-gradient(to right, var(--theme-color), var(--theme-color-dark));
+    z-index: -1;
+  }
+
+  .main {
+    padding: 1rem;
+
+    height: 100%;
+
+    border-radius: 25px;
+    background-color: var(--el-bg-color);
+  }
 }
 
 .footer {
