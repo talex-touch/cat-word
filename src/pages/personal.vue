@@ -23,14 +23,15 @@
     </header>
 
     <main px-4 class="main">
-      <SignCalendar />
+      <SignCalendar my-1 />
+      <SignCalendarMonthly my-4 />
 
-      <LineArrow>
+      <!-- <LineArrow>
         <template #icon>
           <div i-carbon:calendar />
         </template>
         我的日历
-      </LineArrow>
+      </LineArrow> -->
       <LineArrow>
         <template #icon>
           <div i-carbon:user-feedback />
@@ -64,33 +65,33 @@
       content: '';
       position: absolute;
 
-      top: -48px;
-      right: -48px;
+      top: -18px;
+      right: -18px;
 
       width: 128px;
       height: 128px;
 
-      z-index: 1;
-
+      z-index: -1;
       opacity: 0.5;
+      filter: invert(0.2) brightness(150%);
       border-radius: 50%;
-      border: 5px solid var(--el-bg-color);
+      background-image: radial-gradient(circle at center, var(--theme-color) 0%, #0000 80%);
     }
     &::after {
       content: '';
       position: absolute;
 
-      top: -36px;
-      right: -36px;
+      top: -68px;
+      right: -68px;
 
-      width: 108px;
-      height: 108px;
+      width: 258px;
+      height: 258px;
 
-      z-index: 1;
-
+      z-index: -1;
       opacity: 0.5;
       border-radius: 50%;
-      border: 5px solid var(--el-bg-color);
+      filter: invert(0.1) brightness(250%);
+      background-image: radial-gradient(circle at center, var(--theme-color) 0%, #0000 80%);
     }
 
     .header-img {
@@ -134,6 +135,9 @@
 
   width: 100%;
   height: 100%;
+
+  overflow-y: scroll;
+  overflow-x: hidden;
 }
 
 .PersonalPage {
@@ -154,7 +158,7 @@
 
     height: 100%;
 
-    border-radius: 25px;
+    border-radius: 36px;
     background-color: var(--el-bg-color);
   }
 }
