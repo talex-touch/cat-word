@@ -1,5 +1,4 @@
 <script setup lang="ts" generic="T extends any, O extends any">
-import { ConfigProvider } from 'vant'
 import DisplayIndexCourse from '~/components/display/IndexCourse.vue'
 import { globalData } from '~/composables/words'
 import prewords from './prewords.vue'
@@ -45,47 +44,43 @@ function handleSign() {
 onMounted(() => {
   globalSetting.footer = true
 })
-
-const mode = useColorMode()
 </script>
 
 <template>
-  <ConfigProvider :theme="mode === 'dark' ? 'dark' : 'light'">
-    <div class="IndexPage">
-      <div class="IndexPage-Header">
-        <div class="coffee-font" text-1.75xl flex items-center gap-1 font-bold @click="cozeWebSDK.showChatBot()">
-          <img w-8 src="/ai-logo.png">
-          Tata
-        </div>
-
-        <div flex items-center gap-2 class="IndexPage-Header-Info">
-          <RoundInfo type="danger">
-            <div i-carbon-favorite-filled />
-            5
-          </RoundInfo>
-
-          <RoundInfo type="warning">
-            <div i-carbon-star-filled />
-            400
-          </RoundInfo>
-        </div>
+  <div class="IndexPage">
+    <div class="IndexPage-Header">
+      <div class="coffee-font" text-1.75xl flex items-center gap-1 font-bold @click="cozeWebSDK.showChatBot()">
+        <img w-8 src="/ai-logo.png">
+        Tata
       </div>
 
-      <div id="sign-info" :class="{ expand: prewordsVisible }" mx-auto class="IndexPage-Card w-95%">
-        <WordSignInfo @sign="handleSign" />
+      <div flex items-center gap-2 class="IndexPage-Header-Info">
+        <RoundInfo type="danger">
+          <div i-carbon-favorite-filled />
+          5
+        </RoundInfo>
 
-        <teleport to="body">
-          <div :class="{ visible: prewordsVisible }" class="IndexPage-PreWords">
-            <prewords @exit="prewordsVisible = false" />
-          </div>
-        </teleport>
+        <RoundInfo type="warning">
+          <div i-carbon-star-filled />
+          400
+        </RoundInfo>
       </div>
-
-      <DisplayIndexCourse />
-
-      <br>
     </div>
-  </ConfigProvider>
+
+    <div id="sign-info" :class="{ expand: prewordsVisible }" mx-auto class="IndexPage-Card w-95%">
+      <WordSignInfo @sign="handleSign" />
+
+      <teleport to="body">
+        <div :class="{ visible: prewordsVisible }" class="IndexPage-PreWords">
+          <prewords @exit="prewordsVisible = false" />
+        </div>
+      </teleport>
+    </div>
+
+    <DisplayIndexCourse />
+
+    <br>
+  </div>
 </template>
 
 <style lang="scss">
