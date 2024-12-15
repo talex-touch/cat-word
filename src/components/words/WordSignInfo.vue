@@ -1,4 +1,8 @@
 <script setup lang="ts">
+import DictSelector from '~/components/words/DictSelector.vue'
+import ModeSelector from '~/components/words/ModeSelector.vue'
+import PlanSelector from '~/components/words/PlanSelector.vue'
+
 import { calendarManager, globalData, targetDict } from '~/composables/words'
 import Cat from '/svg/cat.svg'
 import Checked from '/svg/complete.svg'
@@ -17,6 +21,25 @@ const todayData = computed(() => calendarManager.getTodayData())
 function calculateTime(amo: number) {
   return Math.max(Math.ceil(amo / 20), 1)
 }
+
+const dialogOptions = reactive<any>({
+  visible: false,
+  component: null,
+})
+
+function selectDict() {
+  Object.assign(dialogOptions, {
+    visible: true,
+    component: DictSelector,
+  })
+}
+
+function selectPlan() {
+  Object.assign(dialogOptions, {
+    visible: true,
+    component: PlanSelector,
+  })
+}
 </script>
 
 <template>
@@ -31,8 +54,12 @@ function calculateTime(amo: number) {
       </div>
 
       <div class="WordSignInfo-Content">
-        <p class="WordSignInfo-Content-Title coffee-font">
-          单词练习
+        <p w-full flex justify-between class="WordSignInfo-Content-Title">
+          <span>单词练习</span>
+          <span mr-4 flex items-center text-sm font-normal op-75 active:op-100 @click="selectDict">
+            调整词书
+            <i i-carbon-chevron-right block />
+          </span>
         </p>
         <p class="WordSignInfo-Content-Desc">
           {{ learnedAmo }} /{{ totalAmo }} 已学习
@@ -47,10 +74,14 @@ function calculateTime(amo: number) {
     <div class="WordSignInfo-Detail">
       <p w-full flex items-center justify-between>
         <span font-bold class="title">今日计划</span>
-        <span text-sm>随时随地，单词好记</span>
+        <!-- <span text-sm>随时随地，单词好记</span> -->
+        <span flex items-center text-sm font-normal op-75 active:op-100 @click="selectPlan">
+          调整计划
+          <i i-carbon-chevron-right block />
+        </span>
       </p>
 
-      <div mt-2 flex items-center justify-between class="WordSignInfo-DetailBlockWrapper">
+      <div my-2 flex items-center justify-between class="WordSignInfo-DetailBlockWrapper">
         <template v-if="todayData?.signed">
           <div class="WordSignInfo-DetailBlock coffee-font">
             <p text-sm font-bold op-75>
@@ -104,6 +135,12 @@ function calculateTime(amo: number) {
         </div>
       </template>
     </div>
+
+    <TouchDialog v-model="dialogOptions.visible">
+      <template #Main>
+        <component :is="dialogOptions.component" v-if="dialogOptions.component" />
+      </template>
+    </TouchDialog>
   </div>
 </template>
 
@@ -132,7 +169,7 @@ function calculateTime(amo: number) {
     width: 100%;
     height: 100%;
 
-    opacity: 0.25;
+    opacity: 0.125;
     --color: var(--theme-color);
     // background-color: #191a1a;
     background-image: linear-gradient(
@@ -167,7 +204,7 @@ function calculateTime(amo: number) {
   padding: 0.5rem 1rem;
 
   width: 100%;
-  height: 160px;
+  height: 165px;
 
   border-top: 1px solid var(--theme-color-dark);
   // border-radius: 5px;
@@ -181,7 +218,7 @@ function calculateTime(amo: number) {
   left: 5%;
 
   width: 90%;
-  height: 300px;
+  height: 305px;
 
   flex-direction: column;
   justify-content: center;
@@ -295,7 +332,7 @@ function calculateTime(amo: number) {
     width: 100%;
     height: 100%;
 
-    opacity: 0.5;
+    opacity: 0.25;
     --color: var(--theme-color);
     // background-color: #191a1a;
     background-image: linear-gradient(
