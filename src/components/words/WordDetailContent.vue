@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { Swipe, SwipeItem } from 'vant'
 import { type IWord, useWordSound } from '~/composables/words'
 
 const props = defineProps<{
@@ -26,8 +27,57 @@ async function spokenWord(word: IWord) {
 }
 
 const analyze = ref(false)
+const sdk = ref<any>()
+
+function openChat() {
+  sdk.value?.destroy()
+
+  const container = document.getElementById('chat-content')
+  if (!container)
+    return
+
+  const cozeWebSDK = sdk.value = new CozeWebSDK.WebChatClient({
+    config: {
+      // 智能体 ID
+      botId: '7448405006673412115',
+    },
+    userInfo: {
+      id: 'test',
+      url: 'https://files.catbox.moe/wp02xj.png',
+      nickname: '爱学习的猫猫',
+    },
+    ui: {
+      footer: {
+        isShow: false,
+      },
+      chatBot: {
+        el: container,
+        title: 'Lucas Tata',
+        onBeforeHide: async () => {
+          analyze.value = false
+
+          await sleep(300)
+
+          return false
+        },
+      },
+      asstBtn: {
+        isNeed: false,
+      },
+      base: {
+        icon: 'https://ai.quotawish.com/favicon.ico',
+      },
+    },
+  })
+
+  console.log(cozeWebSDK)
+
+  cozeWebSDK.showChatBot()
+}
 
 function openAnalyse() {
+  openChat()
+
   analyze.value = true
 }
 </script>
@@ -55,6 +105,12 @@ function openAnalyse() {
     </div>
 
     <div class="WordDetailContent-Main">
+      <Swipe style="border-radius: 20px" lazy-render overflow-hidden :autoplay="3000" indicator-color="red">
+        <SwipeItem v-for="item in word.img" :key="item">
+          <el-image style="width: 100%;height: 200px" fit="fill" loading="lazy" :src="item" />
+        </SwipeItem>
+      </Swipe>
+
       <WordSection>
         <template #Tag>
           定义解析
@@ -169,19 +225,14 @@ function openAnalyse() {
     </div>
 
     <TouchDialog v-model="analyze">
-      <div class="WordDetailContent-DialogContent">
-        <MoContentRender :model-value="word.backgroundStory" />
-
-        <br>
-        <br>
-      </div>
+      <div id="chat-content" class="WordDetailContent-DialogContent" />
     </TouchDialog>
   </div>
 </template>
 
 <style lang="scss">
 .WordDetailContent-DialogContent {
-  padding: 1rem;
+  padding-bottom: 0.5rem;
 
   height: 85vh;
 }

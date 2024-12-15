@@ -52,12 +52,12 @@ async function spokenWord(word: IWord) {
     <div v-if="data" class="WordsCard">
       <div class="WordsCard-Image">
         <!-- indicator-position="outside" -->
-        <van-swipe lazy-render :autoplay="3000" indicator-color="red">
-          <van-swipe-item v-for="item in data.mainWord.img" :key="item">
+        <Swipe lazy-render h-full :autoplay="3000" indicator-color="red">
+          <SwipeItem v-for="item in data.mainWord.img" :key="item">
             <el-image fit="fill" loading="lazy" :src="item" />
             <el-image fit="fill" loading="lazy" :src="item" />
-          </van-swipe-item>
-        </van-swipe>
+          </SwipeItem>
+        </Swipe>
         <!-- <el-carousel height="auto">
           <el-carousel-item v-for="item in data.mainWord.img" :key="item">
             <el-image fit="fill" loading="lazy" :src="item" />
