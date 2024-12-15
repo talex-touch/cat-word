@@ -3,6 +3,7 @@ import DictSelector from '~/components/words/DictSelector.vue'
 import ModeSelector from '~/components/words/ModeSelector.vue'
 import PlanSelector from '~/components/words/PlanSelector.vue'
 import { globalData, targetDict, targetMode } from '~/composables/words'
+import words from '~/pages/words/index.vue'
 
 const emits = defineEmits(['exit'])
 
@@ -101,6 +102,10 @@ function calculateTime(amo: number) {
       </p>
     </div>
 
+    <!-- <div class="PreWordsPage-Word">
+      <words />
+    </div> -->
+
     <TouchDialog v-model="dialogOptions.visible">
       <template #Main>
         <component :is="dialogOptions.component" v-if="dialogOptions.component" />
@@ -110,6 +115,20 @@ function calculateTime(amo: number) {
 </template>
 
 <style lang="scss">
+.PreWordsPage-Word {
+  z-index: 10;
+  position: absolute;
+
+  top: 0;
+  left: 0;
+
+  width: 100%;
+  height: 100%;
+
+  display: none;
+  background-color: var(--el-bg-color);
+}
+
 .PreWordsPage-Section {
   padding: 0 7.5%;
 }
