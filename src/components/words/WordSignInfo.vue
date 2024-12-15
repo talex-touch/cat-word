@@ -19,7 +19,7 @@ const progress = computed(() => learnedAmo.value / totalAmo.value)
 const todayData = computed(() => calendarManager.getTodayData())
 
 function calculateTime(amo: number) {
-  return Math.max(Math.ceil(amo / 20), 1)
+  return Math.max(Math.ceil(amo / 7), 1)
 }
 
 const dialogOptions = reactive<any>({
@@ -55,18 +55,19 @@ function selectPlan() {
 
       <div class="WordSignInfo-Content">
         <p w-full flex justify-between class="WordSignInfo-Content-Title">
-          <span>单词练习</span>
+          <span>{{ data.name }}</span>
           <span mr-4 flex items-center text-sm font-normal op-75 active:op-100 @click="selectDict">
             调整词书
             <i i-carbon-chevron-right block />
           </span>
         </p>
-        <p class="WordSignInfo-Content-Desc">
-          {{ learnedAmo }} /{{ totalAmo }} 已学习
+        <p w-full flex items-center justify-between class="WordSignInfo-Content-Desc">
+          <span>{{ learnedAmo }} /{{ totalAmo }} 已学习</span>
+          <span mr-4 text-sm op-75>剩余 {{ Math.ceil((totalAmo - learnedAmo) / globalData.amount) }} 天</span>
         </p>
         <div :style="`--p: ${progress * 100}%`" class="WordSignInfo-Content-Progress">
           <div class="WordSignInfo-Content-Progress-Bg" />
-          <div class="WordSignInfo-Content-Progress-Inner" />
+          <div class="WordSignInfo-Content-Progress-Inner transition-cubic" />
         </div>
       </div>
     </div>
@@ -81,35 +82,41 @@ function selectPlan() {
         </span>
       </p>
 
-      <div my-2 flex items-center justify-between class="WordSignInfo-DetailBlockWrapper">
+      <div my-4 flex items-center justify-between class="WordSignInfo-DetailBlockWrapper">
         <template v-if="todayData?.signed">
           <div class="WordSignInfo-DetailBlock coffee-font">
             <p text-sm font-bold op-75>
               已学习
             </p>
 
-            <p text-2xl>
-              {{ todayData.data?.words.length }} 词
+            <p>
+              <span mr-3 text-3xl font-bold>
+                {{ todayData.data?.words.length }}
+              </span> 词
             </p>
           </div>
         </template>
         <template v-else>
-          <div class="WordSignInfo-DetailBlock coffee-font">
-            <p text-sm font-bold op-75>
+          <div class="WordSignInfo-DetailBlock">
+            <p text-sm op-75>
               需新学
             </p>
 
-            <p text-2xl>
-              {{ globalData.amount }} 词
+            <p>
+              <span mr-3 text-3xl font-bold>
+                {{ globalData.amount }}
+              </span> 词
             </p>
           </div>
-          <div class="WordSignInfo-DetailBlock coffee-font">
-            <p text-sm font-bold op-75>
+          <div class="WordSignInfo-DetailBlock">
+            <p text-sm op-75>
               需复习
             </p>
 
-            <p text-2xl>
-              {{ globalData.amount }} 词
+            <p>
+              <span mr-3 text-3xl font-bold>
+                {{ globalData.amount }}
+              </span>词
             </p>
           </div>
         </template>
@@ -120,7 +127,7 @@ function selectPlan() {
           <span>开始背单词吧！</span>
         </el-button>
 
-        <div my-2 flex items-center justify-center gap-2 text-sm op-75>
+        <div my-2 flex items-center justify-center gap-1 text-sm op-75>
           <div i-carbon-time />预计用时 {{ calculateTime(globalData.amount) }} 分钟
         </div>
       </template>
@@ -204,7 +211,7 @@ function selectPlan() {
   padding: 0.5rem 1rem;
 
   width: 100%;
-  height: 165px;
+  height: 185px;
 
   border-top: 1px solid var(--theme-color-dark);
   // border-radius: 5px;
@@ -218,7 +225,7 @@ function selectPlan() {
   left: 5%;
 
   width: 90%;
-  height: 305px;
+  height: 325px;
 
   flex-direction: column;
   justify-content: center;
@@ -231,6 +238,16 @@ function selectPlan() {
 
   &:active {
     filter: drop-shadow(2px 2px 8px var(--theme-color));
+  }
+}
+
+@keyframes growth {
+  from {
+    width: 0;
+  }
+
+  to {
+    width: var(--p);
   }
 }
 
@@ -252,7 +269,8 @@ function selectPlan() {
     width: var(--p);
     height: 100%;
 
-    border-radius: 16px;
+    animation: growth 0.5s;
+    border-radius: 16px 8px 8px 16px;
     background-color: #fff;
     box-shadow: 0 0 4px 1px #eee;
     filter: drop-shadow(2px 2px 8px #fff);
@@ -269,14 +287,13 @@ function selectPlan() {
   .WordSignInfo-Content-Title {
     color: #fff;
     font-weight: 600;
-    font-size: 1.25em;
+    // font-size: 1.25em;
   }
 
   .WordSignInfo-Content-Desc {
-    margin-bottom: 1em;
+    margin-bottom: 0.5em;
 
     color: #eee;
-    opacity: 0.75;
   }
   position: relative;
   padding: 1.25rem 0;

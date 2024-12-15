@@ -33,7 +33,7 @@ function selectMode() {
 }
 
 function calculateTime(amo: number) {
-  return Math.max(Math.ceil(amo / 20), 1)
+  return Math.max(Math.ceil(amo / 7), 1)
 }
 </script>
 

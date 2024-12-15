@@ -59,7 +59,8 @@ const cozeWebSDK = new CozeWebSDK.WebChatClient({
     </div>
 
     <DisplayIndexCourse />
-    <el-empty description="None" />
+
+    <br>
   </div>
 </template>
 
