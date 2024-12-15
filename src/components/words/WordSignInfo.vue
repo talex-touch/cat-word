@@ -233,6 +233,7 @@ function selectPlan() {
   justify-content: center;
 
   overflow: hidden;
+  user-select: none;
   border-radius: 25px;
 
   filter: drop-shadow(0 0 4px var(--theme-color));

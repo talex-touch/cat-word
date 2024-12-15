@@ -40,6 +40,10 @@ watch(prewordsVisible, visible => globalSetting.footer = !visible)
 function handleSign() {
   prewordsVisible.value = true
 }
+
+onMounted(() => {
+  globalSetting.footer = true
+})
 </script>
 
 <template>
