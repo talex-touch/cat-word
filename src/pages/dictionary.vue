@@ -31,7 +31,7 @@ const currentWord = ref<any>()
   &.visible {
     transform: translateX(0%);
   }
-
+  z-index: 1;
   position: absolute;
 
   width: 100%;

@@ -5,13 +5,38 @@ defineOptions({
   name: 'IndexPage',
 })
 
-const router = useRouter()
+const cozeWebSDK = new CozeWebSDK.WebChatClient({
+  config: {
+    // 智能体 ID
+    botId: '7448405006673412115',
+  },
+  ui: {
+    footer: {
+      expressionText: 'Powered by {{QuotaWish}}.',
+      linkvars: {
+        QuotaWish: {
+          text: 'QuotaWish 科塔智爱',
+          link: 'https://quotawish.com',
+        },
+      },
+    },
+    chatBot: {
+      title: 'Lucas Tata',
+    },
+    asstBtn: {
+      isNeed: false,
+    },
+    base: {
+      icon: 'https://ai.quotawish.com/favicon.ico',
+    },
+  },
+})
 </script>
 
 <template>
   <div class="IndexPage">
     <div class="IndexPage-Header">
-      <div class="coffee-font" text-1.75xl flex items-center gap-1 font-bold>
+      <div class="coffee-font" text-1.75xl flex items-center gap-1 font-bold @click="cozeWebSDK.showChatBot()">
         <img w-8 src="/ai-logo.png">
         Tata
       </div>
@@ -57,6 +82,7 @@ const router = useRouter()
   & > p {
     color: #000;
   }
+
   z-index: 1;
   position: sticky;
   display: flex;

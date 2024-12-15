@@ -1,24 +1,18 @@
 <script setup lang="ts">
-const click = ref(false)
-
-async function handleClick() {
-  click.value = true
-
-  await sleep(3000)
-
-  click.value = false
-}
+const props = defineProps<{
+  active: boolean
+}>()
 </script>
 
 <template>
-  <span :class="{ click }" class="PlayIcon" @click="handleClick">
+  <span :class="{ active }" class="PlayIcon">
     <i i-carbon:volume-up block />
   </span>
 </template>
 
 <style lang="scss">
 .PlayIcon {
-  &.click {
+  &.active {
     opacity: 1;
 
     color: var(--theme-color);

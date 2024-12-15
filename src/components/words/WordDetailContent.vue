@@ -10,12 +10,19 @@ const emits = defineEmits<{
   (e: 'close'): void
 }>()
 
+const duration = ref()
 const buttonTitle = computed(() => props.button || '重新选择')
 
 async function spokenWord(word: IWord) {
-  const { play } = await useWordSound(word.word)
+  const audio = await useWordSound(word.word)
 
-  play()
+  await audio.play()
+
+  duration.value = audio.duration * 1000
+
+  setTimeout(() => {
+    duration.value = 0
+  }, duration.value)
 }
 
 const analyze = ref(false)
@@ -23,8 +30,6 @@ const analyze = ref(false)
 function openAnalyse() {
   analyze.value = true
 }
-
-console.log(props.word)
 </script>
 
 <template>
@@ -32,7 +37,7 @@ console.log(props.word)
     <div class="WordDetailContent-Background" />
 
     <div class="WordDetaiContent-Header">
-      <p flex items-end gap-2 class="word">
+      <p :style="duration > 0 ? `--a: growth ${duration}ms` : ''" flex items-end gap-2 class="word">
         {{ word.word }}
       </p>
 
@@ -41,7 +46,7 @@ console.log(props.word)
           <span text-sm class="phonetic">
             {{ word.phonetic }}
           </span>
-          <PlayIcon @click="spokenWord(word)" />
+          <PlayIcon :active="duration > 0" @click="spokenWord(word)" />
         </div>
         <div class="desc-translation">
           {{ word.translation }} <span mx-2 op-50>{{ formateType(word.type) }}.</span>
@@ -193,6 +198,23 @@ console.log(props.word)
   }
 
   p.word {
+    &::before {
+      content: '';
+      position: absolute;
+
+      left: 0;
+      bottom: 0;
+
+      width: 0;
+      height: 5px;
+
+      transition: 0.25s;
+      border-radius: 2px;
+      animation: var(--a);
+      background-color: var(--el-color-primary);
+    }
+    position: relative;
+
     font-size: 32px;
     font-weight: 600;
   }
@@ -213,6 +235,21 @@ console.log(props.word)
 
   align-items: flex-start;
   justify-content: center;
+}
+
+@keyframes growth {
+  from {
+    opacity: 0;
+  }
+
+  80% {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+    width: 100%;
+  }
 }
 
 .WordDetailContent-Main {
