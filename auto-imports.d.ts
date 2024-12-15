@@ -37,6 +37,7 @@ declare global {
   const formateType: typeof import('./src/composables/index')['formateType']
   const getCurrentInstance: typeof import('vue')['getCurrentInstance']
   const getCurrentScope: typeof import('vue')['getCurrentScope']
+  const globalSetting: typeof import('./src/composables/index')['globalSetting']
   const h: typeof import('vue')['h']
   const highlightKeywords: typeof import('./src/composables/index')['highlightKeywords']
   const ignorableWatch: typeof import('@vueuse/core')['ignorableWatch']
@@ -335,6 +336,7 @@ declare module 'vue' {
     readonly formateType: UnwrapRef<typeof import('./src/composables/index')['formateType']>
     readonly getCurrentInstance: UnwrapRef<typeof import('vue')['getCurrentInstance']>
     readonly getCurrentScope: UnwrapRef<typeof import('vue')['getCurrentScope']>
+    readonly globalSetting: UnwrapRef<typeof import('./src/composables/index')['globalSetting']>
     readonly h: UnwrapRef<typeof import('vue')['h']>
     readonly highlightKeywords: UnwrapRef<typeof import('./src/composables/index')['highlightKeywords']>
     readonly ignorableWatch: UnwrapRef<typeof import('@vueuse/core')['ignorableWatch']>
@@ -626,6 +628,7 @@ declare module '@vue/runtime-core' {
     readonly formateType: UnwrapRef<typeof import('./src/composables/index')['formateType']>
     readonly getCurrentInstance: UnwrapRef<typeof import('vue')['getCurrentInstance']>
     readonly getCurrentScope: UnwrapRef<typeof import('vue')['getCurrentScope']>
+    readonly globalSetting: UnwrapRef<typeof import('./src/composables/index')['globalSetting']>
     readonly h: UnwrapRef<typeof import('vue')['h']>
     readonly highlightKeywords: UnwrapRef<typeof import('./src/composables/index')['highlightKeywords']>
     readonly ignorableWatch: UnwrapRef<typeof import('@vueuse/core')['ignorableWatch']>

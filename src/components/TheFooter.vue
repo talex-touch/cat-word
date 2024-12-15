@@ -1,4 +1,6 @@
 <script lang="ts" setup>
+import { globalSetting } from '~/composables'
+
 const navs = reactive([
   {
     name: '学习',
@@ -68,7 +70,7 @@ watchEffect(() => {
 </script>
 
 <template>
-  <nav v-if="activeNav" class="Application-Footer fake-background" mt-6 inline-flex gap-2 text-xl>
+  <nav v-if="activeNav" :class="{ shrink: !globalSetting.footer }" class="Application-Footer fake-background transition-cubic" mt-6 inline-flex gap-2 text-xl>
     <ul w-full flex justify-between>
       <li
         v-for="(nav, ind) in navs" :id="`footer-nav-item-${ind + 1}`" :key="nav.path" flex flex-col items-center
@@ -128,6 +130,9 @@ watchEffect(() => {
 }
 
 .Application-Footer {
+  &.shrink {
+    transform: translateY(80px);
+  }
   z-index: 1;
   position: absolute;
   padding: 1rem;

@@ -7,6 +7,8 @@ import { calendarManager, globalData, targetDict } from '~/composables/words'
 import Cat from '/svg/cat.svg'
 import Checked from '/svg/complete.svg'
 
+const emits = defineEmits(['sign'])
+
 const router = useRouter()
 
 const data = computed<any>(() => targetDict.value)
@@ -123,7 +125,7 @@ function selectPlan() {
       </div>
 
       <template v-if="!todayData?.signed">
-        <el-button w-full size="large" type="primary" @click="router.push('/prewords')">
+        <el-button w-full size="large" type="primary" @click="emits('sign')">
           <span>开始背单词吧！</span>
         </el-button>
 
@@ -133,7 +135,7 @@ function selectPlan() {
       </template>
 
       <template v-else>
-        <el-button w="30%" size="large" type="primary" @click="router.push('/prewords')">
+        <el-button w="30%" size="large" type="primary" @click="router.push('/words/signed')">
           <span>打卡</span>
         </el-button>
 

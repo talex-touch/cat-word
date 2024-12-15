@@ -4,6 +4,8 @@ import ModeSelector from '~/components/words/ModeSelector.vue'
 import PlanSelector from '~/components/words/PlanSelector.vue'
 import { globalData, targetDict, targetMode } from '~/composables/words'
 
+const emits = defineEmits(['exit'])
+
 const router = useRouter()
 
 const dialogOptions = reactive<any>({
@@ -91,6 +93,12 @@ function calculateTime(amo: number) {
       <el-button size="large" w-full type="primary" @click="router.push('/words')">
         开始打卡
       </el-button>
+
+      <p mt-4 text-center @click="emits('exit')">
+        <el-text active:op-50>
+          退出
+        </el-text>
+      </p>
     </div>
 
     <TouchDialog v-model="dialogOptions.visible">
@@ -113,7 +121,7 @@ function calculateTime(amo: number) {
   left: 7.5%;
 
   width: 85%;
-  bottom: 20vmin;
+  bottom: 15vmin;
 }
 
 .PreWordsPage-Head {

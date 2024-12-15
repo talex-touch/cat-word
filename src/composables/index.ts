@@ -65,3 +65,7 @@ export function useAutoVibrate(duration: number[]) {
   if (typeof window !== 'undefined' && window.navigator.vibrate)
     window.navigator.vibrate(duration)
 }
+
+export const globalSetting = reactive({
+  footer: true,
+})

@@ -1,5 +1,7 @@
 <script setup lang="ts" generic="T extends any, O extends any">
 import DisplayIndexCourse from '~/components/display/IndexCourse.vue'
+import { globalData } from '~/composables/words'
+import prewords from './prewords.vue'
 
 defineOptions({
   name: 'IndexPage',
@@ -31,6 +33,13 @@ const cozeWebSDK = new CozeWebSDK.WebChatClient({
     },
   },
 })
+
+const prewordsVisible = ref(false)
+watch(prewordsVisible, visible => globalSetting.footer = !visible)
+
+function handleSign() {
+  prewordsVisible.value = true
+}
 </script>
 
 <template>
@@ -54,8 +63,14 @@ const cozeWebSDK = new CozeWebSDK.WebChatClient({
       </div>
     </div>
 
-    <div mx-auto class="IndexPage-Card w-95%">
-      <WordSignInfo />
+    <div id="sign-info" :class="{ expand: prewordsVisible }" mx-auto class="IndexPage-Card w-95%">
+      <WordSignInfo @sign="handleSign" />
+
+      <teleport to="body">
+        <div :class="{ visible: prewordsVisible }" class="IndexPage-PreWords">
+          <prewords @exit="prewordsVisible = false" />
+        </div>
+      </teleport>
     </div>
 
     <DisplayIndexCourse />
@@ -65,7 +80,59 @@ const cozeWebSDK = new CozeWebSDK.WebChatClient({
 </template>
 
 <style lang="scss">
+.IndexPage-PreWords {
+  &.visible {
+    opacity: 1;
+    pointer-events: auto;
+
+    transform: scale(1);
+    transition: 0.25s 0.1s;
+  }
+  z-index: 2;
+  position: absolute;
+
+  top: 0;
+  left: 0;
+
+  width: 100%;
+  height: 100%;
+
+  opacity: 0;
+  pointer-events: none;
+  transform: scale(1.05);
+  background-color: var(--el-bg-color);
+}
+
 .IndexPage-Card {
+  &::before {
+    z-index: 1;
+    content: '';
+    position: absolute;
+
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100%;
+
+    opacity: 0;
+    pointer-events: none;
+    border-radius: 25px;
+    background-color: var(--theme-color);
+    transform: scale(1);
+
+    transition: 0.25s 0.05s;
+  }
+
+  &.expand {
+    &::before {
+      opacity: 1;
+      transform: scale(1);
+    }
+    z-index: 2;
+    transform: scale(1.25);
+  }
+
   p.title {
     margin: 0 0 1rem;
 
@@ -73,6 +140,9 @@ const cozeWebSDK = new CozeWebSDK.WebChatClient({
     font-size: 24px;
     font-weight: 600;
   }
+  position: relative;
+
+  transition: 0.25s;
 }
 
 .IndexPage-Header {
