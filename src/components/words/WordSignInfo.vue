@@ -271,7 +271,7 @@ function selectPlan() {
     width: var(--p);
     height: 100%;
 
-    animation: growth 0.5s;
+    animation: growth 0.5s 0.01s;
     border-radius: 16px 8px 8px 16px;
     background-color: #fff;
     box-shadow: 0 0 4px 1px #eee;
