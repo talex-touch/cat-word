@@ -88,7 +88,7 @@ watchEffect(() => {
       </li>
     </ul>
   </nav>
-  <div v-if="activeNav" ref="indicator" class="Application-Footer-Indicator transition-cubic" />
+  <div v-if="activeNav && globalSetting.footer" ref="indicator" class="Application-Footer-Indicator transition-cubic" />
 </template>
 
 <style lang="scss">

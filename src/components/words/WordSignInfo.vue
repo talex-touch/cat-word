@@ -249,7 +249,7 @@ function selectPlan() {
   }
 
   to {
-    width: var(--p);
+    width: var(--p, 0);
   }
 }
 
