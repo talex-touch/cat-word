@@ -7,6 +7,7 @@ export {}
 /* prettier-ignore */
 declare module 'vue' {
   export interface GlobalComponents {
+    AnimateIcon: typeof import('./src/components/icon/AnimateIcon.vue')['default']
     CircleLoader: typeof import('./src/components/icon/CircleLoader.vue')['default']
     CodeMirror: typeof import('./src/components/editor/CodeMirror.vue')['default']
     DictionaryDisplay: typeof import('./src/components/display/DictionaryDisplay.vue')['default']

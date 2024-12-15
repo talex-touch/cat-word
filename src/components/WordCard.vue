@@ -1,4 +1,5 @@
 <script name="Words" setup lang="ts">
+import { Swipe, SwipeItem } from 'vant'
 import { type IWord, useWordSound } from '~/composables/words'
 import PlayIcon from './icon/PlayIcon.vue'
 
@@ -51,12 +52,18 @@ async function spokenWord(word: IWord) {
     <div v-if="data" class="WordsCard">
       <div class="WordsCard-Image">
         <!-- indicator-position="outside" -->
-        <el-carousel>
+        <van-swipe lazy-render :autoplay="3000" indicator-color="red">
+          <van-swipe-item v-for="item in data.mainWord.img" :key="item">
+            <el-image fit="fill" loading="lazy" :src="item" />
+            <el-image fit="fill" loading="lazy" :src="item" />
+          </van-swipe-item>
+        </van-swipe>
+        <!-- <el-carousel height="auto">
           <el-carousel-item v-for="item in data.mainWord.img" :key="item">
-            <el-image :src="item" />
-            <el-image :src="item" />
+            <el-image fit="fill" loading="lazy" :src="item" />
+            <el-image fit="fill" loading="lazy" :src="item" />
           </el-carousel-item>
-        </el-carousel>
+        </el-carousel> -->
       </div>
 
       <p class="word">
@@ -206,11 +213,14 @@ async function spokenWord(word: IWord) {
     width: 100%;
     height: 100%;
 
-    // border-radius: 12px;
+    border-radius: 12px;
+    // transform: scale(0.97);
     &:first-child {
       z-index: 0;
 
+      // opacity: 0.5;
       filter: blur(5px);
+      transform: scale(1);
     }
   }
 
@@ -219,10 +229,10 @@ async function spokenWord(word: IWord) {
     padding: 0.5rem;
 
     width: 100%;
-    height: 300px;
-    max-height: 40vh;
+    height: 40vh;
+    max-height: 50vh;
 
-    overflow: hidden;
+    // overflow: hidden;
     border-radius: 16px;
 
     .el-carousel {

@@ -30,10 +30,6 @@ const router = useRouter()
     </div>
 
     <div mx-auto class="IndexPage-Card w-95%">
-      <p class="title coffee-font">
-        Plan
-      </p>
-
       <WordSignInfo />
     </div>
 

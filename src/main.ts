@@ -14,6 +14,7 @@ import './styles/main.css'
 import 'uno.css'
 import 'element-plus/dist/index.css'
 import 'element-plus/theme-chalk/dark/css-vars.css'
+import './styles/element/index.scss'
 
 import 'vant/lib/index.css'
 

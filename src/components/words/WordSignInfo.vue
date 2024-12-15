@@ -13,6 +13,10 @@ const totalAmo = computed(() => data.value.words.length)
 
 const progress = computed(() => learnedAmo.value / totalAmo.value)
 const todayData = computed(() => calendarManager.getTodayData())
+
+function calculateTime(amo: number) {
+  return Math.max(Math.ceil(amo / 20), 1)
+}
 </script>
 
 <template>
@@ -80,9 +84,15 @@ const todayData = computed(() => calendarManager.getTodayData())
         </template>
       </div>
 
-      <el-button v-if="!todayData?.signed" w-full size="large" type="primary" @click="router.push('/prewords')">
-        <span>开始背单词吧！</span>
-      </el-button>
+      <template v-if="!todayData?.signed">
+        <el-button w-full size="large" type="primary" @click="router.push('/prewords')">
+          <span>开始背单词吧！</span>
+        </el-button>
+
+        <div my-2 flex items-center justify-center gap-2 text-sm op-75>
+          <div i-carbon-time />预计用时 {{ calculateTime(globalData.amount) }} 分钟
+        </div>
+      </template>
 
       <template v-else>
         <el-button w="30%" size="large" type="primary" @click="router.push('/prewords')">
@@ -112,6 +122,7 @@ const todayData = computed(() => calendarManager.getTodayData())
 
 .WordSignInfo-Detail {
   &::before {
+    z-index: -1;
     content: '';
     position: absolute;
 
@@ -156,7 +167,7 @@ const todayData = computed(() => calendarManager.getTodayData())
   padding: 0.5rem 1rem;
 
   width: 100%;
-  height: 150px;
+  height: 160px;
 
   border-top: 1px solid var(--theme-color-dark);
   // border-radius: 5px;
@@ -170,7 +181,7 @@ const todayData = computed(() => calendarManager.getTodayData())
   left: 5%;
 
   width: 90%;
-  height: 270px;
+  height: 300px;
 
   flex-direction: column;
   justify-content: center;
