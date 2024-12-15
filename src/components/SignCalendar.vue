@@ -12,15 +12,33 @@ function getDates() {
   return dates
 }
 
+function calcAccumuData(signData: string): number {
+  let num = (signData) || ''
+  let amo = 0
+
+  while (num.length) {
+    if (((+num.at(-1)! || 0) & 1) === 0)
+      break
+
+    num = num.slice(0, -1)
+    amo++
+  }
+
+  return amo
+}
+
 const dates = getDates()
 const todayData = calendarManager.getTodayData()
 const todaySigned = computed(() => todayData?.signed)
+const signedDays = computed(() => (todayData?.origin.day || ''))
+const signedDayMap = computed(() => signedDays.value.split(''))
+const accumulateSigned = computed(() => calcAccumuData(signedDays.value))
 </script>
 
 <template>
   <div class="SignCalendar">
     <ul class="SignCalendar-Head">
-      <li v-for="date in dates" :key="date.getDate()" :class="{ checked: todaySigned && date.getDate() === new Date().getDate() }">
+      <li v-for="date in dates" :key="date.getDate()" :class="{ checked: signedDayMap[date.getDate() - 1] === '1' }">
         {{ date.getDate() }}
       </li>
     </ul>
@@ -33,9 +51,8 @@ const todaySigned = computed(() => todayData?.signed)
           坚持打卡不断电挑战
         </p>
         <p class="inner">
-          <span class="normal">Day:</span><span color-green>
-            <span v-if="todaySigned">1</span>
-            <span v-else>0</span>
+          <span class="normal">本月已打卡:</span><span color-green>
+            {{ accumulateSigned }}
           </span>/30
         </p>
       </div>
