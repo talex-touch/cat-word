@@ -51,6 +51,7 @@ const signedDayMap = computed(() => signedDays.value.split(''))
     align-items: center;
     justify-content: center;
 
+    color: var(--el-text-color-primary);
     width: var(--van-calendar-selected-day-size);
     height: var(--van-calendar-selected-day-size);
 

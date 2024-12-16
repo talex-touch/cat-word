@@ -6,6 +6,7 @@ const props = defineProps<{
   loading?: boolean
   header?: boolean
   footer?: boolean
+  active?: boolean
 }>()
 
 const emits = defineEmits(['update:modelValue'])
@@ -27,15 +28,34 @@ const dialogOptions = reactive({
   forbidden: false,
 })
 
+const dom = ref<HTMLElement>()
+
+async function handleShrinkDialog() {
+  const parentEl = dom.value!.parentElement!
+
+  parentEl.style.transition = '0.25s'
+  parentEl.style.transform = 'translateY(0) scaleY(1) translateY(1000px)'
+
+  await sleep(200)
+
+  visible.value = false
+
+  parentEl.style.transform = ''
+  parentEl.style.transition = ''
+}
+
 async function handleClickOutside() {
+  if (!props.active) {
+    handleShrinkDialog()
+    return
+  }
+
   dialogOptions.forbidden = true
 
   await sleep(100)
 
   dialogOptions.forbidden = false
 }
-
-const dom = ref<HTMLElement>()
 
 // 允许触控下拉Floater关闭页面
 interface Options {

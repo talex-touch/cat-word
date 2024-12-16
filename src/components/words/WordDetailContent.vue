@@ -12,7 +12,7 @@ const emits = defineEmits<{
 }>()
 
 const duration = ref()
-const buttonTitle = computed(() => props.button || '重新选择')
+const buttonTitle = computed(() => props.button || '已了解')
 
 async function spokenWord(word: IWord) {
   const audio = await useWordSound(word.word)
