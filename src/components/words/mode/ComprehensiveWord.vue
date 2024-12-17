@@ -10,6 +10,10 @@ const props = defineProps<{
   prepare: PrepareWord<ComprehensiveMode>
 }>()
 
+const emits = defineEmits<{
+  (e: 'quit'): void
+}>()
+
 const mainCard = ref<InstanceType<typeof WordCard>>()
 const moveCard = ref<InstanceType<typeof WordCard>>()
 
@@ -145,6 +149,9 @@ onMounted(() => {
 
     <div flex items-center justify-between gap-2 text-black class="WordsPage-Header">
       <div flex items-center gap-2 font-bold class="WordsPage-Header-Left">
+        <ExitButton @click="emits('quit')">
+          <div i-carbon:arrow-left />
+        </ExitButton>
         <p underline @click="goDictionary">
           {{ targetDict.name }}
         </p>

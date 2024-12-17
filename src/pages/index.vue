@@ -51,6 +51,17 @@ function handleSign() {
 onMounted(() => {
   globalSetting.footer = true
 })
+
+useRouter().beforeEach((_to, _from, next) => {
+  if (prewordsVisible.value) {
+    next(false)
+
+    prewordsVisible.value = false
+    return
+  }
+
+  next(true)
+})
 </script>
 
 <template>

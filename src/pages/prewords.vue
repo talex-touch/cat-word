@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import NumberFlow from '@number-flow/vue'
+import { routerKey } from 'vue-router'
 import DictSelector from '~/components/words/DictSelector.vue'
 import ModeSelector from '~/components/words/ModeSelector.vue'
 import PlanSelector from '~/components/words/PlanSelector.vue'
@@ -86,7 +87,24 @@ async function handleStart() {
 
   // start
   loadingOptions.start = true
+
+  await sleep(500)
+
+  loadingOptions.loading = false
+  loadingOptions.progress = -1
 }
+
+useRouter().beforeEach((_to, _from, next) => {
+  if (loadingOptions.start) {
+    next(false)
+
+    loadingOptions.loading = false
+    loadingOptions.start = false
+    return
+  }
+
+  next(true)
+})
 </script>
 
 <template>
@@ -171,7 +189,7 @@ async function handleStart() {
 
     <teleport to="body">
       <div :class="{ wordVisible: loadingOptions.start }" class="PreWordsPage-Word transition-cubic">
-        <component :is="loadingOptions.component" v-if="loadingOptions.component" :prepare="loadingOptions.prepare" />
+        <component :is="loadingOptions.component" v-if="loadingOptions.component" :prepare="loadingOptions.prepare" @quit="loadingOptions.start = false" />
       </div>
     </teleport>
 
