@@ -1,5 +1,5 @@
 import { DictStorage } from './storage'
-import type { IWord } from '.'
+import type { IWord, IWordItem } from '.'
 
 export interface IDict {
   id: string

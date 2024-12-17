@@ -1,5 +1,6 @@
+import ComprehensiveWord from '~/components/words/mode/ComprehensiveWord.vue'
 import { PrepareWord, SignMode } from '.'
-import { globalData, type IWord, type IWordItem, useWordSound } from '..'
+import { calendarManager, globalData, type IWord, type IWordItem, useWordSound } from '..'
 import type { DictStorage } from '../storage'
 
 export class ComprehensivePrepareWord extends PrepareWord<ComprehensiveMode> {
@@ -21,7 +22,8 @@ export class ComprehensivePrepareWord extends PrepareWord<ComprehensiveMode> {
     // load images
     const { mainWord } = word
 
-    const promises: Promise<HTMLElement>[] = mainWord.img.map(async item => this.loadImage(item))
+    // const promises: Promise<HTMLElement>[] = mainWord.img.map(async item => this.loadImage(item))
+    const promises: Promise<HTMLElement>[] = [mainWord.img[0]].map(async item => this.loadImage(item))
 
     promises.push(useWordSound(mainWord.word))
 
@@ -29,30 +31,31 @@ export class ComprehensivePrepareWord extends PrepareWord<ComprehensiveMode> {
   }
 
   preload(callback: (progress: number) => void): Promise<boolean> {
-    // 提前加载前2个单词的数据 / 后续根据用户行为习惯决定加载数量 2-3 个
+    // 提前加载前5个单词的数据 / 后续根据用户行为习惯决定加载数量 2-3 个
     const PRELOAD_WORD_AMO = 2
 
     const storage = this.mode.dictionaryStorage
     // const unlearedWords = storage.getUnlearnedWords()
 
     return new Promise((resolve) => {
+      const maxProgress = PRELOAD_WORD_AMO * 5 * this.taskAmount + this.taskAmount
       let progress = 0
       const words = []
 
       for (let i = 0; i < this.taskAmount; ++i) {
         words.push(storage.randomUnlearnedWordsWithOptiohns())
         progress += 1
-        callback(+((progress / this.taskAmount) / 2).toFixed(2))
+        callback(+(progress / maxProgress).toFixed(2))
       }
 
       this.wordsQueue = words
 
-      const promises = words.filter((_, ind) => ind + 1 < PRELOAD_WORD_AMO).map(async (word) => {
+      const promises = words.filter((_, ind) => ind + 1 <= PRELOAD_WORD_AMO).map(async (word) => {
         const res = await this.preloadWordData(word)
 
-        progress += 1
+        progress += this.taskAmount * 5
 
-        callback(+(progress / this.taskAmount).toFixed(2))
+        callback(+(progress / maxProgress).toFixed(2))
 
         return res
       })
@@ -60,6 +63,7 @@ export class ComprehensivePrepareWord extends PrepareWord<ComprehensiveMode> {
       Promise.all(promises).then(() => {
         this.wordIndex = 0
 
+        this.startTime = Date.now()
         resolve(true)
       },
       )
@@ -82,8 +86,8 @@ export class ComprehensivePrepareWord extends PrepareWord<ComprehensiveMode> {
 
     this.wordIndex++
 
-    // 预备加载下下一个单词
-    const nextIndex = this.wordIndex + 2
+    // 预备加载下5个单词
+    const nextIndex = this.wordIndex + 5
     if (nextIndex < this.wordsQueue.length)
       this.preloadWordData(this.wordsQueue[nextIndex])
 
@@ -117,11 +121,23 @@ export class ComprehensivePrepareWord extends PrepareWord<ComprehensiveMode> {
       return false
     }
 
-    throw new Error('Method not implemented.')
+    this.endTime = Date.now()
+
+    const duration = this.endTime - this.startTime
+
+    const words = this.wordsQueue.map(i => i.mainWord.word)
+
+    calendarManager.createTodayData(words, duration, true)
+
+    return true
+  }
+
+  getLeftWords(): number {
+    return this.wordsQueue.length - this.wordIndex
   }
 
   getTargetComponent(): Component {
-    throw new Error('Method not implemented.')
+    return ComprehensiveWord
   }
 }
 

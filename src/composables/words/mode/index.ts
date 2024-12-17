@@ -1,6 +1,4 @@
-import { type Dictionary, type IWord, type IWordItem, Mode } from '..'
-import { ComprehensiveMode } from './comprehensive'
-import { PunchMode } from './punch'
+import type { IWordItem } from '..'
 import type { DictStorage } from '../storage'
 
 export abstract class PrepareWord<T> {
@@ -9,6 +7,9 @@ export abstract class PrepareWord<T> {
 
   wordIndex: number = -1
   taskAmount: number = 0
+
+  startTime: number = 0
+  endTime: number = 0
 
   constructor(mode: T) {
     this.mode = mode
@@ -25,6 +26,8 @@ export abstract class PrepareWord<T> {
   abstract next(success: boolean): Promise<boolean>
   abstract previous(): Promise<boolean>
   abstract finish(): Promise<boolean>
+
+  abstract getLeftWords(): number
 
   get currentWord() {
     if (!this.wordsQueue.length)
@@ -67,9 +70,13 @@ export abstract class SignMode implements ISignMode<SignMode> {
   }
 }
 
-type ModeIdentifier = string
+export enum ModeType {
+  COMPREHENSIVE = 'comprehensive',
+  LISTENING = 'listening',
+  READING = 'reading',
+  PUNCH = 'punch',
+}
 
-export const manager = new Map<ModeIdentifier, (dictionaryStorage: DictStorage) => SignMode>()
+type ModeIdentifier = ModeType
 
-manager.set('comprehensive', (dictionaryStorage: DictStorage) => new ComprehensiveMode(dictionaryStorage))
-manager.set('punch', (dictionaryStorage: DictStorage) => new PunchMode(dictionaryStorage))
+export const modeManager = new Map<ModeIdentifier, (dictionaryStorage: DictStorage) => SignMode>()

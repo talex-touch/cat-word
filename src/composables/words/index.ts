@@ -2,6 +2,7 @@ import cet4 from './cet4'
 import cet6 from './cet6'
 import high from './high'
 import ielts from './ielts'
+import { modeManager, ModeType } from './mode'
 import postGraduate from './post-graduate'
 import type { IDict } from './types'
 
@@ -67,36 +68,29 @@ export interface IWordItem {
 
 export interface IGlobalData {
   dict: string
-  mode: Mode
+  mode: ModeType
   amount: number
-}
-
-export enum Mode {
-  COMPREHENSIVE = 'comprehensive',
-  LISTENING = 'listening',
-  READING = 'reading',
-  PUNCH = 'punch',
 }
 
 export const modes = reactive([
 
   {
-    mode: Mode.COMPREHENSIVE,
+    mode: ModeType.COMPREHENSIVE,
     name: '综合模式',
     desc: '采用图片、音频、拼写进行综合学习',
   },
   {
-    mode: Mode.LISTENING,
+    mode: ModeType.LISTENING,
     name: '音析模式',
     desc: '通过听写进行学习',
   },
   {
-    mode: Mode.READING,
+    mode: ModeType.READING,
     name: '词析模式',
     desc: '通过单词历史意义进行学习',
   },
   {
-    mode: Mode.PUNCH,
+    mode: ModeType.PUNCH,
     name: '小打卡',
     desc: '适合随时随地碎片化学习',
   },
@@ -104,7 +98,7 @@ export const modes = reactive([
 
 const obj: IGlobalData = {
   dict: 'CET-4',
-  mode: Mode.COMPREHENSIVE,
+  mode: ModeType.COMPREHENSIVE,
   amount: 10,
 }
 
@@ -141,6 +135,12 @@ export const calendarData = useLocalStorage<CalendarData[]>('calendarData', [])
 
 export const targetDict = computed(() => dictionaries.find(item => item.id === globalData.value.dict) || dictionaries[0])
 export const targetMode = computed(() => modes.find(item => item.mode === globalData.value.mode) || modes[0])
+export const targetSignMode = computed(() => {
+  const manager = modeManager.get(targetMode.value.mode)!
+  const managerIns = manager(targetDict.value.storage)
+
+  return managerIns
+})
 
 export class CalendarManager {
   createTodayData(words: string[], cost: number, done: boolean) {

@@ -1,11 +1,18 @@
 <script setup lang="ts" generic="T extends any, O extends any">
 import DisplayIndexCourse from '~/components/display/IndexCourse.vue'
 import { globalData } from '~/composables/words'
+import { modeManager, ModeType } from '~/composables/words/mode'
+import { ComprehensiveMode } from '~/composables/words/mode/comprehensive'
+import { PunchMode } from '~/composables/words/mode/punch'
+import type { DictStorage } from '~/composables/words/storage'
 import prewords from './prewords.vue'
 
 defineOptions({
   name: 'IndexPage',
 })
+
+modeManager.set(ModeType.COMPREHENSIVE, (dictionaryStorage: DictStorage) => new ComprehensiveMode(dictionaryStorage))
+modeManager.set(ModeType.PUNCH, (dictionaryStorage: DictStorage) => new PunchMode(dictionaryStorage))
 
 const cozeWebSDK = new CozeWebSDK.WebChatClient({
   config: {

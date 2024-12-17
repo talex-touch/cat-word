@@ -1,5 +1,5 @@
 import type { RemovableRef } from '@vueuse/core'
-import type { Dictionary, IWord } from '.'
+import type { Dictionary, IWord, IWordItem } from '.'
 
 export interface IStorage {
   data: any
@@ -54,7 +54,7 @@ export class DictStorage implements IStorage {
     this.data = useLocalStorage<WordData[]>(`word-data-${dict.id}`, []) as unknown as WordData[]
   }
 
-  randomUnlearnedWordsWithOptiohns() {
+  randomUnlearnedWordsWithOptiohns(): IWordItem {
     const totalWords = [...this.getAllWords()]
     const unlearnedWords = [...this.getUnlearnedWords()]
 
@@ -74,7 +74,7 @@ export class DictStorage implements IStorage {
       totalWords.splice(randomIndex, 1)
     }
 
-    return { mainWord, options }
+    return { mainWord, options, wrongHistory: [] }
   }
 
   dataContainsWord(word: string) {
