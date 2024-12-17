@@ -1,5 +1,6 @@
 import { type Dictionary, type IWord, type IWordItem, Mode } from '..'
 import { ComprehensiveMode } from './comprehensive'
+import { PunchMode } from './punch'
 import type { DictStorage } from '../storage'
 
 export abstract class PrepareWord<T> {
@@ -71,3 +72,4 @@ type ModeIdentifier = string
 export const manager = new Map<ModeIdentifier, (dictionaryStorage: DictStorage) => SignMode>()
 
 manager.set('comprehensive', (dictionaryStorage: DictStorage) => new ComprehensiveMode(dictionaryStorage))
+manager.set('punch', (dictionaryStorage: DictStorage) => new PunchMode(dictionaryStorage))

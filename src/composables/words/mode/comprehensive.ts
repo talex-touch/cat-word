@@ -127,15 +127,15 @@ export class ComprehensivePrepareWord extends PrepareWord<ComprehensiveMode> {
 
 export class ComprehensiveMode extends SignMode {
   getModeIcon(): string {
-    return '🥊'
+    return '👁️'
   }
 
   getModeDesc() {
-    return 'Punch words in the air'
+    return '采用图片、音频、拼写进行综合学习'
   }
 
   getModeName() {
-    return '随时打卡'
+    return '综合沉浸'
   }
 
   prepareWords() {
