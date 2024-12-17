@@ -244,7 +244,7 @@ function selectPlan() {
   }
 }
 
-@keyframes growth {
+@keyframes progressGrowth {
   from {
     width: 0;
   }
@@ -269,10 +269,10 @@ function selectPlan() {
   .WordSignInfo-Content-Progress-Inner {
     position: absolute;
 
-    width: var(--p);
+    width: var(--p, 0);
     height: 100%;
 
-    animation: growth 0.5s 0.01s;
+    animation: progressGrowth 0.5s;
     border-radius: 16px 8px 8px 16px;
     background-color: #fff;
     box-shadow: 0 0 4px 1px #eee;
