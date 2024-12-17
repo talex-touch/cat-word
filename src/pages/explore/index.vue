@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { Swipe, SwipeItem } from 'vant'
+
 const icons = [{
   name: '综合提升',
   icon: 'i-carbon:arrow-up',
@@ -62,9 +64,8 @@ function directPage(icon: any) {
 
     <div class="ExplorePage-Icon">
       <div
-        v-for="icon in icons"
-        :key="icon.name" class="ExplorePage-IconItem" :style="`--c1: ${icon.color[0]}; --c2: ${icon.color[1]}`"
-        @click="directPage(icon)"
+        v-for="icon in icons" :key="icon.name" class="ExplorePage-IconItem"
+        :style="`--c1: ${icon.color[0]}; --c2: ${icon.color[1]}`" @click="directPage(icon)"
       >
         <div class="ExplorePage-IconItem-Bg">
           <div :class="icon.icon" />
@@ -74,18 +75,18 @@ function directPage(icon: any) {
     </div>
 
     <div my-2 class="ExplorePage-Banner">
-      <el-carousel height="120px">
-        <el-carousel-item>
+      <Swipe>
+        <SwipeItem v-for="item in 1" :key="item">
+          <h3 class="ExplorePage-BannerItem small justify-center" text="2xl">
+            千叶单词 | 立即体验
+          </h3>
+        </SwipeItem>
+        <SwipeItem>
           <h3 class="ExplorePage-BannerItem small justify-center" text="2xl">
             你离地道发音还有多远？
           </h3>
-        </el-carousel-item>
-        <el-carousel-item v-for="item in 1" :key="item">
-          <h3 class="ExplorePage-BannerItem small justify-center" text="2xl">
-            猫咪单词 | 立即体验
-          </h3>
-        </el-carousel-item>
-      </el-carousel>
+        </SwipeItem>
+      </Swipe>
     </div>
 
     <div class="ExplorePage-Course">
@@ -109,6 +110,10 @@ function directPage(icon: any) {
   color: #fff;
   border-radius: 25px;
   background-image: linear-gradient(to right, rgb(248, 99, 99), rgb(74, 74, 231));
+}
+
+.ExplorePage-Banner .van-swipe {
+  height: 120px;
 }
 
 .ExplorePage-Course {

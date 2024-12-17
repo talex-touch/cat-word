@@ -57,6 +57,14 @@ export interface IWord {
   }[]
 }
 
+export interface IWordItem {
+  mainWord: IWord
+  options: IWord[]
+
+  // Choose other options
+  wrongHistory: IWord[]
+}
+
 export interface IGlobalData {
   dict: string
   mode: Mode
