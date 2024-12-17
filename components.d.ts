@@ -38,6 +38,7 @@ declare module 'vue' {
     WordCard: typeof import('./src/components/WordCard.vue')['default']
     WordDetailContent: typeof import('./src/components/words/WordDetailContent.vue')['default']
     WordExamples: typeof import('./src/components/WordExamples.vue')['default']
+    WordIndexBanner: typeof import('./src/components/words/WordIndexBanner.vue')['default']
     WordSection: typeof import('./src/components/words/WordSection.vue')['default']
     WordSelector: typeof import('./src/components/words/WordSelector.vue')['default']
     WordSignInfo: typeof import('./src/components/words/WordSignInfo.vue')['default']

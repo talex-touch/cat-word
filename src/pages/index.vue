@@ -97,6 +97,8 @@ useRouter().beforeEach((_to, _from, next) => {
 
     <DisplayIndexCourse />
 
+    <WordIndexBanner />
+
     <br>
   </div>
 </template>
@@ -190,6 +192,7 @@ useRouter().beforeEach((_to, _from, next) => {
 
 .IndexPage {
   position: relative;
+  padding-bottom: 80px;
 
   height: 100%;
 
