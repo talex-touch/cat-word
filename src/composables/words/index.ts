@@ -63,7 +63,7 @@ export interface IWordItem {
   options: IWord[]
 
   // Choose other options
-  wrongHistory: IWord[]
+  wrongHistory: number[]
 }
 
 export interface IGlobalData {

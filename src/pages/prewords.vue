@@ -156,7 +156,7 @@ async function handleStart() {
 
     <div class="PreWordsPage-Progress transition-cubic">
       <p mb-1 flex items-center justify-between>
-        <span>正在加载单词数据</span>
+        <span>正在为您定制学习计划</span>
         <span v-if="loadingOptions.progress !== -1">
           <NumberFlow
             suffix="%" :continuous="true" :will-change="true" :animated="true"

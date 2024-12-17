@@ -79,6 +79,11 @@ export class ComprehensivePrepareWord extends PrepareWord<ComprehensiveMode> {
       this.wordsQueue.splice(this.wordIndex, 1)
       this.wordsFinished.push(this.currentWord!)
     }
+    else {
+      const obj = this.wordsQueue[this.wordIndex]
+
+      obj.wrongHistory.push(Date.now())
+    }
 
     if (this.wordsQueue.length === 0) {
       return false
