@@ -95,11 +95,17 @@ async function handleStart() {
 }
 
 useRouter().beforeEach((_to, _from, next) => {
-  if (loadingOptions.start) {
+  if (loadingOptions.loading) {
     next(false)
 
-    loadingOptions.loading = false
+    return
+  }
+
+  if (loadingOptions.start) {
     loadingOptions.start = false
+
+    next(false)
+
     return
   }
 

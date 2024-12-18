@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import { NavBar } from 'vant'
 
-import { dictionaries } from '~/composables/words'
+import type { IWord } from '~/composables/words'
+import { dictionaries, useWordSound } from '~/composables/words'
 
 const route = useRoute()
 const router = useRouter()
@@ -15,8 +16,24 @@ const currentWord = ref<any>()
     <NavBar :title="`${dictionary?.name} - 词典`" left-text="返回" left-arrow w-full @click-left="router.back()" />
 
     <ul>
-      <li v-for="word in dictionary?.storage.getAllWords()" :key="word.word" @click="currentWord = word">
-        {{ word.word }}
+      <li v-for="word in dictionary?.storage.getAllWords()" :key="word.word">
+        <p w-full flex items-center justify-between class="word">
+          <span text-lg font-bold>{{ word.word }}</span>
+          <span>
+            <WordPlayIcon :word="word.word" />
+          </span>
+        </p>
+        <p w-full flex items-center justify-between font-size-3.25 op-75 class="content">
+          <span flex items-center class="translation">
+            <input type="checkbox">
+            <span>{{ word.translation }}</span>
+          </span>
+
+          <span flex items-center @click="currentWord = word">
+            详情
+            <i i-carbon-chevron-right block />
+          </span>
+        </p>
       </li>
     </ul>
 
@@ -31,6 +48,7 @@ const currentWord = ref<any>()
   &.visible {
     transform: translateX(0%);
   }
+
   z-index: 1;
   position: absolute;
 
@@ -46,25 +64,49 @@ const currentWord = ref<any>()
 }
 
 .DictionaryPage {
+  .translation {
+    // 当input选项框选中的时候
+    input:checked + span {
+      color: unset;
+      background-color: transparent;
+    }
+
+    input {
+      position: absolute;
+
+      opacity: 0;
+      width: calc(100% - 100px);
+    }
+
+    span {
+      color: #0000;
+      background-color: var(--el-fill-color-darker);
+    }
+  }
+
   ul {
     li {
       position: relative;
-      padding: 0.5rem;
+      padding: 0.5rem 1rem;
       display: flex;
-      margin: 0.25rem 0;
+      // margin: 0.35rem 0;
 
       width: 100%;
-      height: 40px;
+      height: 70px;
 
-      align-items: center;
+      flex-direction: column;
+      justify-content: space-between;
 
       background-color: var(--el-fill-color-lighter);
+      border-bottom: 1px solid var(--el-border-color-lighter);
     }
 
     position: relative;
 
+    width: 100%;
     height: calc(100% - 2rem);
 
+    overflow-x: hidden;
     overflow-y: scroll;
   }
 

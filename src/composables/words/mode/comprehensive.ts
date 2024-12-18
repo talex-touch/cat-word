@@ -32,7 +32,7 @@ export class ComprehensivePrepareWord extends PrepareWord<ComprehensiveMode> {
 
   preload(callback: (progress: number) => void): Promise<boolean> {
     // 提前加载前5个单词的数据 / 后续根据用户行为习惯决定加载数量 2-3 个
-    const PRELOAD_WORD_AMO = 2
+    const PRELOAD_WORD_AMO = 5
 
     const storage = this.mode.dictionaryStorage
     // const unlearedWords = storage.getUnlearnedWords()
