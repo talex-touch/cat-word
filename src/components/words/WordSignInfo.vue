@@ -74,7 +74,7 @@ function selectPlan() {
       </div>
     </div>
 
-    <div class="WordSignInfo-Detail">
+    <div text-white class="WordSignInfo-Detail">
       <p w-full flex items-center justify-between>
         <span font-bold class="title">今日计划</span>
         <!-- <span text-sm>随时随地，单词好记</span> -->

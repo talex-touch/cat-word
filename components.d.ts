@@ -8,6 +8,7 @@ export {}
 declare module 'vue' {
   export interface GlobalComponents {
     AnimateIcon: typeof import('./src/components/icon/AnimateIcon.vue')['default']
+    BookLoading: typeof import('./src/components/icon/BookLoading.vue')['default']
     CircleLoader: typeof import('./src/components/icon/CircleLoader.vue')['default']
     CodeMirror: typeof import('./src/components/editor/CodeMirror.vue')['default']
     ComprehensiveWord: typeof import('./src/components/words/mode/ComprehensiveWord.vue')['default']

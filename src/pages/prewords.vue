@@ -193,9 +193,16 @@ useRouter().beforeEach((_to, _from, next) => {
       <LineLoading :progress="loadingOptions.progress" />
     </div>
 
+    <div class="PreWordPage-Loading transition-cubic">
+      <BookLoading />
+    </div>
+
     <teleport to="body">
       <div :class="{ wordVisible: loadingOptions.start }" class="PreWordsPage-Word transition-cubic">
-        <component :is="loadingOptions.component" v-if="loadingOptions.component" :prepare="loadingOptions.prepare" @quit="loadingOptions.start = false" />
+        <component
+          :is="loadingOptions.component" v-if="loadingOptions.component" :prepare="loadingOptions.prepare"
+          @quit="loadingOptions.start = false"
+        />
       </div>
     </teleport>
 
@@ -208,6 +215,20 @@ useRouter().beforeEach((_to, _from, next) => {
 </template>
 
 <style lang="scss">
+.PreWordPage-Loading {
+  .loading & {
+    opacity: 1;
+  }
+  position: absolute;
+
+  top: 50%;
+  left: 50%;
+
+  opacity: 0;
+  pointer-events: none;
+  transform: translate(-50%, 0);
+}
+
 .PreWordsPage-Word {
   &.wordVisible {
     opacity: 1;

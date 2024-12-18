@@ -64,9 +64,12 @@ button.el-button--large {
 }
 
 :root {
-  --theme-color: #f7c62c;
+  --theme-color: #275efe;
+  --theme-color-light: #23c4f8;
+  --theme-color-dark: #2d305f;
+  /* --theme-color: #f7c62c;
   --theme-color-light: #d3ac2aff;
-  --theme-color-dark: #bb920aff;
+  --theme-color-dark: #bb920aff; */
   --bg-color: var(--el-bg-color);
   --bg-color-dark: var(--el-bg-color-dark);
 

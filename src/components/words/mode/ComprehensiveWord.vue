@@ -53,6 +53,48 @@ function refreshData() {
   data.current = prepareData.currentWord
 }
 
+async function handlePrevious() {
+  const currentDom = mainCard.value!.$el
+  const nextDom = moveCard.value!.$el
+
+  data.next = data.current
+
+  const result = await prepareData.previous()
+  if (!result) {
+    return
+  }
+
+  refreshData()
+
+  currentDom.style.transition = 'none'
+  currentDom.style.transform = 'translateX(-120%)'
+
+  nextDom.style.transition = 'none'
+  nextDom.style.transform = 'translateX(0)'
+
+  await sleep(10)
+
+  nextDom.style.visibility = 'visible'
+  nextDom.style.transition = ''
+  nextDom.style.transform = 'translateX(0%)'
+
+  await sleep(20)
+
+  nextDom.style.transform = 'translateX(120%)'
+
+  await sleep(200)
+
+  currentDom.style.transition = ''
+  currentDom.style.transform = 'translateX(0)'
+
+  spokenWord(prepareData.currentWord!.mainWord)
+
+  await sleep(200)
+
+  currentDom.style.transform = 'translateX(0)'
+  nextDom.style.visibility = ''
+}
+
 async function next(success: boolean) {
   const moving = data.current !== null
 
@@ -69,6 +111,7 @@ async function next(success: boolean) {
   data.next = data.current
 
   const result = await prepareData.next(success)
+  console.log('result', result)
   if (!result) {
     const r = await prepareData.finish()
 
@@ -112,6 +155,8 @@ async function next(success: boolean) {
 async function handleChoose(word: IWord) {
   const wrong = word !== data.current!.mainWord
 
+  console.log('choose', word)
+
   await playAudioSound(!wrong)
 
   if (wrong) {
@@ -142,68 +187,37 @@ onMounted(() => {
 
 <template>
   <div class="WordsPage">
-    <div class="WordsPage-Decoration">
-      <div class="WordsPage-Decoration-EarLeft" />
-      <div class="WordsPage-Decoration-EarRight" />
-    </div>
-
     <div flex items-center justify-between gap-2 text-black class="WordsPage-Header">
-      <div flex items-center gap-2 font-bold class="WordsPage-Header-Left">
-        <ExitButton @click="emits('quit')">
-          <div i-carbon:arrow-left />
-        </ExitButton>
-        <p underline @click="goDictionary">
-          {{ targetDict.name }}
+      <div flex items-center gap-2 class="WordsPage-Header-Left">
+        <div i-carbon:chevron-left @click="emits('quit')" />
+        <p class="WordsPage-Header-Title">
+          <span>需新学 {{ prepareData.getLeftWords() }}</span>
+          <span>需复习 {{ prepareData.getLeftWords() }}</span>
         </p>
       </div>
 
-      <h1 flex items-center gap-2 text-sm op-75>
-        剩余 {{ prepareData.getLeftWords() }} 个
+      <h1 flex items-center gap-2 text-sm op-75 @click="goDictionary">
+        <el-link>{{ targetDict.name }}</el-link>
       </h1>
     </div>
 
     <div v-if="data.current" class="WordCard-Container">
       <WordCard
         ref="mainCard" :right="data.current!.mainWord" class="WordCard WordCard-Main transition-cubic"
-        :data="data.current!" @choose="handleChoose"
+        :data="data.current!" @choose="handleChoose" @previous="handlePrevious"
       />
       <WordCard
         ref="moveCard" :right="data.current!.mainWord" class="WordCard WordCard-Next transition-cubic"
-        :data="data.next!"
+        :data="data.next!" @previous="handlePrevious" @choose="handleChoose"
       />
     </div>
 
     <audio ref="successAudio" src="/sound/success.wav" />
     <audio ref="errorAudio" src="/sound/error.wav" />
-
-    <div v-if="data.current" :class="{ visible: data.content }" class="WordContent transition-cubic">
-      <WordDetailContent :word="data.current.mainWord" @close="data.content = false" />
-    </div>
   </div>
 </template>
 
 <style lang="scss">
-.WordContent {
-  &.visible {
-    transform: translateY(0);
-  }
-
-  z-index: 10;
-  position: absolute;
-  // padding: 1rem;
-
-  top: 0;
-  left: 0;
-
-  width: 100%;
-  height: 100%;
-  min-height: 100%;
-
-  overflow: scroll;
-  transform: translateY(-120%);
-  background-color: var(--el-bg-color);
-}
-
 .WordCard {
   &.WordCard-Next {
     visibility: hidden;
@@ -280,29 +294,16 @@ onMounted(() => {
 }
 
 .WordsPage {
-  &::before {
-    z-index: -1;
-    content: '';
-    position: absolute;
+  &-Header {
+    &-Title {
+      display: flex;
+      padding-right: 1rem;
 
-    top: -1rem;
-    left: -10vmin;
-
-    width: 120vmin;
-    height: 60vmin;
-
-    // opacity: 0.75;
-    // filter: drop-shadow(0 0 16px var(--theme-color));
-    border-radius: 0 0 200px 200px;
-    background-color: var(--theme-color);
-    box-shadow:
-      0 0 0rem 5rem #eea850e0,
-      0 0 0.5rem 8rem #ed935780,
-      0 0 1rem 10rem #eb726350;
-  }
-
-  &.listenning {
-    filter: blur(2px);
+      font-size: 12px;
+      flex-direction: column;
+      color: var(--el-text-color-secondary);
+      border-right: 1px solid var(--el-border-color);
+    }
   }
 
   h1.title {
@@ -316,5 +317,7 @@ onMounted(() => {
 
   width: 100%;
   height: 100%;
+
+  background-color: var(--el-fill-color);
 }
 </style>

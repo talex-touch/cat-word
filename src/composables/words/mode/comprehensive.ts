@@ -75,8 +75,6 @@ export class ComprehensivePrepareWord extends PrepareWord<ComprehensiveMode> {
       throw new Error('Current word not exist, cannot get next word')
 
     if (success) {
-      // 从queue中删除
-      this.wordsQueue.splice(this.wordIndex, 1)
       this.wordsFinished.push(this.currentWord!)
     }
     else {
@@ -85,11 +83,11 @@ export class ComprehensivePrepareWord extends PrepareWord<ComprehensiveMode> {
       obj.wrongHistory.push(Date.now())
     }
 
-    if (this.wordsQueue.length === 0) {
+    this.wordIndex++
+
+    if (this.getLeftWords() === 0) {
       return false
     }
-
-    this.wordIndex++
 
     // 预备加载下5个单词
     const nextIndex = this.wordIndex + 5
@@ -99,7 +97,7 @@ export class ComprehensivePrepareWord extends PrepareWord<ComprehensiveMode> {
     return true
   }
 
-  // 只能返回上一个未成功选择的单词
+  // 返回上一个单词
   async previous(): Promise<boolean> {
     if (!this.currentWord)
       throw new Error('Current word not exist, cannot get previous word')
