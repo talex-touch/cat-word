@@ -170,6 +170,7 @@ useRouter().beforeEach((_to, _from, next) => {
     font-weight: 600;
   }
   position: relative;
+  padding: 0.5rem 0;
 
   transition: 0.25s;
 }

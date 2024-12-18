@@ -112,8 +112,7 @@ const courses = [
 
 .DisplayIndexCourse {
   position: relative;
-  padding: 1rem;
-  margin: 1rem 0;
+  padding: 0.5rem 1rem;
 
   // height: 200px;
 }
