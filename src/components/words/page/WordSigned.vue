@@ -5,21 +5,43 @@ import { calendarManager, globalData } from '~/composables/words'
 import Astronaut from '/svg/astronaut.svg'
 import Mello from '/svg/mello.svg'
 
+const props = defineProps<{
+  modelValue: boolean
+}>()
+
+const emits = defineEmits<{
+  (e: 'update:modelValue', value: boolean): void
+}>()
+
 const num = ref(0)
 const score = ref(0)
 const days = ref(0)
 const timeText = ref('')
 
 const router = useRouter()
-
 const route = useRoute()
-const visible = computed(() => route.query?.signed)
+
+const visible = useVModel(props, 'modelValue', emits)
+
+watchEffect(() => {
+  console.log(route)
+  if (route.query.signed) {
+    visible.value = true
+  }
+})
 
 watch(visible, visible => globalSetting.footer = !visible)
 
 watch(visible, async (visible) => {
   if (!visible) {
     num.value = score.value = days.value = 0
+
+    router.replace({
+      query: {
+        ...route.query,
+        signed: undefined,
+      },
+    })
     return
   }
 
@@ -99,7 +121,7 @@ watch(visible, async (visible) => {
     </div>
 
     <div class="Signed-CheckIn fake-background">
-      <el-button w-full size="large" type="primary" @click="router.push('/')">
+      <el-button w-full size="large" type="primary" @click="visible = false">
         关闭
       </el-button>
     </div>

@@ -101,10 +101,6 @@ useRouter().beforeEach((_to, _from, next) => {
     <WordIndexBanner />
 
     <br>
-
-    <teleport to="body">
-      <WordSigned />
-    </teleport>
   </div>
 </template>
 

@@ -25,6 +25,7 @@ const loadingOptions = reactive<{
 })
 
 const dialogOptions = reactive<any>({
+  done: false,
   visible: false,
   component: null,
 })
@@ -111,6 +112,19 @@ useRouter().beforeEach((_to, _from, next) => {
 
   next(true)
 })
+
+const router = useRouter()
+async function handleDone() {
+  dialogOptions.done = true
+
+  await sleep(200)
+
+  loadingOptions.start = false
+
+  await sleep(200)
+
+  emits('exit')
+}
 </script>
 
 <template>
@@ -201,9 +215,13 @@ useRouter().beforeEach((_to, _from, next) => {
       <div :class="{ wordVisible: loadingOptions.start }" class="PreWordsPage-Word transition-cubic">
         <component
           :is="loadingOptions.component" v-if="loadingOptions.component" :prepare="loadingOptions.prepare"
-          @quit="loadingOptions.start = false"
+          @quit="loadingOptions.start = false" @done="handleDone"
         />
       </div>
+    </teleport>
+
+    <teleport to="body">
+      <WordSigned v-model="dialogOptions.done" />
     </teleport>
 
     <TouchDialog v-model="dialogOptions.visible">

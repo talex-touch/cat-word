@@ -12,6 +12,7 @@ const props = defineProps<{
 
 const emits = defineEmits<{
   (e: 'quit'): void
+  (e: 'done'): void
 }>()
 
 const mainCard = ref<InstanceType<typeof WordCard>>()
@@ -115,11 +116,7 @@ async function next(success: boolean) {
   if (!result) {
     const _r = await prepareData.finish()
 
-    router.replace({
-      query: {
-        signed: 'true',
-      },
-    })
+    emits('done')
 
     return
   }

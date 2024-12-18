@@ -30,13 +30,13 @@ const activeNav = computed(() => navs.find(item => item.path === route?.path))
 const indicator = ref<HTMLElement>()
 
 async function fixIndicator() {
-  if (!indicator.value)
-    return
-
   const ind = navs.findIndex(item => item.path === route?.path)
   const el = document.querySelector(`#footer-nav-item-${ind + 1}`) as HTMLElement
 
   if (!el)
+    return
+
+  if (!indicator.value)
     return
 
   const x = el.offsetLeft
@@ -48,6 +48,9 @@ async function fixIndicator() {
   })
 
   await sleep(20)
+
+  if (!indicator.value)
+    return
 
   Object.assign(indicator.value.style, {
     opacity: '',
