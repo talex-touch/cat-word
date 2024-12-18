@@ -1,5 +1,6 @@
 <script setup lang="ts" generic="T extends any, O extends any">
 import DisplayIndexCourse from '~/components/display/IndexCourse.vue'
+import WordSigned from '~/components/words/page/WordSigned.vue'
 import { globalData } from '~/composables/words'
 import { modeManager, ModeType } from '~/composables/words/mode'
 import { ComprehensiveMode } from '~/composables/words/mode/comprehensive'
@@ -100,6 +101,10 @@ useRouter().beforeEach((_to, _from, next) => {
     <WordIndexBanner />
 
     <br>
+
+    <teleport to="body">
+      <WordSigned />
+    </teleport>
   </div>
 </template>
 

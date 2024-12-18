@@ -22,6 +22,14 @@ async function handlePlay() {
 
   active.value = false
 }
+
+watchEffect(() => {
+  const _ = props.word
+
+  setTimeout(() => {
+    sound.value?.pause()
+  })
+})
 </script>
 
 <template>

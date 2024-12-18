@@ -1,6 +1,6 @@
 <script name="Words" setup lang="ts">
 import { Swipe, SwipeItem } from 'vant'
-import type { IWord, IWordItem, useWordSound } from '~/composables/words'
+import { type IWord, type IWordItem, useErrorAudio, useSuccessAudio } from '~/composables/words'
 
 import PlayIcon from './icon/PlayIcon.vue'
 
@@ -43,15 +43,19 @@ async function handleChooseWord(word: IWord) {
   const right = props.right.word === word.word
 
   if (right) {
+    useSuccessAudio().play()
+
     options.display = true
 
-    emits('choose', word)
-
     await sleep(800)
+
+    emits('choose', word)
 
     options.display = false
   }
   else {
+    useErrorAudio().play()
+
     if (options.wrongAmo >= 1) {
       options.content = true
     }
@@ -108,7 +112,7 @@ async function handleChooseWord(word: IWord) {
     </div>
 
     <teleport to="body">
-      <div v-if="data.mainWord" :class="{ visible: options.content }" class="WordContent transition-cubic">
+      <div v-if="data?.mainWord" :class="{ visible: options.content }" class="WordContent transition-cubic">
         <WordDetailContent :word="data.mainWord" @close="options.content = false" />
       </div>
     </teleport>

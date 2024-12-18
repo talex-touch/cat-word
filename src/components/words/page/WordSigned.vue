@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import NumberFlow from '@number-flow/vue'
 import { dayjs } from 'element-plus'
-import { calendarManager } from '~/composables/words'
+import { calendarManager, globalData } from '~/composables/words'
 import Astronaut from '/svg/astronaut.svg'
 import Mello from '/svg/mello.svg'
 
@@ -12,7 +12,17 @@ const timeText = ref('')
 
 const router = useRouter()
 
-onMounted(async () => {
+const route = useRoute()
+const visible = computed(() => route.query?.signed)
+
+watch(visible, visible => globalSetting.footer = !visible)
+
+watch(visible, async (visible) => {
+  if (!visible) {
+    num.value = score.value = days.value = 0
+    return
+  }
+
   const todayData = calendarManager.getTodayData()!
 
   if (!todayData?.signed) {
@@ -38,7 +48,7 @@ onMounted(async () => {
 </script>
 
 <template>
-  <div class="Signed">
+  <div :class="{ visible }" class="Signed transition-cubic">
     <div class="Signed-Header">
       <h1>今日已完成!</h1>
       <div class="Signed-Header-Time">
@@ -331,6 +341,11 @@ onMounted(async () => {
 }
 
 .Signed {
+  &.visible {
+    transform: translateX(0);
+    pointer-events: all;
+  }
+
   .dark &::before {
     opacity: 0.5;
   }
@@ -346,7 +361,7 @@ onMounted(async () => {
     height: 100%;
 
     transform: scale(1.25);
-    filter: blur(2px) saturate(180%);
+    filter: hue-rotate(180deg) brightness(80%) blur(2px) saturate(180%);
     background:
       radial-gradient(circle farthest-side at 0% 50%, #fb1 23.5%, rgba(240, 166, 17, 0) 0) 21px 30px,
       radial-gradient(circle farthest-side at 0% 50%, #b71 24%, rgba(240, 166, 17, 0) 0) 19px 30px,
@@ -378,11 +393,18 @@ onMounted(async () => {
       linear-gradient(90deg, #b71 2%, #fb1 0, #fb1 98%, #b71 0%) 0 0 #fb1;
     background-size: 40px 60px;
   }
-  position: relative;
+  z-index: 100;
+  position: absolute;
   // padding: 1rem;
 
+  top: 0;
+  left: 0;
+
+  width: 100%;
   height: 100%;
 
+  pointer-events: none;
+  transform: translateX(120%);
   --fake-opacity: 0.85;
   --fake-color: var(--el-fill-color-dark);
 }

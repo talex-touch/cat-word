@@ -111,12 +111,15 @@ async function next(success: boolean) {
   data.next = data.current
 
   const result = await prepareData.next(success)
-  console.log('result', result)
-  if (!result) {
-    const r = await prepareData.finish()
 
-    if (r)
-      router.push('/words/signed')
+  if (!result) {
+    const _r = await prepareData.finish()
+
+    router.replace({
+      query: {
+        signed: 'true',
+      },
+    })
 
     return
   }
@@ -154,8 +157,6 @@ async function next(success: boolean) {
 
 async function handleChoose(word: IWord) {
   const wrong = word !== data.current!.mainWord
-
-  console.log('choose', word)
 
   await playAudioSound(!wrong)
 

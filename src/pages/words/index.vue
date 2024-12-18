@@ -1,7 +1,7 @@
 <script name="Words" setup lang="ts">
 import { ElMessage } from 'element-plus'
 import WordCard from '~/components/WordCard.vue'
-import type { IWord } from '~/composables/words'
+import type { IWord, IWordItem } from '~/composables/words'
 import { calendarData, calendarManager, globalData, targetDict, useWordSound } from '~/composables/words'
 
 const mainCard = ref<InstanceType<typeof WordCard>>()
@@ -12,15 +12,10 @@ const errorAudio = ref<HTMLAudioElement>()
 
 const router = useRouter()
 
-interface IWordGroup {
-  mainWord: IWord
-  options: IWord[]
-}
-
 const data = reactive<{
   content: boolean
-  current: IWordGroup | null
-  next: IWordGroup | null
+  current: IWordItem | null
+  next: IWordItem | null
   word: {
     current: number
     total: number

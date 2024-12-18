@@ -31,6 +31,7 @@ declare module 'vue' {
     RouterView: typeof import('vue-router')['RouterView']
     SignCalendar: typeof import('./src/components/SignCalendar.vue')['default']
     SignCalendarMonthly: typeof import('./src/components/SignCalendarMonthly.vue')['default']
+    Signed: typeof import('./src/components/words/pages/signed.vue')['default']
     SignSuccess: typeof import('./src/components/words/page/SignSuccess.vue')['default']
     TheCounter: typeof import('./src/components/TheCounter.vue')['default']
     TheFooter: typeof import('./src/components/TheFooter.vue')['default']
@@ -43,6 +44,7 @@ declare module 'vue' {
     WordPlayIcon: typeof import('./src/components/icon/WordPlayIcon.vue')['default']
     WordSection: typeof import('./src/components/words/WordSection.vue')['default']
     WordSelector: typeof import('./src/components/words/WordSelector.vue')['default']
+    WordSigned: typeof import('./src/components/words/page/WordSigned.vue')['default']
     WordSignInfo: typeof import('./src/components/words/WordSignInfo.vue')['default']
   }
 }

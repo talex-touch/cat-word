@@ -22,12 +22,19 @@ export class ComprehensivePrepareWord extends PrepareWord<ComprehensiveMode> {
     // load images
     const { mainWord } = word
 
+    console.log('preload word audio', mainWord)
+
+    const res = await useWordSound(mainWord.word)
+
+    console.log('preload word audio done', mainWord, res)
+
+    return res
     // const promises: Promise<HTMLElement>[] = mainWord.img.map(async item => this.loadImage(item))
-    const promises: Promise<HTMLElement>[] = [mainWord.img[0]].map(async item => this.loadImage(item))
+    // const promises: Promise<HTMLElement>[] = [] // [mainWord.img[0]].map(async item => this.loadImage(item))
 
-    promises.push(useWordSound(mainWord.word))
+    // promises.push(useWordSound(mainWord.word))
 
-    return Promise.all(promises)
+    //  Promise.all(promises)
   }
 
   preload(callback: (progress: number) => void): Promise<boolean> {
@@ -116,11 +123,7 @@ export class ComprehensivePrepareWord extends PrepareWord<ComprehensiveMode> {
   }
 
   async finish(): Promise<boolean> {
-    if (!this.currentWord) {
-      return false
-    }
-
-    if (this.wordIndex !== this.wordsQueue.length - 1) {
+    if (this.wordIndex <= this.wordsQueue.length - 1) {
       return false
     }
 

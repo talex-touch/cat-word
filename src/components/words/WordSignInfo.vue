@@ -135,9 +135,13 @@ function selectPlan() {
       </template>
 
       <template v-else>
-        <el-button w="30%" size="large" type="primary" @click="router.push('/words/signed')">
+        <el-button w="30%" size="large" type="primary" @click="router.replace({ query: { signed: 'true' } })">
           <span>打卡</span>
         </el-button>
+
+        <div my-2 ml-1 flex items-center gap-1 text-sm op-75>
+          随时随地，单词好记。
+        </div>
 
         <div class="WordSignInfo-Checked">
           <img :src="Checked">
