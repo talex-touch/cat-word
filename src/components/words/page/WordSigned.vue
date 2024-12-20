@@ -125,7 +125,7 @@ watch(visible, async (visible) => {
       </el-button>
     </div>
 
-    <div class="Signed-Particles">
+    <div v-if="visible" class="Signed-Particles">
       <vue-particles
         id="tsparticles" :options="{
           background: {
