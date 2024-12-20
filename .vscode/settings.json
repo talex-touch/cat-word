@@ -45,5 +45,9 @@
     "jsonc",
     "yaml"
   ],
-  "Codegeex.RepoIndex": true
+  "Codegeex.RepoIndex": true,
+  "marscode.codeCompletionPro": {
+    "enableCodeCompletionPro": true
+  },
+  "marscode.enableInlineCommand": true
 }

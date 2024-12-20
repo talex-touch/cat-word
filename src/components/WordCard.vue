@@ -1,16 +1,15 @@
 <script name="Words" setup lang="ts">
 import { Swipe, SwipeItem } from 'vant'
-import { type IWord, type IWordItem, useErrorAudio, useSuccessAudio } from '~/composables/words'
-
-import PlayIcon from './icon/PlayIcon.vue'
+import { type IWord, useErrorAudio, useSuccessAudio } from '~/composables/words'
+import type { IComprehensiveWordItem } from '~/composables/words/mode/comprehensive'
 
 const props = defineProps<{
-  data: IWordItem
-  right: IWord
+  data: IComprehensiveWordItem
+  right: IComprehensiveWordItem
 }>()
 
 const emits = defineEmits<{
-  (e: 'choose', word: IWord): void
+  (e: 'choose', wrong: boolean): void
   (e: 'previous'): void
 }>()
 const options = reactive({
@@ -19,16 +18,11 @@ const options = reactive({
   wrongAmo: 0,
 })
 
-watch(() => props.data?.mainWord, () => {
-  options.wrongAmo = 0
-  options.display = false
-})
-
 const finalOptions = computed(() => {
-  if (!props.data?.mainWord)
+  if (!props.data?.word.mainWord)
     return null
 
-  const res = [props.data.mainWord, ...props.data.options]
+  const res = [props.data.word.mainWord, ...props.data.word.options]
 
   // shuffle
   for (let i = res.length - 1; i > 0; i--) {
@@ -39,25 +33,54 @@ const finalOptions = computed(() => {
   return res
 })
 
+function handleEmit() {
+  const wrong = options.wrongAmo !== 0
+
+  options.wrongAmo = 0
+  options.display = false
+
+  emits('choose', wrong)
+}
+
 async function handleChooseWord(word: IWord) {
-  const right = props.right.word === word.word
+  const right = props.right.word.mainWord.word === word.word
 
   if (right) {
+    useVibrate('bit')
     useSuccessAudio().play()
 
     options.display = true
 
     await sleep(800)
 
-    emits('choose', word)
-
     options.display = false
+
+    await sleep(100)
+
+    if (props.data.type === 'new' || !!options.wrongAmo) {
+      options.content = true
+
+      whenever(() => options.content === false, handleEmit, { once: true })
+    }
+    else {
+      handleEmit()
+    }
   }
   else {
+    useVibrate('heavy')
     useErrorAudio().play()
 
-    if (options.wrongAmo >= 1) {
+    if (options.wrongAmo > 1) {
+      options.display = true
+
+      await sleep(800)
+
+      options.display = false
+
+      await sleep(100)
       options.content = true
+
+      whenever(() => options.content === false, handleEmit, { once: true })
     }
 
     options.wrongAmo++
@@ -66,11 +89,11 @@ async function handleChooseWord(word: IWord) {
 </script>
 
 <template>
-  <div :class="{ imagable: !!options.wrongAmo }" class="WordCard">
+  <div :class="{ imagable: !!options.wrongAmo, review: data?.type === 'review' }" class="WordCard">
     <div v-if="data" class="WordsCard">
       <div class="WordsCard-Image transition-cubic">
-        <Swipe lazy-render h-full :autoplay="3000" indicator-color="red">
-          <SwipeItem v-for="item in data.mainWord.img" :key="item">
+        <Swipe v-if="!!options.wrongAmo" lazy-render h-full :autoplay="3000" indicator-color="red">
+          <SwipeItem v-for="item in data.word.mainWord.img" :key="item">
             <el-image fit="fill" loading="lazy" :src="item" />
             <el-image fit="fill" loading="lazy" :src="item" />
           </SwipeItem>
@@ -78,9 +101,12 @@ async function handleChooseWord(word: IWord) {
       </div>
 
       <p class="word transition-cubic">
-        <span class="word-inner">{{ data.mainWord.word }}<span class="word-type">{{ formateType(data.mainWord.type, 1)
+        <span class="word-inner transition-cubic">{{ data.word.mainWord.word }}<span
+          class="word-type transition-cubic"
+        >{{
+          formateType(data.word.mainWord.type, 1)
         }}.</span></span>
-        <span class="phonetic" flex items-center gap-2>{{ data.mainWord.phonetic }}
+        <span class="phonetic" flex items-center gap-2>{{ data.word.mainWord.phonetic }}
         </span>
       </p>
     </div>
@@ -88,7 +114,8 @@ async function handleChooseWord(word: IWord) {
     <ul v-if="finalOptions" class="WordsOptions">
       <!-- {{ formateType(word.type, 1) }}.  -->
       <li
-        v-for="word in finalOptions" :key="word.word" :class="{ right: options.display && word === right }"
+        v-for="word in finalOptions" :key="word.word"
+        :class="{ right: options.display && word.word === right.word.mainWord.word }"
         class="WordOption transition-cubic" @click="handleChooseWord(word)"
       >
         <p>{{ word.translation }}</p>
@@ -101,8 +128,8 @@ async function handleChooseWord(word: IWord) {
         上一个
       </div>
 
-      <div v-if="data?.mainWord" flex items-center gap-1 class="WordCard-Footer-Button">
-        <WordPlayIcon :word="data.mainWord?.word" />
+      <div v-if="data?.word.mainWord" flex items-center gap-1 class="WordCard-Footer-Button">
+        <WordPlayIcon :word="data.word.mainWord?.word" />
       </div>
 
       <div ml-auto flex items-center gap-1 class="WordCard-Footer-Button">
@@ -112,14 +139,35 @@ async function handleChooseWord(word: IWord) {
     </div>
 
     <teleport to="body">
-      <div v-if="data?.mainWord" :class="{ visible: options.content }" class="WordContent transition-cubic">
-        <WordDetailContent :word="data.mainWord" @close="options.content = false" />
+      <div v-if="data?.word.mainWord" :class="{ visible: options.content }" class="WordContent transition-cubic">
+        <WordDetailContent :word="data.word.mainWord" @close="options.content = false" />
       </div>
     </teleport>
   </div>
 </template>
 
 <style lang="scss">
+.WordCard.review {
+  span.word-type {
+    position: relative;
+    margin: 0;
+    padding: 0;
+
+    width: 0;
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+}
+
+.WordCard.review.imagable span.word-type {
+  margin: 0 0.25rem;
+  padding: 0.25rem 0.5rem;
+
+  width: max-content;
+}
+
 .WordContent {
   &.visible {
     transform: translateY(0);
@@ -223,6 +271,7 @@ async function handleChooseWord(word: IWord) {
 .WordsCard {
   .word {
     .word-type {
+      display: block;
       margin: 0 0.25rem;
       padding: 0.25rem 0.5rem;
 
@@ -237,6 +286,12 @@ async function handleChooseWord(word: IWord) {
 
       font-size: 18px;
       font-weight: normal;
+    }
+
+    .word-inner {
+      display: flex;
+
+      align-items: center;
     }
     display: flex;
 

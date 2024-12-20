@@ -24,5 +24,8 @@ export function useErrorAudio() {
 }
 
 export function useSuccessAudio() {
-  return useSound(SuccessAudio)
+  const audio = new Audio()
+  audio.src = SuccessAudio
+
+  return audio
 }

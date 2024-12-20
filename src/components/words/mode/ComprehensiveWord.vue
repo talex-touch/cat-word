@@ -1,13 +1,11 @@
 <script name="Words" setup lang="ts">
-import { ElMessage } from 'element-plus'
 import WordCard from '~/components/WordCard.vue'
-import type { IWord, IWordItem } from '~/composables/words'
-import { calendarData, calendarManager, globalData, targetDict, useWordSound } from '~/composables/words'
-import type { PrepareWord } from '~/composables/words/mode'
-import type { ComprehensiveMode } from '~/composables/words/mode/comprehensive'
+import type { IWord } from '~/composables/words'
+import { targetDict, useWordSound } from '~/composables/words'
+import type { ComprehensivePrepareWord, IComprehensiveWordItem } from '~/composables/words/mode/comprehensive'
 
 const props = defineProps<{
-  prepare: PrepareWord<ComprehensiveMode>
+  prepare: ComprehensivePrepareWord
 }>()
 
 const emits = defineEmits<{
@@ -18,40 +16,33 @@ const emits = defineEmits<{
 const mainCard = ref<InstanceType<typeof WordCard>>()
 const moveCard = ref<InstanceType<typeof WordCard>>()
 
-const successAudio = ref<HTMLAudioElement>()
-const errorAudio = ref<HTMLAudioElement>()
-
 const router = useRouter()
 const prepareData = reactive(props.prepare)
 
 const data = reactive<{
-  content: boolean
-  current: IWordItem | null
-  next: IWordItem | null
+  current: IComprehensiveWordItem | null
+  next: IComprehensiveWordItem | null
 }>({
-  content: false,
   current: null,
   next: null,
 })
 
-async function playAudioSound(success: boolean = false) {
-  const el = success ? successAudio.value : errorAudio.value
-
-  if (!el)
-    return
-
-  el.currentTime = 0
-  await el.play()
-}
-
+let lastAudio: HTMLAudioElement | null = null
 async function spokenWord(word: IWord) {
-  const audio = await useWordSound(word.word)
+  if (lastAudio) {
+    lastAudio?.pause()
+  }
 
-  audio.play()
+  lastAudio = await useWordSound(word.word)
+
+  lastAudio.play()
 }
 
 function refreshData() {
   data.current = prepareData.currentWord
+  Object.assign(prepareData, props.prepare)
+
+  spokenWord(data.current!.word.mainWord)
 }
 
 async function handlePrevious() {
@@ -88,24 +79,13 @@ async function handlePrevious() {
   currentDom.style.transition = ''
   currentDom.style.transform = 'translateX(0)'
 
-  spokenWord(prepareData.currentWord!.mainWord)
-
   await sleep(200)
 
   currentDom.style.transform = 'translateX(0)'
   nextDom.style.visibility = ''
 }
 
-async function next(success: boolean) {
-  const moving = data.current !== null
-
-  if (!moving) {
-    refreshData()
-    spokenWord(prepareData.currentWord!.mainWord)
-
-    return
-  }
-
+async function nextData(success: boolean) {
   const currentDom = mainCard.value!.$el
   const nextDom = moveCard.value!.$el
 
@@ -114,7 +94,7 @@ async function next(success: boolean) {
   const result = await prepareData.next(success)
 
   if (!result) {
-    const _r = await prepareData.finish()
+    await prepareData.finish()
 
     emits('done')
 
@@ -144,34 +124,18 @@ async function next(success: boolean) {
   currentDom.style.transition = ''
   currentDom.style.transform = 'translateX(0)'
 
-  spokenWord(prepareData.currentWord!.mainWord)
-
   await sleep(200)
 
   currentDom.style.transform = 'translateX(0)'
   nextDom.style.visibility = ''
 }
 
-async function handleChoose(word: IWord) {
-  const wrong = word !== data.current!.mainWord
+async function handleChoose(wrong: boolean) {
+  lastAudio?.pause()
 
-  await playAudioSound(!wrong)
+  nextData(!wrong)
 
-  if (wrong) {
-    data.content = true
-    useVibrate('heavy')
-
-    whenever(() => data.content = false, () => {
-      next(wrong)
-    })
-  }
-  else {
-    targetDict.value.storage.setLearned(data.current!.mainWord.word)
-
-    useVibrate('bit')
-
-    next(wrong)
-  }
+  // targetDict.value.storage.setLearned(data.current!.mainWord.word)
 }
 
 function goDictionary() {
@@ -179,18 +143,18 @@ function goDictionary() {
 }
 
 onMounted(() => {
-  next(true)
+  refreshData()
 })
 </script>
 
 <template>
   <div class="WordsPage">
-    <div flex items-center justify-between gap-2 text-black class="WordsPage-Header">
+    <div flex items-center justify-between gap-2 class="WordsPage-Header">
       <div flex items-center gap-2 class="WordsPage-Header-Left">
         <div i-carbon:chevron-left @click="emits('quit')" />
         <p class="WordsPage-Header-Title">
-          <span>需新学 {{ prepareData.getLeftWords() }}</span>
-          <span>需复习 {{ prepareData.getLeftWords() }}</span>
+          <span>需新学 {{ prepareData.getNewlyWords() }}</span>
+          <span>需复习 {{ prepareData.getReviewWords() }}</span>
         </p>
       </div>
 
@@ -201,17 +165,14 @@ onMounted(() => {
 
     <div v-if="data.current" class="WordCard-Container">
       <WordCard
-        ref="mainCard" :right="data.current!.mainWord" class="WordCard WordCard-Main transition-cubic"
+        ref="mainCard" :right="data.current" class="WordCard WordCard-Main transition-cubic"
         :data="data.current!" @choose="handleChoose" @previous="handlePrevious"
       />
       <WordCard
-        ref="moveCard" :right="data.current!.mainWord" class="WordCard WordCard-Next transition-cubic"
-        :data="data.next!" @previous="handlePrevious" @choose="handleChoose"
+        ref="moveCard" pointer-events-none :right="data.current"
+        class="WordCard WordCard-Next transition-cubic" :data="data.next!"
       />
     </div>
-
-    <audio ref="successAudio" src="/sound/success.wav" />
-    <audio ref="errorAudio" src="/sound/error.wav" />
   </div>
 </template>
 

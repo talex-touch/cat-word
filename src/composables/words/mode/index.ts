@@ -1,9 +1,9 @@
 import type { IWordItem } from '..'
 import type { DictStorage } from '../storage'
 
-export abstract class PrepareWord<T> {
+export abstract class PrepareWord<T, W> {
   mode: T
-  wordsQueue: IWordItem[]
+  wordsQueue: Array<W>
 
   wordIndex: number = -1
   taskAmount: number = 0
@@ -48,22 +48,22 @@ export abstract class PrepareWord<T> {
   }
 }
 
-export interface ISignMode<T> {
+export interface ISignMode<T, W> {
   getModeName: () => string
   getModeIcon: () => string
   getModeDesc: () => string
   // randomWord: () => IWord
-  prepareWords: () => PrepareWord<T>
+  prepareWords: () => PrepareWord<T, W>
 }
 
-export abstract class SignMode implements ISignMode<SignMode> {
+export abstract class SignMode implements ISignMode<SignMode, any> {
   dictionaryStorage: DictStorage
 
   abstract getModeName(): string
   abstract getModeIcon(): string
   abstract getModeDesc(): string
   // abstract randomWord(): IWord
-  abstract prepareWords(): PrepareWord<any>
+  abstract prepareWords(): PrepareWord<any, any>
 
   constructor(dictionaryStorage: DictStorage) {
     this.dictionaryStorage = dictionaryStorage

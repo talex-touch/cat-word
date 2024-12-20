@@ -24,7 +24,6 @@ const route = useRoute()
 const visible = useVModel(props, 'modelValue', emits)
 
 watchEffect(() => {
-  console.log(route)
   if (route.query.signed) {
     visible.value = true
   }
@@ -429,5 +428,7 @@ watch(visible, async (visible) => {
   transform: translateX(120%);
   --fake-opacity: 0.85;
   --fake-color: var(--el-fill-color-dark);
+
+  backdrop-filter: blur(18px) saturate(180%);
 }
 </style>
