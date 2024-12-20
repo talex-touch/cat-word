@@ -272,7 +272,7 @@ export class ComprehensivePrepareWord extends PrepareWord<ComprehensiveMode, ICo
 
     const duration = this.endTime - this.startTime
 
-    const words = this.wordsQueue.map(i => i.word.mainWord.word)
+    const words = this.wordsFinished.map(i => i.mainWord.word)
 
     calendarManager.createTodayData(words, duration, true)
 
