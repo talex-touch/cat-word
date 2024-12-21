@@ -321,6 +321,10 @@ export class ComprehensiveMode extends SignMode {
     return new ComprehensivePrepareWord(this)
   }
 
+  getEstimateCost(amount: number): number {
+    return Math.max(Math.ceil(amount / 7), 1)
+  }
+
   constructor(dictionaryStorage: DictStorage) {
     super(dictionaryStorage)
   }

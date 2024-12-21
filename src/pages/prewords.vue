@@ -1,12 +1,10 @@
 <script setup lang="ts">
 import NumberFlow from '@number-flow/vue'
-import { routerKey } from 'vue-router'
 import DictSelector from '~/components/words/DictSelector.vue'
 import ModeSelector from '~/components/words/ModeSelector.vue'
 import PlanSelector from '~/components/words/PlanSelector.vue'
-import type { PrepareWord } from '~/composables/words'
-import { globalData, targetDict, targetMode, targetSignMode } from '~/composables/words'
-import words from '~/pages/words/index.vue'
+import { globalData, targetDict, targetSignMode } from '~/composables/words'
+import { PrepareWord } from '~/composables/words/mode'
 
 const emits = defineEmits(['exit'])
 
@@ -15,7 +13,7 @@ const loadingOptions = reactive<{
   progress: number
   start: boolean
   component: Component | null
-  prepare: PrepareWord<any> | null
+  prepare: PrepareWord<any, any> | null
 }>({
   loading: false,
   progress: -1,
@@ -52,7 +50,9 @@ function selectMode() {
 }
 
 function calculateTime(amo: number) {
-  return Math.max(Math.ceil(amo / 7), 1)
+  const mode = targetSignMode.value
+
+  return mode.getEstimateCost(amo)
 }
 
 async function handleStart() {
@@ -113,7 +113,6 @@ useRouter().beforeEach((_to, _from, next) => {
   next(true)
 })
 
-const router = useRouter()
 async function handleDone() {
   dialogOptions.done = true
 
@@ -171,7 +170,7 @@ async function handleDone() {
             <div i-carbon:apps />
           </template>
           <template #end>
-            {{ targetMode.name }}
+            {{ targetSignMode.getModeName() }}
           </template>
           实操模式
         </LineArrow>

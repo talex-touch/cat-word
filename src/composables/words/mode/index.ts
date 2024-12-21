@@ -56,6 +56,11 @@ export interface ISignMode<T, W> {
   prepareWords: () => PrepareWord<T, W>
 
   getMainColor: () => string
+
+  /**
+   * Unit: minute
+   */
+  getEstimateCost: (amount: number) => number
 }
 
 export abstract class SignMode implements ISignMode<SignMode, any> {
@@ -67,6 +72,8 @@ export abstract class SignMode implements ISignMode<SignMode, any> {
   abstract getMainColor(): string
   // abstract randomWord(): IWord
   abstract prepareWords(): PrepareWord<any, any>
+
+  abstract getEstimateCost(amount: number): number
 
   constructor(dictionaryStorage: DictStorage) {
     this.dictionaryStorage = dictionaryStorage

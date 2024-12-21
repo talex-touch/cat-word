@@ -309,7 +309,7 @@ export class SoundMode extends SignMode {
   }
 
   getModeDesc() {
-    return '适合随时随地碎片化学习'
+    return '通过听写进行学习'
   }
 
   getModeName() {
@@ -318,6 +318,10 @@ export class SoundMode extends SignMode {
 
   prepareWords() {
     return new SoundPrepareWord(this)
+  }
+
+  getEstimateCost(amount: number): number {
+    return Math.max(Math.ceil(amount / 7), 1)
   }
 
   constructor(dictionaryStorage: DictStorage) {
