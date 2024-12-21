@@ -1,29 +1,25 @@
 <script setup lang="ts">
-import Image1 from '/course/1.png'
-import Image2 from '/course/2.png'
-import Image3 from '/course/3.png'
-import Image4 from '/course/4.png'
 
 const courses = [
   {
     title: '懂你英语',
     type: '综合系统课',
-    img: Image1,
+    img: "https://img2.quotawish.com/2024/12/22/6766e99f6bed6.png",
   },
   {
     title: '英语基础',
     type: '基础系统课',
-    img: Image2,
+    img: "https://img2.quotawish.com/2024/12/22/6766e9a135d89.png",
   },
   {
     title: '英语进阶',
     type: '进阶系统课',
-    img: Image3,
+    img: "https://img2.quotawish.com/2024/12/22/6766e99fed915.png",
   },
   {
     title: '英语阅读',
     type: '阅读系统课',
-    img: Image4,
+    img: "https://img2.quotawish.com/2024/12/22/6766e9a06d201.png",
   },
 ]
 </script>
@@ -44,6 +40,10 @@ const courses = [
       <el-scrollbar>
         <div h-full flex class="DisplayIndexCourse-MainInner">
           <div v-for="course in courses" :key="course.title" flex-shrink-0 class="DisplayIndexCourse-MainItem">
+            <span class="badge">
+              限时免费
+            </span>
+
             <div class="DisplayIndexCourse-MainItem-Background">
               <img :src="course.img">
             </div>
@@ -67,6 +67,22 @@ const courses = [
 }
 
 .DisplayIndexCourse-MainItem {
+  .badge {
+    z-index: 1;
+    position: absolute;
+    padding: 0.25rem 0.5rem;
+
+    top: 1rem;
+    right: 1rem;
+
+    color: #000;
+
+    font-size: 12px;
+    border-radius: 4px 16px 4px 16px;
+    background-color: #FFF2D2;
+    box-shadow: -2px 2px 4px 0px #E2D2AD50;
+  }
+
   .DisplayIndexCourse-MainItem-Background {
     img {
       position: absolute;
