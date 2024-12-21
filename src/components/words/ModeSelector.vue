@@ -44,6 +44,9 @@ function handleSelect(index: number) {
 <style lang="scss">
 .ModeSelector-Wrapper {
   .el-carousel {
+    .el-carousel__mask {
+      background-color: transparent;
+    }
     &__item {
       display: flex;
     }
