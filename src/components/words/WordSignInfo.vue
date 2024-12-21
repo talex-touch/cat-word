@@ -71,7 +71,7 @@ function selectPlan() {
         </p>
         <div :style="`--p: ${progress * 100}%`" class="WordSignInfo-Content-Progress">
           <div class="WordSignInfo-Content-Progress-Bg" />
-          <div class="WordSignInfo-Content-Progress-Inner transition-cubic" />
+          <div v-if="progress" class="WordSignInfo-Content-Progress-Inner transition-cubic" />
         </div>
       </div>
     </div>
@@ -270,16 +270,30 @@ function selectPlan() {
   }
 
   .WordSignInfo-Content-Progress-Inner {
+    // &::before {
+    //   content: "";
+    //   position: absolute;
+
+    //   top: -2px;
+    //   left: -2px;
+
+    //   width: calc(100% + 4px);
+    //   height: calc(100% + 4px);
+
+    //   box-shadow: 0 0 4px 1px #eee;
+    //   border-radius: 16px 8px 8px 16px;
+    // }
+
     position: absolute;
 
     width: var(--p, 0);
     height: 100%;
 
+    box-shadow: 0 0 4px 1px #eee;
     animation: progressGrowth 0.5s;
     border-radius: 16px 8px 8px 16px;
     background-color: #fff;
-    box-shadow: 0 0 4px 1px #eee;
-    filter: drop-shadow(2px 2px 8px #fff);
+    filter: drop-shadow(0px 0px 4px #fff);
   }
 
   position: relative;
@@ -287,7 +301,6 @@ function selectPlan() {
   width: 90%;
   height: 8px;
 
-  // overflow: hidden;
 }
 
 .WordSignInfo-Content {

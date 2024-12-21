@@ -89,6 +89,8 @@ export class DictStorage implements IStorage {
       return
 
     this.data.push(new WordData(word))
+
+    console.log('cur', this.data)
   }
 
   setUnlearned(word: string) {
