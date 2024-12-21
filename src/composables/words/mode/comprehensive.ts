@@ -156,6 +156,8 @@ export class ComprehensivePrepareWord extends PrepareWord<ComprehensiveMode, ICo
 
         // 如果当前单词是复习单词，将其从复习队列中移除
         this.wordsQueue.push({ word: currentWord.word, type: 'review' })
+
+        this.mode.dictionaryStorage.setLearned(currentWord.word.mainWord.word)
       }
       else {
         this.wordsFinished.push(currentWord.word)
