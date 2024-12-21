@@ -44,6 +44,9 @@ export class ComprehensivePrepareWord extends PrepareWord<ComprehensiveMode, ICo
 
   // 预加载单词数据
   preload(callback: (progress: number) => void): Promise<boolean> {
+    this.amo = 0
+    this.wordsQueue.length = this.wordsDispalyed.length = this.wordsFinished.length = 0
+
     const storage = this.mode.dictionaryStorage
 
     // console.log('PRELOAD')
