@@ -1,10 +1,10 @@
 <script setup lang="ts" generic="T extends any, O extends any">
 import DisplayIndexCourse from '~/components/display/IndexCourse.vue'
-import WordSigned from '~/components/words/page/WordSigned.vue'
-import { globalData } from '~/composables/words'
 import { modeManager, ModeType } from '~/composables/words/mode'
 import { ComprehensiveMode } from '~/composables/words/mode/comprehensive'
+import { DictWordMode } from '~/composables/words/mode/dict-word'
 import { PunchMode } from '~/composables/words/mode/punch'
+import { SoundMode } from '~/composables/words/mode/sound'
 import type { DictStorage } from '~/composables/words/storage'
 import prewords from './prewords.vue'
 
@@ -13,7 +13,9 @@ defineOptions({
 })
 
 modeManager.set(ModeType.COMPREHENSIVE, (dictionaryStorage: DictStorage) => new ComprehensiveMode(dictionaryStorage))
-// modeManager.set(ModeType.PUNCH, (dictionaryStorage: DictStorage) => new PunchMode(dictionaryStorage))
+modeManager.set(ModeType.PUNCH, (dictionaryStorage: DictStorage) => new PunchMode(dictionaryStorage))
+modeManager.set(ModeType.LISTENING, (dictionaryStorage: DictStorage) => new SoundMode(dictionaryStorage))
+modeManager.set(ModeType.READING, (dictionaryStorage: DictStorage) => new DictWordMode(dictionaryStorage))
 
 const cozeWebSDK = new CozeWebSDK.WebChatClient({
   config: {

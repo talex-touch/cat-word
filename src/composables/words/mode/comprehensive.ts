@@ -313,6 +313,10 @@ export class ComprehensiveMode extends SignMode {
     return '综合沉浸'
   }
 
+  getMainColor(): string {
+    return '#0078d4'
+  }
+
   prepareWords() {
     return new ComprehensivePrepareWord(this)
   }

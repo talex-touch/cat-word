@@ -1,121 +1,61 @@
 <script setup lang="ts">
-import { globalData, modes, targetMode } from '~/composables/words'
+import { globalData, targetDict } from '~/composables/words'
+import type { ModeType } from '~/composables/words/mode'
+import { modeManager } from '~/composables/words/mode'
 
-const active = computed({
-  get() {
-    return globalData.value.mode
-  },
-  set(val) {
-    globalData.value.mode = val
-  },
-})
-const el = ref<HTMLElement>()
+const modes = [...modeManager.keys()]
+const activeIndex = ref(modes.indexOf(globalData.value.mode) ?? 0)
 
-async function fixActive() {
-  const id = `selector-item-${active.value}`
-  const dom = document.querySelector(`#${id}`)
+// const activeMode = computed(() => modes[activeIndex.value])
 
-  if (!dom)
-    return
+function modeIns(modeType: ModeType) {
+  const mode = modeManager.get(modeType)!
 
-  dom.scrollIntoView({ behavior: 'smooth', block: 'nearest' })
+  const dict = targetDict.value.storage
+  const modeInstance = mode(dict)
+
+  return modeInstance
 }
 
-watch(active, () => nextTick(() => fixActive()), { immediate: true })
+function handleSelect(index: number) {
+  activeIndex.value = index
+
+  const mode = modes[index]
+
+  globalData.value.mode = mode
+}
 </script>
 
 <template>
-  <div ref="el" class="ModeSelector">
-    <el-scrollbar>
-      <div class="ModeSelector-Wrapper">
-        <div
-          v-for="(mode, ind) in modes" :id="`selector-item-${ind}`" :key="mode.mode"
-          :class="{ active: mode.mode === active }" class="ModeSelector-Item" @click="active = mode.mode"
-        >
-          <p class="title">
-            {{ mode.name }}
-          </p>
-
-          <div class="checkmark">
-            <div i-carbon-checkmark />
-          </div>
-        </div>
-      </div>
-    </el-scrollbar>
-
-    <p px-6>
-      <el-text>{{ targetMode.desc }}</el-text>
-    </p>
-
-    <!-- <el-button style="width: 85%;left: 7.5%" relative my-6 type="primary" size="large">
-      确定
-    </el-button> -->
+  <div class="ModeSelector">
+    <div class="ModeSelector-Wrapper">
+      <el-carousel
+        :initial-index="activeIndex" arrow="never" :autoplay="false" indicator-position="none" type="card"
+        @change="handleSelect"
+      >
+        <el-carousel-item v-for="(mode, index) in modes" :key="index">
+          <mode-display :mode="modeIns(mode)" :class="{ select: index === activeIndex }" />
+        </el-carousel-item>
+      </el-carousel>
+    </div>
   </div>
 </template>
 
 <style lang="scss">
-.ModeSelector-Item {
-  .checkmark {
-    position: absolute;
-    display: flex;
-
-    width: 32px;
-    height: 32px;
-
-    left: 0.5rem;
-    bottom: 0.5rem;
-
-    align-items: center;
-    justify-content: center;
-
-    border-radius: 50%;
-    background-color: var(--el-fill-color);
-
-    transition: 0.25s;
-    transform: scale(0);
-  }
-
-  &.active {
-    .checkmark {
-      transform: scale(1);
-    }
-
-    transform: scale(1.025);
-  }
-
-  .title {
-    font-size: 20px;
-    font-weight: 600;
-
-    color: #000;
-  }
-
-  position: relative;
-  padding: 1rem;
-
-  width: 100px;
-  height: 130px;
-
-  flex: 1 0 100px;
-  border-radius: 12px;
-  background-image: linear-gradient(to right, var(--theme-color), var(--theme-color-light)),
-    linear-gradient(120deg, #a6c0fe 0%, #f68084 100%);
-  border: 2px solid var(--theme-color-light);
-}
-
 .ModeSelector-Wrapper {
-  padding: 3rem 1rem 2rem 1rem;
-  display: flex;
-
-  gap: 0.5rem;
-  // width: 100%;
+  .el-carousel {
+    &__item {
+      display: flex;
+    }
+    width: 100%;
+    &__container {
+      height: 65vmin;
+    }
+  }
 }
 
 .ModeSelector {
-  position: relative;
-
   width: 100%;
-
   overflow: hidden;
 }
 </style>

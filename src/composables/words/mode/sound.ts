@@ -1,4 +1,4 @@
-import PunchWord from '~/components/words/mode/ComprehensiveWord.vue'
+import SoundWord from '~/components/words/mode/ComprehensiveWord.vue'
 import { PrepareWord, SignMode } from '.'
 import { calendarManager, globalData, type IWord, type IWordItem, useWordSound } from '..'
 import type { DictStorage } from '../storage'
@@ -8,12 +8,12 @@ const PRELOAD_WORD_AMO = 5 // 提前加载的单词数量
 const NEW_WORDS_PER_SESSION = 10 // 每次学习新单词的数量
 const REVIEW_WORDS_PER_SESSION = 10 // 每次复习单词的数量
 
-export interface IPunchWordItem {
+export interface ISoundWordItem {
   word: IWordItem
   type: 'new' | 'review'
 }
 
-export class PunchPrepareWord extends PrepareWord<PunchMode, IPunchWordItem> {
+export class SoundPrepareWord extends PrepareWord<SoundMode, ISoundWordItem> {
   onCreated(): void {
     const globalAmo = globalData.value.amount
     const storage = this.mode.dictionaryStorage
@@ -23,7 +23,7 @@ export class PunchPrepareWord extends PrepareWord<PunchMode, IPunchWordItem> {
     this.taskAmount = amo
   }
 
-  wordsQueue: IPunchWordItem[] = []
+  wordsQueue: ISoundWordItem[] = []
   wordsDispalyed: string[] = []
   wordsFinished: IWordItem[] = []
 
@@ -51,7 +51,7 @@ export class PunchPrepareWord extends PrepareWord<PunchMode, IPunchWordItem> {
     return new Promise((resolve) => {
       const maxProgress = PRELOAD_WORD_AMO * 5 * this.taskAmount + this.taskAmount
       let progress = 0
-      const words: IPunchWordItem[] = []
+      const words: ISoundWordItem[] = []
 
       // 随机选择未学习的单词
       while (words.length < this.taskAmount) {
@@ -187,7 +187,7 @@ export class PunchPrepareWord extends PrepareWord<PunchMode, IPunchWordItem> {
     if (this.amo + 1 >= NEW_WORDS_PER_SESSION) {
       this.amo = 0
 
-      const reviewWords: IPunchWordItem[] = []
+      const reviewWords: ISoundWordItem[] = []
 
       this.wordsQueue.forEach((item, index) => {
         // 如果复习单词数量达到每次复习的单词数量，跳出循环
@@ -296,16 +296,16 @@ export class PunchPrepareWord extends PrepareWord<PunchMode, IPunchWordItem> {
 
   // 获取目标组件
   getTargetComponent(): Component {
-    return PunchWord
+    return SoundWord
   }
 }
-export class PunchMode extends SignMode {
+export class SoundMode extends SignMode {
   getMainColor(): string {
-    return '#9CCF24FF'
+    return '#44A994'
   }
 
   getModeIcon(): string {
-    return '🥊'
+    return '😎'
   }
 
   getModeDesc() {
@@ -313,11 +313,11 @@ export class PunchMode extends SignMode {
   }
 
   getModeName() {
-    return '随时打卡'
+    return '音析模式'
   }
 
   prepareWords() {
-    return new PunchPrepareWord(this)
+    return new SoundPrepareWord(this)
   }
 
   constructor(dictionaryStorage: DictStorage) {

@@ -54,6 +54,8 @@ export interface ISignMode<T, W> {
   getModeDesc: () => string
   // randomWord: () => IWord
   prepareWords: () => PrepareWord<T, W>
+
+  getMainColor: () => string
 }
 
 export abstract class SignMode implements ISignMode<SignMode, any> {
@@ -62,6 +64,7 @@ export abstract class SignMode implements ISignMode<SignMode, any> {
   abstract getModeName(): string
   abstract getModeIcon(): string
   abstract getModeDesc(): string
+  abstract getMainColor(): string
   // abstract randomWord(): IWord
   abstract prepareWords(): PrepareWord<any, any>
 
