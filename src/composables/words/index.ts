@@ -192,6 +192,10 @@ export class CalendarManager {
   getToday() {
     return [new Date().getFullYear(), new Date().getMonth() + 1, new Date().getDate()]
   }
+
+  clear() {
+    calendarData.value = []
+  }
 }
 
 export const calendarManager = new CalendarManager()

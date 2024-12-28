@@ -1,5 +1,13 @@
 <script setup>
+import { calendarManager } from '~/composables/words'
 
+async function handleClear() {
+  calendarManager.clear()
+
+  await useRequestAnimationFrame()
+
+  alert('已清除打卡数据')
+}
 </script>
 
 <template>
@@ -32,7 +40,7 @@
         </template>
         我的日历
       </LineArrow> -->
-      <LineArrow>
+      <LineArrow @click="handleClear">
         <template #icon>
           <div i-carbon:user-feedback />
         </template>
