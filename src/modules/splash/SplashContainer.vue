@@ -1,0 +1,47 @@
+<script setup lang="ts">
+import { ScreenMode, useGlobaSpalshlState } from '.'
+import SplashSafeArea from './SplashSafeArea.vue'
+
+const spalshState = useGlobaSpalshlState()
+
+const isMobile = computed(() => spalshState.screenMode.value === ScreenMode.MOBILE)
+</script>
+
+<template>
+  <div class="SplashContainer" :class="{ 'fullscreen': isMobile, 'wrapped-box': !isMobile }">
+    <div relative h-full w-full flex flex-col class="SplashContainer-Main">
+      <slot />
+      <SplashSafeArea :mock="!isMobile" />
+    </div>
+  </div>
+</template>
+
+<style lang="scss" scoped>
+.SplashContainer {
+  &.wrapped-box {
+    .SplashContainer-Main {
+      // iPhone 12 Pro
+      width: 390px;
+      height: 844px;
+
+      overflow: hidden;
+      border-radius: 38px;
+      border: 2px solid var(--theme-color);
+    }
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+  }
+
+  position: absolute;
+
+  top: 0;
+  left: 0;
+
+  width: 100%;
+  height: 100%;
+  max-height: 100vh;
+}
+</style>
