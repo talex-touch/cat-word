@@ -91,7 +91,7 @@ async function handleChooseWord(word: IWord) {
 <template>
   <div :class="{ imagable: !!options.wrongAmo, review: data?.type === 'review' }" class="WordCard">
     <div v-if="data" class="WordsCard">
-      <div class="transition-cubic WordsCard-Image">
+      <div class="WordsCard-Image transition-cubic">
         <Swipe v-if="!!options.wrongAmo" lazy-render h-full :autoplay="3000" indicator-color="red">
           <SwipeItem v-for="item in data.word.mainWord.img" :key="item">
             <el-image fit="fill" loading="lazy" :src="item" />
@@ -138,7 +138,7 @@ async function handleChooseWord(word: IWord) {
       </div>
     </div>
 
-    <teleport to="#rootApp">
+    <teleport to="#rootMain">
       <div v-if="data?.word.mainWord" :class="{ visible: options.content }" class="transition-cubic WordContent">
         <WordDetailContent :word="data.word.mainWord" @close="options.content = false" />
       </div>

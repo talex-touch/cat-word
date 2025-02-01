@@ -202,10 +202,10 @@ onMounted(() => {
 </script>
 
 <template>
-  <teleport to="#rootApp">
+  <teleport to="#rootMain">
     <div
       :style="`z-index: ${zIndex}`" :class="{ visible, forbidden: dialogOptions.forbidden, loading }"
-      class="TouchDialog transition-cubic" @click="handleClickOutside"
+      class="transition-cubic TouchDialog" @click="handleClickOutside"
     >
       <div class="TouchDialog-Main Main" @click.stop="">
         <div class="TouchDialog-Close" @click="visible = false">

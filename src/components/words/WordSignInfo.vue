@@ -1,9 +1,8 @@
 <script setup lang="ts">
 import DictSelector from '~/components/words/DictSelector.vue'
-import ModeSelector from '~/components/words/ModeSelector.vue'
 import PlanSelector from '~/components/words/PlanSelector.vue'
 
-import { calendarManager, globalData, targetDict, targetMode, targetSignMode } from '~/composables/words'
+import { calendarManager, globalData, targetDict, targetSignMode } from '~/composables/words'
 import Cat from '/svg/cat.svg'
 import Checked from '/svg/complete.svg'
 
@@ -47,8 +46,8 @@ function selectPlan() {
 </script>
 
 <template>
-  <div :class="{ signed: todayData?.signed }" text-black class="WordSignInfo-Wrapper transition-cubic">
-    <div class="WordSignInfo transition-cubic">
+  <div :class="{ signed: todayData?.signed }" text-black class="transition-cubic WordSignInfo-Wrapper">
+    <div class="transition-cubic WordSignInfo">
       <div class="WordSignInfo-Svg">
         <img :src="Cat">
       </div>
@@ -71,7 +70,7 @@ function selectPlan() {
         </p>
         <div :style="`--p: ${progress * 100}%`" class="WordSignInfo-Content-Progress">
           <div class="WordSignInfo-Content-Progress-Bg" />
-          <div v-if="progress" class="WordSignInfo-Content-Progress-Inner transition-cubic" />
+          <div v-if="progress" class="transition-cubic WordSignInfo-Content-Progress-Inner" />
         </div>
       </div>
     </div>
@@ -127,11 +126,11 @@ function selectPlan() {
       </div>
 
       <template v-if="!todayData?.signed">
-        <el-button w-full size="large" type="primary" @click="emits('sign')">
-          <span>开始背单词吧！</span>
+        <el-button class="large-button" w-full size="large" type="primary" @click="emits('sign')">
+          <span>开始背单词吧</span>
         </el-button>
 
-        <div my-2 flex items-center justify-center gap-1 text-sm op-75>
+        <div my-1 flex items-center justify-center gap-1 text-sm op-75>
           <div i-carbon-time />预计用时 {{ calculateTime(globalData.amount) }} 分钟
         </div>
       </template>
@@ -187,7 +186,8 @@ function selectPlan() {
     opacity: 0.125;
     --color: var(--theme-color);
     // background-color: #191a1a;
-    background-image: linear-gradient(0deg,
+    background-image: linear-gradient(
+        0deg,
         transparent 24%,
         var(--theme-color) 25%,
         var(--theme-color-dark) 26%,
@@ -196,8 +196,10 @@ function selectPlan() {
         var(--theme-color) 75%,
         var(--theme-color-dark) 76%,
         transparent 77%,
-        transparent),
-      linear-gradient(90deg,
+        transparent
+      ),
+      linear-gradient(
+        90deg,
         transparent 24%,
         var(--color) 25%,
         var(--color) 26%,
@@ -206,7 +208,8 @@ function selectPlan() {
         var(--color) 75%,
         var(--color) 76%,
         transparent 77%,
-        transparent);
+        transparent
+      );
     pointer-events: none;
     background-size: 55px 55px;
   }
@@ -300,7 +303,6 @@ function selectPlan() {
 
   width: 90%;
   height: 8px;
-
 }
 
 .WordSignInfo-Content {
@@ -373,7 +375,8 @@ function selectPlan() {
     opacity: 0.25;
     --color: var(--theme-color);
     // background-color: #191a1a;
-    background-image: linear-gradient(0deg,
+    background-image: linear-gradient(
+        0deg,
         transparent 24%,
         var(--theme-color) 25%,
         var(--theme-color-dark) 26%,
@@ -382,8 +385,10 @@ function selectPlan() {
         var(--theme-color) 75%,
         var(--theme-color-dark) 76%,
         transparent 77%,
-        transparent),
-      linear-gradient(90deg,
+        transparent
+      ),
+      linear-gradient(
+        90deg,
         transparent 24%,
         var(--color) 25%,
         var(--color) 26%,
@@ -392,7 +397,8 @@ function selectPlan() {
         var(--color) 75%,
         var(--color) 76%,
         transparent 77%,
-        transparent);
+        transparent
+      );
     background-size: 55px 55px;
   }
 

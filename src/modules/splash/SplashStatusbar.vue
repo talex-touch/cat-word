@@ -5,7 +5,7 @@ defineProps<{
 </script>
 
 <template>
-  <div :class="{ mock }" class="SplashStatusbar transition-cubic">
+  <div :class="{ mock }" class="transition-cubic SplashStatusbar">
     <div font-bold class="SplashStatusbar-Time">
       07:16
     </div>
@@ -50,7 +50,7 @@ defineProps<{
       height: 1.5em;
     }
   }
-  z-index: 100;
+  z-index: 1000;
   position: absolute;
   padding: 0.5rem 1.5rem;
 

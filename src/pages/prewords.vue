@@ -129,7 +129,7 @@ async function handleDone() {
 <template>
   <WithPage :class="{ wordVisible: loadingOptions.start, loading: loadingOptions.loading }" class="PreWordsPage">
     <div class="PreWordsPage-Main">
-      <div class="PreWordsPage-Head coffee-font">
+      <div class="coffee-font PreWordsPage-Head">
         <span class="item-1 prewords-headword-item">W</span>
         <span class="prewords-headword-item item-2">O</span>
         <span class="prewords-headword-item item-3">R</span>
@@ -180,7 +180,7 @@ async function handleDone() {
       <div my-2 flex items-center justify-center gap-2 op-75>
         <div i-carbon-time />预计用时 {{ calculateTime(globalData.amount) }} 分钟
       </div>
-      <el-button size="large" w-full type="primary" @click="handleStart">
+      <el-button class="large-button" size="large" w-full type="primary" @click="handleStart">
         开始打卡
       </el-button>
 
@@ -210,7 +210,7 @@ async function handleDone() {
       <BookLoading />
     </div>
 
-    <teleport to="#rootApp">
+    <teleport to="#rootMain">
       <div :class="{ wordVisible: loadingOptions.start }" class="transition-cubic PreWordsPage-Word">
         <component
           :is="loadingOptions.component" v-if="loadingOptions.component" :prepare="loadingOptions.prepare"
@@ -219,7 +219,7 @@ async function handleDone() {
       </div>
     </teleport>
 
-    <teleport to="#rootApp">
+    <teleport to="#rootMain">
       <WordSigned v-model="dialogOptions.done" />
     </teleport>
 
@@ -417,11 +417,34 @@ async function handleDone() {
     height: 60%;
 
     transition: 0.5s;
-    border-radius: 0 0 1000px 1000px;
+    // border-radius: 0 0 200px 200px;
     background-color: var(--theme-color);
 
     transform: translateY(-24px);
   }
+
+  // &::after {
+  //   z-index: -1;
+  //   content: '';
+  //   position: absolute;
+
+  //   top: 60%;
+  //   left: 50%;
+
+  //   width: 10%;
+  //   height: 5%;
+
+  //   // border-radius: 15px;
+  //   transition: 0.5s;
+  //   opacity: 0.75;
+  //   transform: translate(-50%, -100%) scale(5);
+  //   // clip-path: polygon(0% 0%, 0% 50%, 100% 50%, 100% 0%);
+  //   // border-radius: 0 0 200px 200px;
+  //   // background-color: var(--theme-color-light);
+  //   // filter: blur(1px) brightness(80%) opacity(0.8);
+  //   background: radial-gradient(var(--theme-color-light), var(--theme-color-dark));
+  //   filter: blur(8px) brightness(80%); // drop-shadow(0 -10px 5px var(--theme-color-light));
+  // }
 
   &.loading::before {
     transform: scale(0.95) translateY(-50%);
