@@ -26,7 +26,7 @@ const isMobile = computed(() => spalshState.screenMode.value === ScreenMode.MOBI
 
       overflow: hidden;
       border-radius: 38px;
-      border: 2px solid var(--theme-color);
+      border: 2px solid var(--el-text-color-primary);
     }
 
     display: flex;

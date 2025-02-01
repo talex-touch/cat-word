@@ -32,7 +32,7 @@ const activeNav = computed(() => navs.find(item => item.path === route?.path))
 <template>
   <nav
     v-if="activeNav" :class="{ shrink: !globalSetting.footer }"
-    class="Application-Footer fake-background transition-cubic" mt-6 inline-flex gap-2 text-xl
+    class="Application-Footer fake-background transition-cubic" inline-flex gap-2 text-xl
   >
     <ul w-full flex justify-between>
       <li

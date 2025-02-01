@@ -29,7 +29,7 @@ function calcAccumuData(signData: string): number {
 
 const dates = getDates()
 const todayData = calendarManager.getTodayData()
-const todaySigned = computed(() => todayData?.signed)
+// const todaySigned = computed(() => todayData?.signed)
 const signedDays = computed(() => (todayData?.origin.day || ''))
 const signedDayMap = computed(() => signedDays.value.split(''))
 const accumulateSigned = computed(() => calcAccumuData(signedDays.value))
@@ -94,6 +94,7 @@ const accumulateSigned = computed(() => calcAccumuData(signedDays.value))
       color: var(--el-text-color-regular);
     }
   }
+
   margin-top: 4px;
 
   padding: 0.5rem 1rem;
@@ -103,24 +104,59 @@ const accumulateSigned = computed(() => calcAccumuData(signedDays.value))
   li.checked {
     color: var(--el-color-primary);
   }
+
+  &::before {
+    content: '';
+    position: absolute;
+
+    width: 100%;
+    height: 2px;
+
+    left: 0;
+    bottom: -5px;
+
+    opacity: 0.25;
+    filter: blur(1px);
+    background: linear-gradient(to right, #0000, var(--el-text-color-regular), #0000);
+  }
+
   position: relative;
   padding: 0 1rem 0.5rem 1rem;
   display: flex;
 
   justify-content: space-between;
 
-  border-bottom: 1px solid var(--el-border-color);
+  // border-bottom: 1px solid var(--el-border-color);
 }
 
 .SignCalendar {
+  &::before {
+    content: '';
+    position: absolute;
+
+    width: 64px;
+    height: 64px;
+
+    right: 0.25rem;
+    bottom: 0.25rem;
+
+    border-radius: 50%;
+    filter: blur(5px);
+    background: radial-gradient(
+      circle at 30% 30%,
+      rgba(255, 222, 89, 0.3) 0%,
+      rgba(255, 222, 89, 0.1) 60%,
+      transparent 100%
+    );
+  }
+
   position: relative;
   padding: 0.5rem 0;
 
   width: 100%;
   height: 110px;
 
-  border-radius: 25px;
-  background-color: var(--el-fill-color);
-  border: 1px solid var(--el-border-color);
+  border-radius: 8px;
+  background: linear-gradient(125deg, var(--theme-color-dark) 70%, var(--theme-color));
 }
 </style>
