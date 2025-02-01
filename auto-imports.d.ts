@@ -6,6 +6,7 @@
 export {}
 declare global {
   const APP_LOGO: typeof import('./src/composables/constants')['APP_LOGO']
+  const ENDS_URL: typeof import('./src/composables/constants')['ENDS_URL']
   const EffectScope: typeof import('vue')['EffectScope']
   const asyncComputed: typeof import('@vueuse/core')['asyncComputed']
   const autoResetRef: typeof import('@vueuse/core')['autoResetRef']
@@ -30,8 +31,6 @@ declare global {
   const debouncedWatch: typeof import('@vueuse/core')['debouncedWatch']
   const defineAsyncComponent: typeof import('vue')['defineAsyncComponent']
   const defineComponent: typeof import('vue')['defineComponent']
-  const defineLoader: typeof import('vue-router/auto')['defineLoader']
-  const definePage: typeof import('unplugin-vue-router/runtime')['definePage']
   const eagerComputed: typeof import('@vueuse/core')['eagerComputed']
   const effectScope: typeof import('vue')['effectScope']
   const extendRef: typeof import('@vueuse/core')['extendRef']
@@ -308,6 +307,7 @@ declare module 'vue' {
   interface GlobalComponents {}
   interface ComponentCustomProperties {
     readonly APP_LOGO: UnwrapRef<typeof import('./src/composables/constants')['APP_LOGO']>
+    readonly ENDS_URL: UnwrapRef<typeof import('./src/composables/constants')['ENDS_URL']>
     readonly EffectScope: UnwrapRef<typeof import('vue')['EffectScope']>
     readonly asyncComputed: UnwrapRef<typeof import('@vueuse/core')['asyncComputed']>
     readonly autoResetRef: UnwrapRef<typeof import('@vueuse/core')['autoResetRef']>
@@ -601,6 +601,7 @@ declare module '@vue/runtime-core' {
   interface GlobalComponents {}
   interface ComponentCustomProperties {
     readonly APP_LOGO: UnwrapRef<typeof import('./src/composables/constants')['APP_LOGO']>
+    readonly ENDS_URL: UnwrapRef<typeof import('./src/composables/constants')['ENDS_URL']>
     readonly EffectScope: UnwrapRef<typeof import('vue')['EffectScope']>
     readonly asyncComputed: UnwrapRef<typeof import('@vueuse/core')['asyncComputed']>
     readonly autoResetRef: UnwrapRef<typeof import('@vueuse/core')['autoResetRef']>
