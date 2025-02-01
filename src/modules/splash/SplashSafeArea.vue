@@ -7,7 +7,7 @@ defineProps<{
 
 <template>
   <div :class="{ mock }" class="SplashSafeArea">
-    <div class="SplashSafeArea-Mock transition-cubic" />
+    <div class="transition-cubic SplashSafeArea-Mock" />
   </div>
 </template>
 
@@ -33,7 +33,7 @@ defineProps<{
 
   opacity: 0;
   border-radius: 18px;
-  mix-blend-mode: difference;
+  // mix-blend-mode: difference;
   background-color: var(--el-text-color-primary);
   transform: translate(-50%, -50%) translateY(10px);
 }

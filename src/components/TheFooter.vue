@@ -39,7 +39,7 @@ const activeNav = computed(() => navs.find(item => item.path === route?.path))
         v-for="(nav, ind) in navs" :id="`footer-nav-item-${ind + 1}`" :key="nav.path" flex flex-col items-center
         :class="{ active: activeNav?.path === nav.path }" @click="router.push(nav.path)"
       >
-        <div class="transition-cubic nav-icon">
+        <div class="transition-cubic fake-background nav-icon">
           <template v-if="nav.icon.startsWith('i-')">
             <div :class="nav.icon" />
           </template>
@@ -67,10 +67,12 @@ const activeNav = computed(() => navs.find(item => item.path === route?.path))
       width: 36px;
       height: 36px;
 
-      transform: translateY(10px);
+      transform: translateY(15px);
 
       border-radius: 50%;
-      background-color: var(--el-fill-color);
+      // background-color: var(--el-fill-color);
+      --fake-opacity: 0.25;
+      --fake-color: var(--theme-color-light);
     }
 
     opacity: 1;
@@ -98,10 +100,10 @@ const activeNav = computed(() => navs.find(item => item.path === route?.path))
   position: relative;
   padding: 0 1rem;
 
-  width: 64px;
-  height: 64px;
+  // width: 64px;
+  height: 100%;
 
-  gap: 0.25rem;
+  // gap: 0.25rem;
   opacity: 0.75;
   font-size: 30px;
   font-weight: 600;
@@ -118,14 +120,14 @@ const activeNav = computed(() => navs.find(item => item.path === route?.path))
 
   z-index: 1;
   position: absolute;
-  padding: 1rem;
+  padding: 0.25rem 1rem;
 
   width: 100%;
   bottom: 0;
 
-  height: 80px;
+  height: 64px;
 
-  flex: 1 0 80px;
+  flex: 1 0 64px;
   // border-top: 1px solid var(--el-border-color);
 
   --fake-opacity: 0.85;
