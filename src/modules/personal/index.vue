@@ -17,7 +17,7 @@ async function handleClear() {
   <PersonalLayout>
     <template #header>
       <PersonalHeaderDisplay>
-        <div h-full w-full flex flex-col p-4 pt-8>
+        <div h-full w-full flex flex-col pt-8>
           <div w-full flex justify-end class="header-line h-[32px]">
             <div i-ri:bubble-chart-fill />
           </div>
