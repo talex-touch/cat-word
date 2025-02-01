@@ -77,22 +77,32 @@ const accumulateSigned = computed(() => calcAccumuData(signedDays.value))
     font-size: 22px;
     font-weight: 600;
     border-radius: 50%;
+    box-shadow: var(--el-box-shadow);
     background-image: linear-gradient(120deg, #a6c0fe 0%, #f68084 100%);
   }
 
   .main-content {
     .title {
-      color: var(--el-text-color-secondary);
+      color: #fff;
+      opacity: 0.85;
+
+      font-size: 16px;
     }
 
     .inner {
-      color: var(--el-text-color-secondary);
+      color: #fff;
+      opacity: 0.75;
+
+      font-size: 14px;
     }
 
     .normal {
       margin-right: 0.5rem;
 
-      color: var(--el-text-color-regular);
+      color: #fff;
+      opacity: 0.75;
+
+      font-size: 14px;
     }
   }
 
@@ -125,6 +135,7 @@ const accumulateSigned = computed(() => calcAccumuData(signedDays.value))
   padding: 0 1rem 0.5rem 1rem;
   display: flex;
 
+  color: #fff;
   justify-content: space-between;
 
   // border-bottom: 1px solid var(--el-border-color);

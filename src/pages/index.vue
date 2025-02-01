@@ -117,6 +117,7 @@ useRouter().beforeEach((_to, _from, next) => {
   }
   z-index: 2;
   position: absolute;
+  padding-top: 1rem;
 
   top: 0;
   left: 0;
