@@ -1,11 +1,11 @@
 <script setup lang="ts" generic="T extends any, O extends any">
-import DisplayIndexCourse from '~/components/display/IndexCourse.vue'
 import { modeManager, ModeType } from '~/composables/words/mode'
 import { ComprehensiveMode } from '~/composables/words/mode/comprehensive'
 import { DictWordMode } from '~/composables/words/mode/dict-word'
 import { PunchMode } from '~/composables/words/mode/punch'
 import { SoundMode } from '~/composables/words/mode/sound'
 import type { DictStorage } from '~/composables/words/storage'
+import Plan from '~/modules/plan/index.vue'
 import prewords from './prewords.vue'
 
 defineOptions({
@@ -16,33 +16,6 @@ modeManager.set(ModeType.COMPREHENSIVE, (dictionaryStorage: DictStorage) => new 
 modeManager.set(ModeType.PUNCH, (dictionaryStorage: DictStorage) => new PunchMode(dictionaryStorage))
 modeManager.set(ModeType.LISTENING, (dictionaryStorage: DictStorage) => new SoundMode(dictionaryStorage))
 modeManager.set(ModeType.READING, (dictionaryStorage: DictStorage) => new DictWordMode(dictionaryStorage))
-
-const cozeWebSDK = new CozeWebSDK.WebChatClient({
-  config: {
-    // 智能体 ID
-    botId: '7448405006673412115',
-  },
-  ui: {
-    footer: {
-      expressionText: 'Powered by {{QuotaWish}}.',
-      linkvars: {
-        QuotaWish: {
-          text: 'QuotaWish 科塔智爱',
-          link: 'https://quotawish.com',
-        },
-      },
-    },
-    chatBot: {
-      title: 'Lucas Tata',
-    },
-    asstBtn: {
-      isNeed: false,
-    },
-    base: {
-      icon: 'https://ai.quotawish.com/favicon.ico',
-    },
-  },
-})
 
 const prewordsVisible = ref(false)
 watch(prewordsVisible, visible => globalSetting.footer = !visible)
@@ -68,42 +41,19 @@ useRouter().beforeEach((_to, _from, next) => {
 </script>
 
 <template>
-  <div class="IndexPage">
-    <div class="IndexPage-Header">
-      <div class="coffee-font" text-1.75xl flex items-center gap-1 font-bold @click="cozeWebSDK.showChatBot()">
-        <img w-8 src="/ai-logo.png">
-        Tata
+  <Plan>
+    <template #main>
+      <div id="sign-info" :class="{ expand: prewordsVisible }" mx-auto class="IndexPage-Card w-95%">
+        <WordSignInfo @sign="handleSign" />
+
+        <teleport to="#rootApp">
+          <div :class="{ visible: prewordsVisible }" class="IndexPage-PreWords">
+            <prewords @exit="prewordsVisible = false" />
+          </div>
+        </teleport>
       </div>
-
-      <div flex items-center gap-2 class="IndexPage-Header-Info">
-        <RoundInfo type="danger">
-          <div i-carbon-favorite-filled />
-          5
-        </RoundInfo>
-
-        <RoundInfo type="warning">
-          <div i-carbon-star-filled />
-          400
-        </RoundInfo>
-      </div>
-    </div>
-
-    <div id="sign-info" :class="{ expand: prewordsVisible }" mx-auto class="IndexPage-Card w-95%">
-      <WordSignInfo @sign="handleSign" />
-
-      <teleport to="body">
-        <div :class="{ visible: prewordsVisible }" class="IndexPage-PreWords">
-          <prewords @exit="prewordsVisible = false" />
-        </div>
-      </teleport>
-    </div>
-
-    <DisplayIndexCourse />
-
-    <WordIndexBanner />
-
-    <br>
-  </div>
+    </template>
+  </Plan>
 </template>
 
 <style lang="scss">
@@ -117,7 +67,6 @@ useRouter().beforeEach((_to, _from, next) => {
   }
   z-index: 2;
   position: absolute;
-  padding-top: 1rem;
 
   top: 0;
   left: 0;
@@ -172,36 +121,5 @@ useRouter().beforeEach((_to, _from, next) => {
   padding: 0.5rem 0;
 
   transition: 0.25s;
-}
-
-.IndexPage-Header {
-  .IndexPage-Header-Info {
-    font-size: 14px;
-  }
-
-  & > p {
-    color: #000;
-  }
-
-  z-index: 1;
-  position: sticky;
-  display: flex;
-  padding: 1rem;
-
-  top: 0;
-
-  justify-content: space-between;
-
-  background-color: var(--el-bg-color);
-}
-
-.IndexPage {
-  position: relative;
-  padding-bottom: 80px;
-
-  height: 100%;
-
-  overflow-y: scroll;
-  background-color: var(--el-bg-color);
 }
 </style>
