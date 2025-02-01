@@ -34,6 +34,7 @@ declare module 'vue' {
     TheFooter: typeof import('./src/components/TheFooter.vue')['default']
     TheInput: typeof import('./src/components/TheInput.vue')['default']
     TouchDialog: typeof import('./src/components/dialog/TouchDialog.vue')['default']
+    WithPage: typeof import('./src/components/page/WithPage.vue')['default']
     WordCard: typeof import('./src/components/WordCard.vue')['default']
     WordDetailContent: typeof import('./src/components/words/WordDetailContent.vue')['default']
     WordExamples: typeof import('./src/components/WordExamples.vue')['default']

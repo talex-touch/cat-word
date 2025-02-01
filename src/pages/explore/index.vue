@@ -57,43 +57,45 @@ function directPage(icon: any) {
 </script>
 
 <template>
-  <div class="ExplorePage">
-    <h1 class="title">
-      探索
-    </h1>
+  <WithPage>
+    <div class="ExplorePage">
+      <h1 class="title">
+        探索
+      </h1>
 
-    <div class="ExplorePage-Icon">
-      <div
-        v-for="icon in icons" :key="icon.name" class="ExplorePage-IconItem"
-        :style="`--c1: ${icon.color[0]}; --c2: ${icon.color[1]}`" @click="directPage(icon)"
-      >
-        <div class="ExplorePage-IconItem-Bg">
-          <div :class="icon.icon" />
+      <div class="ExplorePage-Icon">
+        <div
+          v-for="icon in icons" :key="icon.name" class="ExplorePage-IconItem"
+          :style="`--c1: ${icon.color[0]}; --c2: ${icon.color[1]}`" @click="directPage(icon)"
+        >
+          <div class="ExplorePage-IconItem-Bg">
+            <div :class="icon.icon" />
+          </div>
+          <span>{{ icon.name }}</span>
         </div>
-        <span>{{ icon.name }}</span>
+      </div>
+
+      <div my-2 class="ExplorePage-Banner">
+        <Swipe>
+          <SwipeItem v-for="item in 1" :key="item">
+            <h3 class="ExplorePage-BannerItem small justify-center" text="2xl">
+              千叶单词 | 立即体验
+            </h3>
+          </SwipeItem>
+          <SwipeItem>
+            <h3 class="ExplorePage-BannerItem small justify-center" text="2xl">
+              你离地道发音还有多远？
+            </h3>
+          </SwipeItem>
+        </Swipe>
+      </div>
+
+      <div class="ExplorePage-Course">
+        <h1>更多课程</h1>
+        暂无
       </div>
     </div>
-
-    <div my-2 class="ExplorePage-Banner">
-      <Swipe>
-        <SwipeItem v-for="item in 1" :key="item">
-          <h3 class="ExplorePage-BannerItem small justify-center" text="2xl">
-            千叶单词 | 立即体验
-          </h3>
-        </SwipeItem>
-        <SwipeItem>
-          <h3 class="ExplorePage-BannerItem small justify-center" text="2xl">
-            你离地道发音还有多远？
-          </h3>
-        </SwipeItem>
-      </Swipe>
-    </div>
-
-    <div class="ExplorePage-Course">
-      <h1>更多课程</h1>
-      暂无
-    </div>
-  </div>
+  </WithPage>
 </template>
 
 <style lang="scss">
