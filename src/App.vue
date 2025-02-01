@@ -6,7 +6,14 @@ import Splash from '~/modules/splash/index.vue'
 <template>
   <Splash>
     <template #main>
-      <RouterView />
+      <router-view v-slot="{ Component }">
+        <!-- <transition name="el-fade-in-linear"> -->
+        <keep-alive>
+          <component :is="Component" />
+        </keep-alive>
+        <!-- </transition> -->
+      </router-view>
+      <!-- <RouterView /> -->
 
       <Auth />
     </template>
