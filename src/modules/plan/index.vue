@@ -1,5 +1,4 @@
 <script setup lang="ts" generic="T extends any, O extends any">
-import DisplayIndexCourse from '~/components/display/IndexCourse.vue'
 import PlanLayout from './PlanLayout.vue'
 
 const cozeWebSDK = new CozeWebSDK.WebChatClient({
@@ -52,11 +51,12 @@ const cozeWebSDK = new CozeWebSDK.WebChatClient({
     </template>
 
     <template #main>
+      <slot name="cover" />
       <slot name="main" />
 
-      <DisplayIndexCourse />
+      <!-- <DisplayIndexCourse /> -->
 
-      <WordIndexBanner />
+      <!-- <WordIndexBanner /> -->
     </template>
   </PlanLayout>
 </template>

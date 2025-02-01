@@ -19,9 +19,7 @@
   position: relative;
 
   width: 100%;
-  min-height: 100%;
-
-  padding: 0.5rem 0;
+  height: calc(100% - 88px);
 }
 
 .PlanLayout {
@@ -29,17 +27,18 @@
     z-index: 1;
     position: sticky;
     display: flex;
-    padding: 1rem;
+    padding: 0.5rem 1rem;
     padding-top: calc(1rem + 24px);
 
     top: 0;
+
+    height: 88px;
 
     justify-content: space-between;
 
     background-color: var(--el-bg-color);
   }
   position: relative;
-  padding-bottom: 5rem;
 
   height: 100%;
 

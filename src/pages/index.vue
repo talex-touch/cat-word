@@ -6,6 +6,7 @@ import { PunchMode } from '~/composables/words/mode/punch'
 import { SoundMode } from '~/composables/words/mode/sound'
 import type { DictStorage } from '~/composables/words/storage'
 import Plan from '~/modules/plan/index.vue'
+import PlanCover from '~/modules/plan/PlanCover.vue'
 import prewords from './prewords.vue'
 
 defineOptions({
@@ -42,8 +43,12 @@ useRouter().beforeEach((_to, _from, next) => {
 
 <template>
   <Plan>
+    <template #cover>
+      <PlanCover />
+    </template>
+
     <template #main>
-      <div id="sign-info" :class="{ expand: prewordsVisible }" mx-auto class="IndexPage-Card w-95%">
+      <div id="sign-info" :class="{ expand: prewordsVisible }" mx-auto class="IndexPage-Card z-1 w-95%">
         <WordSignInfo @sign="handleSign" />
 
         <teleport to="#rootApp">
@@ -65,6 +70,7 @@ useRouter().beforeEach((_to, _from, next) => {
     transform: scale(1);
     transition: 0.25s 0.1s;
   }
+
   z-index: 2;
   position: absolute;
 
@@ -106,6 +112,7 @@ useRouter().beforeEach((_to, _from, next) => {
       opacity: 1;
       transform: scale(1);
     }
+
     z-index: 2;
     transform: scale(1.25);
   }
@@ -117,8 +124,11 @@ useRouter().beforeEach((_to, _from, next) => {
     font-size: 24px;
     font-weight: 600;
   }
+
   position: relative;
   padding: 0.5rem 0;
+
+  top: 5%;
 
   transition: 0.25s;
 }

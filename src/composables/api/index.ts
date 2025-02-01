@@ -1,5 +1,5 @@
-import pronounce from './pronounce'
+import utils from './utils'
 
 export const $api = {
-  pronounce,
+  utils,
 }
