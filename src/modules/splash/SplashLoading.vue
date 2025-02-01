@@ -10,7 +10,7 @@ const loading = ref(true)
 
 <template>
   <div :class="{ loading }" class="SplashLoading">
-    <div class="SplashLoading-Page transition-cubic">
+    <div class="transition-cubic SplashLoading-Page">
       <div class="SplashLoading-Page-Main">
         <div class="SplashLoading-Logo">
           <img :src="APP_LOGO" alt="Logo" class="logo">
@@ -28,7 +28,7 @@ const loading = ref(true)
         Powered by QuotaWish.
       </div>
     </div>
-    <div class="transition-cubic SplashLoading-Content">
+    <div id="rootMain" class="transition-cubic SplashLoading-Content">
       <slot />
     </div>
   </div>

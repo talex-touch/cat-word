@@ -116,6 +116,8 @@ function handleAuth(event: Event) {
       transform 0.3s ease,
       color 0.3s ease;
     pointer-events: none;
+
+    font-size: 18px;
   }
 
   .input-line {
