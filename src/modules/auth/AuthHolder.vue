@@ -1,12 +1,10 @@
 <script setup lang="ts">
-import { useGlobaAuthState } from '.'
-
-const authState = useGlobaAuthState()
+import { globalAuthStorage } from '.'
 </script>
 
 <template>
   <teleport defer to="#rootApp">
-    <div :class="{ display: !authState.isLogin.value }" class="AuthHolder transition-cubic absolute-layout">
+    <div :class="{ display: !globalAuthStorage.isLogin }" class="AuthHolder transition-cubic absolute-layout">
       <slot />
     </div>
   </teleport>

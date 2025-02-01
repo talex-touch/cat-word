@@ -1,5 +1,19 @@
 <script setup lang="ts">
+import { globalAuthStorage } from '.'
 
+const options = reactive({
+  identifier: '',
+  certificate: '',
+})
+
+function handleAuth(event: Event) {
+  event.preventDefault()
+
+  if (!options.identifier || !options.certificate)
+    return
+
+  globalAuthStorage.value.isLogin = true
+}
 </script>
 
 <template>
@@ -10,23 +24,28 @@
       </h1>
       <form class="login-form">
         <div class="input-group">
-          <input id="username" type="text" name="username" required>
+          <input id="username" v-model="options.identifier" type="text" name="username" required>
           <label for="username">用户名</label>
           <div class="input-line" />
         </div>
         <div class="input-group">
-          <input id="password" type="password" name="password" required>
+          <input id="password" v-model="options.certificate" type="password" name="password" required>
           <label for="password">密码</label>
           <div class="input-line" />
         </div>
-        <button type="submit" class="submit-btn">
+        <button type="submit" class="submit-btn" @click="handleAuth">
           登录
         </button>
       </form>
-      <p class="agreement-text">
-        登录即代表你同意
-        <a href="https://protocol.quotawish.com" class="agreement-link">用户协议</a>
-      </p>
+      <div class="agreement-text">
+        <p>
+          未注册账号会自动注册
+        </p>
+        <p>
+          登录即代表你同意
+          <a href="https://protocol.quotawish.com" class="agreement-link">用户协议</a>
+        </p>
+      </div>
     </div>
   </div>
 </template>
@@ -40,7 +59,7 @@
   // background: rgba(255, 255, 255, 0.05);
 
   &-Inner {
-    padding: 2.5rem;
+    padding: 2rem 2.5rem;
     width: 100%;
     max-width: 400px;
     --fake-opacity: 0.85;
