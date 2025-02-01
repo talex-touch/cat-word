@@ -91,7 +91,7 @@ async function handleChooseWord(word: IWord) {
 <template>
   <div :class="{ imagable: !!options.wrongAmo, review: data?.type === 'review' }" class="WordCard">
     <div v-if="data" class="WordsCard">
-      <div class="WordsCard-Image transition-cubic">
+      <div class="transition-cubic WordsCard-Image">
         <Swipe v-if="!!options.wrongAmo" lazy-render h-full :autoplay="3000" indicator-color="red">
           <SwipeItem v-for="item in data.word.mainWord.img" :key="item">
             <el-image fit="fill" loading="lazy" :src="item" />
@@ -100,9 +100,9 @@ async function handleChooseWord(word: IWord) {
         </Swipe>
       </div>
 
-      <p class="word transition-cubic">
-        <span class="word-inner transition-cubic">{{ data.word.mainWord.word }}<span
-          class="word-type transition-cubic"
+      <p class="transition-cubic word">
+        <span class="transition-cubic word-inner">{{ data.word.mainWord.word }}<span
+          class="transition-cubic word-type"
         >{{
           formateType(data.word.mainWord.type, 1)
         }}.</span></span>
@@ -116,7 +116,7 @@ async function handleChooseWord(word: IWord) {
       <li
         v-for="word in finalOptions" :key="word.word"
         :class="{ right: options.display && word.word === right.word.mainWord.word }"
-        class="WordOption transition-cubic" @click="handleChooseWord(word)"
+        class="transition-cubic WordOption" @click="handleChooseWord(word)"
       >
         <p>{{ word.translation }}</p>
       </li>
@@ -138,8 +138,8 @@ async function handleChooseWord(word: IWord) {
       </div>
     </div>
 
-    <teleport to="body">
-      <div v-if="data?.word.mainWord" :class="{ visible: options.content }" class="WordContent transition-cubic">
+    <teleport to="#rootApp">
+      <div v-if="data?.word.mainWord" :class="{ visible: options.content }" class="transition-cubic WordContent">
         <WordDetailContent :word="data.word.mainWord" @close="options.content = false" />
       </div>
     </teleport>
@@ -211,7 +211,7 @@ async function handleChooseWord(word: IWord) {
 
   top: calc(100% - 94px);
 
-  bottom: 1rem;
+  bottom: 0.5rem;
 
   justify-items: center;
   grid-template-columns: repeat(3, 1fr);
@@ -266,6 +266,18 @@ async function handleChooseWord(word: IWord) {
   gap: 1rem;
   grid-template-columns: repeat(2, 1fr);
   grid-template-rows: repeat(2, 1fr);
+}
+
+.WordCard {
+  position: relative;
+
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  flex-direction: column;
+
+  justify-content: space-between;
 }
 
 .WordsCard {
@@ -336,8 +348,7 @@ async function handleChooseWord(word: IWord) {
     padding: 0.5rem;
 
     width: 100%;
-    height: 40vh;
-    max-height: 50vh;
+    height: 100%;
 
     opacity: 0;
     border-radius: 16px;
@@ -358,7 +369,9 @@ async function handleChooseWord(word: IWord) {
   margin: 1rem auto;
 
   width: 100%;
-  height: 45vh;
+  height: 80%;
+
+  flex: 1;
 
   gap: 1rem;
   align-items: center;
@@ -366,9 +379,5 @@ async function handleChooseWord(word: IWord) {
 
   border-radius: 18px;
   // background-color: var(--el-bg-color-page);
-}
-
-.WordsPage {
-  padding: 1rem;
 }
 </style>

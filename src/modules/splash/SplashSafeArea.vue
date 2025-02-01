@@ -7,7 +7,7 @@ defineProps<{
 
 <template>
   <div :class="{ mock }" class="SplashSafeArea">
-    <div class="transition-cubic SplashSafeArea-Mock" />
+    <div class="SplashSafeArea-Mock transition-cubic" />
   </div>
 </template>
 
@@ -40,6 +40,7 @@ defineProps<{
 
 /* 基本样式 */
 .SplashSafeArea {
+  z-index: 100000;
   position: relative;
 
   /* padding-top: var(--safe-area-inset-top); */

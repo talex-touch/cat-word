@@ -148,7 +148,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="WordsPage">
+  <WithPage class="WordsPage">
     <div flex items-center justify-between gap-2 class="WordsPage-Header">
       <div flex items-center gap-2 class="WordsPage-Header-Left">
         <div i-carbon:chevron-left @click="emits('quit')" />
@@ -165,41 +165,22 @@ onMounted(() => {
 
     <div v-if="data.current" class="WordCard-Container">
       <WordCard
-        ref="mainCard" :right="data.current" class="WordCard WordCard-Main transition-cubic"
+        ref="mainCard" :right="data.current" class="transition-cubic WordCard WordCard-Main"
         :data="data.current!" @choose="handleChoose" @previous="handlePrevious"
       />
       <WordCard
         ref="moveCard" pointer-events-none :right="data.current"
-        class="WordCard WordCard-Next transition-cubic" :data="data.next!"
+        class="WordCard transition-cubic WordCard-Next" :data="data.next!"
       />
     </div>
-  </div>
+  </WithPage>
 </template>
 
 <style lang="scss">
-.WordCard {
-  &.WordCard-Next {
-    visibility: hidden;
-  }
-
-  position: absolute;
-
-  top: 0;
-  left: 0;
-
-  width: 100%;
-  height: 100%;
-}
-
 .WordCard-Container {
-  position: absolute;
-  margin: 1rem;
+  position: relative;
 
-  top: 50px;
-  left: 0;
-
-  width: calc(100% - 2rem);
-  height: calc(100% - 2rem);
+  height: 100%;
 
   overflow: hidden;
 }
@@ -253,6 +234,10 @@ onMounted(() => {
 }
 
 .WordsPage {
+  &.WordCard-Next {
+    visibility: hidden;
+  }
+
   &-Header {
     &-Title {
       display: flex;
@@ -263,6 +248,7 @@ onMounted(() => {
       color: var(--el-text-color-secondary);
       border-right: 1px solid var(--el-border-color);
     }
+    margin: 1rem 0;
   }
 
   h1.title {
@@ -272,10 +258,13 @@ onMounted(() => {
 
   z-index: 1;
   position: relative;
+  display: flex;
   padding: 1rem;
 
   width: 100%;
   height: 100%;
+
+  flex-direction: column;
 
   background-color: var(--el-fill-color);
 }

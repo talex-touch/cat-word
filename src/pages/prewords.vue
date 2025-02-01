@@ -210,7 +210,7 @@ async function handleDone() {
       <BookLoading />
     </div>
 
-    <teleport to="body">
+    <teleport to="#rootApp">
       <div :class="{ wordVisible: loadingOptions.start }" class="transition-cubic PreWordsPage-Word">
         <component
           :is="loadingOptions.component" v-if="loadingOptions.component" :prepare="loadingOptions.prepare"
@@ -219,7 +219,7 @@ async function handleDone() {
       </div>
     </teleport>
 
-    <teleport to="body">
+    <teleport to="#rootApp">
       <WordSigned v-model="dialogOptions.done" />
     </teleport>
 
