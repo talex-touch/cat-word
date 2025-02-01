@@ -5,7 +5,7 @@ defineProps<{
 </script>
 
 <template>
-  <div class="SplashStatusbar">
+  <div :class="{ mock }" class="SplashStatusbar transition-cubic">
     <div font-bold class="SplashStatusbar-Time">
       07:16
     </div>
@@ -60,5 +60,12 @@ defineProps<{
   display: flex;
   align-items: center;
   justify-content: space-between;
+
+  opacity: 0;
+  pointer-events: none;
+
+  &.mock {
+    opacity: 1;
+  }
 }
 </style>
