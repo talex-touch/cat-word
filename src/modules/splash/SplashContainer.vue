@@ -10,7 +10,7 @@ const isMobile = computed(() => spalshState.screenMode.value === ScreenMode.MOBI
 
 <template>
   <div class="SplashContainer" :class="{ 'fullscreen': isMobile, 'wrapped-box': !isMobile }">
-    <div relative h-full w-full flex flex-col class="SplashContainer-Main">
+    <div id="rootApp" relative h-full w-full flex flex-col class="SplashContainer-Main">
       <SplashStatusbar :mock="!isMobile" />
       <slot />
       <SplashSafeArea :mock="!isMobile" />

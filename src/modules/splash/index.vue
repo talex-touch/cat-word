@@ -35,10 +35,10 @@ onMounted(() => {
     <SplashLoading>
       <SplashLayout>
         <template #content>
-          <RouterView />
+          <slot name="main" />
         </template>
         <template #footer>
-          <TheFooter />
+          <slot name="nav" />
         </template>
       </SplashLayout>
     </SplashLoading>

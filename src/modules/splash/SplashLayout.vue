@@ -33,7 +33,7 @@
   flex: 1;
   height: 100%;
 
-  max-height: calc(100% - 80px);
+  max-height: calc(100% - 64px);
 
   overflow: hidden;
 }

@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import Auth from '~/modules/auth/index.vue'
 import Splash from '~/modules/splash/index.vue'
 </script>
 
@@ -6,6 +7,8 @@ import Splash from '~/modules/splash/index.vue'
   <Splash>
     <template #main>
       <RouterView />
+
+      <Auth />
     </template>
 
     <template #nav>
