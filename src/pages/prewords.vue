@@ -127,7 +127,7 @@ async function handleDone() {
 </script>
 
 <template>
-  <div :class="{ wordVisible: loadingOptions.start, loading: loadingOptions.loading }" class="PreWordsPage">
+  <WithPage :class="{ wordVisible: loadingOptions.start, loading: loadingOptions.loading }" class="PreWordsPage">
     <div class="PreWordsPage-Main">
       <div class="PreWordsPage-Head coffee-font">
         <span class="item-1 prewords-headword-item">W</span>
@@ -228,7 +228,7 @@ async function handleDone() {
         <component :is="dialogOptions.component" v-if="dialogOptions.component" />
       </template>
     </TouchDialog>
-  </div>
+  </WithPage>
 </template>
 
 <style lang="scss">
@@ -236,6 +236,7 @@ async function handleDone() {
   .loading & {
     opacity: 1;
   }
+
   position: absolute;
 
   top: 50%;
@@ -254,6 +255,7 @@ async function handleDone() {
     border-radius: 0;
     transform: translateX(0);
   }
+
   z-index: 10;
   position: absolute;
 
@@ -310,13 +312,10 @@ async function handleDone() {
     transform: translateY(10%);
   }
 
-  position: absolute;
-
-  margin: 0 auto;
-  left: 7.5%;
+  position: relative;
+  margin: auto;
 
   width: 85%;
-  bottom: 15vmin;
 }
 
 .PreWordsPage-Head {
@@ -420,21 +419,23 @@ async function handleDone() {
     transition: 0.5s;
     border-radius: 0 0 1000px 1000px;
     background-color: var(--theme-color);
+
+    transform: translateY(-24px);
   }
 
   &.loading::before {
-    transform: scale(0.95) translateY(-50vmin);
+    transform: scale(0.95) translateY(-50%);
   }
+
   &.wordVisible {
     transform: scale(0.95);
   }
 
   z-index: 1;
-  position: absolute;
+  display: flex;
 
-  width: 100%;
-  height: 100%;
-
-  overflow: hidden;
+  gap: 2rem;
+  flex-direction: column;
+  justify-content: space-between;
 }
 </style>
