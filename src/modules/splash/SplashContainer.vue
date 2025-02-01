@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ScreenMode, useGlobaSpalshlState } from '.'
 import SplashSafeArea from './SplashSafeArea.vue'
+import SplashStatusbar from './SplashStatusbar.vue'
 
 const spalshState = useGlobaSpalshlState()
 
@@ -10,6 +11,7 @@ const isMobile = computed(() => spalshState.screenMode.value === ScreenMode.MOBI
 <template>
   <div class="SplashContainer" :class="{ 'fullscreen': isMobile, 'wrapped-box': !isMobile }">
     <div relative h-full w-full flex flex-col class="SplashContainer-Main">
+      <SplashStatusbar :mock="!isMobile" />
       <slot />
       <SplashSafeArea :mock="!isMobile" />
     </div>
