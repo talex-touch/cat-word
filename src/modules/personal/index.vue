@@ -56,7 +56,7 @@ async function handleClear() {
     </template>
 
     <template #footer>
-      <p font-size-2 op-50>
+      <p font-size-3 op-50>
         Powered by QuotaWish.
       </p>
     </template>

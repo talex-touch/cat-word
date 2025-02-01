@@ -1,34 +1,35 @@
 <script setup lang="ts">
 import { Calendar } from 'vant'
 import { calendarManager } from '~/composables/words'
+import LeafCard from './display/LeafCard.vue'
 
-function calcAccumuData(signData: string): number {
-  let num = (signData) || ''
-  let amo = 0
+// function calcAccumuData(signData: string): number {
+//   let num = (signData) || ''
+//   let amo = 0
 
-  while (num.length) {
-    if (((+num.at(-1)! || 0) & 1) === 0)
-      break
+//   while (num.length) {
+//     if (((+num.at(-1)! || 0) & 1) === 0)
+//       break
 
-    num = num.slice(0, -1)
-    amo++
-  }
+//     num = num.slice(0, -1)
+//     amo++
+//   }
 
-  return amo
-}
+//   return amo
+// }
 
 const date = new Date()
 const firstDay = new Date(date.getFullYear(), date.getMonth(), 1)
 const lastDay = new Date(date.getFullYear(), date.getMonth() + 1, 0)
 
 const todayData = calendarManager.getTodayData()
-const todaySigned = computed(() => todayData?.signed)
+// const todaySigned = computed(() => todayData?.signed)
 const signedDays = computed(() => (todayData?.origin.day || ''))
 const signedDayMap = computed(() => signedDays.value.split(''))
 </script>
 
 <template>
-  <div class="SignCalendarMonthly">
+  <LeafCard class="SignCalendarMonthly">
     <Calendar
       :show-confirm="false" :show-mark="false" :show-title="false" :poppable="false" :min-date="firstDay"
       :max-date="lastDay"
@@ -40,7 +41,7 @@ const signedDayMap = computed(() => signedDays.value.split(''))
         </span>
       </template>
     </Calendar>
-  </div>
+  </LeafCard>
 </template>
 
 <style lang="scss">
@@ -62,17 +63,12 @@ const signedDayMap = computed(() => signedDays.value.split(''))
   }
 
   .van-calendar {
-    border-radius: 25px;
+    border-radius: 10px;
   }
-  position: relative;
-  padding: 2px;
+  padding: 0 !important;
 
-  width: 100%;
-  height: auto;
-
-  border-radius: 25px;
-  background-color: var(--el-fill-color);
-  border: 1px solid var(--el-border-color);
+  // background-color: var(--el-fill-color);
+  // border: 1px solid var(--el-border-color);
 
   --van-calendar-day-height: 48px;
   --van-calendar-selected-day-size: 32px;

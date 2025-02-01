@@ -55,8 +55,8 @@ section {
   align-items: center;
   justify-content: space-between;
 
-  border-radius: 16px;
+  border-radius: 12px;
   background-color: var(--el-fill-color);
-  border: 1px solid var(--el-border-color);
+  // border: 1px solid var(--el-border-color);
 }
 </style>

@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { calendarManager } from '~/composables/words'
+import LeafCard from './display/LeafCard.vue'
 
 // 获取近7天的日期
 function getDates() {
@@ -36,7 +37,7 @@ const accumulateSigned = computed(() => calcAccumuData(signedDays.value))
 </script>
 
 <template>
-  <div class="SignCalendar">
+  <LeafCard class="SignCalendar">
     <ul class="SignCalendar-Head">
       <li v-for="date in dates" :key="date.getDate()" :class="{ checked: signedDayMap[date.getDate() - 1] === '1' }">
         {{ date.getDate() }}
@@ -57,7 +58,7 @@ const accumulateSigned = computed(() => calcAccumuData(signedDays.value))
         </p>
       </div>
     </div>
-  </div>
+  </LeafCard>
 </template>
 
 <style lang="scss">
@@ -130,33 +131,6 @@ const accumulateSigned = computed(() => calcAccumuData(signedDays.value))
 }
 
 .SignCalendar {
-  &::before {
-    content: '';
-    position: absolute;
-
-    width: 64px;
-    height: 64px;
-
-    right: 0.25rem;
-    bottom: 0.25rem;
-
-    border-radius: 50%;
-    filter: blur(5px);
-    background: radial-gradient(
-      circle at 30% 30%,
-      rgba(255, 222, 89, 0.3) 0%,
-      rgba(255, 222, 89, 0.1) 60%,
-      transparent 100%
-    );
-  }
-
-  position: relative;
-  padding: 0.5rem 0;
-
-  width: 100%;
   height: 110px;
-
-  border-radius: 8px;
-  background: linear-gradient(125deg, var(--theme-color-dark) 70%, var(--theme-color));
 }
 </style>
