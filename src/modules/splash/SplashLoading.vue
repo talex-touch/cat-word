@@ -11,9 +11,15 @@ const loading = ref(true)
 <template>
   <div :class="{ loading }" class="SplashLoading">
     <div class="SplashLoading-Page transition-cubic">
-      <div class="SplashLoading-Logo">
-        <img :src="APP_LOGO" alt="Logo" class="logo">
-        <img :src="APP_LOGO" alt="Logo" class="logo-bg">
+      <div class="SplashLoading-Page-Main">
+        <div class="SplashLoading-Logo">
+          <img :src="APP_LOGO" alt="Logo" class="logo">
+          <img :src="APP_LOGO" alt="Logo" class="logo-bg">
+        </div>
+        <div class="SplashLoading-Page-Text">
+          <h1>千叶单词</h1>
+          <p>Leave words, Embrace worlds!</p>
+        </div>
       </div>
       <div class="progress-container">
         <progress-bar :progress="0" />
@@ -54,6 +60,7 @@ const loading = ref(true)
     height: 100%;
   }
 
+  z-index: 100;
   position: relative;
 
   height: 100%;
@@ -105,6 +112,26 @@ const loading = ref(true)
 
   width: 150px;
   height: 150px;
+}
+
+.SplashLoading-Page-Main {
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  h1 {
+    margin-top: -1rem;
+
+    font-size: 2rem;
+    font-weight: bold;
+    text-align: center;
+  }
+
+  p {
+    color: var(--el-text-color-secondary);
+  }
 
   animation: enterView 0.5s ease-in-out;
 }
