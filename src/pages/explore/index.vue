@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { Swipe, SwipeItem } from 'vant'
+import Explore from '~/modules/explore/index.vue'
 
 const icons = [{
   name: '综合提升',
@@ -57,45 +58,39 @@ function directPage(icon: any) {
 </script>
 
 <template>
-  <WithPage>
-    <div class="ExplorePage">
-      <h1 class="title">
-        探索
-      </h1>
-
-      <div class="ExplorePage-Icon">
-        <div
-          v-for="icon in icons" :key="icon.name" class="ExplorePage-IconItem"
-          :style="`--c1: ${icon.color[0]}; --c2: ${icon.color[1]}`" @click="directPage(icon)"
-        >
-          <div class="ExplorePage-IconItem-Bg">
-            <div :class="icon.icon" />
-          </div>
-          <span>{{ icon.name }}</span>
+  <Explore>
+    <div class="ExplorePage-Icon">
+      <div
+        v-for="icon in icons" :key="icon.name" class="ExplorePage-IconItem"
+        :style="`--c1: ${icon.color[0]}; --c2: ${icon.color[1]}`" @click="directPage(icon)"
+      >
+        <div class="ExplorePage-IconItem-Bg">
+          <div :class="icon.icon" />
         </div>
-      </div>
-
-      <div my-2 class="ExplorePage-Banner">
-        <Swipe>
-          <SwipeItem v-for="item in 1" :key="item">
-            <h3 class="ExplorePage-BannerItem small justify-center" text="2xl">
-              千叶单词 | 立即体验
-            </h3>
-          </SwipeItem>
-          <SwipeItem>
-            <h3 class="ExplorePage-BannerItem small justify-center" text="2xl">
-              你离地道发音还有多远？
-            </h3>
-          </SwipeItem>
-        </Swipe>
-      </div>
-
-      <div class="ExplorePage-Course">
-        <h1>更多课程</h1>
-        暂无
+        <span>{{ icon.name }}</span>
       </div>
     </div>
-  </WithPage>
+
+    <div my-2 class="ExplorePage-Banner">
+      <Swipe>
+        <SwipeItem v-for="item in 1" :key="item">
+          <h3 class="ExplorePage-BannerItem small justify-center" text="2xl">
+            千叶单词 | 立即体验
+          </h3>
+        </SwipeItem>
+        <SwipeItem>
+          <h3 class="ExplorePage-BannerItem small justify-center" text="2xl">
+            你离地道发音还有多远？
+          </h3>
+        </SwipeItem>
+      </Swipe>
+    </div>
+
+    <div class="ExplorePage-Course">
+      <h1>更多课程</h1>
+      暂无
+    </div>
+  </Explore>
 </template>
 
 <style lang="scss">
@@ -135,6 +130,7 @@ function directPage(icon: any) {
     gap: 0.5rem;
     align-items: center;
     flex-direction: column;
+
     &-Bg {
       display: flex;
 
@@ -157,6 +153,7 @@ function directPage(icon: any) {
       color: var(--el-text-color-regular);
     }
   }
+
   margin: 1rem 0;
   display: grid;
 
@@ -164,18 +161,5 @@ function directPage(icon: any) {
 
   gap: 0.5rem;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-}
-
-.ExplorePage {
-  & > h1 {
-    font-size: 24px;
-    font-weight: 600;
-
-    color: var(--el-text-color-regular);
-  }
-  padding: 1rem;
-  display: flex;
-
-  flex-direction: column;
 }
 </style>

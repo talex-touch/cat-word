@@ -307,6 +307,7 @@ declare module 'vue' {
   interface GlobalComponents {}
   interface ComponentCustomProperties {
     readonly APP_LOGO: UnwrapRef<typeof import('./src/composables/constants')['APP_LOGO']>
+    readonly ENDS_URL: UnwrapRef<typeof import('./src/composables/constants')['ENDS_URL']>
     readonly EffectScope: UnwrapRef<typeof import('vue')['EffectScope']>
     readonly asyncComputed: UnwrapRef<typeof import('@vueuse/core')['asyncComputed']>
     readonly autoResetRef: UnwrapRef<typeof import('@vueuse/core')['autoResetRef']>
@@ -600,6 +601,7 @@ declare module '@vue/runtime-core' {
   interface GlobalComponents {}
   interface ComponentCustomProperties {
     readonly APP_LOGO: UnwrapRef<typeof import('./src/composables/constants')['APP_LOGO']>
+    readonly ENDS_URL: UnwrapRef<typeof import('./src/composables/constants')['ENDS_URL']>
     readonly EffectScope: UnwrapRef<typeof import('vue')['EffectScope']>
     readonly asyncComputed: UnwrapRef<typeof import('@vueuse/core')['asyncComputed']>
     readonly autoResetRef: UnwrapRef<typeof import('@vueuse/core')['autoResetRef']>

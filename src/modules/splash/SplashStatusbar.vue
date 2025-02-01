@@ -37,6 +37,8 @@ defineProps<{
         </svg>
       </div>
     </div>
+
+    <div class="SplashStatusbar-DynamicIsland" />
   </div>
 </template>
 
@@ -67,5 +69,20 @@ defineProps<{
   &.mock {
     opacity: 1;
   }
+}
+
+.SplashStatusbar-DynamicIsland {
+  position: absolute;
+
+  top: 50%;
+  left: 50%;
+
+  width: 30%;
+  height: 30px;
+
+  border-radius: 20px;
+  background-color: #000;
+
+  transform: translate(-50%, -50%);
 }
 </style>
