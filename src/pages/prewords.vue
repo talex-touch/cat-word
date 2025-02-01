@@ -4,7 +4,7 @@ import DictSelector from '~/components/words/DictSelector.vue'
 import ModeSelector from '~/components/words/ModeSelector.vue'
 import PlanSelector from '~/components/words/PlanSelector.vue'
 import { globalData, targetDict, targetSignMode } from '~/composables/words'
-import { PrepareWord } from '~/composables/words/mode'
+import type { PrepareWord } from '~/composables/words/mode'
 
 const emits = defineEmits(['exit'])
 
@@ -130,7 +130,7 @@ async function handleDone() {
   <div :class="{ wordVisible: loadingOptions.start, loading: loadingOptions.loading }" class="PreWordsPage">
     <div class="PreWordsPage-Main">
       <div class="PreWordsPage-Head coffee-font">
-        <span class="prewords-headword-item item-1">W</span>
+        <span class="item-1 prewords-headword-item">W</span>
         <span class="prewords-headword-item item-2">O</span>
         <span class="prewords-headword-item item-3">R</span>
         <span class="prewords-headword-item item-4">D</span>
@@ -144,7 +144,7 @@ async function handleDone() {
         请稍等
       </p>
 
-      <div mt-8 class="PreWordsPage-Section transition-cubic">
+      <div mt-8 class="transition-cubic PreWordsPage-Section">
         <LineArrow @click="selectDict">
           <template #icon>
             <div i-carbon:book />
@@ -176,7 +176,7 @@ async function handleDone() {
         </LineArrow>
       </div>
     </div>
-    <div class="PreWordsPage-Supper transition-cubic">
+    <div class="transition-cubic PreWordsPage-Supper">
       <div my-2 flex items-center justify-center gap-2 op-75>
         <div i-carbon-time />预计用时 {{ calculateTime(globalData.amount) }} 分钟
       </div>
@@ -191,7 +191,7 @@ async function handleDone() {
       </p>
     </div>
 
-    <div class="PreWordsPage-Progress transition-cubic">
+    <div class="transition-cubic PreWordsPage-Progress">
       <p mb-1 flex items-center justify-between>
         <span>正在为您定制学习计划</span>
         <span v-if="loadingOptions.progress !== -1">
@@ -206,12 +206,12 @@ async function handleDone() {
       <LineLoading :progress="loadingOptions.progress" />
     </div>
 
-    <div class="PreWordPage-Loading transition-cubic">
+    <div class="transition-cubic PreWordPage-Loading">
       <BookLoading />
     </div>
 
     <teleport to="body">
-      <div :class="{ wordVisible: loadingOptions.start }" class="PreWordsPage-Word transition-cubic">
+      <div :class="{ wordVisible: loadingOptions.start }" class="transition-cubic PreWordsPage-Word">
         <component
           :is="loadingOptions.component" v-if="loadingOptions.component" :prepare="loadingOptions.prepare"
           @quit="loadingOptions.start = false" @done="handleDone"
@@ -412,10 +412,10 @@ async function handleDone() {
     content: '';
     position: absolute;
 
-    left: -50vmin;
+    left: -25%;
 
-    width: 200vmin;
-    height: 120vmin;
+    width: 150%;
+    height: 60%;
 
     transition: 0.5s;
     border-radius: 0 0 1000px 1000px;
