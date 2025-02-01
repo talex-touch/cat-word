@@ -141,7 +141,7 @@ async function handleDone() {
         准备打卡
       </p>
       <p text-black class="transition-cubic head-title next">
-        请稍等
+        稍等片刻
       </p>
 
       <div mt-8 class="transition-cubic PreWordsPage-Section">
@@ -298,7 +298,7 @@ async function handleDone() {
   left: 7.5%;
 
   width: 85%;
-  bottom: 15vmin;
+  bottom: 5%;
 
   opacity: 0;
   pointer-events: none;
@@ -373,7 +373,7 @@ async function handleDone() {
         opacity: 1;
         filter: blur(0);
 
-        transform: translateY(-100%);
+        transform: translateY(0%);
       }
 
       opacity: 0;

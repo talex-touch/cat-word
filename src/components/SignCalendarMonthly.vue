@@ -58,7 +58,9 @@ const signedDayMap = computed(() => signedDays.value.split(''))
 
     border-radius: 12px;
     &.active {
-      background-color: var(--el-color-success);
+      font-weight: 600;
+      font-size: 18px;
+      background-color: var(--theme-color); // var(--el-color-success);
     }
   }
 

@@ -44,6 +44,9 @@ button.el-button--large {
   --bg-color: var(--el-bg-color);
   --bg-color-dark: var(--el-bg-color-dark);
 
+  --success-color-wechat: #3eb575;
+  --success-color-dark: #2aa06b;
+
   --van-nav-bar-background: var(--bg-color) !important;
   --van-nav-bar-title-text-color: var(--el-text-color-secondary) !important;
 }

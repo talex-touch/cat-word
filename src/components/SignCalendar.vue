@@ -52,7 +52,7 @@ const accumulateSigned = computed(() => calcAccumuData(signedDays.value))
           坚持打卡不断电挑战
         </p>
         <p class="inner">
-          <span class="normal">本月已打卡:</span><span color-green>
+          <span class="normal">本月已打卡:</span><span color-green font-bold>
             {{ accumulateSigned }}
           </span>/30
         </p>
@@ -77,7 +77,7 @@ const accumulateSigned = computed(() => calcAccumuData(signedDays.value))
     font-size: 22px;
     font-weight: 600;
     border-radius: 50%;
-    box-shadow: var(--el-box-shadow);
+    box-shadow: var(--el-box-shadow-light);
     background-image: linear-gradient(120deg, #a6c0fe 0%, #f68084 100%);
   }
 
@@ -112,8 +112,23 @@ const accumulateSigned = computed(() => calcAccumuData(signedDays.value))
 }
 
 .SignCalendar-Head {
-  li.checked {
-    color: var(--el-color-primary);
+  li {
+    &.checked {
+      color: var(--el-color-primary);
+      background-color: #fff; // var(--el-color-success);
+      font-weight: 600;
+    }
+    display: flex;
+
+    border-radius: 50%;
+    align-items: center;
+    justify-content: center;
+
+    width: 24px;
+    height: 24px;
+
+    font-size: 18px;
+    font-weight: 500;
   }
 
   &::before {

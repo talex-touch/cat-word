@@ -38,7 +38,7 @@
   border-radius: 12px;
   background: linear-gradient(125deg, var(--theme-color) 70%, var(--theme-color-dark));
 
-  .dark {
+  .dark & {
     background: linear-gradient(125deg, var(--theme-color-dark) 70%, var(--theme-color));
   }
 }
