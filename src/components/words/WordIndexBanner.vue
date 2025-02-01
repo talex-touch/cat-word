@@ -17,7 +17,7 @@ const banners = reactive([
     title: '美剧精听，听说专练',
     desc: '无障碍看美剧、英剧，地道表达！',
     image: 'https://img2.quotawish.com/2024/12/22/6766e8482b500.png',
-   },
+  },
 ])
 </script>
 
@@ -104,7 +104,7 @@ const banners = reactive([
 
 .WordIndexBanner {
   position: relative;
-  margin: 0 5%;
+  // margin: 0 2.5%;
   display: flex;
 
   gap: 0.5rem;

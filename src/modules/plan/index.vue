@@ -55,8 +55,6 @@ const cozeWebSDK = new CozeWebSDK.WebChatClient({
       <slot name="main" />
 
       <!-- <DisplayIndexCourse /> -->
-
-      <!-- <WordIndexBanner /> -->
     </template>
   </PlanLayout>
 </template>

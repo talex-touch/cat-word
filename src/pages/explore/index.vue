@@ -88,7 +88,8 @@ function directPage(icon: any) {
 
     <div class="ExplorePage-Course">
       <h1>更多课程</h1>
-      暂无
+
+      <WordIndexBanner />
     </div>
   </Explore>
 </template>
