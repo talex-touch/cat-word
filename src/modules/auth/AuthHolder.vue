@@ -13,12 +13,16 @@ import { globalAuthStorage } from '.'
 <style lang="scss" scoped>
 .AuthHolder {
   &.display {
+    border-radius: 0;
     transform: translateY(0) scale(1);
   }
 
   z-index: 100;
 
+  border-radius: 18px;
   transform: translateY(120%) scale(0.8);
   background-color: var(--el-bg-color);
+
+  transition-duration: 0.75s;
 }
 </style>
