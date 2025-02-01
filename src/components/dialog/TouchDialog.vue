@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useZIndex, ZINDEX_INJECTION_KEY } from 'element-plus'
+import { useZIndex } from 'element-plus'
 
 const props = defineProps<{
   modelValue: boolean
@@ -202,7 +202,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <teleport to="body">
+  <teleport to="#rootApp">
     <div
       :style="`z-index: ${zIndex}`" :class="{ visible, forbidden: dialogOptions.forbidden, loading }"
       class="TouchDialog transition-cubic" @click="handleClickOutside"

@@ -10,12 +10,10 @@ function checkScreenSize() {
   if (window.innerWidth > 768) {
     spalshState.screenMode.value = ScreenMode.WRAPPED
     document.body.classList.add('large-screen')
-    document.body.classList.remove('mobile')
   }
   else {
     spalshState.screenMode.value = ScreenMode.MOBILE
     document.body.classList.remove('large-screen')
-    document.body.classList.add('mobile')
   }
 }
 
@@ -27,6 +25,8 @@ watch([width, height], () => {
 
 onMounted(() => {
   checkScreenSize()
+
+  document.body.classList.add('mobile')
 })
 </script>
 
