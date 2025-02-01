@@ -2,7 +2,7 @@
 const loading = ref(true)
 
   ; (async () => {
-  await sleep(3000)
+  await sleep(2000)
 
   loading.value = false
 })()
@@ -50,6 +50,8 @@ const loading = ref(true)
     opacity: 0;
     pointer-events: none;
     transform: scale(0.9);
+
+    transition-duration: 1s;
   }
 
   &-Content {
@@ -58,6 +60,8 @@ const loading = ref(true)
     transform: scale(1);
 
     height: 100%;
+
+    transition-duration: 1s;
   }
 
   z-index: 100;
