@@ -128,7 +128,7 @@ useRouter().beforeEach((_to, _from, next) => {
   position: relative;
   padding: 0.5rem 0;
 
-  top: 5%;
+  top: 0%;
 
   transition: 0.25s;
 }

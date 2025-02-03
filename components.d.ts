@@ -47,5 +47,6 @@ declare module 'vue' {
     WordSelector: typeof import('./src/components/words/WordSelector.vue')['default']
     WordSigned: typeof import('./src/components/words/page/WordSigned.vue')['default']
     WordSignInfo: typeof import('./src/components/words/WordSignInfo.vue')['default']
+    WordSignInfoCard: typeof import('./src/components/words/card/WordSignInfoCard.vue')['default']
   }
 }
