@@ -24,7 +24,7 @@ $api.utils.getDailyQuote().then((res: any) => {
 
 <template>
   <div class="PlanCover absolute-layout">
-    <div v-if="data?.poster" class="PlanCover-Bg fake-background absolute-layout">
+    <div v-if="data?.poster" class="fake-background PlanCover-Bg absolute-layout">
       <img :src="data.poster" alt="Cover">
     </div>
     <!-- Card Placeholder -->
@@ -58,8 +58,8 @@ $api.utils.getDailyQuote().then((res: any) => {
     }
 
     transform: scale(1.1);
-    filter: blur(12px) brightness(0.8) saturate(140%);
-    --fake-opacity: 0.7;
+    // filter: blur(12px) brightness(0.8) saturate(140%);
+    --fake-opacity: 0.05;
     transition: all 0.3s ease;
   }
 

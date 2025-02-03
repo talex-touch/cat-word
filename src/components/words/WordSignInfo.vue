@@ -276,10 +276,10 @@ function selectPlan() {
   border: 1px solid rgba(255, 255, 255, 0.15);
   transition: all 0.3s ease;
 
-  &:hover {
-    background: rgba(255, 255, 255, 0.15);
-    transform: translateY(-1px);
-  }
+  // &:hover {
+  //   background: rgba(255, 255, 255, 0.15);
+  //   transform: translateY(-1px);
+  // }
 
   p {
     &:first-child {
@@ -303,10 +303,10 @@ function selectPlan() {
   letter-spacing: 0.02em;
   transition: all 0.3s ease !important;
 
-  &:hover {
-    background: rgba(255, 255, 255, 0.2) !important;
-    transform: translateY(-1px);
-  }
+  // &:hover {
+  //   background: rgba(255, 255, 255, 0.2) !important;
+  //   transform: translateY(-1px);
+  // }
 
   &:active {
     transform: translateY(0);
@@ -365,24 +365,24 @@ function selectPlan() {
     transform: rotate(135deg);
   }
 
-  &:hover {
-    transform: translateY(-2px);
-    filter: drop-shadow(0 0 16px rgba(0, 0, 0, 0.2));
-    // background: rgba(255, 255, 255, 0.95);
+  // &:hover {
+  //   transform: translateY(-2px);
+  //   filter: drop-shadow(0 0 16px rgba(0, 0, 0, 0.2));
+  //   // background: rgba(255, 255, 255, 0.95);
 
-    .leaf-decoration {
-      opacity: 0.12;
-      transform: scale(1.1) rotate(var(--rotation));
-    }
+  //   .leaf-decoration {
+  //     opacity: 0.12;
+  //     transform: scale(1.1) rotate(var(--rotation));
+  //   }
 
-    .top-left {
-      --rotation: -45deg;
-    }
+  //   .top-left {
+  //     --rotation: -45deg;
+  //   }
 
-    .bottom-right {
-      --rotation: 135deg;
-    }
-  }
+  //   .bottom-right {
+  //     --rotation: 135deg;
+  //   }
+  // }
 
   &:active {
     transform: translateY(0);
@@ -499,7 +499,7 @@ function selectPlan() {
   .title {
     font-size: 1.1em;
     font-weight: 600;
-    color: rgba(255, 255, 255, 0.95);
+    color: var(--el-text-color-primary);
   }
 }
 
