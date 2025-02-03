@@ -48,7 +48,7 @@ useRouter().beforeEach((_to, _from, next) => {
     </template>
 
     <template #main>
-      <div id="sign-info" :class="{ expand: prewordsVisible }" mx-auto class="IndexPage-Card z-1 w-95%">
+      <div id="sign-info" :class="{ expand: prewordsVisible }" mx-auto class="IndexPage-Card z-1">
         <WordSignInfo @sign="handleSign" />
 
         <teleport to="#rootMain">

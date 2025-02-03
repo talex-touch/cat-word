@@ -130,7 +130,7 @@ function selectPlan() {
       </div>
 
       <template v-if="!todayData?.signed">
-        <LeafButton w-full @click="emits('sign')">
+        <LeafButton animated w-full @click="emits('sign')">
           <span>开始背单词吧</span>
         </LeafButton>
 
