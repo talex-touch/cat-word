@@ -69,7 +69,7 @@ export async function importEnglishDictionaryUsingPost(
 export async function listEnglishDictionaryUsingGet(options?: {
   [key: string]: any;
 }) {
-  return request<API.BaseResponseListEnglishDictionary_>(
+  return request<API.BaseResponseListEnglishDictionaryWithCategoryVO_>(
     "/api/english_dictionary/list",
     {
       method: "GET",

@@ -128,6 +128,9 @@ async function handleDone() {
 
 <template>
   <WithPage :class="{ wordVisible: loadingOptions.start, loading: loadingOptions.loading }" class="PreWordsPage">
+    <template #bg>
+      <LeafBackground />
+    </template>
     <div class="PreWordsPage-Main">
       <div class="coffee-font PreWordsPage-Head">
         <span class="item-1 prewords-headword-item">W</span>
@@ -180,11 +183,14 @@ async function handleDone() {
       <div my-2 flex items-center justify-center gap-2 op-75>
         <div i-carbon-time />预计用时 {{ calculateTime(globalData.amount) }} 分钟
       </div>
-      <el-button class="large-button" size="large" w-full type="primary" @click="handleStart">
+      <LeafButton v-wave animated w-full @click="handleStart">
         开始打卡
-      </el-button>
+      </LeafButton>
+      <!-- <el-button class="large-button" size="large" w-full type="primary" @click="handleStart">
+        开始打卡
+      </el-button> -->
 
-      <p mt-4 text-center @click="emits('exit')">
+      <p mt-6 cursor-pointer text-center @click="emits('exit')">
         <el-text active:op-50>
           退出
         </el-text>
@@ -411,12 +417,13 @@ async function handleDone() {
     content: '';
     position: absolute;
 
-    left: -25%;
+    left: 0;
 
-    width: 150%;
+    width: 100%;
     height: 60%;
 
     transition: 0.5s;
+    opacity: 0.5;
     // border-radius: 0 0 200px 200px;
     background-color: var(--theme-color);
 

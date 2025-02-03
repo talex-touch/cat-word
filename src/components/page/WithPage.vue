@@ -4,6 +4,9 @@
 
 <template>
   <div class="WithPage">
+    <div class="WithPage-Background absolute-layout">
+      <slot name="bg" />
+    </div>
     <slot />
   </div>
 </template>

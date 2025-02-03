@@ -108,9 +108,15 @@ declare namespace API {
     message?: string;
   };
 
-  type BaseResponseListEnglishDictionary_ = {
+  type BaseResponseListCategory_ = {
     code?: number;
-    data?: EnglishDictionary[];
+    data?: Category[];
+    message?: string;
+  };
+
+  type BaseResponseListEnglishDictionaryWithCategoryVO_ = {
+    code?: number;
+    data?: EnglishDictionaryWithCategoryVO[];
     message?: string;
   };
 
@@ -141,6 +147,12 @@ declare namespace API {
   type BaseResponsePageAudioFileVO_ = {
     code?: number;
     data?: PageAudioFileVO_;
+    message?: string;
+  };
+
+  type BaseResponsePageCategory_ = {
+    code?: number;
+    data?: PageCategory_;
     message?: string;
   };
 
@@ -250,6 +262,34 @@ declare namespace API {
     code?: number;
     data?: UserVO;
     message?: string;
+  };
+
+  type Category = {
+    createdAt?: string;
+    description?: string;
+    id?: number;
+    isRoot?: boolean;
+    name?: string;
+    parentId?: number;
+    sortOrder?: number;
+    updatedAt?: string;
+  };
+
+  type CategoryQueryRequest = {
+    current?: number;
+    description?: string;
+    id?: number;
+    name?: string;
+    notId?: number;
+    pageSize?: number;
+    searchText?: string;
+    sortField?: string;
+    sortOrder?: string;
+  };
+
+  type CategoryRelativeRequest = {
+    category_ids?: number[];
+    dict_id?: number;
   };
 
   type checkUsingGETParams = {
@@ -362,11 +402,24 @@ declare namespace API {
     content?: string;
     createTime?: string;
     id?: number;
-    tagList?: string[];
     title?: string;
     updateTime?: string;
     user?: UserVO;
     userId?: number;
+  };
+
+  type EnglishDictionaryWithCategoryVO = {
+    author?: string;
+    categoryList?: Category[];
+    create_time?: string;
+    description?: string;
+    id?: number;
+    image_url?: string;
+    isbn?: string;
+    name?: string;
+    publication_date?: string;
+    publisher?: string;
+    update_time?: string;
   };
 
   type EnglishWord = {
@@ -462,6 +515,11 @@ declare namespace API {
   type getAudioFileVOByIdUsingGETParams = {
     /** id */
     id?: number;
+  };
+
+  type getDictionaryCategoryByDictionaryIdUsingGETParams = {
+    /** dict_id */
+    dict_id: number;
   };
 
   type getDictionaryWordVOByIdUsingGETParams = {
@@ -579,6 +637,19 @@ declare namespace API {
     orders?: OrderItem[];
     pages?: number;
     records?: AudioFileVO[];
+    searchCount?: boolean;
+    size?: number;
+    total?: number;
+  };
+
+  type PageCategory_ = {
+    countId?: string;
+    current?: number;
+    maxLimit?: number;
+    optimizeCountSql?: boolean;
+    orders?: OrderItem[];
+    pages?: number;
+    records?: Category[];
     searchCount?: boolean;
     size?: number;
     total?: number;
@@ -845,6 +916,11 @@ declare namespace API {
     updateTime?: string;
     user?: UserVO;
     userId?: number;
+  };
+
+  type selectOneUsingGETParams = {
+    /** id */
+    id?: number;
   };
 
   type SseEmitter = {

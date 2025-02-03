@@ -25,7 +25,7 @@ async function handleClear() {
             <div class="header-img">
               <img src="/avatar.jpg">
             </div>
-            <div flex flex-col justify-center gap-1 class="header-content">
+            <div flex flex-col justify-center class="header-content">
               <p font-size-5 font-bold class="name">
                 Test Account
               </p>
