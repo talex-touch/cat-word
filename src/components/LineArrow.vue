@@ -100,5 +100,9 @@ section {
   border-radius: 12px;
   background-color: #fafff9;
   border: 1px solid rgba(0, 128, 0, 0.1);
+
+  .dark & {
+    background-color: #1e1e1e;
+  }
 }
 </style>
