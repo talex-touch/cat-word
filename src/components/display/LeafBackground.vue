@@ -26,6 +26,8 @@ export default {
     position: relative;
     height: 100%;
 
+    // transform: scale(1.25);
+
     &::before {
       content: '';
       position: absolute;
