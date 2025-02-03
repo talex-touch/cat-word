@@ -51,10 +51,13 @@ const cozeWebSDK = new CozeWebSDK.WebChatClient({
     </template>
 
     <template #main>
-      <slot name="cover" />
       <slot name="main" />
 
       <!-- <DisplayIndexCourse /> -->
+    </template>
+
+    <template #cover>
+      <slot name="cover" />
     </template>
   </PlanLayout>
 </template>

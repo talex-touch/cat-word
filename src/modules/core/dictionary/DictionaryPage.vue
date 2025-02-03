@@ -3,6 +3,7 @@
 import { Search } from '@element-plus/icons-vue'
 import { useDebounceFn } from '@vueuse/core'
 import { ElIcon, ElInput, ElTabPane, ElTabs } from 'element-plus'
+import DictionaryHolder from './DictionaryHolder.vue'
 // import BookItem from './BookItem.vue'
 
 // interface IBook {
@@ -46,7 +47,7 @@ function handleCategoryChange() {
 </script>
 
 <template>
-  <div class="dictionary-page">
+  <DictionaryHolder class="dictionary-page">
     <!-- 搜索栏 -->
     <div class="search-bar">
       <ElInput
@@ -83,7 +84,7 @@ function handleCategoryChange() {
       </template>
       </WordSelector>
     </virtualscroll> -->
-  </div>
+  </DictionaryHolder>
 </template>
 
 <style scoped>

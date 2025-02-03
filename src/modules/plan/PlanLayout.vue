@@ -11,6 +11,10 @@
     <div class="PlanLayout-Main">
       <slot name="main" />
     </div>
+
+    <div class="PlanLayout-Cover absolute-layout z-0">
+      <slot name="cover" />
+    </div>
   </div>
 </template>
 
@@ -35,8 +39,6 @@
     height: 88px;
 
     justify-content: space-between;
-
-    background-color: var(--el-bg-color);
   }
   position: relative;
 
