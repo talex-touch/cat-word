@@ -414,7 +414,7 @@ async function handleDone() {
 
 .PreWordsPage {
   &::before {
-    z-index: -1;
+    z-index: 0;
     content: '';
     position: absolute;
 
@@ -455,7 +455,7 @@ async function handleDone() {
   // }
 
   &.loading::before {
-    transform: scale(0.95) translateY(-50%);
+    transform: translateY(-50%);
   }
 
   &.wordVisible {
