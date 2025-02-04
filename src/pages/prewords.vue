@@ -148,7 +148,7 @@ async function handleDone() {
         稍等片刻
       </p>
 
-      <div mt-8 class="transition-cubic PreWordsPage-Section">
+      <div mt-8 class="transition-cubic PreWordsPage-Section flex flex-col gap-3">
         <LineArrow @click="selectDict">
           <template #icon>
             <div i-carbon:book />
