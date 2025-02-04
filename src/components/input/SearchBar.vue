@@ -49,11 +49,14 @@ function handleClear() {
       @compositionstart="isComposing = true" @compositionend="isComposing = false" @clear="handleClear"
       @keyup.enter="handleSearch"
     >
+      <template #prefix>
+        <el-icon>
+          <Search />
+        </el-icon>
+      </template>
       <template #suffix>
         <el-button class="search-button" type="primary" :loading="isLoading" @click="handleSearch">
-          <el-icon>
-            <Search />
-          </el-icon>
+          搜索
         </el-button>
       </template>
     </el-input>
@@ -80,6 +83,10 @@ function handleClear() {
 .search-input :deep(.el-input__inner) {
   height: 40px;
   font-size: 14px;
+}
+
+.search-bar-container :deep(.el-input) {
+  --el-input-bg-color: var(--el-fill-color);
 }
 
 .search-button {

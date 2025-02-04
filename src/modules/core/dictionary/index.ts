@@ -5,7 +5,7 @@ export interface Category extends API.Category {
   children: Category[]
   books: Book[]
 }
-type Book = API.EnglishDictionaryWithCategoryVO
+export type Book = API.EnglishDictionaryWithCategoryVO
 
 export function useCategoryTree(data: Book[]) {
   const categoryTree = ref<Category[]>([])

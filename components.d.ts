@@ -11,6 +11,7 @@ declare module 'vue' {
     BookLoading: typeof import('./src/components/icon/BookLoading.vue')['default']
     CircleLoader: typeof import('./src/components/icon/CircleLoader.vue')['default']
     ComprehensiveWord: typeof import('./src/components/words/mode/ComprehensiveWord.vue')['default']
+    DictionaryBookDisplay: typeof import('./src/components/display/DictionaryBookDisplay.vue')['default']
     DictionaryDisplay: typeof import('./src/components/display/DictionaryDisplay.vue')['default']
     DictSelector: typeof import('./src/components/words/DictSelector.vue')['default']
     ExitButton: typeof import('./src/components/ExitButton.vue')['default']

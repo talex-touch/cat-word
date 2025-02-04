@@ -4,7 +4,7 @@
 
 <template>
   <div class="WithPage">
-    <div class="WithPage-Background absolute-layout">
+    <div class="WithPage-Background absolute-layout -z-1">
       <slot name="bg" />
     </div>
     <slot />

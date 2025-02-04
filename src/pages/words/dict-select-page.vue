@@ -9,6 +9,8 @@ import DictionaryHolder from '~/modules/core/dictionary/DictionaryHolder.vue'
 // import BookItem from './BookItem.vue'
 
 const bookData = ref<Category[]>([])
+const selectCategory = ref<Category>()
+// const selectBook = ref<Book>()
 
 async function fetchBookData() {
   const { code, data } = await listEnglishDictionaryUsingGet()
@@ -17,6 +19,10 @@ async function fetchBookData() {
     const result = data || []
 
     bookData.value = useCategoryTree(result).value
+
+    if (!selectCategory.value) {
+      selectCategory.value = bookData.value[0]
+    }
   }
   else {
     ElMessage.error('获取书籍数据失败')
@@ -35,7 +41,7 @@ const handleSearch = useDebounceFn(() => {
 </script>
 
 <template>
-  <DictionaryHolder visible class="dictionary-page">
+  <DictionaryHolder visible class="DictionarySelectPage">
     <template #header>
       <div class="search-bar">
         <SearchBar
@@ -47,7 +53,19 @@ const handleSearch = useDebounceFn(() => {
       </div>
     </template>
 
-    {{ bookData }}
+    <template #nav>
+      <ul h-full class="DictionarySelectPage-Nav">
+        <li v-for="nav in bookData" :key="nav.id" :class="{ active: nav.id === selectCategory?.id }" text-center>
+          {{ nav.name }}
+        </li>
+      </ul>
+    </template>
+
+    <div h-full class="DictionarySelectPage-Content">
+      <DictionaryBookDisplay v-for="book in selectCategory?.books" :key="book.id" :model-value="book" />
+      <!-- {{ currentCategory }} -->
+    </div>
+    <!-- {{ bookData }} -->
     <!-- 分类切换 -->
     <!-- <ElTabs v-model="activeCategory" @tab-change="handleCategoryChange">
       <ElTabPane
@@ -73,14 +91,44 @@ const handleSearch = useDebounceFn(() => {
   </DictionaryHolder>
 </template>
 
-<style scoped>
-.dictionary-page {
-  /* padding: 1rem; */
-  /* height: 100vh; */
-  display: flex;
-  flex-direction: column;
+<style lang="scss" scoped>
+.DictionarySelectPage-Nav {
+  li.active {
+    &::before {
+      transform: scale(1);
+    }
+    background-color: var(--el-fill-color);
+  }
+
+  li {
+    &::before {
+      content: '';
+      position: absolute;
+
+      top: 20%;
+      left: 0;
+
+      width: 2px;
+      height: 60%;
+
+      transition: 0.25s;
+      transform: scale(0);
+      background-color: var(--theme-color);
+    }
+    position: relative;
+
+    height: 36px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+  }
+
+  background-color: var(--el-bg-color);
 }
-.search-bar {
-  margin-bottom: 20px;
+
+.DictionarySelectPage {
+  background-color: var(--el-bg-color);
 }
 </style>
