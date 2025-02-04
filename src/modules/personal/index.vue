@@ -1,4 +1,5 @@
 <script setup>
+import VersionBar from '~/components/chore/VersionBar.vue'
 import { calendarManager } from '~/composables/words'
 import PersonalHeaderDisplay from './PersonalHeaderDisplay.vue'
 import PersonalLayout from './PersonalLayout.vue'
@@ -56,7 +57,10 @@ async function handleClear() {
     </template>
 
     <template #footer>
-      <p font-size-3 op-50>
+      <p>
+        <VersionBar />
+      </p>
+      <p font-size-3>
         Powered by QuotaWish.
       </p>
     </template>

@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import VersionBar from '~/components/chore/VersionBar.vue'
+
 const loading = ref(true)
 
   ; (async () => {
@@ -10,7 +12,7 @@ const loading = ref(true)
 
 <template>
   <div :class="{ loading }" class="SplashLoading">
-    <div class="transition-cubic SplashLoading-Page">
+    <div class="SplashLoading-Page transition-cubic">
       <div class="SplashLoading-Page-Main">
         <div class="SplashLoading-Logo">
           <img :src="APP_LOGO" alt="Logo" class="logo">
@@ -24,8 +26,9 @@ const loading = ref(true)
       <div class="progress-container">
         <progress-bar :progress="0" />
       </div>
-      <div class="powered-by">
-        Powered by QuotaWish.
+      <div flex flex-col items-center class="powered-by">
+        <p><VersionBar /></p>
+        <p>Powered by QuotaWish.</p>
       </div>
     </div>
     <div id="rootMain" class="transition-cubic SplashLoading-Content">

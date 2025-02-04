@@ -11,6 +11,7 @@ import VueMacros from 'unplugin-vue-macros/vite'
 import { VueRouterAutoImports } from 'unplugin-vue-router'
 import VueRouter from 'unplugin-vue-router/vite'
 import { defineConfig, loadEnv } from 'vite'
+import { vitePluginVersionMark } from 'vite-plugin-version-date-mark'
 
 export default ({ mode }: { mode: string }) => {
   const env = loadEnv(mode, process.cwd())
@@ -55,10 +56,20 @@ export default ({ mode }: { mode: string }) => {
       dts: true,
     }), // https://github.com/antfu/unocss
     // see uno.config.ts for config
-    UnoCSS(), sentryVitePlugin({
+    UnoCSS({}),
+    // sentry connect
+    sentryVitePlugin({
       authToken: env.VITE_SENTRY_AUTH_TOKEN,
       org: 'quotawish',
       project: 'leaves_word',
+    }),
+    // version displayer
+    vitePluginVersionMark({
+      name: 'LEAVES_WORD',
+      ifShortSHA: true,
+      ifMeta: true,
+      ifLog: true,
+      ifGlobal: true,
     })],
 
     // https://github.com/vitest-dev/vitest

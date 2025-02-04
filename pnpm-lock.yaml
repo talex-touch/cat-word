@@ -56,6 +56,9 @@ importers:
       vant:
         specifier: ^4.9.9
         version: 4.9.9(vue@3.5.3(typescript@5.5.4))
+      vite-plugin-version-date-mark:
+        specifier: ^0.1.0
+        version: 0.1.0(vite@5.4.3(@types/node@22.5.4)(sass@1.81.0))
       vue:
         specifier: ^3.5.3
         version: 3.5.3(typescript@5.5.4)
@@ -3762,6 +3765,11 @@ packages:
     resolution: {integrity: sha512-LdsW4pxj0Ot69FAoXZ1yTnA9bjGohr2yNBU7QKRxpz8ITSkhuDl6h3zS/tvgz4qrNjeRnvrWeXQ8ZF7Um4W00Q==}
     engines: {node: ^18.0.0 || >=20.0.0}
     hasBin: true
+
+  vite-plugin-version-date-mark@0.1.0:
+    resolution: {integrity: sha512-otsLD6D/VdUMqrKswdUI3J4uB7zkDMWkQ6PEKmpc6bMbwZ+pL8uhVgYB1Up9gPQngsKSCxLVxmdFJOfav5q5Yg==}
+    peerDependencies:
+      vite: '*'
 
   vite@5.4.3:
     resolution: {integrity: sha512-IH+nl64eq9lJjFqU+/yrRnrHPVTlgy42/+IzbOdaFDVlyLgI/wDlf+FCobXLX1cT0X5+7LMyH1mIy2xJdLfo8Q==}
@@ -8161,6 +8169,10 @@ snapshots:
       - sugarss
       - supports-color
       - terser
+
+  vite-plugin-version-date-mark@0.1.0(vite@5.4.3(@types/node@22.5.4)(sass@1.81.0)):
+    dependencies:
+      vite: 5.4.3(@types/node@22.5.4)(sass@1.81.0)
 
   vite@5.4.3(@types/node@22.5.4)(sass@1.81.0):
     dependencies:

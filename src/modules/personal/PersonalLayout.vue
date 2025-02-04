@@ -10,7 +10,7 @@
     <main class="main">
       <slot name="main" />
     </main>
-    <footer class="footer">
+    <footer flex flex-col items-center op-50 class="footer">
       <slot name="footer" />
     </footer>
   </div>
