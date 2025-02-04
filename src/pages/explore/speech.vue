@@ -44,7 +44,7 @@ async function handlePlayParagraph(text: string) {
   </PageNavHolder>
 </template>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .SpeechPage-Main {
   &-Paragraph {
     .SpeechPage-Main-Text {
