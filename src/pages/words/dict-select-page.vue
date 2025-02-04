@@ -41,7 +41,7 @@ const handleSearch = useDebounceFn(() => {
 </script>
 
 <template>
-  <DictionaryHolder visible class="DictionarySelectPage">
+  <DictionaryHolder class="DictionarySelectPage">
     <template #header>
       <div class="search-bar">
         <SearchBar

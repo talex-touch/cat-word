@@ -1,10 +1,6 @@
 <script setup lang="ts">
 import { NavBar } from 'vant'
 
-defineProps<{
-  visible: boolean
-}>()
-
 const router = useRouter()
 </script>
 
