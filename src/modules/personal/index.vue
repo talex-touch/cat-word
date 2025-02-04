@@ -4,6 +4,8 @@ import { calendarManager } from '~/composables/words'
 import PersonalHeaderDisplay from './PersonalHeaderDisplay.vue'
 import PersonalLayout from './PersonalLayout.vue'
 
+const router = useRouter()
+
 async function handleClear() {
   calendarManager.clear()
 
@@ -48,9 +50,15 @@ async function handleClear() {
         </template>
 我的日历
 </LineArrow> -->
+      <LineArrow @click="router.push('/personal/settings')">
+        <template #icon>
+          <div i-carbon:paint-brush />
+        </template>
+        个性化设置
+      </LineArrow>
       <LineArrow @click="handleClear">
         <template #icon>
-          <div i-carbon:user-feedback />
+          <div i-carbon:help />
         </template>
         帮助与反馈
       </LineArrow>

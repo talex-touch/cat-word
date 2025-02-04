@@ -95,6 +95,7 @@ section {
   padding: 0.75rem 1rem;
   display: flex;
   width: 100%;
+  cursor: pointer;
   align-items: center;
   justify-content: space-between;
   border-radius: 12px;
