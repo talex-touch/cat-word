@@ -113,7 +113,10 @@ function onBeforeLeave(tempEl: Element) {
   if (transitionData?.mode !== 'leave')
     return
 
-  if (transitionData.name === 'nav') {
+  const { meta } = route
+  const { transition } = meta
+
+  if (transition === 'nav') {
     console.warn(`Nav transition not support yet.`)
     return
   }
