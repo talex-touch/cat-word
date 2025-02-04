@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useFooterNav } from '.'
+import { useFooterNav } from './footer'
 
 const { active } = useFooterNav()
 </script>
