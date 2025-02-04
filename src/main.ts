@@ -6,9 +6,9 @@ import ElementPlus from 'element-plus'
 
 import { createApp } from 'vue'
 import { createRouter, createWebHistory } from 'vue-router'
-
 import { routes } from 'vue-router/auto-routes'
 import App from './App.vue'
+import transitionRouter from './router-transition'
 import '@unocss/reset/tailwind.css'
 
 import './styles/main.css'
@@ -21,9 +21,12 @@ import './styles/element/index.scss'
 import 'vant/lib/index.css'
 
 const app = createApp(App)
-const router = createRouter({
+const router = transitionRouter(createRouter({
   routes,
   history: createWebHistory(import.meta.env.BASE_URL),
+}), {
+  forwardName: 'slide-left',
+  backName: 'slide-right',
 })
 
 Sentry.init({

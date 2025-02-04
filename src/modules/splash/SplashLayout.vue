@@ -8,6 +8,7 @@
       <slot name="content" />
     </div>
 
+    <!-- FOOTER -->
     <slot name="footer" />
   </div>
 </template>
