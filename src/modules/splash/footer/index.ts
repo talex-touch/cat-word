@@ -26,11 +26,7 @@ export function useFooterNav() {
   const route = useRoute()
 
   const globalSplashState = useGlobalSplashState()
-  const activeNav = computed(() => {
-    // console.log(route.path)
-
-    return navs.find(item => item.path === route?.path)
-  })
+  const activeNav = computed(() => navs.find(item => item.path === route?.path))
 
   return {
     activeNav,
