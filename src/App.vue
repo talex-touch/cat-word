@@ -21,9 +21,5 @@ const router = useRouter()
       <Auth />
       <Core />
     </template>
-
-    <template #nav>
-      <TheFooter />
-    </template>
   </Splash>
 </template>

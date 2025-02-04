@@ -7,6 +7,7 @@ import { SoundMode } from '~/composables/words/mode/sound'
 import type { DictStorage } from '~/composables/words/storage'
 import Plan from '~/modules/plan/index.vue'
 import PlanCover from '~/modules/plan/PlanCover.vue'
+import { useGlobalSplashState } from '~/modules/splash'
 import prewords from './prewords.vue'
 
 defineOptions({
@@ -19,14 +20,15 @@ modeManager.set(ModeType.LISTENING, (dictionaryStorage: DictStorage) => new Soun
 modeManager.set(ModeType.READING, (dictionaryStorage: DictStorage) => new DictWordMode(dictionaryStorage))
 
 const prewordsVisible = ref(false)
-watch(prewordsVisible, visible => globalSetting.footer = !visible)
+const globalSplashState = useGlobalSplashState()
+watch(prewordsVisible, visible => globalSplashState.footerVisible.value = !visible)
 
 function handleSign() {
   prewordsVisible.value = true
 }
 
 onMounted(() => {
-  globalSetting.footer = true
+  globalSplashState.footerVisible.value = true
 })
 
 useRouter().beforeEach((_to, _from, next) => {

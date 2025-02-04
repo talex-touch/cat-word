@@ -1,9 +1,11 @@
 <script setup lang="ts">
+import { useFooterNav } from '.'
 
+const { active } = useFooterNav()
 </script>
 
 <template>
-  <div class="SplashLayout">
+  <div :class="{ footerVisible: active }" class="SplashLayout">
     <div class="SplashLayout-Main">
       <slot name="content" />
     </div>
@@ -34,8 +36,12 @@
   flex: 1;
   height: 100%;
 
-  max-height: calc(100% - 64px);
+  max-height: 100%;
 
   overflow: hidden;
+
+  .footerVisible & {
+    max-height: calc(100% - 64px);
+  }
 }
 </style>

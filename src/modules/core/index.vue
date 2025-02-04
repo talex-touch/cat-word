@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import DictionaryPage from './dictionary/DictionaryPage.vue'
+// import DictionaryPage from './dictionary/DictionaryPage.vue'
 </script>
 
 <template>
   <teleport to="#rootMain" defer>
-    <DictionaryPage />
+    <!-- <DictionaryPage /> -->
   </teleport>
 </template>

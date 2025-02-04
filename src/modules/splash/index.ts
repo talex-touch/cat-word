@@ -9,9 +9,11 @@ export enum ScreenMode {
   WRAPPED,
 }
 
-export const useGlobaSpalshlState = createGlobalState(
+export const useGlobalSplashState = createGlobalState(
   () => {
     const screenMode = ref(0)
-    return { screenMode }
+    const footerVisible = ref(false)
+
+    return { screenMode, footerVisible }
   },
 )

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import axios, { type AxiosResponse, type CreateAxiosDefaults } from 'axios'
+import axios, { AxiosRequestConfig, type AxiosResponse, type CreateAxiosDefaults } from 'axios'
 import { ElMessage } from 'element-plus'
 import { globalAuthStorage } from '~/modules/auth'
 import type { IStandardResponse } from './index.type'
@@ -92,6 +92,12 @@ export function genAxios(options: CreateAxiosDefaults) {
   )
 
   // 导出常用函数
+  function request<T>(url: string, options: AxiosRequestConfig<any>) {
+    return $http({
+      ...options,
+      url,
+    }) as Promise<T>
+  }
 
   /**
    * @param {string} url
@@ -160,12 +166,13 @@ export function genAxios(options: CreateAxiosDefaults) {
     put,
     del,
     patch,
+    request,
     timeoutLogout,
   }
 }
 
 export const endHttp = genAxios({
-  baseURL: `${ENDS_URL}api`,
+  baseURL: `${ENDS_URL}`,
 })
 
-export const request = endHttp.$http
+export const request = endHttp.request

@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import NumberFlow from '@number-flow/vue'
 import { dayjs } from 'element-plus'
-import { calendarManager, globalData } from '~/composables/words'
+import { calendarManager } from '~/composables/words'
+import { useGlobalSplashState } from '~/modules/splash'
 import Astronaut from '/svg/astronaut.svg'
 import Mello from '/svg/mello.svg'
 
@@ -29,7 +30,8 @@ watchEffect(() => {
   }
 })
 
-watch(visible, visible => globalSetting.footer = !visible)
+const globalSplashState = useGlobalSplashState()
+watch(visible, visible => globalSplashState.footerVisible.value = !visible)
 
 watch(visible, async (visible) => {
   if (!visible) {
@@ -104,7 +106,7 @@ watch(visible, async (visible) => {
     </div>
 
     <div class="Signed-SubCard">
-      <div class="Signed-SubCardItem fake-background">
+      <div class="fake-background Signed-SubCardItem">
         <p>过招单词</p>
         <p class="amo">
           <NumberFlow :continuous="true" :will-change="true" :animated="true" :value="num" />
@@ -119,7 +121,7 @@ watch(visible, async (visible) => {
       </div>
     </div>
 
-    <div class="Signed-CheckIn fake-background">
+    <div class="fake-background Signed-CheckIn">
       <el-button w-full size="large" type="primary" @click="visible = false">
         关闭
       </el-button>

@@ -1,10 +1,11 @@
 <script setup lang="ts">
 import SpalshContainer from '~/modules/splash/SplashContainer.vue'
 import SplashLoading from '~/modules/splash/SplashLoading.vue'
-import { ScreenMode, useGlobaSpalshlState } from '.'
+import { ScreenMode, useGlobalSplashState } from '.'
+import TheFooter from './footer/TheFooter.vue'
 import SplashLayout from './SplashLayout.vue'
 
-const spalshState = useGlobaSpalshlState()
+const spalshState = useGlobalSplashState()
 
 function checkScreenSize() {
   if (window.innerWidth > 768) {
@@ -38,7 +39,7 @@ onMounted(() => {
           <slot name="main" />
         </template>
         <template #footer>
-          <slot name="nav" />
+          <TheFooter />
         </template>
       </SplashLayout>
     </SplashLoading>

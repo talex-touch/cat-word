@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import { ScreenMode, useGlobaSpalshlState } from '.'
+import { ScreenMode, useGlobalSplashState } from '.'
 import SplashSafeArea from './SplashSafeArea.vue'
 import SplashStatusbar from './SplashStatusbar.vue'
 
-const spalshState = useGlobaSpalshlState()
+const spalshState = useGlobalSplashState()
 
 const isMobile = computed(() => spalshState.screenMode.value === ScreenMode.MOBILE)
 </script>
