@@ -1,4 +1,4 @@
-<script name="Words" setup lang="ts">
+<!-- <script name="Words" setup lang="ts">
 import { ElMessage } from 'element-plus'
 import WordCard from '~/components/WordCard.vue'
 import type { IWord, IWordItem } from '~/composables/words'
@@ -416,4 +416,4 @@ function goDictionary() {
   width: 100%;
   height: 100%;
 }
-</style>
+</style> -->

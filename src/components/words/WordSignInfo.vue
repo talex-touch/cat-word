@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import DictSelector from '~/components/words/DictSelector.vue'
 import PlanSelector from '~/components/words/PlanSelector.vue'
-import { calendarManager, globalData, targetDict, targetSignMode } from '~/composables/words'
+import { calendarManager, globalData, useTargetData } from '~/composables/words'
 
 import WordSignInfoCard from './card/WordSignInfoCard.vue'
 import Cat from '/svg/cat.svg'
@@ -11,6 +11,7 @@ const emits = defineEmits(['sign'])
 
 const router = useRouter()
 
+const { targetDict, targetSignMode } = useTargetData()
 const data = computed<any>(() => targetDict.value)
 
 const storage = computed(() => data.value.storage)

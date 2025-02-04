@@ -1,8 +1,9 @@
 <script setup lang="ts">
-import { globalData, targetDict } from '~/composables/words'
+import { globalData, useTargetData } from '~/composables/words'
 import type { ModeType } from '~/composables/words/mode'
 import { modeManager } from '~/composables/words/mode'
 
+const { targetDict } = useTargetData()
 const modes = [...modeManager.keys()]
 const activeIndex = ref(modes.indexOf(globalData.value.mode) ?? 0)
 

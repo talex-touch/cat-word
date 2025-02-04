@@ -1,7 +1,7 @@
 <script name="Words" setup lang="ts">
 import WordCard from '~/components/WordCard.vue'
 import type { IWord } from '~/composables/words'
-import { targetDict, useWordSound } from '~/composables/words'
+import { useTargetData, useWordSound } from '~/composables/words'
 import type { ComprehensivePrepareWord, IComprehensiveWordItem } from '~/composables/words/mode/comprehensive'
 
 const props = defineProps<{
@@ -129,6 +129,8 @@ async function nextData(success: boolean) {
   currentDom.style.transform = 'translateX(0)'
   nextDom.style.visibility = ''
 }
+
+const { targetDict } = useTargetData()
 
 async function handleChoose(wrong: boolean) {
   lastAudio?.pause()

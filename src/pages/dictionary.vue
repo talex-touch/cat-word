@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { ActionSheet, NavBar } from 'vant'
 
-import type { IWord } from '~/composables/words'
-import { dictionaries, targetDict, useWordSound } from '~/composables/words'
+// import type { IWord } from '~/composables/words'
+import { dictionaries, useTargetData } from '~/composables/words'
 
 const route = useRoute()
 const router = useRouter()
@@ -41,6 +41,7 @@ function handleSelectWord(word: string) {
   }
 }
 
+const { targetDict } = useTargetData()
 const actions = [
   {
     name: '重新学习',

@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import { Picker } from 'vant'
-import { globalData, targetDict } from '~/composables/words'
+import { globalData, useTargetData } from '~/composables/words'
 
+const { targetDict } = useTargetData()
 const max = computed(() => targetDict.value.storage.getUnlearnedWords().length)
 const amount = computed(() => globalData.value.amount || 10)
 const options = computed(() => Array.from({ length: max.value / 5 }, (_, i) => (i + 1) * 5))
