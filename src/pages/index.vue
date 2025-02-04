@@ -135,3 +135,8 @@ useRouter().beforeEach((_to, _from, next) => {
   transition: 0.25s;
 }
 </style>
+
+<route lang="yaml">
+meta:
+  transition: nav
+</route>

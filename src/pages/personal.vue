@@ -20,3 +20,8 @@ import PersonalModule from '~/modules/personal/index.vue'
   overflow-x: hidden;
 }
 </style>
+
+<route lang="yaml">
+meta:
+  transition: nav
+</route>

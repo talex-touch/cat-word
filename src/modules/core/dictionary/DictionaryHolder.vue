@@ -9,7 +9,8 @@ const router = useRouter()
 </script>
 
 <template>
-  <RoutePage :visible="visible" class="DictionaryHolder">
+  <!-- path="/words/dict-select-page" -->
+  <RoutePage class="DictionaryHolder">
     <template #header>
       <NavBar
         title="选择词典"

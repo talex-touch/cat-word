@@ -38,6 +38,7 @@ declare module 'vue' {
     TheCounter: typeof import('./src/components/TheCounter.vue')['default']
     TheInput: typeof import('./src/components/TheInput.vue')['default']
     TouchDialog: typeof import('./src/components/dialog/TouchDialog.vue')['default']
+    TransitionPage: typeof import('./src/components/page/TransitionPage.vue')['default']
     VersionBar: typeof import('./src/components/chore/VersionBar.vue')['default']
     WithPage: typeof import('./src/components/page/WithPage.vue')['default']
     WordCard: typeof import('./src/components/WordCard.vue')['default']

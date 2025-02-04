@@ -1,17 +1,24 @@
 <script setup lang="ts">
-const props = defineProps<{
-  visible: boolean
-}>()
+// defineProps<{
+//   path?: string
+// }>()
 
-const emits = defineEmits<{
-  (e: 'modelValue:visible'): void
-}>()
+// const visible = ref(!false)
 
-const visible = useVModel(props, 'visible', emits)
+// onActivated(() => {
+//   nextTick(() => {
+//     visible.value = true
+//   })
+// })
+
+// onDeactivated(() => {
+//   visible.value = false
+// })
 </script>
 
 <template>
-  <WithPage class="RoutePage transition-cubic absolute-layout flex flex-col" :class="{ visible }">
+  <!-- :class="{ visible }" -->
+  <WithPage class="RoutePage transition-cubic absolute-layout flex flex-col">
     <div class="RoutePage-Header">
       <slot name="header" />
     </div>
@@ -23,8 +30,8 @@ const visible = useVModel(props, 'visible', emits)
 .RoutePage {
   z-index: 1;
 
-  border-radius: 18px;
-  transform: translateX(120%);
+  // border-radius: 18px;
+  // transform: translateX(120%);
   background-color: var(--el-fill-color);
 
   &-Header {
@@ -40,9 +47,9 @@ const visible = useVModel(props, 'visible', emits)
     }
   }
 
-  &.visible {
-    border-radius: 0;
-    transform: translateX(0);
-  }
+  // &.visible {
+  //   border-radius: 0;
+  //   transform: translateX(0);
+  // }
 }
 </style>

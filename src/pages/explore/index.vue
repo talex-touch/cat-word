@@ -2,6 +2,13 @@
 import { Swipe, SwipeItem } from 'vant'
 import Explore from '~/modules/explore/index.vue'
 
+defineOptions({
+  name: 'ExplorePage',
+  meta: {
+    transition: 'nav',
+  },
+})
+
 const icons = [{
   name: '综合提升',
   icon: 'i-carbon:arrow-up',
@@ -164,3 +171,8 @@ function directPage(icon: any) {
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
 }
 </style>
+
+<route lang="yaml">
+meta:
+  transition: nav
+</route>

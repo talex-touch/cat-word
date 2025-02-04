@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import DictSelector from '~/components/words/DictSelector.vue'
 import PlanSelector from '~/components/words/PlanSelector.vue'
 import { calendarManager, globalData, useTargetData } from '~/composables/words'
 
@@ -36,10 +35,11 @@ const dialogOptions = reactive<any>({
 })
 
 function selectDict() {
-  Object.assign(dialogOptions, {
-    visible: true,
-    component: DictSelector,
-  })
+  router.push('/words/dict-select-page')
+  // Object.assign(dialogOptions, {
+  //   visible: true,
+  //   component: DictSelector,
+  // })
 }
 
 function selectPlan() {
@@ -51,7 +51,7 @@ function selectPlan() {
 </script>
 
 <template>
-  <WordSignInfoCard :class="{ signed: todayData?.signed }" text-black class="WordSignInfo-Wrapper transition-cubic">
+  <WordSignInfoCard :class="{ signed: todayData?.signed }" text-black class="transition-cubic WordSignInfo-Wrapper">
     <div class="leaf-decoration top-left" />
     <div class="leaf-decoration bottom-right" />
 
