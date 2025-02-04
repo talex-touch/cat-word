@@ -1,13 +1,26 @@
 <script setup lang="ts">
+import { NavBar } from 'vant'
+
 defineProps<{
   visible: boolean
 }>()
+
+const router = useRouter()
 </script>
 
 <template>
   <RoutePage :visible="visible" class="DictionaryHolder">
+    <template #header>
+      <NavBar
+        title="选择词典"
+        left-text="返回"
+        left-arrow
+        @click-left="router.back()"
+      />
+    </template>
+
     <div h-full flex flex-col class="DictionaryHolder-Container">
-      <div p-4 class="DictionaryHolder-Header">
+      <div px-4 py-2 class="DictionaryHolder-Header">
         <slot name="header" />
       </div>
 
@@ -44,6 +57,6 @@ defineProps<{
 }
 
 .DictionaryHolder-Header {
-  border-bottom: 1px solid var(--el-border-color-light);
+  // border-bottom: 1px solid var(--el-border-color-light);
 }
 </style>

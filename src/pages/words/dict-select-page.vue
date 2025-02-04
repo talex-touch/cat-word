@@ -46,7 +46,7 @@ const handleSearch = useDebounceFn(() => {
       <div class="search-bar">
         <SearchBar
           v-model="searchQuery"
-          placeholder="搜索书籍/教材"
+          placeholder="搜索词典/书籍/教材"
           class="search-bar__input"
           @input="handleSearch"
         />
