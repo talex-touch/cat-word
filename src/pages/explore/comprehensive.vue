@@ -1,80 +1,72 @@
 <script setup lang="ts">
-import { Card, NavBar, Sidebar, SidebarItem } from 'vant'
+import { Card } from 'vant'
+import ComprehensiveHolder from '~/modules/explore/comprehensive/ComprehensiveHolder.vue'
 
-const router = useRouter()
-const active = ref(0)
+const searchQuery = ref('')
 
-function onClickLeft() {
-  router.back()
-}
+function handleSearch() {}
+
+const selectCategoryId = ref(0)
+const category = ['全部', '高考词汇', '大学精选', '四级核心', '六级核心', '雅思', 'BEC']
+// const bookData = ref(category.map(item => ({ id: Math.random(), name: item })))
 </script>
 
 <template>
-  <div class="ComprehensivePage">
-    <NavBar title="综合提升" left-text="返回" left-arrow @click-left="onClickLeft" />
+  <ComprehensiveHolder class="ComprehensivePage">
+    <template #header>
+      <SearchBar
+        v-model="searchQuery"
+        placeholder="搜索词典/书籍/教材"
+        class="search-bar__input"
+        @input="handleSearch"
+      />
+    </template>
 
-    <div class="ComprehensivePage-Main">
-      <div class="ComprehensivePage-Aside">
-        <Sidebar v-model="active">
-          <SidebarItem title="全部" />
-          <SidebarItem title="高考词汇" />
-          <SidebarItem title="大学精选" />
-          <SidebarItem title="四级核心" />
-          <SidebarItem title="六级核心" />
-          <SidebarItem title="雅思" />
-          <SidebarItem title="BEC" />
-        </Sidebar>
-      </div>
+    <template #nav>
+      <ul h-full class="ComprehensiveSelectPage-Nav">
+        <li v-for="(nav, index) in category" :key="index" :class="{ active: index === selectCategoryId }" text-center @click="selectCategoryId = index">
+          {{ nav }}
+        </li>
+      </ul>
+    </template>
 
-      <div class="ComprehensivePage-Content">
-        <Card v-for="i in 10" :key="i" num="1" price="0.00" desc="英语真题试卷" title="英语真题" thumb="/pdf/BEC.png" />
-      </div>
+    <div class="ComprehensivePage-Content">
+      <Card v-for="i in 10" :key="i" num="1" price="0.00" desc="英语真题试卷" title="英语真题" thumb="/pdf/BEC.png" />
     </div>
-  </div>
+  </ComprehensiveHolder>
 </template>
 
 <style lang="scss">
 .ComprehensivePage-Content {
+  .van-card {
+    border-radius: 18px;
+  }
+
   flex: 1;
 
   --van-card-text-color: var(--el-text-color-primary);
   --van-card-price-color: var(--el-text-color-secondary);
-  --van-card-background: var(--el-fill-color-lighter);
+  --van-card-background: var(--el-fill-color-light);
 }
 
-.ComprehensivePage-Aside {
-  border-right: 1px solid var(--el-border-color);
-}
+// .ComprehensivePage-Main {
+//   div.van-sidebar {
+//     div {
+//       color: var(--el-text-color-primary) !important;
+//     }
+//     position: sticky;
 
-.ComprehensivePage-Main {
-  div.van-sidebar {
-    div {
-      color: var(--el-text-color-primary) !important;
-    }
-    position: sticky;
+//     top: 46px;
 
-    top: 46px;
+//     width: 100px;
+//     // height: 100%;
 
-    width: 100px;
-    // height: 100%;
+//     --van-sidebar-selected-background: var(--el-bg-color) !important;
+//     --van-sidebar-background: var(--el-bg-color) !important;
+//   }
+//   position: relative;
+//   display: flex;
 
-    --van-sidebar-selected-background: var(--el-bg-color) !important;
-    --van-sidebar-background: var(--el-bg-color) !important;
-  }
-  position: relative;
-  display: flex;
-
-  min-height: 100%;
-}
-
-.ComprehensivePage {
-  .van-nav-bar {
-    position: sticky;
-
-    top: 0;
-  }
-  height: 100%;
-
-  overflow-y: scroll;
-}
+//   min-height: 100%;
+// }
 </style>
