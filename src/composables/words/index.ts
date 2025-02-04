@@ -110,7 +110,7 @@ export const globalData = useLocalStorage<IGlobalData>('globalData', JSON.parse(
 export const calendarData = useLocalStorage<CalendarData[]>('calendarData', [])
 
 export const targetDict = computed(() => dictionaries.find(item => item.id === globalData.value.dict) || dictionaries[0])
-export const targetMode = computed(() => modeManager.keys().find(item => item === globalData.value.mode))
+export const targetMode = computed(() => modeManager?.keys() && modeManager.keys()?.find(item => item === globalData.value.mode))
 export const targetSignMode = computed(() => {
   const manager = modeManager.get(targetMode.value!)!
   const managerIns = manager(targetDict.value.storage)

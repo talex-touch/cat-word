@@ -22,6 +22,9 @@ const todayData = computed(() => calendarManager.getTodayData())
 
 function calculateTime(amo: number) {
   const mode = targetSignMode.value
+  if (!mode) {
+    return 0
+  }
 
   return mode.getEstimateCost(amo)
 }
