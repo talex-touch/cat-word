@@ -42,6 +42,8 @@ const ins = ref(getCurrentInstance())
 
 .PageNavHolder-Content {
   height: 100%;
+
+  overflow-y: auto;
 }
 
 .PageNavHolder {
