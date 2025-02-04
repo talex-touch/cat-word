@@ -9,7 +9,7 @@ const { active, activeNav, navs } = useFooterNav()
 <template>
   <nav
     :class="{ shrink: !active }"
-    class="fake-background transition-cubic Application-Footer" inline-flex gap-2 text-xl
+    class="fake-background Application-Footer transition-cubic" inline-flex gap-2 text-xl
   >
     <ul w-full flex justify-between>
       <li
@@ -29,6 +29,11 @@ const { active, activeNav, navs } = useFooterNav()
         </p>
       </li>
     </ul>
+
+    <div hidden>
+      <div i-carbon-explore />
+      <div i-carbon:user-avatar-filled-alt />
+    </div>
   </nav>
 </template>
 
