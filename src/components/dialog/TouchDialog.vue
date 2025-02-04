@@ -20,6 +20,27 @@ watch(visible, (val) => {
   if (val) {
     nextTick(() => {
       zIndex.value = indexManager.nextZIndex()
+
+      const main = document.querySelector('#rootLayout') as HTMLElement
+      if (main) {
+        Object.assign(main.style, {
+          transition: '0.35s',
+          transform: 'scale(0.95)',
+          borderRadius: '25px',
+        })
+      }
+    })
+  }
+  else {
+    nextTick(() => {
+      const main = document.querySelector('#rootLayout') as HTMLElement
+      if (main) {
+        Object.assign(main.style, {
+          transition: '0.35s',
+          transform: 'scale(1)',
+          borderRadius: '',
+        })
+      }
     })
   }
 })
@@ -205,7 +226,7 @@ onMounted(() => {
   <teleport to="#rootMain">
     <div
       :style="`z-index: ${zIndex}`" :class="{ visible, forbidden: dialogOptions.forbidden, loading }"
-      class="transition-cubic TouchDialog" @click="handleClickOutside"
+      class="TouchDialog transition-cubic" @click="handleClickOutside"
     >
       <div class="TouchDialog-Main Main" @click.stop="">
         <div class="TouchDialog-Close" @click="visible = false">
@@ -489,7 +510,7 @@ onMounted(() => {
   opacity: 0;
   pointer-events: none;
   transform: scale(1.05);
-  background-color: var(--el-overlay-color-lighter);
+  background-color: var(--el-overlay-color-light);
 }
 
 .TouchDialog-Close {

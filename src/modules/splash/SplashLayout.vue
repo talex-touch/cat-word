@@ -5,7 +5,7 @@ const { active } = useFooterNav()
 </script>
 
 <template>
-  <div :class="{ footerVisible: active }" class="SplashLayout">
+  <div id="rootLayout" :class="{ footerVisible: active }" class="transition-cubic SplashLayout">
     <div class="SplashLayout-Main">
       <slot name="content" />
     </div>
@@ -26,6 +26,7 @@ const { active } = useFooterNav()
   width: 100%;
   height: 100%;
 
+  overflow: hidden;
   flex-direction: column;
   color: var(--el-text-color-primary);
 }
