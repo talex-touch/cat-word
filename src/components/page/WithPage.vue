@@ -14,11 +14,14 @@
 <style lang="scss" scoped>
 .WithPage {
   position: relative;
-  padding-top: 24px;
 
   width: 100%;
   height: 100%;
 
   overflow: hidden;
+
+  .statusbar & {
+    padding-top: 24px;
+  }
 }
 </style>

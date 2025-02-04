@@ -19,10 +19,13 @@
 <style lang="scss" scoped>
 .PersonalLayout {
   .header {
+    .statusbar & {
+      height: 130px;
+    }
     position: relative;
 
     width: 100%;
-    height: 130px;
+    height: 106px;
 
     flex-shrink: 0;
   }

@@ -4,10 +4,13 @@ import SplashLoading from '~/modules/splash/SplashLoading.vue'
 import { ScreenMode, useGlobalSplashState } from '.'
 import TheFooter from './footer/TheFooter.vue'
 import SplashLayout from './SplashLayout.vue'
+import { useDeviceUaParser } from './ua-parser'
 
 const spalshState = useGlobalSplashState()
 
 function checkScreenSize() {
+  const { isBrowser } = useDeviceUaParser()
+
   if (window.innerWidth > 768) {
     spalshState.screenMode.value = ScreenMode.WRAPPED
     document.body.classList.add('large-screen')
@@ -16,6 +19,8 @@ function checkScreenSize() {
     spalshState.screenMode.value = ScreenMode.MOBILE
     document.body.classList.remove('large-screen')
   }
+
+  spalshState.mockStatusbar.value = isBrowser && spalshState.screenMode.value !== ScreenMode.MOBILE
 }
 
 const { width, height } = useWindowSize()

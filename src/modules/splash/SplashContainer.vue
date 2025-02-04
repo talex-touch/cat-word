@@ -6,12 +6,13 @@ import SplashStatusbar from './SplashStatusbar.vue'
 const spalshState = useGlobalSplashState()
 
 const isMobile = computed(() => spalshState.screenMode.value === ScreenMode.MOBILE)
+const mockStatusbar = computed(() => spalshState.mockStatusbar.value)
 </script>
 
 <template>
-  <div class="SplashContainer" :class="{ 'fullscreen': isMobile, 'wrapped-box': !isMobile }">
+  <div class="SplashContainer" :class="{ 'statusbar': mockStatusbar, 'fullscreen': isMobile, 'wrapped-box': !isMobile }">
     <div id="rootApp" relative h-full w-full flex flex-col class="SplashContainer-Main">
-      <SplashStatusbar :mock="!isMobile" />
+      <SplashStatusbar :mock="mockStatusbar" />
       <slot />
       <SplashSafeArea :mock="!isMobile" />
     </div>

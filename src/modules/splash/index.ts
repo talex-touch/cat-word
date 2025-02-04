@@ -12,8 +12,9 @@ export enum ScreenMode {
 export const useGlobalSplashState = createGlobalState(
   () => {
     const screenMode = ref(0)
+    const mockStatusbar = ref(false)
     const footerVisible = ref(true)
 
-    return { screenMode, footerVisible }
+    return { screenMode, mockStatusbar, footerVisible }
   },
 )

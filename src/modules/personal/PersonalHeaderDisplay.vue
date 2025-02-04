@@ -32,12 +32,16 @@
     align-items: center;
     justify-content: center;
 
-    padding: 0.5rem 1rem;
+    padding: 1rem 1rem;
     display: flex;
 
     gap: 1rem;
     align-items: center;
     // flex-direction: column;
+
+    .statusbar & {
+      padding-top: calc(1rem + 24px);
+    }
   }
 }
 

@@ -32,13 +32,18 @@
     position: sticky;
     display: flex;
     padding: 0.5rem 1rem;
-    padding-top: calc(1rem + 24px);
 
     top: 0;
 
-    height: 88px;
+    height: 64px;
 
     justify-content: space-between;
+
+    .statusbar & {
+      padding-top: calc(1rem + 24px);
+
+      height: 88px;
+    }
   }
   position: relative;
 
