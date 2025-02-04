@@ -417,3 +417,10 @@ function goDictionary() {
   height: 100%;
 }
 </style> -->
+
+<script setup lang="ts">
+</script>
+
+<template>
+  Out dated!
+</template>
