@@ -50,18 +50,20 @@ async function handleClear() {
         </template>
 我的日历
 </LineArrow> -->
-      <LineArrow @click="router.push('/personal/settings')">
-        <template #icon>
-          <div i-carbon:paint-brush />
-        </template>
-        个性化设置
-      </LineArrow>
-      <LineArrow @click="handleClear">
-        <template #icon>
-          <div i-carbon:help />
-        </template>
-        帮助与反馈
-      </LineArrow>
+      <div flex flex-col gap-3>
+        <LineArrow @click="router.push('/personal/settings')">
+          <template #icon>
+            <div i-carbon:paint-brush />
+          </template>
+          个性化设置
+        </LineArrow>
+        <LineArrow @click="handleClear">
+          <template #icon>
+            <div i-carbon:help />
+          </template>
+          帮助与反馈
+        </LineArrow>
+      </div>
     </template>
 
     <template #footer>

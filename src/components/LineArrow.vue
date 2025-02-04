@@ -91,7 +91,7 @@ section {
     }
   }
 
-  margin: 0.75rem 0;
+  // margin: 0.75rem 0;
   padding: 0.75rem 1rem;
   display: flex;
   width: 100%;

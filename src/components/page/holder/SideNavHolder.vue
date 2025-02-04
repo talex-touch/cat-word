@@ -6,6 +6,8 @@ defineProps<{
 }>()
 
 const router = useRouter()
+
+const ins = ref(getCurrentInstance())
 </script>
 
 <template>
@@ -20,7 +22,7 @@ const router = useRouter()
     </template>
 
     <div h-full flex flex-col class="SideNavHolder-Container">
-      <div px-4 py-2 class="DictionaryHolder-Header">
+      <div v-if="ins?.slots.header" px-4 py-2 class="DictionaryHolder-Header">
         <slot name="header" />
       </div>
 

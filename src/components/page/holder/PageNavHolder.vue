@@ -3,9 +3,13 @@ import { NavBar } from 'vant'
 
 defineProps<{
   title: string
+  header?: boolean
 }>()
 
 const router = useRouter()
+
+// 获取插槽
+const ins = ref(getCurrentInstance())
 </script>
 
 <template>
@@ -20,11 +24,11 @@ const router = useRouter()
     </template>
 
     <div h-full flex flex-col class="PageNavHolder-Container">
-      <div px-4 py-2 class="DictionaryHolder-Header">
+      <div v-if="ins?.slots.header" px-4 py-2 class="DictionaryHolder-Header">
         <slot name="header" />
       </div>
 
-      <div class="PageNavHolder-Content h-full w-full flex">
+      <div class="PageNavHolder-Content h-full w-full px-4">
         <slot />
       </div>
     </div>
