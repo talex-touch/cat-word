@@ -92,42 +92,6 @@ const handleSearch = useDebounceFn(() => {
 </template>
 
 <style lang="scss" scoped>
-.DictionarySelectPage-Nav {
-  li.active {
-    &::before {
-      transform: scale(1);
-    }
-    background-color: var(--el-fill-color);
-  }
-
-  li {
-    &::before {
-      content: '';
-      position: absolute;
-
-      top: 20%;
-      left: 0;
-
-      width: 2px;
-      height: 60%;
-
-      transition: 0.25s;
-      transform: scale(0);
-      background-color: var(--theme-color);
-    }
-    position: relative;
-
-    height: 36px;
-
-    display: flex;
-
-    align-items: center;
-    justify-content: center;
-  }
-
-  background-color: var(--el-bg-color);
-}
-
 .DictionarySelectPage {
   background-color: var(--el-bg-color);
 }
