@@ -52,8 +52,9 @@ export default defineConfig({
   }), // https://github.com/antfu/unocss
   // see uno.config.ts for config
   UnoCSS(), sentryVitePlugin({
+    authToken: import.meta.env.SENTRY_AUTH_TOKEN,
     org: 'quotawish',
-    project: 'javascript-vue-vb',
+    project: 'leaves_word',
   })],
 
   // https://github.com/vitest-dev/vitest
