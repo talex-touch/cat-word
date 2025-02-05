@@ -14,6 +14,64 @@ const router = useRouter()
 const active = ref(0)
 const showDetailsDialog = ref(false)
 
+const featureCards = [
+  {
+    title: '单词学习',
+    desc: '智能规划学习进度',
+    icon: 'i-carbon-3d-print-mesh',
+    decorationIcon: 'i-carbon-book-knowledge',
+    gradient: 'from-blue-500/20 to-cyan-500/20',
+    colors: ['#3B82F6', '#06B6D4'],
+    action: '开始学习',
+    onClick: (dictId: number | undefined) => dictId && router.push(`/words/dict-select-page?dictId=${dictId}`),
+  },
+  {
+    title: '听力训练',
+    desc: '提升听力理解能力',
+    icon: 'i-carbon-headphones',
+    decorationIcon: 'i-carbon-music',
+    gradient: 'from-violet-500/20 to-fuchsia-500/20',
+    colors: ['#8B5CF6', '#D946EF'],
+    action: '开始练习',
+  },
+  {
+    title: '发音练习',
+    desc: 'AI 语音纠正发音',
+    icon: 'i-carbon-microphone',
+    decorationIcon: 'i-carbon-sound-max',
+    gradient: 'from-rose-500/20 to-pink-500/20',
+    colors: ['#F43F5E', '#EC4899'],
+    action: '开始练习',
+  },
+  {
+    title: '阅读理解',
+    desc: '场景化提升应用',
+    icon: 'i-carbon-book',
+    decorationIcon: 'i-carbon-document-multiple',
+    gradient: 'from-teal-500/20 to-emerald-500/20',
+    colors: ['#14B8A6', '#10B981'],
+    action: '开始阅读',
+  },
+  {
+    title: '词汇测试',
+    desc: '全方位测试效果',
+    icon: 'i-carbon-exam-mode',
+    decorationIcon: 'i-carbon-task',
+    gradient: 'from-amber-500/20 to-orange-500/20',
+    colors: ['#F59E0B', '#F97316'],
+    action: '开始测试',
+  },
+  {
+    title: '学习统计',
+    desc: '可视化学习历程',
+    icon: 'i-carbon-analytics',
+    decorationIcon: 'i-carbon-chart-line',
+    gradient: 'from-indigo-500/20 to-purple-500/20',
+    colors: ['#6366F1', '#9333EA'],
+    action: '查看统计',
+  },
+]
+
 async function fetchDictionaryData() {
   loading.value = true
 
@@ -64,35 +122,34 @@ watch(() => route.params.id, fetchDictionaryData, { immediate: true })
         <Tabs v-model:active="active" sticky>
           <Tab title="学习">
             <div class="p-4">
-              <div class="grid grid-cols-1 gap-3 sm:grid-cols-2">
-                <div class="group option-card" @click="router.push(`/words/dict-select-page?dictId=${dict.id}`)">
-                  <div class="flex items-center">
-                    <div i-carbon-document-add class="text-primary text-2xl" />
-                    <div class="ml-3 flex-1">
-                      <h3 class="text-base font-medium">
-                        开始学习
+              <div class="grid grid-cols-1 gap-6 lg:grid-cols-2 sm:grid-cols-2">
+                <CardDisplay
+                  v-for="card in featureCards" :key="card.title" class="feature-card bg-gradient-to-br"
+                  :class="card.gradient" :colors="card.colors" @click="card.onClick?.(dict?.id)"
+                >
+                  <template #icon>
+                    <div :class="card.icon" />
+                  </template>
+                  <template #header>
+                    <div flex items-center>
+                      <h3>
+                        {{ card.title }}
                       </h3>
-                      <p class="mt-0.5 text-xs text-gray-500">
-                        开始学习这本字典中的单词
+                    </div>
+                  </template>
+                  <div class="card-content">
+                    <div class="text-content">
+                      <p class="feature-desc line-clamp-2 text-xs text-gray-600">
+                        {{ card.desc }}
                       </p>
                     </div>
-                    <div i-carbon-chevron-right class="text-gray-400" />
-                  </div>
-                </div>
-                <div class="option-card group">
-                  <div class="flex items-center">
-                    <div i-carbon-task class="text-primary text-2xl" />
-                    <div class="ml-3 flex-1">
-                      <h3 class="text-base font-medium">
-                        学习记录
-                      </h3>
-                      <p class="mt-0.5 text-xs text-gray-500">
-                        查看学习进度和历史记录
-                      </p>
+                    <div class="action-area">
+                      <button class="rounded-full px-3 py-1 text-xs text-white" :style="{ background: `linear-gradient(to right, ${card.colors[0]}, ${card.colors[1]})` }">
+                        {{ card.action }}
+                      </button>
                     </div>
-                    <div i-carbon-chevron-right class="text-gray-400" />
                   </div>
-                </div>
+                </CardDisplay>
               </div>
             </div>
           </Tab>
@@ -148,44 +205,12 @@ watch(() => route.params.id, fetchDictionaryData, { immediate: true })
   </PageNavHolder>
 </template>
 
-<style scoped>
-.dictionary-container {
-  @apply p-3 bg-gray-50 min-h-screen;
+<style lang="scss" scoped>
+.action-area {
+  margin-top: 0.5rem;
 }
 
-.option-card {
-  @apply p-4 bg-white rounded-lg border border-gray-100 hover:border-primary hover:shadow-sm transition-all duration-200 cursor-pointer;
-}
-
-.info-item {
-  @apply flex items-center p-3.5 bg-gray-50 rounded-lg border border-gray-100;
-}
-
-.info-label {
-  @apply text-gray-500 text-sm min-w-[4.5rem];
-}
-
-.info-value {
-  @apply text-gray-700 text-sm flex-1;
-}
-
-:deep(.van-tabs__wrap) {
-  @apply border-b border-gray-100 bg-white;
-}
-
-:deep(.van-tabs__nav) {
-  @apply bg-transparent;
-}
-
-:deep(.van-tab) {
-  @apply text-sm;
-}
-
-:deep(.van-tab--active) {
-  @apply text-primary font-medium;
-}
-
-:deep(.van-tabs__line) {
-  @apply bg-primary;
+.feature-desc {
+  margin-bottom: 0.5rem;
 }
 </style>

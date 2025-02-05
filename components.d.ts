@@ -9,6 +9,7 @@ declare module 'vue' {
   export interface GlobalComponents {
     AnimateIcon: typeof import('./src/components/icon/AnimateIcon.vue')['default']
     BookLoading: typeof import('./src/components/icon/BookLoading.vue')['default']
+    CardDisplay: typeof import('./src/components/display/CardDisplay.vue')['default']
     CircleLoader: typeof import('./src/components/icon/CircleLoader.vue')['default']
     ComprehensiveWord: typeof import('./src/components/words/mode/ComprehensiveWord.vue')['default']
     copy: typeof import('./src/components/page/holder/PageNavHolder.vue')['default']
