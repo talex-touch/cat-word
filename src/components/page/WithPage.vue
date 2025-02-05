@@ -21,7 +21,7 @@
   overflow: hidden;
 
   .statusbar & {
-    padding-top: 24px;
+    padding-top: 28px;
   }
 }
 </style>

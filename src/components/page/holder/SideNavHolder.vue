@@ -4,6 +4,7 @@ import { Empty, NavBar } from 'vant'
 defineProps<{
   title: string
   empty?: boolean
+  loading?: boolean
 }>()
 
 const router = useRouter()
@@ -12,7 +13,7 @@ const ins = ref(getCurrentInstance())
 </script>
 
 <template>
-  <RoutePage class="SideNavHolder">
+  <RoutePage :loading="loading" class="SideNavHolder">
     <template #header>
       <NavBar
         :title="title"

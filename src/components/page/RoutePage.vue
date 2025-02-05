@@ -1,7 +1,7 @@
 <script setup lang="ts">
-// defineProps<{
-//   path?: string
-// }>()
+defineProps<{
+  loading?: boolean
+}>()
 
 // const visible = ref(!false)
 
@@ -18,17 +18,34 @@
 
 <template>
   <!-- :class="{ visible }" -->
-  <WithPage class="RoutePage transition-cubic absolute-layout flex flex-col">
+  <WithPage :class="{ loading }" class="RoutePage transition-cubic absolute-layout flex flex-col">
     <div class="RoutePage-Header">
       <slot name="header" />
     </div>
-    <div class="RoutePage-Main w-full flex-1 overflow-hidden">
+    <div class="RoutePage-Main relative w-full flex-1 overflow-hidden">
       <slot />
+
+      <div
+        class="transition-cubic RoutePage-Loading absolute-layout z-1 h-full w-full flex flex-col items-center justify-center gap-4 p-4"
+      >
+        <Loading />
+      </div>
     </div>
   </WithPage>
 </template>
 
 <style lang="scss" scoped>
+.RoutePage-Loading {
+  .RoutePage.loading & {
+    opacity: 1;
+    pointer-events: all;
+  }
+
+  opacity: 0;
+  pointer-events: none;
+  background-color: var(--el-fill-color);
+}
+
 .RoutePage {
   z-index: 1;
 
