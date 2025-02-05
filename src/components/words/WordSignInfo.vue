@@ -60,7 +60,7 @@ function selectPlan() {
         <img :src="Cat">
       </div>
 
-      <div class="WordSignInfo-Dictionary" @click="router.push(`/dictionary?dict=${targetDict.id}`)">
+      <div class="WordSignInfo-Dictionary" @click="router.push(`/dictionary/${targetDict.id}`)">
         <DictionaryDisplay :dict="data" />
       </div>
 

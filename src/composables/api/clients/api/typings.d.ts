@@ -399,13 +399,16 @@ declare namespace API {
   };
 
   type EnglishDictionaryVO = {
-    content?: string;
-    createTime?: string;
+    author?: string;
+    create_time?: string;
+    description?: string;
     id?: number;
-    title?: string;
-    updateTime?: string;
-    user?: UserVO;
-    userId?: number;
+    image_url?: string;
+    isbn?: string;
+    name?: string;
+    publication_date?: string;
+    publisher?: string;
+    update_time?: string;
   };
 
   type EnglishDictionaryWithCategoryVO = {
@@ -529,7 +532,7 @@ declare namespace API {
 
   type getEnglishDictionaryVOByIdUsingGETParams = {
     /** id */
-    id?: number;
+    id: string;
   };
 
   type getEnglishWordChangeLogVOByIdUsingGETParams = {

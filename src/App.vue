@@ -11,7 +11,7 @@ import Splash from '~/modules/splash/index.vue'
     <template #main>
       <router-view v-slot="{ Component }">
         <TransitionPage>
-          <keep-alive>
+          <keep-alive :exclude="['DictionaryPage']">
             <component :is="Component" />
           </keep-alive>
         </TransitionPage>

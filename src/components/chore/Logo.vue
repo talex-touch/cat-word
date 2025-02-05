@@ -15,9 +15,12 @@
     top: 0;
     left: 0;
 
-    width: 32px;
-    height: 32px;
+    width: 100%;
+    height: 100%;
+
+    object-fit: contain;
   }
+  position: relative;
   margin: 0 10px;
   display: flex;
 

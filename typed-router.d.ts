@@ -20,7 +20,8 @@ declare module 'vue-router/auto-routes' {
   export interface RouteNamedMap {
     '/': RouteRecordInfo<'/', '/', Record<never, never>, Record<never, never>>,
     '/[...all]': RouteRecordInfo<'/[...all]', '/:all(.*)', { all: ParamValue<true> }, { all: ParamValue<false> }>,
-    '/dictionary': RouteRecordInfo<'/dictionary', '/dictionary', Record<never, never>, Record<never, never>>,
+    '/dictionary/[id]': RouteRecordInfo<'/dictionary/[id]', '/dictionary/:id', { id: ParamValue<true> }, { id: ParamValue<false> }>,
+    '/dictionary/dictionary': RouteRecordInfo<'/dictionary/dictionary', '/dictionary/dictionary', Record<never, never>, Record<never, never>>,
     '/editor/': RouteRecordInfo<'/editor/', '/editor', Record<never, never>, Record<never, never>>,
     '/editor/merge': RouteRecordInfo<'/editor/merge', '/editor/merge', Record<never, never>, Record<never, never>>,
     '/explore/': RouteRecordInfo<'/explore/', '/explore', Record<never, never>, Record<never, never>>,
@@ -29,7 +30,6 @@ declare module 'vue-router/auto-routes' {
     '/explore/listen': RouteRecordInfo<'/explore/listen', '/explore/listen', Record<never, never>, Record<never, never>>,
     '/explore/pronounce': RouteRecordInfo<'/explore/pronounce', '/explore/pronounce', Record<never, never>, Record<never, never>>,
     '/explore/speech': RouteRecordInfo<'/explore/speech', '/explore/speech', Record<never, never>, Record<never, never>>,
-    '/hi/[name]': RouteRecordInfo<'/hi/[name]', '/hi/:name', { name: ParamValue<true> }, { name: ParamValue<false> }>,
     '/old': RouteRecordInfo<'/old', '/old', Record<never, never>, Record<never, never>>,
     '/personal/': RouteRecordInfo<'/personal/', '/personal', Record<never, never>, Record<never, never>>,
     '/personal/settings': RouteRecordInfo<'/personal/settings', '/personal/settings', Record<never, never>, Record<never, never>>,

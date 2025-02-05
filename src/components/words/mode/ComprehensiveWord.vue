@@ -141,7 +141,7 @@ async function handleChoose(wrong: boolean) {
 }
 
 function goDictionary() {
-  router.push(`/dictionary?dict=${targetDict.value.id}`)
+  router.push(`/dictionary/${targetDict.value.id}`)
 }
 
 onMounted(() => {

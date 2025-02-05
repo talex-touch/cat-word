@@ -3,13 +3,14 @@
 import { useDebounceFn } from '@vueuse/core'
 import { ElMessage } from 'element-plus'
 import { listEnglishDictionaryUsingGet } from '~/composables/api/clients/api/englishDictionaryController'
-import type { Category } from '~/modules/core/dictionary'
+import type { Book, Category } from '~/modules/core/dictionary'
 import { useCategoryTree } from '~/modules/core/dictionary'
 import DictionaryHolder from '~/modules/core/dictionary/DictionaryHolder.vue'
 // import BookItem from './BookItem.vue'
 import 'wc-waterfall'
 
 const loading = ref(false)
+const router = useRouter()
 const bookData = ref<Category[]>([])
 const selectCategory = ref<Category>()
 // const selectBook = ref<Book>()
@@ -47,6 +48,13 @@ const handleSearch = useDebounceFn(() => {
 
 function handleSelectCategory(category: Category) {
   selectCategory.value = category
+}
+
+function handleBookClick(book: Book) {
+  // selectBook.value = book
+  router.push({
+    path: `/dictionary/${book.id}`,
+  })
 }
 </script>
 
@@ -103,7 +111,7 @@ function handleSelectCategory(category: Category) {
         :gap="12"
         :cols="2"
       >
-        <DictionaryBookDisplay v-for="book in (selectCategory?.books || [])" :key="book.id" :model-value="book" />
+        <DictionaryBookDisplay v-for="book in (selectCategory?.books || [])" :key="book.id" :model-value="book" @click="handleBookClick(book)" />
       </wc-waterfall>
     </el-skeleton>
   </DictionaryHolder>
