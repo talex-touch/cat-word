@@ -8,12 +8,17 @@ import { useCategoryTree } from '~/modules/core/dictionary'
 import DictionaryHolder from '~/modules/core/dictionary/DictionaryHolder.vue'
 // import BookItem from './BookItem.vue'
 
+const loading = ref(false)
 const bookData = ref<Category[]>([])
 const selectCategory = ref<Category>()
 // const selectBook = ref<Book>()
 
 async function fetchBookData() {
+  loading.value = true
+
   const { code, data } = await listEnglishDictionaryUsingGet()
+
+  loading.value = false
 
   if (code === 0) {
     const result = data || []
@@ -41,7 +46,7 @@ const handleSearch = useDebounceFn(() => {
 </script>
 
 <template>
-  <DictionaryHolder class="DictionarySelectPage">
+  <DictionaryHolder :empty="!loading && !bookData.length" class="DictionarySelectPage">
     <template #header>
       <div class="search-bar">
         <SearchBar
@@ -54,15 +59,44 @@ const handleSearch = useDebounceFn(() => {
     </template>
 
     <template #nav>
-      <ul h-full class="DictionarySelectPage-Nav">
-        <li v-for="nav in bookData" :key="nav.id" :class="{ active: nav.id === selectCategory?.id }" text-center>
-          {{ nav.name }}
-        </li>
-      </ul>
+      <el-skeleton :loading="loading" animated>
+        <template #template>
+          <el-skeleton-item v-for="i in 10" :key="i" variant="p" class="relative left-20% my-2 !w-60%" />
+        </template>
+        <ul h-full class="DictionarySelectPage-Nav">
+          <li v-for="nav in bookData" :key="nav.id" :class="{ active: nav.id === selectCategory?.id }" text-center>
+            {{ nav.name }}
+          </li>
+        </ul>
+      </el-skeleton>
     </template>
 
     <div h-full class="DictionarySelectPage-Content">
-      <DictionaryBookDisplay v-for="book in selectCategory?.books" :key="book.id" :model-value="book" />
+      <el-skeleton :loading="loading" animated>
+        <template #template>
+          <div h-full w-full flex flex-wrap items-center justify-between>
+            <div v-for="i in 4" :key="i">
+              <el-skeleton-item variant="image" style="width: 120px; height: 120px" />
+              <div style="padding: 14px">
+                <el-skeleton-item variant="h3" style="width: 50%" />
+                <div
+                  style="
+              display: flex;
+              align-items: center;
+              justify-items: space-between;
+              margin-top: 16px;
+              height: 16px;
+            "
+                >
+                  <el-skeleton-item variant="text" style="margin-right: 16px" />
+                  <el-skeleton-item variant="text" style="width: 30%" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </template>
+        <DictionaryBookDisplay v-for="book in selectCategory?.books" :key="book.id" :model-value="book" />
+      </el-skeleton>
       <!-- {{ currentCategory }} -->
     </div>
     <!-- {{ bookData }} -->

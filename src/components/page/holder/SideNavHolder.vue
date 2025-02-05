@@ -1,8 +1,9 @@
 <script setup lang="ts">
-import { NavBar } from 'vant'
+import { Empty, NavBar } from 'vant'
 
 defineProps<{
   title: string
+  empty?: boolean
 }>()
 
 const router = useRouter()
@@ -21,26 +22,37 @@ const ins = ref(getCurrentInstance())
       />
     </template>
 
-    <div h-full flex flex-col class="SideNavHolder-Container">
+    <div relative h-full flex flex-col class="SideNavHolder-Container">
       <div v-if="ins?.slots.header" px-4 py-2 class="DictionaryHolder-Header">
         <slot name="header" />
       </div>
 
       <div class="SideNavHolder-Content h-full w-full flex">
-        <div class="SideNavHolder-Nav z-1 w-[80px] flex-shrink-0">
+        <div v-if="ins?.slots.nav" class="SideNavHolder-Nav z-1 w-[80px] flex-shrink-0">
           <slot name="nav" />
         </div>
         <div class="SideNavHolder-Main w-full flex flex-1 flex-wrap justify-between overflow-x-hidden overflow-y-scroll p-2">
           <slot />
         </div>
       </div>
+
+      <div :class="{ visible: empty }" class="SideNavHolder-Empty transition-cubic absolute-layout z-10 flex items-center justify-center">
+        <Empty description="你来到了荒漠." />
+      </div>
     </div>
   </RoutePage>
 </template>
 
 <style lang="scss" scoped>
-.SideNavHolder-Container {
-  height: 100%;
+.SideNavHolder-Empty {
+  &.visible {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  opacity: 0;
+  pointer-events: none;
+  background-color: var(--el-fill-color-lighter);
 }
 
 .SideNavHolder-Content {
