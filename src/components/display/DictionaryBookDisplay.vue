@@ -46,7 +46,7 @@ defineProps<{
 <style lang="scss" scoped>
 .DictionaryBookDisplay {
   width: 100%;
-  //   height: 80px;
+  min-height: 80px;
   //   border-radius: 16px;
   //   background-color: var(--el-fill-color-light);
   overflow: hidden;
@@ -54,12 +54,16 @@ defineProps<{
   flex-direction: column;
 
   .cover {
+    display: flex;
     flex: 1;
     border: 1px solid var(--el-border-color);
     border-radius: 8px;
     margin: 8px;
     overflow: hidden;
     position: relative;
+
+    align-items: center;
+    justify-content: center;
 
     img {
       width: 100%;

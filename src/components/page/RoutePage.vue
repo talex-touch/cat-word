@@ -22,7 +22,9 @@
     <div class="RoutePage-Header">
       <slot name="header" />
     </div>
-    <slot />
+    <div class="RoutePage-Main w-full flex-1 overflow-hidden">
+      <slot />
+    </div>
   </WithPage>
 </template>
 
