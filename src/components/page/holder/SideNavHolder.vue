@@ -31,7 +31,7 @@ const ins = ref(getCurrentInstance())
         <div v-if="ins?.slots.nav" class="SideNavHolder-Nav z-1 w-[80px] flex-shrink-0">
           <slot name="nav" />
         </div>
-        <div class="SideNavHolder-Main w-full flex flex-1 flex-wrap justify-between overflow-x-hidden overflow-y-scroll p-2">
+        <div class="SideNavHolder-Main w-full flex-1 gap-4 overflow-x-hidden overflow-y-scroll p-2">
           <slot />
         </div>
       </div>

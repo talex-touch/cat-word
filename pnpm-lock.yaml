@@ -68,6 +68,9 @@ importers:
       vue-router:
         specifier: ^4.4.3
         version: 4.4.3(vue@3.5.3(typescript@5.5.4))
+      wc-waterfall:
+        specifier: ^0.1.3
+        version: 0.1.3
     devDependencies:
       '@antfu/eslint-config':
         specifier: ^3.4.0
@@ -3888,6 +3891,9 @@ packages:
   w3c-xmlserializer@5.0.0:
     resolution: {integrity: sha512-o8qghlI8NZHU1lLPrpi2+Uq7abh4GGPpYANlalzWxyWteJOCsr/P+oPBA49TOLu5FTZO4d3F9MnWJfiMo4BkmA==}
     engines: {node: '>=18'}
+
+  wc-waterfall@0.1.3:
+    resolution: {integrity: sha512-zJQLFGSSueI+hVAwBXaSKWS/juOFQ50nmfDK5F7GbVjxGJIOm+LJH76tghBvB1BFxG45+MBfZpL+MSDgnNKX0Q==}
 
   webidl-conversions@3.0.1:
     resolution: {integrity: sha512-2JAn3z8AR6rjK8Sm8orRC0h/bcl/DqL7tRPdGZ4I1CjdF+EaMLmYxBHyXuKL849eucPFhvBoxMsflfOb8kxaeQ==}
@@ -8292,6 +8298,8 @@ snapshots:
   w3c-xmlserializer@5.0.0:
     dependencies:
       xml-name-validator: 5.0.0
+
+  wc-waterfall@0.1.3: {}
 
   webidl-conversions@3.0.1: {}
 

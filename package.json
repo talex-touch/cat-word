@@ -33,7 +33,8 @@
     "vant": "^4.9.9",
     "vite-plugin-version-date-mark": "^0.1.0",
     "vue": "^3.5.3",
-    "vue-router": "^4.4.3"
+    "vue-router": "^4.4.3",
+    "wc-waterfall": "^0.1.3"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^3.4.0",

@@ -7,6 +7,7 @@ import type { Category } from '~/modules/core/dictionary'
 import { useCategoryTree } from '~/modules/core/dictionary'
 import DictionaryHolder from '~/modules/core/dictionary/DictionaryHolder.vue'
 // import BookItem from './BookItem.vue'
+import 'wc-waterfall'
 
 const loading = ref(false)
 const bookData = ref<Category[]>([])
@@ -43,6 +44,10 @@ const searchQuery = ref('')
 const handleSearch = useDebounceFn(() => {
   // 搜索逻辑...
 }, 300)
+
+function handleSelectCategory(category: Category) {
+  selectCategory.value = category
+}
 </script>
 
 <template>
@@ -64,64 +69,43 @@ const handleSearch = useDebounceFn(() => {
           <el-skeleton-item v-for="i in 10" :key="i" variant="p" class="relative left-20% my-2 !w-60%" />
         </template>
         <ul h-full class="DictionarySelectPage-Nav">
-          <li v-for="nav in bookData" :key="nav.id" :class="{ active: nav.id === selectCategory?.id }" text-center>
+          <li v-for="nav in bookData" :key="nav.id" :class="{ active: nav.id === selectCategory?.id }" text-center @click="handleSelectCategory(nav)">
             {{ nav.name }}
           </li>
         </ul>
       </el-skeleton>
     </template>
 
-    <div h-full class="DictionarySelectPage-Content">
-      <el-skeleton :loading="loading" animated>
-        <template #template>
-          <div h-full w-full flex flex-wrap items-center justify-between>
-            <div v-for="i in 4" :key="i">
-              <el-skeleton-item variant="image" style="width: 120px; height: 120px" />
-              <div style="padding: 14px">
-                <el-skeleton-item variant="h3" style="width: 50%" />
-                <div
-                  style="
+    <el-skeleton :loading="loading" animated>
+      <template #template>
+        <div h-full w-full flex flex-wrap items-center justify-between>
+          <div v-for="i in 4" :key="i">
+            <el-skeleton-item variant="image" style="width: 120px; height: 120px" />
+            <div style="padding: 14px">
+              <el-skeleton-item variant="h3" style="width: 50%" />
+              <div
+                style="
               display: flex;
               align-items: center;
               justify-items: space-between;
               margin-top: 16px;
               height: 16px;
             "
-                >
-                  <el-skeleton-item variant="text" style="margin-right: 16px" />
-                  <el-skeleton-item variant="text" style="width: 30%" />
-                </div>
+              >
+                <el-skeleton-item variant="text" style="margin-right: 16px" />
+                <el-skeleton-item variant="text" style="width: 30%" />
               </div>
             </div>
           </div>
-        </template>
-        <DictionaryBookDisplay v-for="book in selectCategory?.books" :key="book.id" :model-value="book" />
-      </el-skeleton>
-      <!-- {{ currentCategory }} -->
-    </div>
-    <!-- {{ bookData }} -->
-    <!-- 分类切换 -->
-    <!-- <ElTabs v-model="activeCategory" @tab-change="handleCategoryChange">
-      <ElTabPane
-        v-for="category in categories"
-        :key="category.value"
-        :label="category.label"
-        :name="category.value"
-      />
-    </ElTabs> -->
-
-    <!-- 虚拟滚动书籍列表 -->
-    <!-- 自定义书籍列表组件 -->
-    <!-- <VirtualScroll
-      :items="filteredBooks"
-      :item-size="80"
-      class="book-list"
-    >
-      <template #default="{ item }">
-        <BookItem :book="item" />
+        </div>
       </template>
-      </WordSelector>
-    </virtualscroll> -->
+      <wc-waterfall
+        :gap="12"
+        :cols="2"
+      >
+        <DictionaryBookDisplay v-for="book in (selectCategory?.books || [])" :key="book.id" :model-value="book" />
+      </wc-waterfall>
+    </el-skeleton>
   </DictionaryHolder>
 </template>
 

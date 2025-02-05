@@ -21,7 +21,13 @@ defineProps<{
 <template>
   <div class="DictionaryBookDisplay">
     <div class="cover">
-      <img v-if="modelValue.image_url" :src="modelValue.image_url" :alt="modelValue.name">
+      <el-image v-if="modelValue.image_url" class="min-h[80px] min-w[80px]" :src="modelValue.image_url" :alt="modelValue.name">
+        <template #error>
+          <div class="image-slot">
+            <i class="el-icon-picture-outline" />
+          </div>
+        </template>
+      </el-image>
       <div v-else class="no-image">
         <span>{{ modelValue.name?.slice(0, 1) || 'D' }}</span>
       </div>
@@ -39,10 +45,10 @@ defineProps<{
 
 <style lang="scss" scoped>
 .DictionaryBookDisplay {
-  width: 180px;
-  height: 240px;
-  border-radius: 16px;
-  background-color: var(--el-fill-color-light);
+  width: 100%;
+  //   height: 80px;
+  //   border-radius: 16px;
+  //   background-color: var(--el-fill-color-light);
   overflow: hidden;
   display: flex;
   flex-direction: column;

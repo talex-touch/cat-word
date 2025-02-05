@@ -16,6 +16,7 @@ declare module 'vue' {
     DictionaryDisplay: typeof import('./src/components/display/DictionaryDisplay.vue')['default']
     DictSelector: typeof import('./src/components/words/DictSelector.vue')['default']
     ExitButton: typeof import('./src/components/ExitButton.vue')['default']
+    FlexLayout: typeof import('./src/components/display/FlexLayout.vue')['default']
     IndexCourse: typeof import('./src/components/display/IndexCourse.vue')['default']
     LeafBackground: typeof import('./src/components/display/LeafBackground.vue')['default']
     LeafButton: typeof import('./src/components/button/LeafButton.vue')['default']
