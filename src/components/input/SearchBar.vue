@@ -124,7 +124,6 @@ function handleClear() {
 
   .search-button {
     height: 32px;
-    width: 32px;
     padding: 6px;
   }
 }
